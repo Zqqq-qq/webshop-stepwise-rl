@@ -1,5 +1,7 @@
 # 进度估计、奖励和 PPO 的具体边界
 
+接入前先看 [PPO 接入清单](PPO_INTEGRATION_CHECKLIST.md) 和 [训练 rollout 字段设计](TRAINING_ROLLOUT_SPEC.md)。两份文件是待实现的设计与验收合同，不代表 PPO 已跑通。
+
 ## 论文思路
 
 轨迹有 T 个步骤。估计每步贡献 `p_t`，使 `sum(p_t)` 接近最终奖励 `R`。策略训练使用 `alpha * p_t + beta * grounding_t`。仅有总分监督并不唯一确定每步贡献，因此低总分预测误差不等于因果正确归因。
