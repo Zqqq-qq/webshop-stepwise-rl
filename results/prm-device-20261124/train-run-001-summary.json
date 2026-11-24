@@ -1,0 +1,567 @@
+{
+  "scope": "神经PRM短训；不自动通过正式泛化验收",
+  "device": "cuda",
+  "torch_version": "2.8.0+cu128",
+  "cuda_version": "12.8",
+  "input_files_sha256": {
+    "/root/.cache/huggingface/hub/models--Qwen--Qwen2.5-1.5B-Instruct/snapshots/989aa7980e4cf806f80c7fef2b1adb7bc71aa306/model.safetensors": "dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee",
+    "/root/.cache/huggingface/hub/models--Qwen--Qwen2.5-1.5B-Instruct/snapshots/989aa7980e4cf806f80c7fef2b1adb7bc71aa306/tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+    "/root/.cache/huggingface/hub/models--Qwen--Qwen2.5-1.5B-Instruct/snapshots/989aa7980e4cf806f80c7fef2b1adb7bc71aa306/tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+    "/root/.cache/huggingface/hub/models--Qwen--Qwen2.5-1.5B-Instruct/snapshots/989aa7980e4cf806f80c7fef2b1adb7bc71aa306/vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+    "/root/.cache/huggingface/hub/models--Qwen--Qwen2.5-1.5B-Instruct/snapshots/989aa7980e4cf806f80c7fef2b1adb7bc71aa306/merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+    "/root/webshop-stepwise-rl/artifacts/qwen25-one-epoch-final-resume-Ydr3GfjQ/output/adapter/adapter_model.safetensors": "c39e2a78e7c5973328e9d2c23fb6320e566352e63cc089562488f3dd46ae5f9c",
+    "/root/webshop-stepwise-rl/artifacts/qwen25-one-epoch-final-resume-Ydr3GfjQ/output/adapter/adapter_config.json": "18993c388788ec14de72fd4f6f9ff86ce761ffc3aad5d0923b33f4365be03d97",
+    "/root/.cache/huggingface/hub/models--Qwen--Qwen2.5-1.5B-Instruct/snapshots/989aa7980e4cf806f80c7fef2b1adb7bc71aa306/config.json": "98d2ff8cc47488d08a2b0b3acf4eb99ef210779b42bd48605f6b8e36acdbf670",
+    "/root/.cache/huggingface/hub/models--Qwen--Qwen2.5-1.5B-Instruct/snapshots/989aa7980e4cf806f80c7fef2b1adb7bc71aa306/generation_config.json": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6"
+  },
+  "identity": {
+    "base_revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+    "base_sha256": "dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee",
+    "tokenizer_sha256": {
+      "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+      "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+      "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+      "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3"
+    },
+    "tokenizer_revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+    "auxiliary_input_sha256": {
+      "/root/.cache/huggingface/hub/models--Qwen--Qwen2.5-1.5B-Instruct/snapshots/989aa7980e4cf806f80c7fef2b1adb7bc71aa306/config.json": "98d2ff8cc47488d08a2b0b3acf4eb99ef210779b42bd48605f6b8e36acdbf670",
+      "/root/.cache/huggingface/hub/models--Qwen--Qwen2.5-1.5B-Instruct/snapshots/989aa7980e4cf806f80c7fef2b1adb7bc71aa306/generation_config.json": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6"
+    },
+    "template_sha256": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+    "initialization": {
+      "kind": "sft_b1",
+      "sft_adapter_files_sha256": {
+        "adapter_model.safetensors": "c39e2a78e7c5973328e9d2c23fb6320e566352e63cc089562488f3dd46ae5f9c",
+        "adapter_config.json": "18993c388788ec14de72fd4f6f9ff86ce761ffc3aad5d0923b33f4365be03d97"
+      }
+    },
+    "source_commit": "a67db6abefc73c6f6c7f1efb78645086782b1ade",
+    "source_tracked_clean": true,
+    "source_sha256": {
+      "runtime.py": "25c646efda1727249a2cd402c4b0671b8977331d5af500be533df1eb3d851388",
+      "model_core.py": "b0e90aa60ede7a9c14822fd369a69fc3e44936ceb98c5699a71b4fa4528b843a",
+      "train_core.py": "f4de662f8ba21ddbe02a35f4fd477e27ae488c9e96ff52cb838d8495757b228c",
+      "tokenize.py": "7515488a18e829274e291e63177732c33fad1927c0912e79c33345bb106f370d",
+      "config.py": "ae6a3dea7e586b20dd00e539f27478aae5c3f487c76a74c0b125f49159213710"
+    },
+    "prm_lora": {
+      "rank": 8,
+      "alpha": 16,
+      "target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "dropout": 0.05
+    },
+    "score_position": "assistant_im_end",
+    "max_length": 2048,
+    "policy_dtype": "float32"
+  },
+  "backend": {
+    "float32_matmul_precision": "highest",
+    "cuda_matmul_allow_tf32": false,
+    "cudnn_allow_tf32": false,
+    "autocast_enabled": false
+  },
+  "optimizer_steps": 20,
+  "records": [
+    {
+      "loss": 1.0,
+      "gradient_norm": 11805.5830078125,
+      "totals_before_update": [
+        0.0
+      ],
+      "task_id": 6,
+      "optimizer_step": 1,
+      "head_gradient_l1": 304.95526123046875,
+      "lora_gradient_l1": 0.0,
+      "terminal_reward": 1.0
+    },
+    {
+      "loss": 0.2821824848651886,
+      "gradient_norm": 4730.48779296875,
+      "totals_before_update": [
+        0.13545820116996765
+      ],
+      "task_id": 13,
+      "optimizer_step": 2,
+      "head_gradient_l1": 305.160888671875,
+      "lora_gradient_l1": 0.008246192515798612,
+      "terminal_reward": 0.6666666666666666
+    },
+    {
+      "loss": 0.6642394661903381,
+      "gradient_norm": 22325.255859375,
+      "totals_before_update": [
+        0.8150088787078857
+      ],
+      "task_id": 23,
+      "optimizer_step": 3,
+      "head_gradient_l1": 304.66650390625,
+      "lora_gradient_l1": 0.020270971069941024,
+      "terminal_reward": 0.0
+    },
+    {
+      "loss": 0.19378025829792023,
+      "gradient_norm": 3939.956298828125,
+      "totals_before_update": [
+        0.30979520082473755
+      ],
+      "task_id": 46,
+      "optimizer_step": 4,
+      "head_gradient_l1": 304.86114501953125,
+      "lora_gradient_l1": 0.017810825945943548,
+      "terminal_reward": 0.75
+    },
+    {
+      "loss": 0.08469536900520325,
+      "gradient_norm": 2601.00927734375,
+      "totals_before_update": [
+        0.37564200162887573
+      ],
+      "task_id": 103,
+      "optimizer_step": 5,
+      "head_gradient_l1": 305.3128662109375,
+      "lora_gradient_l1": 0.02144938336169966,
+      "terminal_reward": 0.6666666666666666
+    },
+    {
+      "loss": 0.21545839309692383,
+      "gradient_norm": 4183.84716796875,
+      "totals_before_update": [
+        0.46417495608329773
+      ],
+      "task_id": 126,
+      "optimizer_step": 6,
+      "head_gradient_l1": 305.7670593261719,
+      "lora_gradient_l1": 0.027654167691759657,
+      "terminal_reward": 0.0
+    },
+    {
+      "loss": 0.031245853751897812,
+      "gradient_norm": 1568.791259765625,
+      "totals_before_update": [
+        0.48990172147750854
+      ],
+      "task_id": 158,
+      "optimizer_step": 7,
+      "head_gradient_l1": 304.544921875,
+      "lora_gradient_l1": 0.030419006257714543,
+      "terminal_reward": 0.6666666666666666
+    },
+    {
+      "loss": 0.1548023372888565,
+      "gradient_norm": 4659.1953125,
+      "totals_before_update": [
+        0.7267826199531555
+      ],
+      "task_id": 231,
+      "optimizer_step": 8,
+      "head_gradient_l1": 305.159912109375,
+      "lora_gradient_l1": 0.03398503572508371,
+      "terminal_reward": 0.3333333333333333
+    },
+    {
+      "loss": 0.0630016103386879,
+      "gradient_norm": 2280.34765625,
+      "totals_before_update": [
+        0.5843345522880554
+      ],
+      "task_id": 282,
+      "optimizer_step": 9,
+      "head_gradient_l1": 305.82666015625,
+      "lora_gradient_l1": 0.03184012489826671,
+      "terminal_reward": 0.3333333333333333
+    },
+    {
+      "loss": 0.017227789387106895,
+      "gradient_norm": 1947.235595703125,
+      "totals_before_update": [
+        0.9312546849250793
+      ],
+      "task_id": 298,
+      "optimizer_step": 10,
+      "head_gradient_l1": 304.2606201171875,
+      "lora_gradient_l1": 0.0329798173136564,
+      "terminal_reward": 0.8
+    },
+    {
+      "loss": 0.15343225002288818,
+      "gradient_norm": 4687.009765625,
+      "totals_before_update": [
+        0.7250376343727112
+      ],
+      "task_id": 317,
+      "optimizer_step": 11,
+      "head_gradient_l1": 305.9060363769531,
+      "lora_gradient_l1": 0.02867090561215635,
+      "terminal_reward": 0.3333333333333333
+    },
+    {
+      "loss": 0.0910431370139122,
+      "gradient_norm": 2700.640869140625,
+      "totals_before_update": [
+        0.49826645851135254
+      ],
+      "task_id": 323,
+      "optimizer_step": 12,
+      "head_gradient_l1": 304.7355651855469,
+      "lora_gradient_l1": 0.031003023747596226,
+      "terminal_reward": 0.8
+    },
+    {
+      "loss": 0.2363942712545395,
+      "gradient_norm": 7368.1181640625,
+      "totals_before_update": [
+        0.8195372819900513
+      ],
+      "task_id": 377,
+      "optimizer_step": 13,
+      "head_gradient_l1": 306.5587463378906,
+      "lora_gradient_l1": 0.024104492937643718,
+      "terminal_reward": 0.3333333333333333
+    },
+    {
+      "loss": 0.006158353295177221,
+      "gradient_norm": 921.6968994140625,
+      "totals_before_update": [
+        0.5881915092468262
+      ],
+      "task_id": 395,
+      "optimizer_step": 14,
+      "head_gradient_l1": 306.3504943847656,
+      "lora_gradient_l1": 0.029698308960583564,
+      "terminal_reward": 0.6666666666666666
+    },
+    {
+      "loss": 0.003014130052179098,
+      "gradient_norm": 488.9665832519531,
+      "totals_before_update": [
+        0.4450989067554474
+      ],
+      "task_id": 441,
+      "optimizer_step": 15,
+      "head_gradient_l1": 305.4449462890625,
+      "lora_gradient_l1": 0.026454076973318585,
+      "terminal_reward": 0.5
+    },
+    {
+      "loss": 0.0413532480597496,
+      "gradient_norm": 1812.7568359375,
+      "totals_before_update": [
+        0.45335498452186584
+      ],
+      "task_id": 576,
+      "optimizer_step": 16,
+      "head_gradient_l1": 305.2137451171875,
+      "lora_gradient_l1": 0.026305763245216607,
+      "terminal_reward": 0.25
+    },
+    {
+      "loss": 0.3491895794868469,
+      "gradient_norm": 7076.98193359375,
+      "totals_before_update": [
+        0.5909226536750793
+      ],
+      "task_id": 667,
+      "optimizer_step": 17,
+      "head_gradient_l1": 306.259033203125,
+      "lora_gradient_l1": 0.024614106180582906,
+      "terminal_reward": 0.0
+    },
+    {
+      "loss": 0.0021876536775380373,
+      "gradient_norm": 556.9400024414062,
+      "totals_before_update": [
+        0.5532276630401611
+      ],
+      "task_id": 691,
+      "optimizer_step": 18,
+      "head_gradient_l1": 304.47723388671875,
+      "lora_gradient_l1": 0.02286597162852,
+      "terminal_reward": 0.6
+    },
+    {
+      "loss": 0.16356562077999115,
+      "gradient_norm": 3556.167236328125,
+      "totals_before_update": [
+        0.404432475566864
+      ],
+      "task_id": 720,
+      "optimizer_step": 19,
+      "head_gradient_l1": 304.31024169921875,
+      "lora_gradient_l1": 0.023142967336607256,
+      "terminal_reward": 0.0
+    },
+    {
+      "loss": 0.2323025017976761,
+      "gradient_norm": 5748.5380859375,
+      "totals_before_update": [
+        0.5180222988128662
+      ],
+      "task_id": 770,
+      "optimizer_step": 20,
+      "head_gradient_l1": 305.4559326171875,
+      "lora_gradient_l1": 0.020802131071584906,
+      "terminal_reward": 1.0
+    }
+  ],
+  "samples_sha256": "2ca51c19b3460ed0256eab17a3d76b38855bea79bb9961f1a490402cd8abd975",
+  "train_ids_sha256": "8c85e56b3ac2e1f0a09b54560ad0f9bf77eedddb241d73617c7ff32416522e20",
+  "total_samples": 160,
+  "retained_samples": 121,
+  "rejected": [
+    {
+      "row": 3,
+      "task_id": 31,
+      "reason": "Complete trajectory has 2153 tokens; limit=2048",
+      "terminal_reward": 0.5
+    },
+    {
+      "row": 7,
+      "task_id": 146,
+      "reason": "Complete trajectory has 3919 tokens; limit=2048",
+      "terminal_reward": 0.025
+    },
+    {
+      "row": 9,
+      "task_id": 189,
+      "reason": "Complete trajectory has 3656 tokens; limit=2048",
+      "terminal_reward": 0.0
+    },
+    {
+      "row": 12,
+      "task_id": 296,
+      "reason": "Complete trajectory has 3683 tokens; limit=2048",
+      "terminal_reward": 0.0
+    },
+    {
+      "row": 16,
+      "task_id": 344,
+      "reason": "Complete trajectory has 2843 tokens; limit=2048",
+      "terminal_reward": 0.0
+    },
+    {
+      "row": 26,
+      "task_id": 943,
+      "reason": "Complete trajectory has 2613 tokens; limit=2048",
+      "terminal_reward": 0.0
+    },
+    {
+      "row": 33,
+      "task_id": 1717,
+      "reason": "Complete trajectory has 2235 tokens; limit=2048",
+      "terminal_reward": 0.25
+    },
+    {
+      "row": 36,
+      "task_id": 1780,
+      "reason": "Complete trajectory has 3217 tokens; limit=2048",
+      "terminal_reward": 0.0
+    },
+    {
+      "row": 39,
+      "task_id": 1817,
+      "reason": "Complete trajectory has 8809 tokens; limit=2048",
+      "terminal_reward": 0.0
+    },
+    {
+      "row": 41,
+      "task_id": 1833,
+      "reason": "Complete trajectory has 3096 tokens; limit=2048",
+      "terminal_reward": 0.25
+    },
+    {
+      "row": 43,
+      "task_id": 1978,
+      "reason": "Complete trajectory has 6612 tokens; limit=2048",
+      "terminal_reward": 0.0
+    },
+    {
+      "row": 45,
+      "task_id": 2143,
+      "reason": "Complete trajectory has 2268 tokens; limit=2048",
+      "terminal_reward": 0.4
+    },
+    {
+      "row": 48,
+      "task_id": 2467,
+      "reason": "Complete trajectory has 3119 tokens; limit=2048",
+      "terminal_reward": 0.0
+    },
+    {
+      "row": 52,
+      "task_id": 2581,
+      "reason": "Complete trajectory has 2215 tokens; limit=2048",
+      "terminal_reward": 0.0
+    },
+    {
+      "row": 58,
+      "task_id": 3046,
+      "reason": "Complete trajectory has 2158 tokens; limit=2048",
+      "terminal_reward": 0.75
+    },
+    {
+      "row": 59,
+      "task_id": 3061,
+      "reason": "Complete trajectory has 2549 tokens; limit=2048",
+      "terminal_reward": 0.8
+    },
+    {
+      "row": 66,
+      "task_id": 3338,
+      "reason": "Complete trajectory has 2651 tokens; limit=2048",
+      "terminal_reward": 1.0
+    },
+    {
+      "row": 70,
+      "task_id": 3669,
+      "reason": "Complete trajectory has 7445 tokens; limit=2048",
+      "terminal_reward": 0.0
+    },
+    {
+      "row": 77,
+      "task_id": 4478,
+      "reason": "Complete trajectory has 2373 tokens; limit=2048",
+      "terminal_reward": 0.0
+    },
+    {
+      "row": 78,
+      "task_id": 4488,
+      "reason": "Complete trajectory has 2521 tokens; limit=2048",
+      "terminal_reward": 0.0
+    },
+    {
+      "row": 79,
+      "task_id": 4571,
+      "reason": "Complete trajectory has 2793 tokens; limit=2048",
+      "terminal_reward": 0.0
+    },
+    {
+      "row": 82,
+      "task_id": 5129,
+      "reason": "Complete trajectory has 4540 tokens; limit=2048",
+      "terminal_reward": 0.0
+    },
+    {
+      "row": 89,
+      "task_id": 5514,
+      "reason": "Complete trajectory has 6582 tokens; limit=2048",
+      "terminal_reward": 0.0
+    },
+    {
+      "row": 90,
+      "task_id": 5642,
+      "reason": "Complete trajectory has 2207 tokens; limit=2048",
+      "terminal_reward": 0.25
+    },
+    {
+      "row": 93,
+      "task_id": 5906,
+      "reason": "Complete trajectory has 5596 tokens; limit=2048",
+      "terminal_reward": 0.0
+    },
+    {
+      "row": 96,
+      "task_id": 6222,
+      "reason": "Complete trajectory has 6071 tokens; limit=2048",
+      "terminal_reward": 0.0
+    },
+    {
+      "row": 98,
+      "task_id": 6266,
+      "reason": "Complete trajectory has 3807 tokens; limit=2048",
+      "terminal_reward": 0.75
+    },
+    {
+      "row": 102,
+      "task_id": 6366,
+      "reason": "Complete trajectory has 4178 tokens; limit=2048",
+      "terminal_reward": 0.6666666666666666
+    },
+    {
+      "row": 108,
+      "task_id": 6935,
+      "reason": "Complete trajectory has 5780 tokens; limit=2048",
+      "terminal_reward": 0.0
+    },
+    {
+      "row": 110,
+      "task_id": 7033,
+      "reason": "Complete trajectory has 4755 tokens; limit=2048",
+      "terminal_reward": 0.05
+    },
+    {
+      "row": 111,
+      "task_id": 7035,
+      "reason": "Complete trajectory has 2385 tokens; limit=2048",
+      "terminal_reward": 0.6666666666666666
+    },
+    {
+      "row": 113,
+      "task_id": 7219,
+      "reason": "Complete trajectory has 9538 tokens; limit=2048",
+      "terminal_reward": 0.0
+    },
+    {
+      "row": 125,
+      "task_id": 8118,
+      "reason": "Complete trajectory has 5899 tokens; limit=2048",
+      "terminal_reward": 0.0
+    },
+    {
+      "row": 127,
+      "task_id": 8170,
+      "reason": "Complete trajectory has 5244 tokens; limit=2048",
+      "terminal_reward": 0.0
+    },
+    {
+      "row": 138,
+      "task_id": 9142,
+      "reason": "Complete trajectory has 6711 tokens; limit=2048",
+      "terminal_reward": 0.0
+    },
+    {
+      "row": 148,
+      "task_id": 9807,
+      "reason": "Complete trajectory has 6304 tokens; limit=2048",
+      "terminal_reward": 0.0
+    },
+    {
+      "row": 152,
+      "task_id": 10596,
+      "reason": "Complete trajectory has 2700 tokens; limit=2048",
+      "terminal_reward": 0.5
+    },
+    {
+      "row": 157,
+      "task_id": 11027,
+      "reason": "Complete trajectory has 2344 tokens; limit=2048",
+      "terminal_reward": 0.25
+    },
+    {
+      "row": 159,
+      "task_id": 11333,
+      "reason": "Complete trajectory has 2682 tokens; limit=2048",
+      "terminal_reward": 0.5
+    }
+  ],
+  "parameters_before": {
+    "head": "e39805a25949da937b399213f80f7f99f1b0e14f0698744fd6b2a0330f7289ac",
+    "lora": "5a2c5eaa8c9ede027c7f0336dac31f324ff176459bd56af079a56dd94f3a473d"
+  },
+  "parameters_after": {
+    "head": "58f28a91e12f52aa681632ecef028e27a41e2f1ad5fa40c5872ca625447aebff",
+    "lora": "c9bf72571fd7c61a31d6b494181be8874fa5542cfb37cf61f6dbc2224c8a56fc"
+  },
+  "head_changed": true,
+  "lora_changed": true,
+  "parameter_numel_by_dtype": {
+    "torch.float32": 1544955777
+  },
+  "elapsed_seconds": 120.77632640697993,
+  "test_authorization": false,
+  "peak_allocated_gib": 7.290615081787109,
+  "peak_reserved_gib": 8.4765625
+}

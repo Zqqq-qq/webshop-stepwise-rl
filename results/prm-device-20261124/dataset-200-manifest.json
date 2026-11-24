@@ -1,0 +1,379 @@
+{
+  "schema_version": "prm-data-v1",
+  "config_fingerprint": "d3095a7ee15696eb132920652f88b4010a0691b6f0a11e94aec3249493bda562",
+  "tokenizer_identity": {
+    "path": "/root/.cache/huggingface/hub/models--Qwen--Qwen2.5-1.5B-Instruct/snapshots/989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+    "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+    "template_sha256": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f"
+  },
+  "goal_map_sha256": "6b5d9dfceee913828871b8dff62fd59720a40306738a92a496d1b0fb6838fa88",
+  "split_sha256": {
+    "train_ids": "8c85e56b3ac2e1f0a09b54560ad0f9bf77eedddb241d73617c7ff32416522e20",
+    "val_ids": "45440d724b33e69e13916d0adbe243cc63ce3bd67677b8220feff9f30b866c36",
+    "test_ids": "823eb6f68270b3b83695415c8ee008a1c86fc86977ac6d316e44590f2f0f97c7"
+  },
+  "sources": [
+    {
+      "path": "artifacts/prm-data-20261123/b1-train-200-full.jsonl",
+      "sha256": "348cff0ea9a7fcbefedfc80e3be12c73f7982997c62d9f125360156505038d00"
+    }
+  ],
+  "split": {
+    "seed": 42,
+    "fit_fraction": 0.8,
+    "fit_tasks": 160,
+    "dev_tasks": 40,
+    "fit_episodes": 160,
+    "dev_episodes": 40,
+    "instruction_overlap": 0,
+    "train_pool_gate": {
+      "train_tasks": 1451,
+      "forbidden_tasks": 360,
+      "goal_map_entries": 12087,
+      "forbidden_instructions": 359,
+      "instruction_overlap_with_eval": 0
+    }
+  },
+  "files": {
+    "fit": {
+      "path": "artifacts/prm-data-20261123/dataset-200/fit.jsonl",
+      "sha256": "cd14de0ac92df7e07c7140a05e9b2ea3889ac7e4e351573185fa3c6e858c49c8",
+      "samples": 121,
+      "tasks": 121,
+      "turns": 486,
+      "label_mean": 0.5999311294765839,
+      "label_buckets": {
+        "full": 37,
+        "partial": 69,
+        "zero": 15
+      }
+    },
+    "dev": {
+      "path": "artifacts/prm-data-20261123/dataset-200/dev.jsonl",
+      "sha256": "120d935ba5980fe1394c234d4b352829b0cd856a9cd0f6dc35d7f7143100d4ef",
+      "samples": 29,
+      "tasks": 29,
+      "turns": 112,
+      "label_mean": 0.5801724137931035,
+      "label_buckets": {
+        "full": 7,
+        "partial": 18,
+        "zero": 4
+      }
+    }
+  },
+  "rejections": {
+    "fit": {
+      "too_long": 39
+    },
+    "dev": {
+      "too_long": 11
+    }
+  },
+  "dropped": [
+    {
+      "task_id": 31,
+      "instruction_sha256": "995337300a9e16e6d6cf575c895af10f19299bdc1b976b7dcd398ab438f3fe96",
+      "reason": "too_long"
+    },
+    {
+      "task_id": 146,
+      "instruction_sha256": "92002fd6ffb71cf7be76e47f14a9f2c643849a8b817c28c9b2541d689148e7fa",
+      "reason": "too_long"
+    },
+    {
+      "task_id": 189,
+      "instruction_sha256": "8f94b56f4de429aea8731651d97eb6b61671e05d66f5a3a8b13b1f79002af8b9",
+      "reason": "too_long"
+    },
+    {
+      "task_id": 296,
+      "instruction_sha256": "aaf58fcac8a39ae5213edbb7d8883fe6ce30547f4962ae8e99255775415be7f0",
+      "reason": "too_long"
+    },
+    {
+      "task_id": 344,
+      "instruction_sha256": "2137b1110b30e19246759b57312e2f4325cb589fbcb86f58f01ea7d30a2d4572",
+      "reason": "too_long"
+    },
+    {
+      "task_id": 943,
+      "instruction_sha256": "d5184c712ffb84457d133d776109e6bec8696d99ff0693d1a072ba241c05abb0",
+      "reason": "too_long"
+    },
+    {
+      "task_id": 1717,
+      "instruction_sha256": "e90318e7425f279028f61c65d8565715592c1f341cf5084deeaae0833b73892a",
+      "reason": "too_long"
+    },
+    {
+      "task_id": 1780,
+      "instruction_sha256": "b9186eac7342809f9cba2cbc59bae5c04ac828764f6a8fb40af2191d8b78f582",
+      "reason": "too_long"
+    },
+    {
+      "task_id": 1817,
+      "instruction_sha256": "1f10521ffb71d1638769653e40866a8dd066a1caae4c823c4d69186b5432a3e4",
+      "reason": "too_long"
+    },
+    {
+      "task_id": 1833,
+      "instruction_sha256": "70092c184b05b2986354aa33a20917a29d3e9c71d283e967f8a93a06a01524e7",
+      "reason": "too_long"
+    },
+    {
+      "task_id": 1978,
+      "instruction_sha256": "1789a6887ba7f192e1797f2c474102c08fdf41feb7c318442982e25f06f72726",
+      "reason": "too_long"
+    },
+    {
+      "task_id": 2143,
+      "instruction_sha256": "b0cf9791ecd295abba8199dd7788d871376d6d8705d004bcc557ef7c7f5e9ed6",
+      "reason": "too_long"
+    },
+    {
+      "task_id": 2467,
+      "instruction_sha256": "d3852169c81ef3fffbf4873eea1ce9e2f08a6c9483ee86fb2dbfabf72fb1b267",
+      "reason": "too_long"
+    },
+    {
+      "task_id": 2581,
+      "instruction_sha256": "4906b69c016ae038ce7d8e3f7c2b47cf48f9362ac279104cc864c35db150b33f",
+      "reason": "too_long"
+    },
+    {
+      "task_id": 3046,
+      "instruction_sha256": "affc63cb1696e990c47851dcda0bc01aff374af63a04ac5aaa9e08cd1aac0b1b",
+      "reason": "too_long"
+    },
+    {
+      "task_id": 3061,
+      "instruction_sha256": "9bb0ebb633b6808ad8dba5bfab9c26c5cca169475ca3d55281090163d7e7c6b6",
+      "reason": "too_long"
+    },
+    {
+      "task_id": 3338,
+      "instruction_sha256": "2ab39d0e63fc2931627b83e57732c0b9d577c4026ef99d27b38a968488784db3",
+      "reason": "too_long"
+    },
+    {
+      "task_id": 3669,
+      "instruction_sha256": "8791daa40ec3b68996899b36d111d1b2c4c3a3455b34ac49ceb07a453f83545d",
+      "reason": "too_long"
+    },
+    {
+      "task_id": 4478,
+      "instruction_sha256": "89127736c9c615ed58f9be171648d4d51047ed17bd3a35f75dbe06f5dd0a1f57",
+      "reason": "too_long"
+    },
+    {
+      "task_id": 4488,
+      "instruction_sha256": "dcfa38a5acc2e0b1ef3732011bda223017f4521c13a56e0b0032b54201cfe3c0",
+      "reason": "too_long"
+    },
+    {
+      "task_id": 4571,
+      "instruction_sha256": "cee0e42a9d28127be0eeae1e45c4a03aad0da968657a415dd670facbe9220bd6",
+      "reason": "too_long"
+    },
+    {
+      "task_id": 5129,
+      "instruction_sha256": "d7eb305e29e382fbff7008ac81eb0f1c195985cd713e74d8386e43f1266b3359",
+      "reason": "too_long"
+    },
+    {
+      "task_id": 5514,
+      "instruction_sha256": "e12a24f90bb0f3ea525ad8320df20279f5b914e12b73f165df254c406b6c4c83",
+      "reason": "too_long"
+    },
+    {
+      "task_id": 5642,
+      "instruction_sha256": "2b31baa2b7f8633f50dee766cbea8b218b7950a9f5d7cf8f7d3fa5951d3f20a0",
+      "reason": "too_long"
+    },
+    {
+      "task_id": 5906,
+      "instruction_sha256": "7a81ce67ca01817ccf32cdbceb5d445115458283fef26560e2ad3e4d863425ed",
+      "reason": "too_long"
+    },
+    {
+      "task_id": 6222,
+      "instruction_sha256": "6cb16196b3a1ae5ba493c99b6a9ec7b51d515d0b58b6f2873e093a596b16bbca",
+      "reason": "too_long"
+    },
+    {
+      "task_id": 6266,
+      "instruction_sha256": "093de9ab926f02247b87f85dca6009446e6580aaa6d7d9f5176430a0055a0c21",
+      "reason": "too_long"
+    },
+    {
+      "task_id": 6366,
+      "instruction_sha256": "13a9184ac46b221a4535f549d10881f9853ec6c79c8e8eedab006f88238ac407",
+      "reason": "too_long"
+    },
+    {
+      "task_id": 6935,
+      "instruction_sha256": "40f5f3fd9e58f973b83f2d2b08c40762db2696da08300ffe1d70eddfed408c99",
+      "reason": "too_long"
+    },
+    {
+      "task_id": 7033,
+      "instruction_sha256": "e5c27e1d837c10c071c8e45154d2a193bb2e87121e15cbcdf7175d58047fd4cf",
+      "reason": "too_long"
+    },
+    {
+      "task_id": 7035,
+      "instruction_sha256": "7d78652a5a72258739acd68a4c498cee0b7cd8d3f09c7f10b6036fb284c40d0f",
+      "reason": "too_long"
+    },
+    {
+      "task_id": 7219,
+      "instruction_sha256": "fa352fefc62def90c56a2cbd39b2240dfda72bcc85945a79ff18b82931c56eda",
+      "reason": "too_long"
+    },
+    {
+      "task_id": 8118,
+      "instruction_sha256": "b8cd5f954256886761aba14df967cb5f17ccc3c591a2ea39410e85bb1ccf2878",
+      "reason": "too_long"
+    },
+    {
+      "task_id": 8170,
+      "instruction_sha256": "d2c83f35cea52de9008e90bdf419ea7ea422b7eb92407c0e0f53baf4888bef14",
+      "reason": "too_long"
+    },
+    {
+      "task_id": 9142,
+      "instruction_sha256": "f0f5ca060cd4eca0b154725180a88d71cb85e2d886939bfa9d268c3af4cddfb4",
+      "reason": "too_long"
+    },
+    {
+      "task_id": 9807,
+      "instruction_sha256": "c8efa54d3cc7a5e0538c49e8ceac943cb40f986d9020899855e8d4fdb6ec5dad",
+      "reason": "too_long"
+    },
+    {
+      "task_id": 10596,
+      "instruction_sha256": "93c4d925b20cfc6b60a6d879ca8bf8f5a20fa0d9c200cf9974ee96b08944d02b",
+      "reason": "too_long"
+    },
+    {
+      "task_id": 11027,
+      "instruction_sha256": "e7ecfe3b16a282b590836cfb9747ff6f97a70c72baf80ee01f9136b02939e425",
+      "reason": "too_long"
+    },
+    {
+      "task_id": 11333,
+      "instruction_sha256": "856c6528d510cceb5197172b2b4371c3d7a7ac70475afb2d1b65e9a0914da3e3",
+      "reason": "too_long"
+    },
+    {
+      "task_id": 12,
+      "instruction_sha256": "ffac9424a47465a3411ae61e646678d0913e667c064af6da581c76b3ec292279",
+      "reason": "too_long"
+    },
+    {
+      "task_id": 486,
+      "instruction_sha256": "e8c0bfed11e05078cfb327e3c19517f34589ac39b8504bdfb3bf93c063cf5315",
+      "reason": "too_long"
+    },
+    {
+      "task_id": 661,
+      "instruction_sha256": "a4ce9850fe3617dafdd03bad86465d03dcc9d26324cf5e9c9ce46e224c1f91f3",
+      "reason": "too_long"
+    },
+    {
+      "task_id": 954,
+      "instruction_sha256": "467cb8f76e94122eb3daebbea371cc16a38bf50da305ee9bfd481b28be90f1dc",
+      "reason": "too_long"
+    },
+    {
+      "task_id": 1882,
+      "instruction_sha256": "65f15ba8eacbe2f7c9769249dd75d3f6c6293565a356dad66ef8cd5eb68c79c9",
+      "reason": "too_long"
+    },
+    {
+      "task_id": 1931,
+      "instruction_sha256": "d72d7279cda0d3df71840cb438aa0fdcc7093f02030811523712ebbbac786f72",
+      "reason": "too_long"
+    },
+    {
+      "task_id": 1984,
+      "instruction_sha256": "edbdb3f00ae07d7e6f74c3b4cf39c581c205e8d5c5ed775b76777ff01e382ae7",
+      "reason": "too_long"
+    },
+    {
+      "task_id": 5289,
+      "instruction_sha256": "1c7be345f069b7c73b417399d6f5fc8a33664438743fd07ebe8a7e98ebbed664",
+      "reason": "too_long"
+    },
+    {
+      "task_id": 5761,
+      "instruction_sha256": "20ad83978a174a1c84727a2f79081c036666c3e721f841ef865a4683b71105c3",
+      "reason": "too_long"
+    },
+    {
+      "task_id": 7900,
+      "instruction_sha256": "9cebdaa5ad60cde1eefad15af01dc8fc2ccac21756c36d0c1a31bd99bea649f5",
+      "reason": "too_long"
+    },
+    {
+      "task_id": 8742,
+      "instruction_sha256": "f4afad028ad89c15bd64309623ec51ce520eccd18257dd8437e7b4bf6b9d604d",
+      "reason": "too_long"
+    }
+  ],
+  "dropped_tasks": [
+    12,
+    31,
+    146,
+    189,
+    296,
+    344,
+    486,
+    661,
+    943,
+    954,
+    1717,
+    1780,
+    1817,
+    1833,
+    1882,
+    1931,
+    1978,
+    1984,
+    2143,
+    2467,
+    2581,
+    3046,
+    3061,
+    3338,
+    3669,
+    4478,
+    4488,
+    4571,
+    5129,
+    5289,
+    5514,
+    5642,
+    5761,
+    5906,
+    6222,
+    6266,
+    6366,
+    6935,
+    7033,
+    7035,
+    7219,
+    7900,
+    8118,
+    8170,
+    8742,
+    9142,
+    9807,
+    10596,
+    11027,
+    11333
+  ],
+  "score_position": "assistant_im_end",
+  "truncation": "forbidden: overlong trajectories are rejected and counted"
+}

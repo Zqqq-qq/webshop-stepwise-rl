@@ -1,0 +1,237 @@
+{
+  "scope": "神经PRM短训；不自动通过正式泛化验收",
+  "device": "cuda",
+  "torch_version": "2.8.0+cu128",
+  "cuda_version": "12.8",
+  "input_files_sha256": {
+    "/root/.cache/huggingface/hub/models--Qwen--Qwen2.5-1.5B-Instruct/snapshots/989aa7980e4cf806f80c7fef2b1adb7bc71aa306/model.safetensors": "dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee",
+    "/root/.cache/huggingface/hub/models--Qwen--Qwen2.5-1.5B-Instruct/snapshots/989aa7980e4cf806f80c7fef2b1adb7bc71aa306/tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+    "/root/.cache/huggingface/hub/models--Qwen--Qwen2.5-1.5B-Instruct/snapshots/989aa7980e4cf806f80c7fef2b1adb7bc71aa306/tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+    "/root/.cache/huggingface/hub/models--Qwen--Qwen2.5-1.5B-Instruct/snapshots/989aa7980e4cf806f80c7fef2b1adb7bc71aa306/vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+    "/root/.cache/huggingface/hub/models--Qwen--Qwen2.5-1.5B-Instruct/snapshots/989aa7980e4cf806f80c7fef2b1adb7bc71aa306/merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+    "/root/webshop-stepwise-rl/artifacts/qwen25-one-epoch-final-resume-Ydr3GfjQ/output/adapter/adapter_model.safetensors": "c39e2a78e7c5973328e9d2c23fb6320e566352e63cc089562488f3dd46ae5f9c",
+    "/root/webshop-stepwise-rl/artifacts/qwen25-one-epoch-final-resume-Ydr3GfjQ/output/adapter/adapter_config.json": "18993c388788ec14de72fd4f6f9ff86ce761ffc3aad5d0923b33f4365be03d97",
+    "/root/.cache/huggingface/hub/models--Qwen--Qwen2.5-1.5B-Instruct/snapshots/989aa7980e4cf806f80c7fef2b1adb7bc71aa306/config.json": "98d2ff8cc47488d08a2b0b3acf4eb99ef210779b42bd48605f6b8e36acdbf670",
+    "/root/.cache/huggingface/hub/models--Qwen--Qwen2.5-1.5B-Instruct/snapshots/989aa7980e4cf806f80c7fef2b1adb7bc71aa306/generation_config.json": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6"
+  },
+  "identity": {
+    "base_revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+    "base_sha256": "dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee",
+    "tokenizer_sha256": {
+      "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+      "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+      "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+      "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3"
+    },
+    "tokenizer_revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+    "auxiliary_input_sha256": {
+      "/root/.cache/huggingface/hub/models--Qwen--Qwen2.5-1.5B-Instruct/snapshots/989aa7980e4cf806f80c7fef2b1adb7bc71aa306/config.json": "98d2ff8cc47488d08a2b0b3acf4eb99ef210779b42bd48605f6b8e36acdbf670",
+      "/root/.cache/huggingface/hub/models--Qwen--Qwen2.5-1.5B-Instruct/snapshots/989aa7980e4cf806f80c7fef2b1adb7bc71aa306/generation_config.json": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6"
+    },
+    "template_sha256": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+    "initialization": {
+      "kind": "sft_b1",
+      "sft_adapter_files_sha256": {
+        "adapter_model.safetensors": "c39e2a78e7c5973328e9d2c23fb6320e566352e63cc089562488f3dd46ae5f9c",
+        "adapter_config.json": "18993c388788ec14de72fd4f6f9ff86ce761ffc3aad5d0923b33f4365be03d97"
+      }
+    },
+    "source_commit": "a67db6abefc73c6f6c7f1efb78645086782b1ade",
+    "source_tracked_clean": true,
+    "source_sha256": {
+      "runtime.py": "25c646efda1727249a2cd402c4b0671b8977331d5af500be533df1eb3d851388",
+      "model_core.py": "b0e90aa60ede7a9c14822fd369a69fc3e44936ceb98c5699a71b4fa4528b843a",
+      "train_core.py": "f4de662f8ba21ddbe02a35f4fd477e27ae488c9e96ff52cb838d8495757b228c",
+      "tokenize.py": "7515488a18e829274e291e63177732c33fad1927c0912e79c33345bb106f370d",
+      "config.py": "ae6a3dea7e586b20dd00e539f27478aae5c3f487c76a74c0b125f49159213710"
+    },
+    "prm_lora": {
+      "rank": 8,
+      "alpha": 16,
+      "target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "dropout": 0.05
+    },
+    "score_position": "assistant_im_end",
+    "max_length": 2048,
+    "policy_dtype": "float32"
+  },
+  "backend": {
+    "float32_matmul_precision": "highest",
+    "cuda_matmul_allow_tf32": false,
+    "cudnn_allow_tf32": false,
+    "autocast_enabled": false
+  },
+  "optimizer_steps": 5,
+  "records": [
+    {
+      "loss": 1.0,
+      "gradient_norm": 11805.5830078125,
+      "totals_before_update": [
+        0.0
+      ],
+      "task_id": 6,
+      "optimizer_step": 1,
+      "head_gradient_l1": 304.95526123046875,
+      "lora_gradient_l1": 0.0,
+      "terminal_reward": 1.0
+    },
+    {
+      "loss": 37.286224365234375,
+      "gradient_norm": 54377.09765625,
+      "totals_before_update": [
+        6.772911071777344
+      ],
+      "task_id": 13,
+      "optimizer_step": 2,
+      "head_gradient_l1": 305.1602783203125,
+      "lora_gradient_l1": 0.41230341664049774,
+      "terminal_reward": 0.6666666666666666
+    },
+    {
+      "loss": 377.1884765625,
+      "gradient_norm": 531601.375,
+      "totals_before_update": [
+        19.421340942382812
+      ],
+      "task_id": 23,
+      "optimizer_step": 3,
+      "head_gradient_l1": 304.6417236328125,
+      "lora_gradient_l1": 0.47197665414887524,
+      "terminal_reward": 0.0
+    },
+    {
+      "loss": 9.25006103515625,
+      "gradient_norm": 27180.9375,
+      "totals_before_update": [
+        3.791391372680664
+      ],
+      "task_id": 46,
+      "optimizer_step": 4,
+      "head_gradient_l1": 304.7908020019531,
+      "lora_gradient_l1": 0.22639625900046667,
+      "terminal_reward": 0.75
+    },
+    {
+      "loss": 0.41411852836608887,
+      "gradient_norm": 5739.32080078125,
+      "totals_before_update": [
+        0.023146269842982292
+      ],
+      "task_id": 103,
+      "optimizer_step": 5,
+      "head_gradient_l1": 305.2006530761719,
+      "lora_gradient_l1": 0.09866434446445282,
+      "terminal_reward": 0.6666666666666666
+    }
+  ],
+  "samples_sha256": "2b843f026e677ed038aa5efd09c56d6b8b8fb487e10ed0589ab567a47f5de23e",
+  "train_ids_sha256": "8c85e56b3ac2e1f0a09b54560ad0f9bf77eedddb241d73617c7ff32416522e20",
+  "total_samples": 48,
+  "retained_samples": 34,
+  "rejected": [
+    {
+      "row": 3,
+      "task_id": 31,
+      "reason": "Complete trajectory has 2153 tokens; limit=2048",
+      "terminal_reward": 0.5
+    },
+    {
+      "row": 7,
+      "task_id": 146,
+      "reason": "Complete trajectory has 3919 tokens; limit=2048",
+      "terminal_reward": 0.025
+    },
+    {
+      "row": 9,
+      "task_id": 189,
+      "reason": "Complete trajectory has 3656 tokens; limit=2048",
+      "terminal_reward": 0.0
+    },
+    {
+      "row": 10,
+      "task_id": 296,
+      "reason": "Complete trajectory has 3683 tokens; limit=2048",
+      "terminal_reward": 0.0
+    },
+    {
+      "row": 13,
+      "task_id": 344,
+      "reason": "Complete trajectory has 2843 tokens; limit=2048",
+      "terminal_reward": 0.0
+    },
+    {
+      "row": 19,
+      "task_id": 486,
+      "reason": "Complete trajectory has 2114 tokens; limit=2048",
+      "terminal_reward": 0.1
+    },
+    {
+      "row": 21,
+      "task_id": 661,
+      "reason": "Complete trajectory has 3160 tokens; limit=2048",
+      "terminal_reward": 0.75
+    },
+    {
+      "row": 27,
+      "task_id": 943,
+      "reason": "Complete trajectory has 2613 tokens; limit=2048",
+      "terminal_reward": 0.0
+    },
+    {
+      "row": 28,
+      "task_id": 954,
+      "reason": "Complete trajectory has 2338 tokens; limit=2048",
+      "terminal_reward": 1.0
+    },
+    {
+      "row": 35,
+      "task_id": 1717,
+      "reason": "Complete trajectory has 2235 tokens; limit=2048",
+      "terminal_reward": 0.25
+    },
+    {
+      "row": 42,
+      "task_id": 1833,
+      "reason": "Complete trajectory has 3096 tokens; limit=2048",
+      "terminal_reward": 0.25
+    },
+    {
+      "row": 45,
+      "task_id": 1931,
+      "reason": "Complete trajectory has 6926 tokens; limit=2048",
+      "terminal_reward": 0.0
+    },
+    {
+      "row": 46,
+      "task_id": 1978,
+      "reason": "Complete trajectory has 6612 tokens; limit=2048",
+      "terminal_reward": 0.0
+    },
+    {
+      "row": 47,
+      "task_id": 1984,
+      "reason": "Complete trajectory has 3744 tokens; limit=2048",
+      "terminal_reward": 0.5
+    }
+  ],
+  "parameters_before": {
+    "head": "e39805a25949da937b399213f80f7f99f1b0e14f0698744fd6b2a0330f7289ac",
+    "lora": "5a2c5eaa8c9ede027c7f0336dac31f324ff176459bd56af079a56dd94f3a473d"
+  },
+  "parameters_after": {
+    "head": "74423f5b9c983249c7b8fc560727d12dcb18e8a79b84e88c70b064b78e6348b8",
+    "lora": "7b83b91aeab2c9dc5353719b160d7e07cde384d1eac63a1e4aa19d211a9f90df"
+  },
+  "head_changed": true,
+  "lora_changed": true,
+  "parameter_numel_by_dtype": {
+    "torch.float32": 1544955777
+  },
+  "elapsed_seconds": 41.473052122019,
+  "test_authorization": false,
+  "peak_allocated_gib": 7.290615081787109,
+  "peak_reserved_gib": 8.4765625
+}

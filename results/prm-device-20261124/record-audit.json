@@ -1,0 +1,106 @@
+{
+  "scope": "committed-record consistency only; no GPU/reload/dev reproduction",
+  "summaries": {
+    "smoke-lr5e6-summary.json": {
+      "updates": 5,
+      "mse_recompute_max_absolute_difference": 7.437774911522865e-06,
+      "loss_min": 0.41411852836608887,
+      "loss_max": 377.1884765625,
+      "losses": [
+        1.0,
+        37.286224365234375,
+        377.1884765625,
+        9.25006103515625,
+        0.41411852836608887
+      ],
+      "post_first_loss_min": 0.41411852836608887,
+      "post_first_loss_max": 377.1884765625,
+      "maximum_observed_rejected_tokens": 6926,
+      "maximum_is_full_dataset_maximum": false
+    },
+    "smoke-lr1e6-summary.json": {
+      "updates": 5,
+      "mse_recompute_max_absolute_difference": 8.519054972566664e-08,
+      "loss_min": 8.543987496523187e-05,
+      "loss_max": 15.108643531799316,
+      "losses": [
+        1.0,
+        0.47322773933410645,
+        15.108643531799316,
+        8.543987496523187e-05,
+        0.4385049343109131
+      ],
+      "post_first_loss_min": 8.543987496523187e-05,
+      "post_first_loss_max": 15.108643531799316,
+      "maximum_observed_rejected_tokens": 6926,
+      "maximum_is_full_dataset_maximum": false
+    },
+    "smoke-lr1e7-summary.json": {
+      "updates": 5,
+      "mse_recompute_max_absolute_difference": 5.104983097359295e-08,
+      "loss_min": 0.08469536900520325,
+      "loss_max": 1.0,
+      "losses": [
+        1.0,
+        0.2821824848651886,
+        0.6642394661903381,
+        0.19378025829792023,
+        0.08469536900520325
+      ],
+      "post_first_loss_min": 0.08469536900520325,
+      "post_first_loss_max": 0.6642394661903381,
+      "maximum_observed_rejected_tokens": 6926,
+      "maximum_is_full_dataset_maximum": false
+    },
+    "train-run-001-summary.json": {
+      "updates": 20,
+      "mse_recompute_max_absolute_difference": 5.104983097359295e-08,
+      "loss_min": 0.0021876536775380373,
+      "loss_max": 1.0,
+      "losses": [
+        1.0,
+        0.2821824848651886,
+        0.6642394661903381,
+        0.19378025829792023,
+        0.08469536900520325,
+        0.21545839309692383,
+        0.031245853751897812,
+        0.1548023372888565,
+        0.0630016103386879,
+        0.017227789387106895,
+        0.15343225002288818,
+        0.0910431370139122,
+        0.2363942712545395,
+        0.006158353295177221,
+        0.003014130052179098,
+        0.0413532480597496,
+        0.3491895794868469,
+        0.0021876536775380373,
+        0.16356562077999115,
+        0.2323025017976761
+      ],
+      "post_first_loss_min": 0.0021876536775380373,
+      "post_first_loss_max": 0.6642394661903381,
+      "maximum_observed_rejected_tokens": 9538,
+      "maximum_is_full_dataset_maximum": false
+    }
+  },
+  "input_sha256": {
+    "smoke-lr5e6-summary.json": "b63d16c91e6588a0ca47083a20aa4d5c5919b7f7e67fc3f67539d758e35ad2c1",
+    "smoke-lr1e6-summary.json": "eb07e0f5bec7401f269d6f5d16d748836f093fc1d0b3f1283cdf3c233d724a83",
+    "smoke-lr1e7-summary.json": "3d063c2a87f3f4d6e1a299c44dca98ede4be04f77ae9f6145829272e3624c068",
+    "train-run-001-summary.json": "c4f08688e05df9b01fea80e85767633f4c5d5495e4713b5ffc4fa0b77018e54f",
+    "train-run-001-manifest.json": "b0b57e4424e944917a7a77fb3bd87fab3417c56f694b881e4e4a8a282fd612e7"
+  },
+  "summary_manifest_hash_matches": true,
+  "recovered_source_sha256": {
+    "runtime.py": "25c646efda1727249a2cd402c4b0671b8977331d5af500be533df1eb3d851388",
+    "model_core.py": "b0e90aa60ede7a9c14822fd369a69fc3e44936ceb98c5699a71b4fa4528b843a",
+    "train_core.py": "f4de662f8ba21ddbe02a35f4fd477e27ae488c9e96ff52cb838d8495757b228c",
+    "tokenize.py": "7515488a18e829274e291e63177732c33fad1927c0912e79c33345bb106f370d",
+    "config.py": "ae6a3dea7e586b20dd00e539f27478aae5c3f487c76a74c0b125f49159213710"
+  },
+  "historical_source_files_match": true,
+  "original_smoke_reload_status": "self-reported; original checkpoint/reload evidence pending",
+  "original_29_dev_status": "self-reported; per-task predictions and baseline evidence pending"
+}

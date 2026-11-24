@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "identity": {
+    "base_revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+    "base_sha256": "dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee",
+    "tokenizer_sha256": {
+      "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+      "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+      "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+      "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3"
+    },
+    "tokenizer_revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+    "auxiliary_input_sha256": {
+      "/root/.cache/huggingface/hub/models--Qwen--Qwen2.5-1.5B-Instruct/snapshots/989aa7980e4cf806f80c7fef2b1adb7bc71aa306/config.json": "98d2ff8cc47488d08a2b0b3acf4eb99ef210779b42bd48605f6b8e36acdbf670",
+      "/root/.cache/huggingface/hub/models--Qwen--Qwen2.5-1.5B-Instruct/snapshots/989aa7980e4cf806f80c7fef2b1adb7bc71aa306/generation_config.json": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6"
+    },
+    "template_sha256": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+    "initialization": {
+      "kind": "sft_b1",
+      "sft_adapter_files_sha256": {
+        "adapter_model.safetensors": "c39e2a78e7c5973328e9d2c23fb6320e566352e63cc089562488f3dd46ae5f9c",
+        "adapter_config.json": "18993c388788ec14de72fd4f6f9ff86ce761ffc3aad5d0923b33f4365be03d97"
+      }
+    },
+    "source_commit": "a67db6abefc73c6f6c7f1efb78645086782b1ade",
+    "source_tracked_clean": true,
+    "source_sha256": {
+      "runtime.py": "25c646efda1727249a2cd402c4b0671b8977331d5af500be533df1eb3d851388",
+      "model_core.py": "b0e90aa60ede7a9c14822fd369a69fc3e44936ceb98c5699a71b4fa4528b843a",
+      "train_core.py": "f4de662f8ba21ddbe02a35f4fd477e27ae488c9e96ff52cb838d8495757b228c",
+      "tokenize.py": "7515488a18e829274e291e63177732c33fad1927c0912e79c33345bb106f370d",
+      "config.py": "ae6a3dea7e586b20dd00e539f27478aae5c3f487c76a74c0b125f49159213710"
+    },
+    "prm_lora": {
+      "rank": 8,
+      "alpha": 16,
+      "target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "dropout": 0.05
+    },
+    "score_position": "assistant_im_end",
+    "max_length": 2048,
+    "policy_dtype": "float32"
+  },
+  "vocab_size": 151936,
+  "score_definition": "assistant_turn_end_vocab_logits_linear_sum_mse",
+  "files_sha256": {
+    "adapter/README.md": "d7251f1223fc8a4dda32e75b7749530ca2561c020371ba1dd3dfd7906c53586c",
+    "adapter/adapter_config.json": "e18d473f88e843b47c67e10a396a520724ae1948ea3ac0eeed53f7998f2a6e87",
+    "adapter/adapter_model.safetensors": "26fcb6927655de76c842c1dce173c3320b56ee22a69152fe8c87822cba65c054",
+    "config.json": "12ad026725a7a990c92afa9d00005c806b938bc890e9f1ef3be14c9fb87c00e4",
+    "head.pt": "a673d60bd092e5e5a9b757113b72d449f62be01c516f18ddd650ab8c7599b8f8",
+    "reference-predictions.json": "f0f31a678054476573c8de4b051317d620f851d24a4faca8bffd289819c57d12",
+    "summary.json": "c4f08688e05df9b01fea80e85767633f4c5d5495e4713b5ffc4fa0b77018e54f",
+    "training-state.pt": "077250924590e4c4db60447a8ce99dbfd3455e4ada4c3507de3e1f3d8bbd443d"
+  }
+}
