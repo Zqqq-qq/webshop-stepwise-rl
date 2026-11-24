@@ -1,0 +1,743 @@
+{
+  "scope": "current GitHub protocol fixed-budget training, not all-1451-task coverage",
+  "expected_updates_per_arm_seed": 4,
+  "expected_episodes_per_arm_seed": 16,
+  "chains": {
+    "42/terminal": [
+      {
+        "update": 1,
+        "run_id": "35f3e27e-9612-4fb4-a350-1b5fecbaf799",
+        "parent_run_id": null,
+        "task_ids": [
+          7793,
+          1718,
+          3040,
+          4517
+        ],
+        "actor_tensor_digest": "bd58faf7db53aa5c684ce0454310d5016890e72342dd35f9eb0814d656072371",
+        "critic_tensor_digest": "ab10471ca521898a7ae8280610ee3b62008d215f6c416af599601f96f129f18b",
+        "config_sha256": "66edb3b3c28ae8ee3ce11cdd7e8dfd6a6fc9d47067ebde123a798ea552a7fb96",
+        "meta_sha256": "0397d397d2e8760f84c39ba1959087ab902c6491a8da8a97cb5f8476a34091da",
+        "summary_sha256": "57d57e8ea0cae21ff1ca705ea3529988bdd97cf19f3f0a9f89c12b415ff4aa6f",
+        "episodes_sha256": "034624eacafcfbdaf5f98187b89eb69d579398f85ee9712afbbcb46054427dbf",
+        "optimizer_state_sha256": "30b6d1dc3d44aa1350b32324466db6ba0b4b1b9a3e1a68cd4f7627663443d4cf",
+        "state_keys": [
+          "optimizer",
+          "cpu_rng",
+          "cuda_rng",
+          "update"
+        ],
+        "optimizer_step_values": [
+          1
+        ],
+        "summary": {
+          "loss": -0.35110368798760805,
+          "gradient_norm": 88.39866638183594,
+          "replay_ratio_min": 0.9998185629263637,
+          "replay_ratio_max": 1.000204079185358,
+          "run_id": "35f3e27e-9612-4fb4-a350-1b5fecbaf799",
+          "updates": 1,
+          "cumulative_updates": 1,
+          "parent_run_id": null,
+          "turns": 17,
+          "environment_calls": 16,
+          "generated_tokens": 942,
+          "actor_before": "2261642f9070d0cc7f4a352a9d69aa722c4eb6dd617b28eea854629101f8c435",
+          "actor_after": "bd58faf7db53aa5c684ce0454310d5016890e72342dd35f9eb0814d656072371",
+          "critic_before": "03a8cc352df5c85ff9097fe67b1951d20ad001d662798185f3dcf1eda227f8ad",
+          "critic_after": "ab10471ca521898a7ae8280610ee3b62008d215f6c416af599601f96f129f18b",
+          "same_process_reload": true
+        }
+      },
+      {
+        "update": 2,
+        "run_id": "23637384-c3b3-448d-a533-d3094f6f3a61",
+        "parent_run_id": "35f3e27e-9612-4fb4-a350-1b5fecbaf799",
+        "task_ids": [
+          9258,
+          544,
+          4212,
+          462
+        ],
+        "actor_tensor_digest": "d7c5a59a29860b9941cbb2ad28ebc6caf2402a3e1627e2ef757416d6a3aaa462",
+        "critic_tensor_digest": "5cbe0b6babcf3988fc781a702a50be4966ce6933a48918d09d195d72287fceaa",
+        "config_sha256": "66edb3b3c28ae8ee3ce11cdd7e8dfd6a6fc9d47067ebde123a798ea552a7fb96",
+        "meta_sha256": "7da8cec104537175c37418200a58fbe9b90ef14729dc5170af714e9b049993f3",
+        "summary_sha256": "c2606976f31dce6bbb8accc0873707b559d789a78ac916de8e3fe15744994791",
+        "episodes_sha256": "dfd1dd039e0675826171be9365985a4b3803ff1d8c28cf43473ff453ea1d94fe",
+        "optimizer_state_sha256": "f7413927e8ec646c2fd95964ba9a7aa3c5bfd69d95bbd5808c63e73076e00466",
+        "state_keys": [
+          "optimizer",
+          "cpu_rng",
+          "cuda_rng",
+          "update"
+        ],
+        "optimizer_step_values": [
+          2
+        ],
+        "summary": {
+          "loss": -0.25776681751012803,
+          "gradient_norm": 77.3346176147461,
+          "replay_ratio_min": 0.9999146015993894,
+          "replay_ratio_max": 1.0001323233819566,
+          "run_id": "23637384-c3b3-448d-a533-d3094f6f3a61",
+          "updates": 1,
+          "cumulative_updates": 2,
+          "parent_run_id": "35f3e27e-9612-4fb4-a350-1b5fecbaf799",
+          "turns": 20,
+          "environment_calls": 12,
+          "generated_tokens": 1051,
+          "actor_before": "bd58faf7db53aa5c684ce0454310d5016890e72342dd35f9eb0814d656072371",
+          "actor_after": "d7c5a59a29860b9941cbb2ad28ebc6caf2402a3e1627e2ef757416d6a3aaa462",
+          "critic_before": "ab10471ca521898a7ae8280610ee3b62008d215f6c416af599601f96f129f18b",
+          "critic_after": "5cbe0b6babcf3988fc781a702a50be4966ce6933a48918d09d195d72287fceaa",
+          "same_process_reload": true
+        }
+      },
+      {
+        "update": 3,
+        "run_id": "6cc5a3e0-441a-42db-abc3-4ea6d65bf7b3",
+        "parent_run_id": "23637384-c3b3-448d-a533-d3094f6f3a61",
+        "task_ids": [
+          12,
+          1756,
+          1649,
+          4758
+        ],
+        "actor_tensor_digest": "c59e7fc8738cdfd30e20a36f2e9aa93e6b818d3519bb24d688bc870d4da7fc09",
+        "critic_tensor_digest": "313d939d1ea3e5e3190c15f7bed5962f7a362d50f7d6550b7b771f5e0eb84815",
+        "config_sha256": "66edb3b3c28ae8ee3ce11cdd7e8dfd6a6fc9d47067ebde123a798ea552a7fb96",
+        "meta_sha256": "71e6080cca6a6c1b5c25df809c8c5611d0be979c7ad7b294c286f5325d4b555c",
+        "summary_sha256": "35d7293d7aa501083508a5f9ac88199cdbaae10231b5eee00ddb0ac007197ebd",
+        "episodes_sha256": "8933592d18e4205ef46c7c6fb20a6b4a21683bf4761451f9738d071ca526b4a3",
+        "optimizer_state_sha256": "1bf1f9e193aa8994f2f197c42f9a2199e99405aafc395072654adb98fe6f780b",
+        "state_keys": [
+          "optimizer",
+          "cpu_rng",
+          "cuda_rng",
+          "update"
+        ],
+        "optimizer_step_values": [
+          3
+        ],
+        "summary": {
+          "loss": -0.2709308734961918,
+          "gradient_norm": 71.67037963867188,
+          "replay_ratio_min": 0.9998833581850537,
+          "replay_ratio_max": 1.0001407918902558,
+          "run_id": "6cc5a3e0-441a-42db-abc3-4ea6d65bf7b3",
+          "updates": 1,
+          "cumulative_updates": 3,
+          "parent_run_id": "23637384-c3b3-448d-a533-d3094f6f3a61",
+          "turns": 14,
+          "environment_calls": 14,
+          "generated_tokens": 987,
+          "actor_before": "d7c5a59a29860b9941cbb2ad28ebc6caf2402a3e1627e2ef757416d6a3aaa462",
+          "actor_after": "c59e7fc8738cdfd30e20a36f2e9aa93e6b818d3519bb24d688bc870d4da7fc09",
+          "critic_before": "5cbe0b6babcf3988fc781a702a50be4966ce6933a48918d09d195d72287fceaa",
+          "critic_after": "313d939d1ea3e5e3190c15f7bed5962f7a362d50f7d6550b7b771f5e0eb84815",
+          "same_process_reload": true
+        }
+      },
+      {
+        "update": 4,
+        "run_id": "a260e671-2f89-44b4-9e91-dd36fab596ff",
+        "parent_run_id": "6cc5a3e0-441a-42db-abc3-4ea6d65bf7b3",
+        "task_ids": [
+          4541,
+          1697,
+          1670,
+          9014
+        ],
+        "actor_tensor_digest": "617d62745d108ba4f89ef2969a49c51e153da2d5ccccf63ce04a820974ecac14",
+        "critic_tensor_digest": "35f9570e6c19378f7a98ed802a52cabd3fecd4384762823479b976e67d058be1",
+        "config_sha256": "66edb3b3c28ae8ee3ce11cdd7e8dfd6a6fc9d47067ebde123a798ea552a7fb96",
+        "meta_sha256": "b65bf57f9ece54c664fea5f37dae77707e06b6aadaf07888343345d5a7a44144",
+        "summary_sha256": "b204f60c627e293458f875427ecab179ee9c2fea5f3a567a97fe296f9bae4d65",
+        "episodes_sha256": "cab2b98cb775594f55cbd0ca7b33dd9c3d000fb4b84e8ee31014024d820aa43a",
+        "optimizer_state_sha256": "25dd2869194b9e8a9716507414fa1da85a7d7f2680efc1f88731171aaf406011",
+        "state_keys": [
+          "optimizer",
+          "cpu_rng",
+          "cuda_rng",
+          "update"
+        ],
+        "optimizer_step_values": [
+          4
+        ],
+        "summary": {
+          "loss": -0.43911412182976217,
+          "gradient_norm": 128.50872802734375,
+          "replay_ratio_min": 0.9999098660069283,
+          "replay_ratio_max": 1.0001440268341781,
+          "run_id": "a260e671-2f89-44b4-9e91-dd36fab596ff",
+          "updates": 1,
+          "cumulative_updates": 4,
+          "parent_run_id": "6cc5a3e0-441a-42db-abc3-4ea6d65bf7b3",
+          "turns": 17,
+          "environment_calls": 15,
+          "generated_tokens": 1095,
+          "actor_before": "c59e7fc8738cdfd30e20a36f2e9aa93e6b818d3519bb24d688bc870d4da7fc09",
+          "actor_after": "617d62745d108ba4f89ef2969a49c51e153da2d5ccccf63ce04a820974ecac14",
+          "critic_before": "313d939d1ea3e5e3190c15f7bed5962f7a362d50f7d6550b7b771f5e0eb84815",
+          "critic_after": "35f9570e6c19378f7a98ed802a52cabd3fecd4384762823479b976e67d058be1",
+          "same_process_reload": true
+        }
+      }
+    ],
+    "42/candidate": [
+      {
+        "update": 1,
+        "run_id": "0895ebc0-9980-4569-8de4-fdd8b9886673",
+        "parent_run_id": null,
+        "task_ids": [
+          7793,
+          1718,
+          3040,
+          4517
+        ],
+        "actor_tensor_digest": "4d2893fe460519beb5c9ae1014fc29ec31aa522e4b53475df75167086bb6c0e8",
+        "critic_tensor_digest": "790ff3573b24b0a9d8c3184fa93f185fc5d182c35c3362bd67a61f29e1362fc1",
+        "config_sha256": "f893b17bf5ad424872c37181e80cc83a528c96d5087efec9d64dceb5fcdc94b1",
+        "meta_sha256": "8b1aeae884f45a3c26384d09b183241ddb780b33e67c5e3c527503e42361f4db",
+        "summary_sha256": "202f82844ba7e9996bcc6031ec0dd11fd0afd9e5f5a37e85f19998dfc0db3fea",
+        "episodes_sha256": "5af34519a9bd3617477473e07a7e47801e4557f046ddb15240de3bad9af581c3",
+        "optimizer_state_sha256": "db2aaceb49c419267250b95fd498b43ab218fae79cf8535c310a90bf182bbcfe",
+        "state_keys": [
+          "optimizer",
+          "cpu_rng",
+          "cuda_rng",
+          "update"
+        ],
+        "optimizer_step_values": [
+          1
+        ],
+        "summary": {
+          "loss": -0.3402770459651947,
+          "gradient_norm": 83.98870086669922,
+          "replay_ratio_min": 0.9998185629263637,
+          "replay_ratio_max": 1.000204079185358,
+          "run_id": "0895ebc0-9980-4569-8de4-fdd8b9886673",
+          "updates": 1,
+          "cumulative_updates": 1,
+          "parent_run_id": null,
+          "turns": 17,
+          "environment_calls": 16,
+          "generated_tokens": 942,
+          "actor_before": "2261642f9070d0cc7f4a352a9d69aa722c4eb6dd617b28eea854629101f8c435",
+          "actor_after": "4d2893fe460519beb5c9ae1014fc29ec31aa522e4b53475df75167086bb6c0e8",
+          "critic_before": "03a8cc352df5c85ff9097fe67b1951d20ad001d662798185f3dcf1eda227f8ad",
+          "critic_after": "790ff3573b24b0a9d8c3184fa93f185fc5d182c35c3362bd67a61f29e1362fc1",
+          "same_process_reload": true
+        }
+      },
+      {
+        "update": 2,
+        "run_id": "4009b1fe-ebf1-440d-aa47-46e56fb76ab2",
+        "parent_run_id": "0895ebc0-9980-4569-8de4-fdd8b9886673",
+        "task_ids": [
+          9258,
+          544,
+          4212,
+          462
+        ],
+        "actor_tensor_digest": "d2732b7f9c79d6c995265e139be83a1d2382d15d53153d2098b6c24001d37f6f",
+        "critic_tensor_digest": "bc5c3f2ba7da3f36d0b30e0481ba7b8cee4e7513e2fa604e85a51b7e7f21d6a6",
+        "config_sha256": "f893b17bf5ad424872c37181e80cc83a528c96d5087efec9d64dceb5fcdc94b1",
+        "meta_sha256": "50b1b019fee412f6b32076fa8184109bbadbb9e12f22fa63ea6f62155bb44e94",
+        "summary_sha256": "8ff351115e5032f16ecbfbf004ad90988662600fce25b8575b4d190d3a736836",
+        "episodes_sha256": "b6bc06240d3e077ed72eb182d04ec0a28f7ab8e97a7bc94c7407d7e82cb8ca5f",
+        "optimizer_state_sha256": "08e63aa01732a9ebd4181bd532bfa4efb28adfa4c08ef49586d5319cfa5ad54c",
+        "state_keys": [
+          "optimizer",
+          "cpu_rng",
+          "cuda_rng",
+          "update"
+        ],
+        "optimizer_step_values": [
+          2
+        ],
+        "summary": {
+          "loss": -0.2577587441541255,
+          "gradient_norm": 77.33795166015625,
+          "replay_ratio_min": 0.9998531996467012,
+          "replay_ratio_max": 1.0001045464235971,
+          "run_id": "4009b1fe-ebf1-440d-aa47-46e56fb76ab2",
+          "updates": 1,
+          "cumulative_updates": 2,
+          "parent_run_id": "0895ebc0-9980-4569-8de4-fdd8b9886673",
+          "turns": 20,
+          "environment_calls": 12,
+          "generated_tokens": 1051,
+          "actor_before": "4d2893fe460519beb5c9ae1014fc29ec31aa522e4b53475df75167086bb6c0e8",
+          "actor_after": "d2732b7f9c79d6c995265e139be83a1d2382d15d53153d2098b6c24001d37f6f",
+          "critic_before": "790ff3573b24b0a9d8c3184fa93f185fc5d182c35c3362bd67a61f29e1362fc1",
+          "critic_after": "bc5c3f2ba7da3f36d0b30e0481ba7b8cee4e7513e2fa604e85a51b7e7f21d6a6",
+          "same_process_reload": true
+        }
+      },
+      {
+        "update": 3,
+        "run_id": "4b7b90a3-2369-438b-aaa0-18b5e8d79021",
+        "parent_run_id": "4009b1fe-ebf1-440d-aa47-46e56fb76ab2",
+        "task_ids": [
+          12,
+          1756,
+          1649,
+          4758
+        ],
+        "actor_tensor_digest": "6e081579d3272c4e76513b33dac09a4adbb47c518f8978a6015dc1edda76507f",
+        "critic_tensor_digest": "9dca7dfd83e2cadcfbf8c64300d409a85d9567ff0d75bd2d8b23e5dced1e321b",
+        "config_sha256": "f893b17bf5ad424872c37181e80cc83a528c96d5087efec9d64dceb5fcdc94b1",
+        "meta_sha256": "ac044c544645dc48deba989a9562d00a46b4f47dfcf07dc51a545639cc6f9df0",
+        "summary_sha256": "5958608e7ebe142949795fd541313c205d41ac5408505717e34403e31acbb6db",
+        "episodes_sha256": "13463a93e4ead5df9deca450546a58659209388538bfdc0c64881c152595a467",
+        "optimizer_state_sha256": "c314ff48cf6a08c6cb1b1d7b361f84e90d2941e474b0317d66fdb9f9847c3cab",
+        "state_keys": [
+          "optimizer",
+          "cpu_rng",
+          "cuda_rng",
+          "update"
+        ],
+        "optimizer_step_values": [
+          3
+        ],
+        "summary": {
+          "loss": -0.2586472747581346,
+          "gradient_norm": 67.07521057128906,
+          "replay_ratio_min": 0.9998892942259565,
+          "replay_ratio_max": 1.0000759468846738,
+          "run_id": "4b7b90a3-2369-438b-aaa0-18b5e8d79021",
+          "updates": 1,
+          "cumulative_updates": 3,
+          "parent_run_id": "4009b1fe-ebf1-440d-aa47-46e56fb76ab2",
+          "turns": 14,
+          "environment_calls": 14,
+          "generated_tokens": 987,
+          "actor_before": "d2732b7f9c79d6c995265e139be83a1d2382d15d53153d2098b6c24001d37f6f",
+          "actor_after": "6e081579d3272c4e76513b33dac09a4adbb47c518f8978a6015dc1edda76507f",
+          "critic_before": "bc5c3f2ba7da3f36d0b30e0481ba7b8cee4e7513e2fa604e85a51b7e7f21d6a6",
+          "critic_after": "9dca7dfd83e2cadcfbf8c64300d409a85d9567ff0d75bd2d8b23e5dced1e321b",
+          "same_process_reload": true
+        }
+      },
+      {
+        "update": 4,
+        "run_id": "46b4f33f-41cc-45ab-b740-2ceb782333f5",
+        "parent_run_id": "4b7b90a3-2369-438b-aaa0-18b5e8d79021",
+        "task_ids": [
+          4541,
+          1697,
+          1670,
+          9014
+        ],
+        "actor_tensor_digest": "66e4958b30576887663154538ab473f9bc27f4d86c809bb7bd2ffdba55a532d7",
+        "critic_tensor_digest": "1ea903a762cc08bee43d5b5ee3b723b4d0ee73fed75367a261e236cbf407fa1b",
+        "config_sha256": "f893b17bf5ad424872c37181e80cc83a528c96d5087efec9d64dceb5fcdc94b1",
+        "meta_sha256": "8665201a4d518b5e6bcfb96e6300a624565cf476642a36f8c02101aeca953eaa",
+        "summary_sha256": "0971d51d76697d7d2eb294cdb597ca1ce5c4ab933453898ea66c32a4ff5bdc7d",
+        "episodes_sha256": "5c0f30db27a5165b542dc6260a6b76a6a964d203f26ec5054c0c5e9fff59ee4c",
+        "optimizer_state_sha256": "f91d59d3313805e7aa098682e2e1a7c3a1d25fb514b33ed69e57e6cbfbdc1e98",
+        "state_keys": [
+          "optimizer",
+          "cpu_rng",
+          "cuda_rng",
+          "update"
+        ],
+        "optimizer_step_values": [
+          4
+        ],
+        "summary": {
+          "loss": -0.4351530443219578,
+          "gradient_norm": 124.90169525146484,
+          "replay_ratio_min": 0.9998559575902143,
+          "replay_ratio_max": 1.0001818096441975,
+          "run_id": "46b4f33f-41cc-45ab-b740-2ceb782333f5",
+          "updates": 1,
+          "cumulative_updates": 4,
+          "parent_run_id": "4b7b90a3-2369-438b-aaa0-18b5e8d79021",
+          "turns": 17,
+          "environment_calls": 15,
+          "generated_tokens": 1095,
+          "actor_before": "6e081579d3272c4e76513b33dac09a4adbb47c518f8978a6015dc1edda76507f",
+          "actor_after": "66e4958b30576887663154538ab473f9bc27f4d86c809bb7bd2ffdba55a532d7",
+          "critic_before": "9dca7dfd83e2cadcfbf8c64300d409a85d9567ff0d75bd2d8b23e5dced1e321b",
+          "critic_after": "1ea903a762cc08bee43d5b5ee3b723b4d0ee73fed75367a261e236cbf407fa1b",
+          "same_process_reload": true
+        }
+      }
+    ],
+    "43/terminal": [
+      {
+        "update": 1,
+        "run_id": "1039d225-8ffa-4b0e-b3e3-d72274857cef",
+        "parent_run_id": null,
+        "task_ids": [
+          7793,
+          1718,
+          3040,
+          4517
+        ],
+        "actor_tensor_digest": "8e795254dfc055877b7c37ef963448c46d7268206ff922561de859d5ce6988ed",
+        "critic_tensor_digest": "a26cd3b231c528c4cbd0860c73ebe564747154f5d66525fa9138b7096aa619c9",
+        "config_sha256": "8d6683c62e1798c209d0f116409468d502e001d814e7a94433d3fc134844f58e",
+        "meta_sha256": "b87bcdc5d120a3d12d55b1093ddc16f9f96f2c82a7157bb3372513f4322e2366",
+        "summary_sha256": "d3e1e46e9ef8f07a4ddc08779ce1dc9d42f622885a3c16f86fd00791c4a13d27",
+        "episodes_sha256": "a0d91e574ec213354d8b92028abe8bdac633d83d0202fe5bf9f14746c8a5dc4f",
+        "optimizer_state_sha256": "e5edbbb2a1462ae960f2f6b85e25cff23489173d27e2abe31606e4a585397c6f",
+        "state_keys": [
+          "optimizer",
+          "cpu_rng",
+          "cuda_rng",
+          "update"
+        ],
+        "optimizer_step_values": [
+          1
+        ],
+        "summary": {
+          "loss": -0.35576927891144383,
+          "gradient_norm": 101.43963623046875,
+          "replay_ratio_min": 0.999913668261487,
+          "replay_ratio_max": 1.0001331676215093,
+          "run_id": "1039d225-8ffa-4b0e-b3e3-d72274857cef",
+          "updates": 1,
+          "cumulative_updates": 1,
+          "parent_run_id": null,
+          "turns": 13,
+          "environment_calls": 12,
+          "generated_tokens": 792,
+          "actor_before": "2261642f9070d0cc7f4a352a9d69aa722c4eb6dd617b28eea854629101f8c435",
+          "actor_after": "8e795254dfc055877b7c37ef963448c46d7268206ff922561de859d5ce6988ed",
+          "critic_before": "03a8cc352df5c85ff9097fe67b1951d20ad001d662798185f3dcf1eda227f8ad",
+          "critic_after": "a26cd3b231c528c4cbd0860c73ebe564747154f5d66525fa9138b7096aa619c9",
+          "same_process_reload": true
+        }
+      },
+      {
+        "update": 2,
+        "run_id": "ae0fae0a-0eae-4466-9c66-d32c57d9baf3",
+        "parent_run_id": "1039d225-8ffa-4b0e-b3e3-d72274857cef",
+        "task_ids": [
+          9258,
+          544,
+          4212,
+          462
+        ],
+        "actor_tensor_digest": "6cf4679b1b093269250b5e7442fc52c9adf025a878a8a21416aad7a9f32b2371",
+        "critic_tensor_digest": "15a8e7732777de0914874ae5a15aa48b7d29866c9f2c5b125452501556af5f63",
+        "config_sha256": "8d6683c62e1798c209d0f116409468d502e001d814e7a94433d3fc134844f58e",
+        "meta_sha256": "44640d071441fe3f6db3dd6d0370a28c8f2d1a284770218915a903c665af84e5",
+        "summary_sha256": "2699d49d2ac8a619fa080dd514d7e0adb5e54646bc3b1e676bb508558b76e94f",
+        "episodes_sha256": "6f7b36abd621c0f1f23420191122f75d04da895113e2bfaa0d02baf4f9332297",
+        "optimizer_state_sha256": "a7c63e4c3746ae8645f59d3ceb4f062409b2c646b499dc6eaff5da30ae52bb62",
+        "state_keys": [
+          "optimizer",
+          "cpu_rng",
+          "cuda_rng",
+          "update"
+        ],
+        "optimizer_step_values": [
+          2
+        ],
+        "summary": {
+          "loss": -0.2500736068579413,
+          "gradient_norm": 80.37885284423828,
+          "replay_ratio_min": 0.9998775581940297,
+          "replay_ratio_max": 1.0000560685877602,
+          "run_id": "ae0fae0a-0eae-4466-9c66-d32c57d9baf3",
+          "updates": 1,
+          "cumulative_updates": 2,
+          "parent_run_id": "1039d225-8ffa-4b0e-b3e3-d72274857cef",
+          "turns": 21,
+          "environment_calls": 15,
+          "generated_tokens": 1098,
+          "actor_before": "8e795254dfc055877b7c37ef963448c46d7268206ff922561de859d5ce6988ed",
+          "actor_after": "6cf4679b1b093269250b5e7442fc52c9adf025a878a8a21416aad7a9f32b2371",
+          "critic_before": "a26cd3b231c528c4cbd0860c73ebe564747154f5d66525fa9138b7096aa619c9",
+          "critic_after": "15a8e7732777de0914874ae5a15aa48b7d29866c9f2c5b125452501556af5f63",
+          "same_process_reload": true
+        }
+      },
+      {
+        "update": 3,
+        "run_id": "9864fc57-2f0e-460a-9c93-2c188041bc4c",
+        "parent_run_id": "ae0fae0a-0eae-4466-9c66-d32c57d9baf3",
+        "task_ids": [
+          12,
+          1756,
+          1649,
+          4758
+        ],
+        "actor_tensor_digest": "95ba89ea1c8d3da0b342022b0582ca444413acccc3d855dd9a058c32aa6167a9",
+        "critic_tensor_digest": "cc5d7e45a305436053253fa83f3828183dd1ca8e0b19403601193b445d8f29a0",
+        "config_sha256": "8d6683c62e1798c209d0f116409468d502e001d814e7a94433d3fc134844f58e",
+        "meta_sha256": "687d05b9196ec2c85a8d3ef1a18ae4d26de49807fc7d26bc8b18a06730a10468",
+        "summary_sha256": "c60642baca012439739982d009ab81eada7c77d6e1f05d9cfc9c7d74e8db45dc",
+        "episodes_sha256": "53f3ee22c509be94c9bac3a059995bbd2ea32e66096f54a75ee7180bd177bdbf",
+        "optimizer_state_sha256": "4d95bbea1f25ccf03518faf1c4bf64d17dfd2ae6ea13acde3b52627abd56a4f2",
+        "state_keys": [
+          "optimizer",
+          "cpu_rng",
+          "cuda_rng",
+          "update"
+        ],
+        "optimizer_step_values": [
+          3
+        ],
+        "summary": {
+          "loss": -0.4217942931822368,
+          "gradient_norm": 127.42351531982422,
+          "replay_ratio_min": 0.9998877919372722,
+          "replay_ratio_max": 1.0001129624203127,
+          "run_id": "9864fc57-2f0e-460a-9c93-2c188041bc4c",
+          "updates": 1,
+          "cumulative_updates": 3,
+          "parent_run_id": "ae0fae0a-0eae-4466-9c66-d32c57d9baf3",
+          "turns": 14,
+          "environment_calls": 13,
+          "generated_tokens": 919,
+          "actor_before": "6cf4679b1b093269250b5e7442fc52c9adf025a878a8a21416aad7a9f32b2371",
+          "actor_after": "95ba89ea1c8d3da0b342022b0582ca444413acccc3d855dd9a058c32aa6167a9",
+          "critic_before": "15a8e7732777de0914874ae5a15aa48b7d29866c9f2c5b125452501556af5f63",
+          "critic_after": "cc5d7e45a305436053253fa83f3828183dd1ca8e0b19403601193b445d8f29a0",
+          "same_process_reload": true
+        }
+      },
+      {
+        "update": 4,
+        "run_id": "11132d39-6b6b-46f4-ace1-b6ccb82a6dfc",
+        "parent_run_id": "9864fc57-2f0e-460a-9c93-2c188041bc4c",
+        "task_ids": [
+          4541,
+          1697,
+          1670,
+          9014
+        ],
+        "actor_tensor_digest": "88eb4b335f702849b689c131ee85cd4915405a9d26fad12e4e38dfa7d4306c03",
+        "critic_tensor_digest": "44c54f3557d72374f4d2eca48a1ca999393cfa3929cfe7ef0257e045ccd58dfb",
+        "config_sha256": "8d6683c62e1798c209d0f116409468d502e001d814e7a94433d3fc134844f58e",
+        "meta_sha256": "5cf911b6391c7a1be73ab5a374e818da6b586403097a5f7d022aa89a6069bab4",
+        "summary_sha256": "1cded10b69e19a17f615a648ed7cee6647f72fadd43cabe69fc0f0c94a50c4e5",
+        "episodes_sha256": "385bfdae7dba606f4b7efdad3a48e2b3903015efdbc7533ded4bd28a8092efd0",
+        "optimizer_state_sha256": "649a35f822f738dfcb84a87fff52585d35dddfa8133a36d8cc81d15dd76d008b",
+        "state_keys": [
+          "optimizer",
+          "cpu_rng",
+          "cuda_rng",
+          "update"
+        ],
+        "optimizer_step_values": [
+          4
+        ],
+        "summary": {
+          "loss": -0.3437065355479717,
+          "gradient_norm": 89.21605682373047,
+          "replay_ratio_min": 0.9998761380438114,
+          "replay_ratio_max": 1.000144710465421,
+          "run_id": "11132d39-6b6b-46f4-ace1-b6ccb82a6dfc",
+          "updates": 1,
+          "cumulative_updates": 4,
+          "parent_run_id": "9864fc57-2f0e-460a-9c93-2c188041bc4c",
+          "turns": 20,
+          "environment_calls": 13,
+          "generated_tokens": 1180,
+          "actor_before": "95ba89ea1c8d3da0b342022b0582ca444413acccc3d855dd9a058c32aa6167a9",
+          "actor_after": "88eb4b335f702849b689c131ee85cd4915405a9d26fad12e4e38dfa7d4306c03",
+          "critic_before": "cc5d7e45a305436053253fa83f3828183dd1ca8e0b19403601193b445d8f29a0",
+          "critic_after": "44c54f3557d72374f4d2eca48a1ca999393cfa3929cfe7ef0257e045ccd58dfb",
+          "same_process_reload": true
+        }
+      }
+    ],
+    "43/candidate": [
+      {
+        "update": 1,
+        "run_id": "db24f466-8405-4f8d-9a6d-4bbcbbf5ccee",
+        "parent_run_id": null,
+        "task_ids": [
+          7793,
+          1718,
+          3040,
+          4517
+        ],
+        "actor_tensor_digest": "8e795254dfc055877b7c37ef963448c46d7268206ff922561de859d5ce6988ed",
+        "critic_tensor_digest": "a26cd3b231c528c4cbd0860c73ebe564747154f5d66525fa9138b7096aa619c9",
+        "config_sha256": "a4596222ca05ce64108de58fbd2316685a435d5e85633e943ab4fe2c44c29f51",
+        "meta_sha256": "1eb4bf103c859e72e9c1edcd5b44974380e77436b31d6ade6997b5ce36ce8ee3",
+        "summary_sha256": "747306eb63c8e44585d391d26a2d60d29ad2a2c34a3c2a5a36eeea2bebdf2a87",
+        "episodes_sha256": "48a62d735c3dde394c9c4d64100554d97d1c14d0bef30cf1c45a824606fac79e",
+        "optimizer_state_sha256": "e5edbbb2a1462ae960f2f6b85e25cff23489173d27e2abe31606e4a585397c6f",
+        "state_keys": [
+          "optimizer",
+          "cpu_rng",
+          "cuda_rng",
+          "update"
+        ],
+        "optimizer_step_values": [
+          1
+        ],
+        "summary": {
+          "loss": -0.35576927891144383,
+          "gradient_norm": 101.43963623046875,
+          "replay_ratio_min": 0.999913668261487,
+          "replay_ratio_max": 1.0001331676215093,
+          "run_id": "db24f466-8405-4f8d-9a6d-4bbcbbf5ccee",
+          "updates": 1,
+          "cumulative_updates": 1,
+          "parent_run_id": null,
+          "turns": 13,
+          "environment_calls": 12,
+          "generated_tokens": 792,
+          "actor_before": "2261642f9070d0cc7f4a352a9d69aa722c4eb6dd617b28eea854629101f8c435",
+          "actor_after": "8e795254dfc055877b7c37ef963448c46d7268206ff922561de859d5ce6988ed",
+          "critic_before": "03a8cc352df5c85ff9097fe67b1951d20ad001d662798185f3dcf1eda227f8ad",
+          "critic_after": "a26cd3b231c528c4cbd0860c73ebe564747154f5d66525fa9138b7096aa619c9",
+          "same_process_reload": true
+        }
+      },
+      {
+        "update": 2,
+        "run_id": "5790bd73-bdef-4d96-9e76-27f9b39ba142",
+        "parent_run_id": "db24f466-8405-4f8d-9a6d-4bbcbbf5ccee",
+        "task_ids": [
+          9258,
+          544,
+          4212,
+          462
+        ],
+        "actor_tensor_digest": "fb6f33d02c9f805c783293c027cae132861f2f09f60a26410ffe95d303ddab21",
+        "critic_tensor_digest": "bb21c32e6319791e3f63d3bcbfaeeda277d31886c4b5c637544e78751ba846a0",
+        "config_sha256": "a4596222ca05ce64108de58fbd2316685a435d5e85633e943ab4fe2c44c29f51",
+        "meta_sha256": "65520fb0d73ae40e4e74b8d38fcf8db935df2130601d0918cd9e91c9476b4d5e",
+        "summary_sha256": "a6cdf652ebb276747cae4965a6a5559185b934d12399010118b6d988dd0a28d0",
+        "episodes_sha256": "7aa600463d4ff589311e7c439528d2506a150df966a1bcd2a615fa36385f6d47",
+        "optimizer_state_sha256": "c3087afe51f6655ea1b18294025ff9cdfbdd36f62f3273956d7027ae74d59be8",
+        "state_keys": [
+          "optimizer",
+          "cpu_rng",
+          "cuda_rng",
+          "update"
+        ],
+        "optimizer_step_values": [
+          2
+        ],
+        "summary": {
+          "loss": -0.24307632526116713,
+          "gradient_norm": 76.02648162841797,
+          "replay_ratio_min": 0.9998775581940297,
+          "replay_ratio_max": 1.0000560685877602,
+          "run_id": "5790bd73-bdef-4d96-9e76-27f9b39ba142",
+          "updates": 1,
+          "cumulative_updates": 2,
+          "parent_run_id": "db24f466-8405-4f8d-9a6d-4bbcbbf5ccee",
+          "turns": 21,
+          "environment_calls": 15,
+          "generated_tokens": 1098,
+          "actor_before": "8e795254dfc055877b7c37ef963448c46d7268206ff922561de859d5ce6988ed",
+          "actor_after": "fb6f33d02c9f805c783293c027cae132861f2f09f60a26410ffe95d303ddab21",
+          "critic_before": "a26cd3b231c528c4cbd0860c73ebe564747154f5d66525fa9138b7096aa619c9",
+          "critic_after": "bb21c32e6319791e3f63d3bcbfaeeda277d31886c4b5c637544e78751ba846a0",
+          "same_process_reload": true
+        }
+      },
+      {
+        "update": 3,
+        "run_id": "852a3a88-f162-4dc3-889f-6bb42ea81df1",
+        "parent_run_id": "5790bd73-bdef-4d96-9e76-27f9b39ba142",
+        "task_ids": [
+          12,
+          1756,
+          1649,
+          4758
+        ],
+        "actor_tensor_digest": "f7ca1f6b70674a6768f2df8e089e4f9c49e9200e82ad33eadc7a61374ca40e95",
+        "critic_tensor_digest": "e79047a966758d36b087a171ed468db6c7fcdbc4c8fd006b5f854a5efd13f953",
+        "config_sha256": "a4596222ca05ce64108de58fbd2316685a435d5e85633e943ab4fe2c44c29f51",
+        "meta_sha256": "21dc7eef450847661da1dd11d719c0ce31cbce2787f3907599ffded9b80bf0bb",
+        "summary_sha256": "1a0df515123ffc7326f9bc04063cdbfefd488fc873da5e522a622c6c0ee41ca6",
+        "episodes_sha256": "e12581e1d508461f9bbeade2787399fe51fa25244f38408da3be2a6e234cf0fa",
+        "optimizer_state_sha256": "fa3a588e7b69e5f8238f59fdbb5169b07178750dbeaee9cfddacf28033cb2229",
+        "state_keys": [
+          "optimizer",
+          "cpu_rng",
+          "cuda_rng",
+          "update"
+        ],
+        "optimizer_step_values": [
+          3
+        ],
+        "summary": {
+          "loss": -0.4184444674423763,
+          "gradient_norm": 125.69465637207031,
+          "replay_ratio_min": 0.9998476137984486,
+          "replay_ratio_max": 1.0000686420445914,
+          "run_id": "852a3a88-f162-4dc3-889f-6bb42ea81df1",
+          "updates": 1,
+          "cumulative_updates": 3,
+          "parent_run_id": "5790bd73-bdef-4d96-9e76-27f9b39ba142",
+          "turns": 14,
+          "environment_calls": 13,
+          "generated_tokens": 919,
+          "actor_before": "fb6f33d02c9f805c783293c027cae132861f2f09f60a26410ffe95d303ddab21",
+          "actor_after": "f7ca1f6b70674a6768f2df8e089e4f9c49e9200e82ad33eadc7a61374ca40e95",
+          "critic_before": "bb21c32e6319791e3f63d3bcbfaeeda277d31886c4b5c637544e78751ba846a0",
+          "critic_after": "e79047a966758d36b087a171ed468db6c7fcdbc4c8fd006b5f854a5efd13f953",
+          "same_process_reload": true
+        }
+      },
+      {
+        "update": 4,
+        "run_id": "bf248f43-2131-43be-a5f6-c1fdc0054a7f",
+        "parent_run_id": "852a3a88-f162-4dc3-889f-6bb42ea81df1",
+        "task_ids": [
+          4541,
+          1697,
+          1670,
+          9014
+        ],
+        "actor_tensor_digest": "f96c1659c0fce8b2b2907bb3be77768ae3c98c0135986c0e7d3d40ba119f09b3",
+        "critic_tensor_digest": "d9d04bf91c679babf7fdaea24c59e8b5c6e956321179328efc74653ace87c69f",
+        "config_sha256": "a4596222ca05ce64108de58fbd2316685a435d5e85633e943ab4fe2c44c29f51",
+        "meta_sha256": "04c565702d813e13d8ae892ce4e9e485408ef2c874c96fe765fc2c1fccaf351e",
+        "summary_sha256": "b3780cf2963d6d7e81f6e22b3a798000d94af2a4ad6df95a14db3ad0daf93702",
+        "episodes_sha256": "5640b42bce31fa46e739113ea3e59bc2711fe6fd45e97fc52fe37c2734090283",
+        "optimizer_state_sha256": "6a2c4bbfbee13e23f22fb14ca3b06ee7608216d72091403c861d574451c28604",
+        "state_keys": [
+          "optimizer",
+          "cpu_rng",
+          "cuda_rng",
+          "update"
+        ],
+        "optimizer_step_values": [
+          4
+        ],
+        "summary": {
+          "loss": -0.34369808733463286,
+          "gradient_norm": 89.21038055419922,
+          "replay_ratio_min": 0.9999080880411532,
+          "replay_ratio_max": 1.0000859796708383,
+          "run_id": "bf248f43-2131-43be-a5f6-c1fdc0054a7f",
+          "updates": 1,
+          "cumulative_updates": 4,
+          "parent_run_id": "852a3a88-f162-4dc3-889f-6bb42ea81df1",
+          "turns": 20,
+          "environment_calls": 13,
+          "generated_tokens": 1180,
+          "actor_before": "f7ca1f6b70674a6768f2df8e089e4f9c49e9200e82ad33eadc7a61374ca40e95",
+          "actor_after": "f96c1659c0fce8b2b2907bb3be77768ae3c98c0135986c0e7d3d40ba119f09b3",
+          "critic_before": "e79047a966758d36b087a171ed468db6c7fcdbc4c8fd006b5f854a5efd13f953",
+          "critic_after": "d9d04bf91c679babf7fdaea24c59e8b5c6e956321179328efc74653ace87c69f",
+          "same_process_reload": true
+        }
+      }
+    ]
+  },
+  "test_authorization": false,
+  "totals": {
+    "updates": 16,
+    "episodes": 64,
+    "policy_turns": 272,
+    "environment_calls": 220,
+    "generated_tokens": 16128
+  }
+}

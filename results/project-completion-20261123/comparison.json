@@ -1,0 +1,460 @@
+{
+  "scope": "complete fixed-budget project FP32 validation; registration pending",
+  "scheduled_tasks": 160,
+  "policies": {
+    "b0": {
+      "metrics": {
+        "episodes": 160,
+        "unique_tasks": 160,
+        "purchase_terminated": 50,
+        "full_reward_successes": 15,
+        "successes": 15,
+        "purchase_without_full_reward": 35,
+        "max_steps_terminated": 110,
+        "success_rate": 0.09375,
+        "success_rate_ci95": [
+          0.05763800694554742,
+          0.14891202663130057
+        ],
+        "ci_method": "wilson (one episode per task)",
+        "conditional_success_given_purchase": 0.3,
+        "mean_terminal_reward": 0.1919791666666667,
+        "mean_final_reward": 0.765408857521316,
+        "mean_steps": 7.93125,
+        "invalid_action_rate": 0.7328605200945626,
+        "grounding_accuracy": 0.2671394799054374,
+        "episodes_with_invalid_actions": 114,
+        "termination_counts": {
+          "max_steps": 110,
+          "purchase": 50
+        },
+        "goal_fingerprint": "e69c9ae2a0aad88977c44a7baf49f1f5ef7918ba8317923c4ae24dcc1f5638d8",
+        "notes": [
+          "Success requires done=true AND final_reward approximately 1; a purchase alone is not success.",
+          "mean_terminal_reward is the task reward: the recorded score only when the episode purchased, else 0.",
+          "mean_final_reward is the last recorded environment score; for max_steps episodes it is a page-match score, not task completion.",
+          "success_rate uses every attempted episode as the denominator, including max_steps terminations.",
+          "Independent-task Wilson interval omitted for repeated trajectories; a task-cluster bootstrap is reported instead.",
+          "Check metadata selected_ids against completed IDs (webshop-lab check-run) before quoting a run."
+        ]
+      },
+      "run_id": "0822de67-a569-46ad-9662-4a287c49148d",
+      "config_sha256": "e40d59785c442f486a1da70225fc88755159b3a73d4123b051e8f375602017a7",
+      "jsonl_sha256": "d8212405bc2801306e62276f45fd59915dcab379cfb6ae6685ce2ae99e082eb1",
+      "meta_sha256": "0ba55f92dbd4c7677f62ea84d98fa4a93c5a7f18c1ea1ee6825fb68842c56cc2",
+      "elapsed_seconds": 1615.424390404005,
+      "task6700": {
+        "success": 0,
+        "terminal_reward": 0.0
+      },
+      "source_commit": "a424a89087b25618cf6cd19d58b3bbce445f2557"
+    },
+    "b1": {
+      "metrics": {
+        "episodes": 160,
+        "unique_tasks": 160,
+        "purchase_terminated": 156,
+        "full_reward_successes": 54,
+        "successes": 54,
+        "purchase_without_full_reward": 102,
+        "max_steps_terminated": 4,
+        "success_rate": 0.3375,
+        "success_rate_ci95": [
+          0.26880525616204454,
+          0.41381475726869477
+        ],
+        "ci_method": "wilson (one episode per task)",
+        "conditional_success_given_purchase": 0.34615384615384615,
+        "mean_terminal_reward": 0.6890520833333335,
+        "mean_final_reward": 0.6937395833333334,
+        "mean_steps": 4.0125,
+        "invalid_action_rate": 0.1043613707165109,
+        "grounding_accuracy": 0.8956386292834891,
+        "episodes_with_invalid_actions": 24,
+        "termination_counts": {
+          "purchase": 156,
+          "max_steps": 4
+        },
+        "goal_fingerprint": "e69c9ae2a0aad88977c44a7baf49f1f5ef7918ba8317923c4ae24dcc1f5638d8",
+        "notes": [
+          "Success requires done=true AND final_reward approximately 1; a purchase alone is not success.",
+          "mean_terminal_reward is the task reward: the recorded score only when the episode purchased, else 0.",
+          "mean_final_reward is the last recorded environment score; for max_steps episodes it is a page-match score, not task completion.",
+          "success_rate uses every attempted episode as the denominator, including max_steps terminations.",
+          "Independent-task Wilson interval omitted for repeated trajectories; a task-cluster bootstrap is reported instead.",
+          "Check metadata selected_ids against completed IDs (webshop-lab check-run) before quoting a run."
+        ]
+      },
+      "run_id": "d9c334c8-25cd-47d3-96ec-d8a89a83f841",
+      "config_sha256": "8523cda1bfba8f0eee28cb9420a783d122bf7f41d687b70cc374e59b3d564806",
+      "jsonl_sha256": "a8036105692bef6c60ce3eff54492490dfe74c5d8bfb112c314e684bee4568d3",
+      "meta_sha256": "fc44da2565fa16273368955cdd199a7470b28c099712ffa72c63366fcda7b10d",
+      "elapsed_seconds": 1624.1336735040095,
+      "task6700": {
+        "success": 0,
+        "terminal_reward": 0.0
+      },
+      "source_commit": "a424a89087b25618cf6cd19d58b3bbce445f2557"
+    },
+    "tg42": {
+      "metrics": {
+        "episodes": 160,
+        "unique_tasks": 160,
+        "purchase_terminated": 155,
+        "full_reward_successes": 51,
+        "successes": 51,
+        "purchase_without_full_reward": 104,
+        "max_steps_terminated": 5,
+        "success_rate": 0.31875,
+        "success_rate_ci95": [
+          0.2515198079520845,
+          0.3944794377975862
+        ],
+        "ci_method": "wilson (one episode per task)",
+        "conditional_success_given_purchase": 0.32903225806451614,
+        "mean_terminal_reward": 0.6825937500000001,
+        "mean_final_reward": 0.6904062500000001,
+        "mean_steps": 4.11875,
+        "invalid_action_rate": 0.1274658573596358,
+        "grounding_accuracy": 0.8725341426403642,
+        "episodes_with_invalid_actions": 30,
+        "termination_counts": {
+          "purchase": 155,
+          "max_steps": 5
+        },
+        "goal_fingerprint": "e69c9ae2a0aad88977c44a7baf49f1f5ef7918ba8317923c4ae24dcc1f5638d8",
+        "notes": [
+          "Success requires done=true AND final_reward approximately 1; a purchase alone is not success.",
+          "mean_terminal_reward is the task reward: the recorded score only when the episode purchased, else 0.",
+          "mean_final_reward is the last recorded environment score; for max_steps episodes it is a page-match score, not task completion.",
+          "success_rate uses every attempted episode as the denominator, including max_steps terminations.",
+          "Independent-task Wilson interval omitted for repeated trajectories; a task-cluster bootstrap is reported instead.",
+          "Check metadata selected_ids against completed IDs (webshop-lab check-run) before quoting a run."
+        ]
+      },
+      "run_id": "8756bacc-9052-4eb5-a4cf-d7c18b02b38a",
+      "config_sha256": "1d3e07a412ee4309193fb94207c182a45229874f949c219d0c851d112f96fbd4",
+      "jsonl_sha256": "b20f4caa8c06a96522042cf3a678904befa0063c826867e7f61603210b517d76",
+      "meta_sha256": "eec562cc61e16e8e769a0b389f978847c7303116d3e580a047646fb0aebd3181",
+      "elapsed_seconds": 1621.602149400991,
+      "task6700": {
+        "success": 0,
+        "terminal_reward": 0.0
+      },
+      "source_commit": "a424a89087b25618cf6cd19d58b3bbce445f2557"
+    },
+    "op42": {
+      "metrics": {
+        "episodes": 160,
+        "unique_tasks": 160,
+        "purchase_terminated": 155,
+        "full_reward_successes": 52,
+        "successes": 52,
+        "purchase_without_full_reward": 103,
+        "max_steps_terminated": 5,
+        "success_rate": 0.325,
+        "success_rate_ci95": [
+          0.2572675472298113,
+          0.40093862108021555
+        ],
+        "ci_method": "wilson (one episode per task)",
+        "conditional_success_given_purchase": 0.33548387096774196,
+        "mean_terminal_reward": 0.6846770833333335,
+        "mean_final_reward": 0.6924895833333335,
+        "mean_steps": 4.13125,
+        "invalid_action_rate": 0.12708018154311648,
+        "grounding_accuracy": 0.8729198184568835,
+        "episodes_with_invalid_actions": 30,
+        "termination_counts": {
+          "purchase": 155,
+          "max_steps": 5
+        },
+        "goal_fingerprint": "e69c9ae2a0aad88977c44a7baf49f1f5ef7918ba8317923c4ae24dcc1f5638d8",
+        "notes": [
+          "Success requires done=true AND final_reward approximately 1; a purchase alone is not success.",
+          "mean_terminal_reward is the task reward: the recorded score only when the episode purchased, else 0.",
+          "mean_final_reward is the last recorded environment score; for max_steps episodes it is a page-match score, not task completion.",
+          "success_rate uses every attempted episode as the denominator, including max_steps terminations.",
+          "Independent-task Wilson interval omitted for repeated trajectories; a task-cluster bootstrap is reported instead.",
+          "Check metadata selected_ids against completed IDs (webshop-lab check-run) before quoting a run."
+        ]
+      },
+      "run_id": "ec9d01d2-cccb-453c-9231-31d7b559f786",
+      "config_sha256": "f1d6c713ae64a85627b1f1f4488a4a80a12c8aa323cbb640f38b92b7c1001d76",
+      "jsonl_sha256": "ba0aae4980a5169f7536a2a9f2b16081001e8235ae9ae6634841ac99a8de5425",
+      "meta_sha256": "fbadef872074c11ec9fbee1ce45c2fe41a1af5935dd889d20a5253ee4a96ae54",
+      "elapsed_seconds": 1661.582197636002,
+      "task6700": {
+        "success": 0,
+        "terminal_reward": 0.0
+      },
+      "source_commit": "a424a89087b25618cf6cd19d58b3bbce445f2557"
+    },
+    "tg43": {
+      "metrics": {
+        "episodes": 160,
+        "unique_tasks": 160,
+        "purchase_terminated": 152,
+        "full_reward_successes": 53,
+        "successes": 53,
+        "purchase_without_full_reward": 99,
+        "max_steps_terminated": 8,
+        "success_rate": 0.33125,
+        "success_rate_ci95": [
+          0.2630294299312559,
+          0.40738366093912715
+        ],
+        "ci_method": "wilson (one episode per task)",
+        "conditional_success_given_purchase": 0.34868421052631576,
+        "mean_terminal_reward": 0.67290625,
+        "mean_final_reward": 0.68696875,
+        "mean_steps": 4.125,
+        "invalid_action_rate": 0.1409090909090909,
+        "grounding_accuracy": 0.8590909090909091,
+        "episodes_with_invalid_actions": 27,
+        "termination_counts": {
+          "purchase": 152,
+          "max_steps": 8
+        },
+        "goal_fingerprint": "e69c9ae2a0aad88977c44a7baf49f1f5ef7918ba8317923c4ae24dcc1f5638d8",
+        "notes": [
+          "Success requires done=true AND final_reward approximately 1; a purchase alone is not success.",
+          "mean_terminal_reward is the task reward: the recorded score only when the episode purchased, else 0.",
+          "mean_final_reward is the last recorded environment score; for max_steps episodes it is a page-match score, not task completion.",
+          "success_rate uses every attempted episode as the denominator, including max_steps terminations.",
+          "Independent-task Wilson interval omitted for repeated trajectories; a task-cluster bootstrap is reported instead.",
+          "Check metadata selected_ids against completed IDs (webshop-lab check-run) before quoting a run."
+        ]
+      },
+      "run_id": "fd0ce0a5-463b-4a16-b9cc-0716bac09de9",
+      "config_sha256": "21c19366b7bd107375ea07a626d49429ba36a4246cfb9f99ad4129c84db151cf",
+      "jsonl_sha256": "774958da11453ab6bd39f52fa7a09050fe25c57bcc0e7bfca073b4962a6eff00",
+      "meta_sha256": "252254f7df3c49a7a476ff24e065f628386ed3f125b68daa2ef731cb6480ad6f",
+      "elapsed_seconds": 1717.5207796619943,
+      "task6700": {
+        "success": 0,
+        "terminal_reward": 0.0
+      },
+      "source_commit": "a424a89087b25618cf6cd19d58b3bbce445f2557"
+    },
+    "op43": {
+      "metrics": {
+        "episodes": 160,
+        "unique_tasks": 160,
+        "purchase_terminated": 151,
+        "full_reward_successes": 53,
+        "successes": 53,
+        "purchase_without_full_reward": 98,
+        "max_steps_terminated": 9,
+        "success_rate": 0.33125,
+        "success_rate_ci95": [
+          0.2630294299312559,
+          0.40738366093912715
+        ],
+        "ci_method": "wilson (one episode per task)",
+        "conditional_success_given_purchase": 0.3509933774834437,
+        "mean_terminal_reward": 0.6687395833333334,
+        "mean_final_reward": 0.6890520833333333,
+        "mean_steps": 4.15625,
+        "invalid_action_rate": 0.14887218045112782,
+        "grounding_accuracy": 0.8511278195488722,
+        "episodes_with_invalid_actions": 27,
+        "termination_counts": {
+          "purchase": 151,
+          "max_steps": 9
+        },
+        "goal_fingerprint": "e69c9ae2a0aad88977c44a7baf49f1f5ef7918ba8317923c4ae24dcc1f5638d8",
+        "notes": [
+          "Success requires done=true AND final_reward approximately 1; a purchase alone is not success.",
+          "mean_terminal_reward is the task reward: the recorded score only when the episode purchased, else 0.",
+          "mean_final_reward is the last recorded environment score; for max_steps episodes it is a page-match score, not task completion.",
+          "success_rate uses every attempted episode as the denominator, including max_steps terminations.",
+          "Independent-task Wilson interval omitted for repeated trajectories; a task-cluster bootstrap is reported instead.",
+          "Check metadata selected_ids against completed IDs (webshop-lab check-run) before quoting a run."
+        ]
+      },
+      "run_id": "16c84767-6009-4ef6-91fa-4d7540d55a64",
+      "config_sha256": "f02d622609d3a6a8cc7f69d736f87f0022a96eacd0dcad4a6c0ec309cad25819",
+      "jsonl_sha256": "8d35b0411f49342d640080bcef62d2f1c145644be2e35a721889c8cfadce7c6f",
+      "meta_sha256": "4b6cdc503c188ac2966d67ab9e6ba0daefd8bbc0404504b2e47354d8ebc73069",
+      "elapsed_seconds": 1657.9061593520019,
+      "task6700": {
+        "success": 0,
+        "terminal_reward": 0.0
+      },
+      "source_commit": "a424a89087b25618cf6cd19d58b3bbce445f2557"
+    }
+  },
+  "comparisons": {
+    "b1_minus_b0": {
+      "success": {
+        "difference": 0.24375,
+        "ci95": [
+          0.175,
+          0.31875
+        ]
+      },
+      "terminal_reward": {
+        "difference": 0.49707291666666675,
+        "ci95": [
+          0.4313526041666666,
+          0.5625330729166667
+        ]
+      },
+      "only_left_success": 2,
+      "only_right_success": 41
+    },
+    "tg42_minus_b1": {
+      "success": {
+        "difference": -0.01875,
+        "ci95": [
+          -0.05,
+          0.0125
+        ]
+      },
+      "terminal_reward": {
+        "difference": -0.006458333333333332,
+        "ci95": [
+          -0.024375,
+          0.010416666666666666
+        ]
+      },
+      "only_left_success": 5,
+      "only_right_success": 2
+    },
+    "tg43_minus_b1": {
+      "success": {
+        "difference": -0.00625,
+        "ci95": [
+          -0.04375,
+          0.03125
+        ]
+      },
+      "terminal_reward": {
+        "difference": -0.016145833333333335,
+        "ci95": [
+          -0.04541666666666667,
+          0.012812500000000001
+        ]
+      },
+      "only_left_success": 5,
+      "only_right_success": 4
+    },
+    "op42_minus_b1": {
+      "success": {
+        "difference": -0.0125,
+        "ci95": [
+          -0.04375,
+          0.01875
+        ]
+      },
+      "terminal_reward": {
+        "difference": -0.004374999999999998,
+        "ci95": [
+          -0.02177083333333333,
+          0.011979166666666667
+        ]
+      },
+      "only_left_success": 4,
+      "only_right_success": 2
+    },
+    "op43_minus_b1": {
+      "success": {
+        "difference": -0.00625,
+        "ci95": [
+          -0.04375,
+          0.03125
+        ]
+      },
+      "terminal_reward": {
+        "difference": -0.0203125,
+        "ci95": [
+          -0.05208333333333333,
+          0.011356770833333299
+        ]
+      },
+      "only_left_success": 5,
+      "only_right_success": 4
+    },
+    "op42_minus_tg42": {
+      "success": {
+        "difference": 0.00625,
+        "ci95": [
+          0.0,
+          0.01875
+        ]
+      },
+      "terminal_reward": {
+        "difference": 0.0020833333333333337,
+        "ci95": [
+          0.0,
+          0.00625
+        ]
+      },
+      "only_left_success": 0,
+      "only_right_success": 1
+    },
+    "op43_minus_tg43": {
+      "success": {
+        "difference": 0.0,
+        "ci95": [
+          -0.01875,
+          0.01875
+        ]
+      },
+      "terminal_reward": {
+        "difference": -0.004166666666666667,
+        "ci95": [
+          -0.01875,
+          0.00625
+        ]
+      },
+      "only_left_success": 1,
+      "only_right_success": 1
+    }
+  },
+  "bootstrap": {
+    "resamples": 10000,
+    "seed": 42,
+    "unit": "paired task",
+    "implementation": "Python random.Random.choices, linear quantiles",
+    "order": "frozen val_ids.json"
+  },
+  "test_authorization": false,
+  "formal_registration": false,
+  "shared_config": {
+    "model": "/root/.cache/huggingface/hub/models--Qwen--Qwen2.5-1.5B-Instruct/snapshots/989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+    "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+    "load_in_4bit": false,
+    "seed": 42,
+    "temperature": 0.0,
+    "top_p": 0.9,
+    "context_length": 2048,
+    "max_new_tokens": 128,
+    "max_steps": 10,
+    "environment_url": "http://127.0.0.1:8766",
+    "goal_fingerprint": "e69c9ae2a0aad88977c44a7baf49f1f5ef7918ba8317923c4ae24dcc1f5638d8",
+    "policy_dtype": "float32"
+  },
+  "shared_backend": {
+    "float32_matmul_precision": "highest",
+    "cuda_matmul_allow_tf32": false,
+    "cudnn_allow_tf32": false,
+    "autocast_enabled": false,
+    "torch": "2.8.0+cu128",
+    "cuda": "12.8",
+    "device": "NVIDIA GeForce RTX 5060 Ti"
+  },
+  "shared_source_sha256": {
+    "rollout.py": "64c0946d4aab3970f91c855abba282acaf46fd4b389f54c610d8e920975d128c",
+    "model.py": "5cb8be7618e786a554ae7db356eb03e1138e430a75647ce517509ac77c5fba77",
+    "common.py": "dd75f402438d1b3b275be442271b8397bdd186131ec7ef5df13c83c835b6c72e"
+  },
+  "training": {
+    "updates": 16,
+    "episodes": 64,
+    "policy_turns": 272,
+    "environment_calls": 220,
+    "generated_tokens": 16128
+  }
+}
