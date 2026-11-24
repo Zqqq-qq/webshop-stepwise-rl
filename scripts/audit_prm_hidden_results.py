@@ -12,6 +12,10 @@ TRAIN_SHA = '8c85e56b3ac2e1f0a09b54560ad0f9bf77eedddb241d73617c7ff32416522e20'
 PROBE_SHA = 'aa33e5ca0b62e06a43801ea6416326256ae0d389f8ee8e6c3d46cbf571e75b08'
 HIDDEN_SHA = 'aa35ec78c4149dc81414e0a44b49740abe5b55103b2fb7fdc57383bc67e5615d'
 SOURCE_REF = '5ae6d83553ced1a74db32d750ada6f9d9b6786b1'
+CONTINUATION_SHA = {
+    48: '4e115935e87cd3b6577e4a5a56a0fc2a1f4fb22b5eefa9a1064fe7fa0b000666',
+    80: '4a2daf64b4256d76942b8044d5cade3166c9d4ffa9d40b152cf327931284e46c',
+}
 
 
 def sha(data):
@@ -40,15 +44,19 @@ def verified_archive(path, expected_sha):
                 PurePosixPath(n).is_absolute() or '..' in PurePosixPath(n).parts
                 or '\\' in n for n in names):
             raise ValueError('Unsafe or duplicate archive names')
-        roots = {n.split('/')[0] for n in names}
-        if len(roots) != 1:
-            raise ValueError('Expected one archive root')
-        prefix = roots.pop() + '/'
+        manifests = [n for n in names if PurePosixPath(n).name == 'SHA256SUMS']
+        if len(manifests) != 1:
+            raise ValueError('Expected one archive checksum manifest')
+        prefix = manifests[0][:-len('SHA256SUMS')]
+        if any(not n.startswith(prefix) for n in names if not n.endswith('/')):
+            raise ValueError('Payload outside checksum root')
         files = {n[len(prefix):]: archive.read(n) for n in names if not n.endswith('/')}
     checks = {}
     for line in files['SHA256SUMS'].decode().splitlines():
         digest, name = line.split(None, 1)
         name = name.strip().lstrip('*')
+        if name.startswith('./'):
+            name = name[2:]
         if name in checks or sha(files[name]) != digest:
             raise ValueError('Payload checksum mismatch: ' + name)
         checks[name] = digest
@@ -82,6 +90,32 @@ def score(values, labels):
     errors = [finite(values[t]) - finite(labels[t]) for t in labels]
     return {'mse': sum(e*e for e in errors)/len(errors),
             'max_absolute_error': max(abs(e) for e in errors)}
+
+
+def validate_continuation(summary, previous, expected_final):
+    """Check saved linkage, not a fresh deserialization of optimizer/RNG state."""
+    if (summary['identity'] != previous['identity'] or
+            summary['optimization'] != previous['optimization'] or
+            summary['parameters_before'] != previous['parameters_after']):
+        raise ValueError('Continuation identity/settings/parameter linkage mismatch')
+    expected = list(range(previous['optimizer_steps'] + 1, expected_final + 1))
+    if (summary['optimizer_steps'] != expected_final or
+            [r['optimizer_step'] for r in summary['records']] != expected):
+        raise ValueError('Continuation segment has a gap or wrong budget')
+
+
+def group_error_components(values, labels, positions):
+    """Exact MSE split by turn count: group mean error + centered error."""
+    mean_component = centered_component = 0.0
+    for turns in set(map(len, positions.values())):
+        tasks = [t for t in labels if len(positions[t]) == turns]
+        pred_mean = sum(values[t] for t in tasks) / len(tasks)
+        label_mean = sum(labels[t] for t in tasks) / len(tasks)
+        mean_component += len(tasks) * (pred_mean-label_mean)**2 / len(labels)
+        centered_component += sum(((values[t]-pred_mean)-(labels[t]-label_mean))**2
+                                  for t in tasks) / len(labels)
+    return {'group_mean_error_mse': mean_component,
+            'within_group_centered_error_mse': centered_component}
 
 
 def audit_run(summary, reference, reload, labels, positions):
@@ -158,7 +192,11 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ('probe-archive','features-archive','tokenizer','repo','output'):
         parser.add_argument('--'+name, required=True)
+    for step in CONTINUATION_SHA:
+        parser.add_argument('--step'+str(step)+'-archive')
     args = parser.parse_args(argv)
+    if args.step80_archive and not args.step48_archive:
+        parser.error('Step80 audit requires the Step48 predecessor archive')
     if Path(args.output).exists():
         parser.error('Output must be new')
     probe, probe_hashes = verified_archive(args.probe_archive, PROBE_SHA)
@@ -242,6 +280,49 @@ def main(argv=None):
     baseline={'scope':'in-sample references for these eight; not independent dev baselines',
               'constant':score(constant,labels),
               'turn_count_group_mean':score({t:grouped[len(positions[t])] for t in labels},labels)}
+    previous = load_json(probe['lrprobe/hidden-lr-1e5-probe/summary.json'])
+    previous_ref = load_json(probe['lrprobe/hidden-lr-1e5-probe/reference-predictions.json'])
+    previous_values = {r['task_id']: r['total'] for r in previous_ref}
+    continuations = {}
+    for step, archive_sha in CONTINUATION_SHA.items():
+        archive_path = getattr(args, 'step'+str(step)+'_archive')
+        if not archive_path:
+            continue
+        files, hashes = verified_archive(archive_path, archive_sha)
+        if sha(files['samples.jsonl']) != SAMPLES_SHA or sha(files['train_ids.json']) != TRAIN_SHA:
+            raise ValueError('Continuation input file bytes differ')
+        summary = load_json(files['checkpoint/summary.json'])
+        validate_continuation(summary, previous, step)
+        reference = load_json(files['checkpoint/reference-predictions.json'])
+        reload = load_json(files['hidden-1e5-acc8-step'+str(step)+'-reload.json'])
+        result = audit_run(summary, reference, reload, labels, positions)
+        manifest = load_json(files['checkpoint/prm-manifest.json'])
+        old_manifest = load_json(probe['lrprobe/hidden-lr-1e5-probe-step16/prm-manifest.json'])
+        for field in ('identity', 'schema_version', 'architecture', 'score_definition'):
+            if manifest[field] != old_manifest[field]:
+                raise ValueError('Continuation checkpoint contract changed')
+        if set(manifest['files_sha256']) != set(old_manifest['files_sha256']):
+            raise ValueError('Incomplete checkpoint payload manifest')
+        for name, digest in manifest['files_sha256'].items():
+            if sha(files['checkpoint/'+name]) != digest:
+                raise ValueError('Continuation checkpoint payload SHA mismatch: '+name)
+        values = {r['task_id']: r['total'] for r in reference}
+        before_components = group_error_components(previous_values, labels, positions)
+        after_components = group_error_components(values, labels, positions)
+        decline = score(previous_values, labels)['mse'] - result['mse']
+        result.update(archive_sha256=archive_sha, verified_archive_payloads=len(hashes),
+                      verified_checkpoint_payloads=len(manifest['files_sha256']),
+                      predecessor_optimizer_steps=previous['optimizer_steps'],
+                      saved_parameter_digest_linkage_matches=True,
+                      optimizer_and_rng_state_deserialized_here=False,
+                      mse_components=after_components,
+                      mse_decline_from_predecessor=decline,
+                      group_mean_share_of_mse_decline=(before_components['group_mean_error_mse']-
+                          after_components['group_mean_error_mse'])/decline if decline else None,
+                      per_sample=[dict(task_id=t, label=labels[t], total=values[t],
+                          error=values[t]-labels[t], previous_total=previous_values[t]) for t in labels])
+        continuations[str(step)] = result
+        previous, previous_values = summary, values
     report={'scope':'Independent CPU arithmetic of saved GPU outputs; no model reload or new training',
             'probe_archive_sha256':PROBE_SHA,'features_archive_sha256':HIDDEN_SHA,
             'verified_probe_payloads':len(probe_hashes),'verified_feature_payloads':len(feature_hashes),
@@ -251,7 +332,8 @@ def main(argv=None):
             'source_limit':'Seven supplied core files match pinned PR52; full executed Git tree not independently recovered',
             'baselines':baseline,'runs':runs,
             'independent_model_reload_performed_here':False,
-            'pending':'No cumulative48/80/120 result in these archives; separate checkpoint acceptance required',
+            'continuations':continuations,
+            'pending':'Only supplied archived checkpoints audited; subsequent checkpoints require separate acceptance',
             'test_authorized':False}
     target=Path(args.output);target.parent.mkdir(parents=True,exist_ok=True)
     with target.open('x',encoding='utf-8',newline='\n') as out:

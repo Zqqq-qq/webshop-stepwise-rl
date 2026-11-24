@@ -3,6 +3,8 @@ import copy
 import importlib.util
 from pathlib import Path
 import unittest
+import tempfile
+import zipfile
 
 spec=importlib.util.spec_from_file_location('hidden_audit',Path(__file__).resolve().parents[1]/
                                          'scripts/audit_prm_hidden_results.py')
@@ -83,6 +85,57 @@ class HiddenAuditTests(unittest.TestCase):
         self.assertEqual(result['segment_optimizer_steps'],2)
         self.assertEqual(result['cumulative_optimizer_steps'],18)
         self.assertEqual(result['segment_clip_count'],2)
+
+    def test_continuation_requires_exact_predecessor_parameter_digests(self):
+        previous = copy.deepcopy(self.summary)
+        previous['optimizer_steps'] = 0
+        previous['parameters_after'] = {'head':'saved-head', 'lora':'saved-lora'}
+        self.summary['parameters_before'] = {'head':'reset-head', 'lora':'saved-lora'}
+        with self.assertRaises(ValueError): m.validate_continuation(self.summary, previous, 2)
+        self.summary['parameters_before'] = previous['parameters_after'].copy()
+        m.validate_continuation(self.summary, previous, 2)
+
+    def test_continuation_cannot_skip_first_update_or_change_settings(self):
+        previous = copy.deepcopy(self.summary)
+        previous['optimizer_steps'] = 0
+        previous['parameters_after'] = {'head':'h', 'lora':'l'}
+        self.summary['parameters_before'] = previous['parameters_after'].copy()
+        self.summary['records'].pop(0)
+        with self.assertRaises(ValueError): m.validate_continuation(self.summary, previous, 2)
+        self.summary['records'].insert(0, {'optimizer_step':1})
+        self.summary['optimization']['learning_rate'] = .1
+        with self.assertRaises(ValueError): m.validate_continuation(self.summary, previous, 2)
+
+    def test_group_components_sum_to_original_mse(self):
+        positions={t:[1]*(3 if t not in (5478,3542) else 10) for t in self.labels}
+        values={t:i/10 for i,t in enumerate(self.labels)}
+        parts=m.group_error_components(values,self.labels,positions)
+        self.assertAlmostEqual(sum(parts.values()),m.score(values,self.labels)['mse'])
+
+
+class ArchiveRootTests(unittest.TestCase):
+    def check_archive(self, entries):
+        with tempfile.TemporaryDirectory() as folder:
+            path=Path(folder)/'evidence.zip'
+            with zipfile.ZipFile(path,'w') as z:
+                for name,data in entries.items(): z.writestr(name,data)
+            return m.verified_archive(path,m.sha(path.read_bytes()))
+
+    def test_nested_root_and_dot_slash_checksums(self):
+        files,checks=self.check_archive({'artifacts/run/SHA256SUMS':m.sha(b'data')+'  ./sample.json\n',
+                                        'artifacts/run/sample.json':b'data'})
+        self.assertEqual(files['sample.json'],b'data')
+        self.assertEqual(len(checks),1)
+
+    def test_payload_outside_checksum_root_is_rejected(self):
+        with self.assertRaises(ValueError):
+            self.check_archive({'artifacts/run/SHA256SUMS':'','other/payload':b'x'})
+
+    def test_duplicate_normalized_checksum_entries_are_rejected(self):
+        line=m.sha(b'data')+'  '
+        with self.assertRaises(ValueError):
+            self.check_archive({'run/SHA256SUMS':line+'./sample\n'+line+'sample\n',
+                                'run/sample':b'data'})
 
 
 if __name__=='__main__': unittest.main()
