@@ -1,0 +1,62 @@
+{
+  "scope": "exploratory diagnostic using an explicitly partial 911-task collection; not full training",
+  "fit_tasks": 64,
+  "dev_tasks": 28,
+  "total_actual_optimizer_updates": 384,
+  "source_commit": "a67db6abefc73c6f6c7f1efb78645086782b1ade",
+  "arms": [
+    {
+      "name": "sorted-lr1e7",
+      "steps": 128,
+      "learning_rate": 1e-07,
+      "elapsed_seconds": 246.08499935700092,
+      "peak_allocated_gib": 7.245126247406006,
+      "scope": "exploratory diagnostic; previously viewed train-pool dev; no test",
+      "fit_mse": 0.2661123003226039,
+      "dev_mse": 0.30383671541339524,
+      "constant_mse": 0.19419996301906176,
+      "length_mse": 0.14450205172955263,
+      "fit_prediction_turns_correlation": -0.48132013856076017,
+      "dev_prediction_turns_correlation": -0.5285331655496036,
+      "independent_reload_max_step_difference": 0.0
+    },
+    {
+      "name": "shuffled-lr1e7",
+      "steps": 128,
+      "learning_rate": 1e-07,
+      "elapsed_seconds": 234.54664512400632,
+      "peak_allocated_gib": 7.246434688568115,
+      "scope": "exploratory diagnostic; previously viewed train-pool dev; no test",
+      "fit_mse": 0.43272229099299975,
+      "dev_mse": 0.2982124492452909,
+      "constant_mse": 0.19419996301906176,
+      "length_mse": 0.14450205172955263,
+      "fit_prediction_turns_correlation": 0.9904954874044315,
+      "dev_prediction_turns_correlation": 0.987420307963758,
+      "independent_reload_max_step_difference": 0.0
+    },
+    {
+      "name": "shuffled-lr1e8",
+      "steps": 128,
+      "learning_rate": 1e-08,
+      "elapsed_seconds": 245.13494915099,
+      "peak_allocated_gib": 7.246434688568115,
+      "scope": "exploratory diagnostic; previously viewed train-pool dev; no test",
+      "fit_mse": 0.3182739220516323,
+      "dev_mse": 0.36536587341129356,
+      "constant_mse": 0.19419996301906176,
+      "length_mse": 0.14450205172955263,
+      "fit_prediction_turns_correlation": 0.940926144266948,
+      "dev_prediction_turns_correlation": 0.9146971948803782,
+      "independent_reload_max_step_difference": 0.0
+    }
+  ],
+  "test_authorization": false,
+  "limitations": [
+    "Task/reward-balanced diagnostic subset; not population performance.",
+    "Train-pool dev already viewed; no independent confirmatory claim.",
+    "All arms fresh from B1; unchanged PRM structure/loss/clip/weight_decay.",
+    "No automatic follow-on training or learned-progress PPO authorization.",
+    "Full1451 collection and long-trajectory handling remain incomplete."
+  ]
+}

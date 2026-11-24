@@ -1,0 +1,104 @@
+[
+  {
+    "task_id": 351,
+    "tokens": 1007,
+    "turns": 3,
+    "score_tokens": [
+      "<|im_end|>",
+      "<|im_end|>",
+      "<|im_end|>"
+    ],
+    "label": 0.6666666666666666
+  },
+  {
+    "task_id": 95,
+    "tokens": 902,
+    "turns": 3,
+    "score_tokens": [
+      "<|im_end|>",
+      "<|im_end|>",
+      "<|im_end|>"
+    ],
+    "label": 0.0
+  },
+  {
+    "task_id": 5478,
+    "tokens": 903,
+    "turns": 10,
+    "score_tokens": [
+      "<|im_end|>",
+      "<|im_end|>",
+      "<|im_end|>",
+      "<|im_end|>",
+      "<|im_end|>",
+      "<|im_end|>",
+      "<|im_end|>",
+      "<|im_end|>",
+      "<|im_end|>",
+      "<|im_end|>"
+    ],
+    "label": 0.0
+  },
+  {
+    "task_id": 3542,
+    "tokens": 914,
+    "turns": 10,
+    "score_tokens": [
+      "<|im_end|>",
+      "<|im_end|>",
+      "<|im_end|>",
+      "<|im_end|>",
+      "<|im_end|>",
+      "<|im_end|>",
+      "<|im_end|>",
+      "<|im_end|>",
+      "<|im_end|>",
+      "<|im_end|>"
+    ],
+    "label": 0.0
+  },
+  {
+    "task_id": 359,
+    "tokens": 944,
+    "turns": 3,
+    "score_tokens": [
+      "<|im_end|>",
+      "<|im_end|>",
+      "<|im_end|>"
+    ],
+    "label": 0.6666666666666666
+  },
+  {
+    "task_id": 5031,
+    "tokens": 952,
+    "turns": 3,
+    "score_tokens": [
+      "<|im_end|>",
+      "<|im_end|>",
+      "<|im_end|>"
+    ],
+    "label": 0.0
+  },
+  {
+    "task_id": 0,
+    "tokens": 1037,
+    "turns": 3,
+    "score_tokens": [
+      "<|im_end|>",
+      "<|im_end|>",
+      "<|im_end|>"
+    ],
+    "label": 1.0
+  },
+  {
+    "task_id": 6225,
+    "tokens": 1052,
+    "turns": 3,
+    "score_tokens": [
+      "<|im_end|>",
+      "<|im_end|>",
+      "<|im_end|>"
+    ],
+    "label": 1.0
+  }
+]

@@ -1,0 +1,40 @@
+{
+  "scope": "eight-example fit-only memorization; not generalization or final training",
+  "source": "/root/webshop-main/artifacts/prm-recovery-20261124/source",
+  "source_commit": "a67db6abefc73c6f6c7f1efb78645086782b1ade",
+  "cwd": "/root/webshop-main",
+  "lock_dir": "/root/webshop-main/artifacts",
+  "python": "/root/miniconda3/envs/webshop-gpu/bin/python",
+  "train_ids": "/root/webshop-main/data/processed/train_ids.json",
+  "samples": "/root/webshop-main/artifacts/prm-memory-20261124/samples.jsonl",
+  "initial_config": "/root/webshop-main/artifacts/prm-memory-20261124/initial.config.json",
+  "max_updates": 512,
+  "interval": 64,
+  "learning_rate": 1e-07,
+  "labels": {
+    "351": 0.6666666666666666,
+    "95": 0.0,
+    "5478": 0.0,
+    "3542": 0.0,
+    "359": 0.6666666666666666,
+    "5031": 0.0,
+    "0": 1.0,
+    "6225": 1.0
+  },
+  "initial_parameter_digests": {
+    "head": "e39805a25949da937b399213f80f7f99f1b0e14f0698744fd6b2a0330f7289ac",
+    "lora": "5a2c5eaa8c9ede027c7f0336dac31f324ff176459bd56af079a56dd94f3a473d"
+  },
+  "input_sha256": {
+    "/root/webshop-main/artifacts/prm-memory-20261124/samples.jsonl": "9c88beffaef277f519712ab4a07c45766212579770d6292572c7f189bca4d8fe",
+    "/root/webshop-main/artifacts/prm-memory-20261124/initial.config.json": "7c73b77a0f55606b7edaca384446e75cea5a903644938052c009a28ddbfb9ea9",
+    "/root/webshop-main/artifacts/prm-memory-20261124/run_prm_memory_probe.py": "613575929beba7832e8caa8971fbbfe9284734fba786fdbb90f24c793223b689",
+    "/root/webshop-main/data/processed/train_ids.json": "8c85e56b3ac2e1f0a09b54560ad0f9bf77eedddb241d73617c7ff32416522e20"
+  },
+  "selection": "Two shortest complete retained fit examples per full/partial/purchased-zero/max-steps-zero bucket from previous64-fit; deterministic shuffle42. Length selection disclosed: memory diagnostic only. All examples used for both training and fit checks. No dev/test.",
+  "threshold": {
+    "mse_less_than": 0.001,
+    "each_absolute_error_less_than": 0.1
+  },
+  "unchanged": "FP32, original B1 merged+new PRM LoRA/head, sum-MSE, dropout0.05 while training and off for prediction, clip1, AdamW weight_decay0.01; same fixed shuffle every epoch; 64 updates/checkpoint; resume optimizer and RNG"
+}
