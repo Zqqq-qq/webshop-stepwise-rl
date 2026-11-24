@@ -1,0 +1,92 @@
+{
+  "proposal_schema": "prm-representation-pair-v1",
+  "status": "待表示诊断与组内冻结，不是当前train CLI配置",
+  "execution_authorized": false,
+  "protocol_id": "issue48-hidden-linear-proposed-v1",
+  "runtime_config": {
+    "model": "/root/.cache/huggingface/hub/models--Qwen--Qwen2.5-1.5B-Instruct/snapshots/989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+    "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+    "base_weights_sha256": "dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee",
+    "tokenizer": "/root/.cache/huggingface/hub/models--Qwen--Qwen2.5-1.5B-Instruct/snapshots/989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+    "tokenizer_revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+    "tokenizer_files_sha256": {
+      "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+      "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+      "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+      "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3"
+    },
+    "initialization": "sft_b1",
+    "sft_adapter": "/root/webshop-stepwise-rl/artifacts/qwen25-one-epoch-final-resume-Ydr3GfjQ/output/adapter",
+    "sft_adapter_files_sha256": {
+      "adapter_model.safetensors": "c39e2a78e7c5973328e9d2c23fb6320e566352e63cc089562488f3dd46ae5f9c",
+      "adapter_config.json": "18993c388788ec14de72fd4f6f9ff86ce761ffc3aad5d0923b33f4365be03d97"
+    },
+    "output_dir": "artifacts/prm/issue48-proposed-hidden-linear",
+    "policy_dtype": "float32",
+    "load_in_4bit": false,
+    "max_length": 2048,
+    "lora_r": 8,
+    "lora_alpha": 16,
+    "target_modules": [
+      "q_proj",
+      "v_proj"
+    ],
+    "schema_version": "prm-qwen-config-v1",
+    "score_position": "assistant_im_end"
+  },
+  "architecture": {
+    "representation": "final_hidden_state",
+    "input_dim": 1536,
+    "head_type": "linear",
+    "score_position": "assistant_im_end",
+    "reduction": "sum",
+    "loss": "trajectory_mse",
+    "dtype": "float32",
+    "initialization": "zeros"
+  },
+  "checkpoint_schema_version": 2,
+  "optimizer_proposal": {
+    "name": "AdamW",
+    "head_lr": 1e-07,
+    "lora_lr": 1e-07,
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "eps": 1e-08,
+    "weight_decay": 0.01,
+    "max_grad_norm": 1.0,
+    "scheduler": "constant"
+  },
+  "budget_proposal": {
+    "max_optimizer_updates": 128,
+    "evaluate_every": 64,
+    "batch_size": 1,
+    "order": "同一8条fit固定shuffle42，循环；不看dev选择checkpoint",
+    "seed": 42,
+    "hyperparameter_search": false
+  },
+  "data_lock": {
+    "task_ids": [
+      351,
+      95,
+      5478,
+      3542,
+      359,
+      5031,
+      0,
+      6225
+    ],
+    "samples_sha256": null,
+    "status": "须从原8样本可访问原件核实并填写；null时不得执行"
+  },
+  "acceptance": {
+    "fit_mse_lt": 0.001,
+    "each_absolute_error_lt": 0.1,
+    "reload_atol": 1e-05,
+    "reload_rtol": 1e-05,
+    "requires_per_step_and_total": true,
+    "generalization_passed": false,
+    "test_authorization": false
+  }
+}

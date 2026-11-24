@@ -1,0 +1,37 @@
+{
+  "scope": "合成CPU数学及数值探针，不是项目模型或8样本GPU复现",
+  "versions": {
+    "torch": "2.15.0",
+    "transformers": "4.56.2",
+    "peft": "0.17.1"
+  },
+  "high_cosine_counterexample": {
+    "cosine": 0.9998000199980003,
+    "linear_predictions": [
+      0.0,
+      1.0
+    ]
+  },
+  "adamw_rounding_probe": [
+    {
+      "dtype": "torch.bfloat16",
+      "initial": 0.02001953125,
+      "delta": 0.0,
+      "optimizer_state_dtypes": {
+        "step": "torch.float32",
+        "exp_avg": "torch.bfloat16",
+        "exp_avg_sq": "torch.bfloat16"
+      }
+    },
+    {
+      "dtype": "torch.float32",
+      "initial": 0.019999999552965164,
+      "delta": -0.002559661865234375,
+      "optimizer_state_dtypes": {
+        "step": "torch.float32",
+        "exp_avg": "torch.float32",
+        "exp_avg_sq": "torch.float32"
+      }
+    }
+  ]
+}

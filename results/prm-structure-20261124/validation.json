@@ -1,0 +1,30 @@
+{
+  "scope": "结构查证/变体方案与CPU验证，不是hidden生产实现或GPU验收",
+  "reference_pr43": "f28540b4de58dadd0521d1e5dcf4840ef6119a26",
+  "reference_pr45": "0e1a15e46d2419e4451e6863934a6eafdd1ad3f7",
+  "upstream_snapshot": "01cb439643b8017afcabe9a9e7d2f4b6eb24c2a7",
+  "tests": {
+    "composite_total": 69,
+    "passed": 69,
+    "skipped": 0,
+    "new_plan_tests": 5,
+    "new_tiny_qwen_peft_tests": 3,
+    "plain_python_plan_tests_passed": 5,
+    "elapsed_seconds": 17.963
+  },
+  "versions": {
+    "torch": "2.15.0",
+    "transformers": "4.56.2",
+    "peft": "0.17.1"
+  },
+  "command": "HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 PYTHONPATH=<combined-src> python -m unittest discover -s <combined-tests> -v",
+  "fixed_tokenizer_revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+  "boundaries": {
+    "new_variant_runtime_implemented": false,
+    "v2_full_checkpoint_loader_implemented": false,
+    "target_1_5b_gpu_run": false,
+    "actual_eight_feature_svd_run": false,
+    "llama_webshop_weight_comparison": false,
+    "test_authorization": false
+  }
+}
