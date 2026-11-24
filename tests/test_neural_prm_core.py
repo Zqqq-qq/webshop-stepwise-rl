@@ -1,7 +1,9 @@
 """纯CPU契约测试，不作为Qwen或GPU实训证据。"""
+import copy
 import json
 import tempfile
 import unittest
+from unittest.mock import patch
 from pathlib import Path
 from types import SimpleNamespace
 try:
@@ -10,7 +12,7 @@ except ImportError:
     raise unittest.SkipTest('本组PRM测试需安装PyTorch；不作为GPU证据')
 from torch import nn
 from webshop_lab.prm.model_core import NeuralPRM, save_prm, restore_head, verify_prm
-from webshop_lab.prm.train_core import optimizer_step
+from webshop_lab.prm.train_core import accumulated_optimizer_step, optimizer_step
 
 
 class TinyBackbone(nn.Module):
@@ -86,6 +88,40 @@ class PRMCoreTests(unittest.TestCase):
         self.assertGreater(float(self.model.score_head.weight.grad.abs().sum()),0)
         optimizer_step(self.model,self.batch,opt)
         self.assertGreater(float(self.model.backbone.embedding.weight.grad.abs().sum()),0)
+
+    def test_accumulation_matches_one_logical_batch_before_clipping(self):
+        with torch.no_grad():
+            self.model.score_head.weight.fill_(.04)
+        together = copy.deepcopy(self.model)
+        batch = {key: tensor.repeat((4,) + (1,) * (tensor.ndim - 1))
+                 for key, tensor in self.batch.items()}
+        # Uneven sizes distinguish weighting by trajectory from weighting by batch.
+        microbatches = [{key: value[part] for key, value in batch.items()}
+                        for part in (slice(0, 1), slice(1, 3), slice(3, 8))]
+        expected = optimizer_step(together, batch, torch.optim.SGD(together.parameters(), lr=.1), .15)
+        opt = torch.optim.SGD(self.model.parameters(), lr=.1)
+        with patch.object(opt, 'step', wraps=opt.step) as step, patch.object(
+                torch.nn.utils, 'clip_grad_norm_', wraps=torch.nn.utils.clip_grad_norm_) as clip:
+            actual = accumulated_optimizer_step(self.model, microbatches, opt, .15)
+        step.assert_called_once()
+        clip.assert_called_once()
+        self.assertGreater(expected['gradient_norm'], .15)
+        self.assertAlmostEqual(actual['gradient_norm'], expected['gradient_norm'], places=5)
+        self.assertAlmostEqual(actual['loss'], expected['loss'], places=6)
+        torch.testing.assert_close(torch.tensor(actual['totals_before_update']),
+                                   torch.tensor(expected['totals_before_update']))
+        for actual_param, expected_param in zip(self.model.parameters(), together.parameters()):
+            torch.testing.assert_close(actual_param, expected_param)
+
+    def test_invalid_later_microbatch_aborts_before_updating(self):
+        opt = torch.optim.AdamW(self.model.parameters(), lr=.01)
+        before = [p.detach().clone() for p in self.model.parameters()]
+        invalid = dict(self.batch, labels=torch.tensor([float('nan'), 0.]))
+        with self.assertRaises(ValueError):
+            accumulated_optimizer_step(self.model, [self.batch, invalid], opt)
+        self.assertFalse(opt.state)
+        for p, original in zip(self.model.parameters(), before):
+            torch.testing.assert_close(p, original, atol=0, rtol=0)
     def test_bad_boundaries_are_rejected(self):
         for positions in [[[3,-1],[1,3]],[[2,-1],[3,1]],[[2,-1],[1,1]],[[8,-1],[1,3]]]:
             with self.subTest(positions=positions),self.assertRaises(ValueError):

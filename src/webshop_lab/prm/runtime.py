@@ -101,13 +101,15 @@ def build_prm(config, checkpoint=None, device='cuda', training=True):
     if tokenizer.pad_token_id is None:
         tokenizer.pad_token = tokenizer.eos_token
     identity = checkpoint_identity(config,tokenizer,before,device)
+    checkpoint_schema=2 if config.schema_version=='prm-qwen-config-v2' else 1
     if checkpoint is not None:
         # Reject a wrong representation/schema before allocating the 1.5B backbone.
         model_spec=json.loads((Path(config.model)/'config.json').read_text(encoding='utf-8'))
         vocab_size,hidden_size=model_spec.get('vocab_size'),model_spec.get('hidden_size')
         if type(vocab_size) is not int or type(hidden_size) is not int:
             raise ValueError('Pinned model configuration lacks exact feature dimensions')
-        verify_prm(checkpoint,identity,config.representation,vocab_size,hidden_size)
+        verify_prm(checkpoint,identity,config.representation,vocab_size,hidden_size,
+                   expected_schema_version=checkpoint_schema)
     base = AutoModelForCausalLM.from_pretrained(config.model, revision=config.revision,
         local_files_only=True, trust_remote_code=False, torch_dtype=torch.float32,
         attn_implementation='sdpa')
@@ -130,7 +132,6 @@ def build_prm(config, checkpoint=None, device='cuda', training=True):
     else:
         backbone = PeftModel.from_pretrained(base,str(Path(checkpoint)/'adapter'),
             is_trainable=training,local_files_only=True)
-    checkpoint_schema=2 if config.schema_version=='prm-qwen-config-v2' else 1
     model = NeuralPRM(backbone,representation=config.representation,
                       checkpoint_schema_version=checkpoint_schema).to(device)
     if checkpoint is not None:

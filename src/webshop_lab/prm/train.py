@@ -13,7 +13,7 @@ from .config import load_config
 from .tokenize import tokenize_trajectory, TrajectoryTooLong
 from .runtime import build_prm, tensor_batch, sha, write_json, finalize_manifest, verify_runtime_inputs
 from .model_core import save_prm
-from .train_core import optimizer_step
+from .train_core import accumulated_optimizer_step
 
 
 @contextmanager
@@ -90,14 +90,19 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     for key in ('config','samples','train-ids'):
         parser.add_argument('--'+key,required=True,type=Path)
-    parser.add_argument('--steps',type=int,default=2)
+    parser.add_argument('--steps', type=int, default=2, help='Number of optimizer updates')
     parser.add_argument('--learning-rate',type=float,default=1e-5)
+    parser.add_argument('--weight-decay', type=float, default=0.)
+    parser.add_argument('--gradient-accumulation-steps', type=int, default=1,
+                        help='Complete one-trajectory microbatches per optimizer update')
     parser.add_argument('--seed',type=int,default=42)
     parser.add_argument('--resume',type=Path)
     parser.add_argument('--device',choices=('cuda','cpu'),default='cuda')
     args = parser.parse_args()
     if args.steps < 1 or not math.isfinite(args.learning_rate) or args.learning_rate <= 0:
         raise ValueError('更新步数和学习率必须为正')
+    if args.gradient_accumulation_steps < 1 or not math.isfinite(args.weight_decay) or args.weight_decay < 0:
+        raise ValueError('梯度累积须大于零，权重衰减须有限且非负')
     cfg = load_config(args.config)
     out = Path(cfg.output_dir)
     if out.exists():
@@ -128,32 +133,47 @@ def main():
         if not rows:
             raise ValueError('无完整可训练轨迹；检查超长拒绝和数据来源')
         optimizer = torch.optim.AdamW([p for p in model.parameters() if p.requires_grad],
-                                      lr=args.learning_rate,weight_decay=0.)
+                                      lr=args.learning_rate, weight_decay=args.weight_decay)
+        accumulation = args.gradient_accumulation_steps
         completed = 0
+        consumed = 0
         data_sha = sha(args.samples)
         if args.resume:
             state = torch.load(args.resume/'training-state.pt',map_location='cpu',weights_only=True)
             if (state['samples_sha256'] != data_sha or state['train_ids_sha256'] != train_ids_sha
                     or state['seed'] != args.seed or state['learning_rate'] != args.learning_rate):
                 raise ValueError('续训数据、种子或学习率改变')
-            optimizer.load_state_dict(state['optimizer'])
             completed = state['completed_steps']
+            prior_accumulation = state.get('gradient_accumulation_steps', 1)
+            consumed = state.get('samples_consumed', completed)
+            groups = state['optimizer']['param_groups']
+            if (type(completed) is not int or completed < 0 or type(consumed) is not int
+                    or type(prior_accumulation) is not int or prior_accumulation != accumulation
+                    or consumed != completed * accumulation or len(groups) != 1
+                    or groups[0]['lr'] != args.learning_rate or groups[0]['weight_decay'] != args.weight_decay):
+                raise ValueError('续训梯度累积、样本计数或 AdamW 超参数不一致')
+            optimizer.load_state_dict(state['optimizer'])
             torch.set_rng_state(state['cpu_rng'])
             if args.device == 'cuda':
                 torch.cuda.set_rng_state_all(state['cuda_rng'])
         records = []
         before_parameters={kind:parameter_digest(kind) for kind in ('head','lora')}
         for offset in range(args.steps):
-            index = (completed+offset) % len(rows)
-            task_id,row = rows[index]
-            batch = tensor_batch([row],tok.pad_token_id,args.device,True)
-            report = optimizer_step(model,batch,optimizer)
-            report['task_id'] = task_id
+            selected = [rows[(consumed + i) % len(rows)] for i in range(accumulation)]
+            batches = [tensor_batch([row], tok.pad_token_id, args.device, True) for _, row in selected]
+            report = accumulated_optimizer_step(model, batches, optimizer)
+            consumed += len(selected)
+            report['task_ids'] = [task_id for task_id, _ in selected]
+            report['terminal_rewards'] = [row['terminal_reward'] for _, row in selected]
+            report['samples_consumed'] = consumed
+            report['gradient_clipped'] = report['gradient_norm'] > 1.
+            if accumulation == 1:
+                report['task_id'] = report['task_ids'][0]
+                report['terminal_reward'] = report['terminal_rewards'][0]
             report['optimizer_step'] = completed+offset+1
             report['head_gradient_l1'] = float(model.score_head.weight.grad.detach().abs().sum())
             report['lora_gradient_l1'] = sum(float(p.grad.detach().abs().sum()) for n,p in model.named_parameters()
                                            if 'lora_' in n and p.grad is not None)
-            report['terminal_reward'] = row['terminal_reward']
             records.append(report)
         if not all(math.isfinite(r['loss']) and math.isfinite(r['gradient_norm']) for r in records):
             raise ValueError('训练含非有限记录')
@@ -165,7 +185,8 @@ def main():
         torch.save({'optimizer':optimizer.state_dict(),'cpu_rng':torch.get_rng_state(),
             'cuda_rng':torch.cuda.get_rng_state_all() if args.device == 'cuda' else [],
             'completed_steps':completed+args.steps,'samples_sha256':data_sha,
-            'train_ids_sha256':train_ids_sha,'seed':args.seed,'learning_rate':args.learning_rate},
+            'train_ids_sha256':train_ids_sha,'seed':args.seed,'learning_rate':args.learning_rate,
+            'gradient_accumulation_steps':accumulation,'samples_consumed':consumed},
             out/'training-state.pt')
         write_json(out/'config.json',cfg.to_dict())
         write_json(out/'reference-predictions.json',reference)
@@ -176,7 +197,11 @@ def main():
                        'cuda_matmul_allow_tf32':torch.backends.cuda.matmul.allow_tf32,
                        'cudnn_allow_tf32':torch.backends.cudnn.allow_tf32,
                        'autocast_enabled':torch.is_autocast_enabled()},
-            'optimizer_steps':completed+args.steps,'records':records,
+            'optimizer_steps':completed+args.steps,'samples_consumed':consumed,
+            'optimization':{'microbatch_size':1,'gradient_accumulation_steps':accumulation,
+                            'learning_rate':args.learning_rate,'weight_decay':args.weight_decay,
+                            'max_grad_norm':1.0},
+            'records':records,
             'samples_sha256':data_sha,'train_ids_sha256':train_ids_sha,
             'total_samples':total,'retained_samples':len(rows),'rejected':rejected,
             'parameters_before':before_parameters,'parameters_after':after_parameters,

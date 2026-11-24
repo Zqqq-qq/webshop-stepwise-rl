@@ -122,25 +122,28 @@ def save_prm(model, directory, identity):
 
 
 def verify_prm(directory, expected_identity, expected_representation='vocab_logits',
-               vocab_size=None, hidden_size=None):
+               vocab_size=None, hidden_size=None, *, expected_schema_version=None):
     """必须先验身份再由集成入口加载adapter，禁止只加载head冒充完整重载。"""
     directory = Path(directory)
     manifest = json.loads((directory/'prm-manifest.json').read_text(encoding='utf-8'))
+    schema = manifest.get('schema_version')
+    if type(schema) is not int or schema not in (1, 2):
+        raise ValueError('Unsupported PRM checkpoint schema')
+    if expected_schema_version is not None and schema != expected_schema_version:
+        raise ValueError('PRM checkpoint schema does not match the requested config')
     if manifest.get('identity') != expected_identity:
         raise ValueError('PRM初始化或输入身份不匹配')
-    if manifest.get('schema_version') == 1:
+    if schema == 1:
         if (expected_representation != 'vocab_logits'
                 or manifest.get('score_definition') != 'assistant_turn_end_vocab_logits_linear_sum_mse'):
             raise ValueError('v1 logits checkpoint cannot be loaded as another representation')
-    elif manifest.get('schema_version') == 2:
+    else:
         if type(vocab_size) is not int or type(hidden_size) is not int:
             raise ValueError('v2 checkpoint requires verified model dimensions')
         expected = RepresentationContract(expected_representation,
             hidden_size if expected_representation == 'final_hidden_state' else vocab_size)
         header = {k: v for k, v in manifest.items() if k != 'files_sha256'}
         check_manifest_header(header, expected, expected_identity, vocab_size, hidden_size)
-    else:
-        raise ValueError('Unsupported PRM checkpoint schema')
     files = manifest['files_sha256']
     if 'head.pt' not in files or not any(p.startswith('adapter/') and p.endswith('.safetensors') for p in files):
         raise ValueError('检查点缺少adapter或评分头')
@@ -154,7 +157,8 @@ def verify_prm(directory, expected_identity, expected_representation='vocab_logi
 def restore_head(model, directory, expected_identity):
     """调用方先恢复基础初始化与PRM adapter，再恢复此head。"""
     manifest = verify_prm(directory, expected_identity, model.representation,
-                          model.vocab_size, model.hidden_size)
+                          model.vocab_size, model.hidden_size,
+                          expected_schema_version=model.checkpoint_schema_version)
     if manifest['vocab_size'] != model.vocab_size:
         raise ValueError('重载词表维度不一致')
     state = torch.load(Path(directory)/'head.pt', map_location='cpu', weights_only=True)

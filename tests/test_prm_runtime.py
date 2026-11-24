@@ -6,15 +6,17 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 from pathlib import Path
 try:
     import torch
-    from transformers import AutoTokenizer, Qwen2Config, Qwen2ForCausalLM
+    from transformers import AutoModelForCausalLM, AutoTokenizer, Qwen2Config, Qwen2ForCausalLM
     from peft import LoraConfig, get_peft_model
 except ImportError:
     raise unittest.SkipTest('本组测试需要目标兼容版本的Torch、Transformers和PEFT')
 from webshop_lab.prm.config import PRMConfig
 from webshop_lab.prm.runtime import build_prm, tensor_batch, sha
+from webshop_lab.prm.model_core import restore_head, save_prm
 from webshop_lab.prm.tokenize import tokenize_trajectory
 from webshop_lab.prm.infer import compare_predictions
 from webshop_lab.prm.train import load_samples
@@ -112,18 +114,26 @@ class RuntimeTests(unittest.TestCase):
                       {'role':'user','content':'Find blue shoes.'},
                       {'role':'assistant','content':'Action: search[blue shoes]'}]
             sample=root/'hidden-samples.jsonl'
-            sample.write_text(json.dumps({'task_id':111,'messages':messages,
+            template={'messages':messages,
                 'terminal_reward':1.,'done':True,'termination':'purchase',
                 'policy_adapter_sha256':original.sft_adapter_files_sha256['adapter_model.safetensors'],
-                'source_sha256':'a'*64})+'\n')
-            ids=root/'hidden-train-ids.json';ids.write_text('[111]')
+                'source_sha256':'a'*64}
+            sample.write_text(''.join(json.dumps(dict(template, task_id=i, terminal_reward=reward))+'\n'
+                for i, reward in ((111, 1.), (112, .5), (113, 0.))))
+            ids=root/'hidden-train-ids.json';ids.write_text('[111,112,113]')
             env={**os.environ,'HF_HUB_OFFLINE':'1','TRANSFORMERS_OFFLINE':'1',
                  'OMP_NUM_THREADS':'1','MKL_NUM_THREADS':'1'}
             train=[sys.executable,'-m','webshop_lab.prm.train','--config',str(config),
-                   '--samples',str(sample),'--train-ids',str(ids),'--steps','2','--device','cpu']
+                   '--samples',str(sample),'--train-ids',str(ids),'--steps','2','--device','cpu',
+                   '--gradient-accumulation-steps','8','--learning-rate','3e-4','--weight-decay','0.01']
             trained=subprocess.run(train,capture_output=True,text=True,env=env,timeout=120)
             self.assertEqual(trained.returncode,0,trained.stderr)
             checkpoint=Path(config_data['output_dir'])
+            summary=json.loads((checkpoint/'summary.json').read_text())
+            self.assertEqual(summary['samples_consumed'],16)
+            self.assertEqual(summary['optimization']['gradient_accumulation_steps'],8)
+            self.assertEqual(summary['records'][1]['task_ids'],[113,111,112,113,111,112,113,111])
+            self.assertTrue(summary['head_changed'] and summary['lora_changed'])
             manifest=json.loads((checkpoint/'prm-manifest.json').read_text())
             self.assertEqual(manifest['schema_version'],2)
             self.assertEqual(manifest['architecture']['representation'],'final_hidden_state')
@@ -142,6 +152,53 @@ class RuntimeTests(unittest.TestCase):
             rejected=subprocess.run(wrong_cmd,capture_output=True,text=True,env=env,timeout=120)
             self.assertNotEqual(rejected.returncode,0)
             self.assertFalse((root/'wrong-output.json').exists())
+
+            resumed_cfg=root/'resumed.config.json'
+            resumed_cfg.write_text(json.dumps(dict(config_data, output_dir=str(root/'resumed'))))
+            resumed_train=train.copy()
+            resumed_train[resumed_train.index(str(config))]=str(resumed_cfg)
+            resumed_train[resumed_train.index('--steps')+1]='1'
+            resumed_train+=['--resume',str(checkpoint)]
+            resumed=subprocess.run(resumed_train,capture_output=True,text=True,env=env,timeout=120)
+            self.assertEqual(resumed.returncode,0,resumed.stderr)
+            final=json.loads((root/'resumed/summary.json').read_text())
+            self.assertEqual(final['optimizer_steps'],3)
+            self.assertEqual(final['samples_consumed'],24)
+            self.assertEqual(final['records'][0]['task_ids'],[112,113,111,112,113,111,112,113])
+            saved=torch.load(root/'resumed/training-state.pt',weights_only=True,map_location='cpu')
+            self.assertEqual(saved['optimizer']['param_groups'][0]['weight_decay'],.01)
+            self.assertEqual(saved['samples_consumed'],24)
+            self.assertTrue(all(float(s['step'])==3 for s in saved['optimizer']['state'].values()))
+
+            rejected_cfg=root/'resume-wrong.config.json'
+            rejected_cfg.write_text(json.dumps(dict(config_data, output_dir=str(root/'resume-wrong'))))
+            rejected_train=resumed_train.copy()
+            rejected_train[rejected_train.index(str(resumed_cfg))]=str(rejected_cfg)
+            rejected_train[rejected_train.index('--gradient-accumulation-steps')+1]='1'
+            rejected=subprocess.run(rejected_train,capture_output=True,text=True,env=env,timeout=120)
+            self.assertNotEqual(rejected.returncode,0)
+            self.assertIn('续训梯度累积、样本计数或 AdamW 超参数不一致',rejected.stderr)
+
+    def test_logits_rejects_cross_schema_before_loading_backbone(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp)
+            v1=self.make_fixture(root)
+            v2=PRMConfig(**dict(v1.to_dict(),schema_version='prm-qwen-config-v2',
+                                representation='vocab_logits'))
+            model_v1,_,identity,_=build_prm(v1,device='cpu',training=True)
+            model_v2,_,identity_v2,_=build_prm(v2,device='cpu',training=True)
+            self.assertEqual(identity,identity_v2)
+            p1,p2=root/'v1',root/'v2'
+            save_prm(model_v1,p1,identity)
+            save_prm(model_v2,p2,identity)
+            for config, model, own, other in ((v1, model_v1, p1, p2), (v2, model_v2, p2, p1)):
+                restore_head(model,own,identity)
+                with self.assertRaisesRegex(ValueError,'checkpoint schema'):
+                    restore_head(model,other,identity)
+                with patch.object(AutoModelForCausalLM,'from_pretrained') as loader:
+                    with self.assertRaisesRegex(ValueError,'checkpoint schema'):
+                        build_prm(config,checkpoint=other,device='cpu',training=False)
+                    loader.assert_not_called()
 
     def test_bridge_maps_only_valid_keys_and_masks(self):
         messages=[{'role':'system','content':'Shop.'},{'role':'user','content':'Page'},
