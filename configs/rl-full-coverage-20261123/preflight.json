@@ -1,0 +1,76 @@
+{
+  "42": {
+    "source_commit": "a424a89087b25618cf6cd19d58b3bbce445f2557",
+    "health": {
+      "ready": true,
+      "n_goals": 12087,
+      "goal_fingerprint": "e69c9ae2a0aad88977c44a7baf49f1f5ef7918ba8317923c4ae24dcc1f5638d8",
+      "alignment_checked": 1624,
+      "alignment_mismatches": 0,
+      "type_reward_cache": "page-local-v1",
+      "split_status": {
+        "verified": true,
+        "instruction_overlaps": {
+          "0-1": 0,
+          "0-2": 0,
+          "1-2": 0
+        }
+      },
+      "option_state": true
+    },
+    "bridge_ready_for_candidate": true,
+    "shared_config_sha256": "b14339c4376490a4a8ab174d9781c4eabbafc7fa434f1acbf7f3cabcc0d65a49",
+    "model_sha256": "dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee",
+    "initial_adapter_sha256": "c39e2a78e7c5973328e9d2c23fb6320e566352e63cc089562488f3dd46ae5f9c",
+    "goal_map_sha256": "6b5d9dfceee913828871b8dff62fd59720a40306738a92a496d1b0fb6838fa88",
+    "split_hashes": {
+      "train": "8c85e56b3ac2e1f0a09b54560ad0f9bf77eedddb241d73617c7ff32416522e20",
+      "val": "45440d724b33e69e13916d0adbe243cc63ce3bd67677b8220feff9f30b866c36",
+      "test": "823eb6f68270b3b83695415c8ee008a1c86fc86977ac6d316e44590f2f0f97c7"
+    },
+    "equal_budget_caps": {
+      "updates": 363,
+      "episodes": 1451,
+      "policy_turn_cap": 11608,
+      "environment_call_cap": 11608,
+      "generated_token_cap": 1485824
+    }
+  },
+  "43": {
+    "source_commit": "a424a89087b25618cf6cd19d58b3bbce445f2557",
+    "health": {
+      "ready": true,
+      "n_goals": 12087,
+      "goal_fingerprint": "e69c9ae2a0aad88977c44a7baf49f1f5ef7918ba8317923c4ae24dcc1f5638d8",
+      "alignment_checked": 1624,
+      "alignment_mismatches": 0,
+      "type_reward_cache": "page-local-v1",
+      "split_status": {
+        "verified": true,
+        "instruction_overlaps": {
+          "0-1": 0,
+          "0-2": 0,
+          "1-2": 0
+        }
+      },
+      "option_state": true
+    },
+    "bridge_ready_for_candidate": true,
+    "shared_config_sha256": "9647641a87da0585f597ad6d7e6a3b9cdc299019e44e6dd29526afcd467b85b4",
+    "model_sha256": "dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee",
+    "initial_adapter_sha256": "c39e2a78e7c5973328e9d2c23fb6320e566352e63cc089562488f3dd46ae5f9c",
+    "goal_map_sha256": "6b5d9dfceee913828871b8dff62fd59720a40306738a92a496d1b0fb6838fa88",
+    "split_hashes": {
+      "train": "8c85e56b3ac2e1f0a09b54560ad0f9bf77eedddb241d73617c7ff32416522e20",
+      "val": "45440d724b33e69e13916d0adbe243cc63ce3bd67677b8220feff9f30b866c36",
+      "test": "823eb6f68270b3b83695415c8ee008a1c86fc86977ac6d316e44590f2f0f97c7"
+    },
+    "equal_budget_caps": {
+      "updates": 363,
+      "episodes": 1451,
+      "policy_turn_cap": 11608,
+      "environment_call_cap": 11608,
+      "generated_token_cap": 1485824
+    }
+  }
+}
