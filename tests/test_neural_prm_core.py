@@ -28,6 +28,33 @@ class TinyBackbone(nn.Module):
         (path/'adapter_model.safetensors').write_bytes('CPU契约占位'.encode('utf-8'))
 
 
+class TinyDecoder(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.embedding=nn.Embedding(7,5)
+
+    def forward(self,input_ids,attention_mask,use_cache=False,return_dict=True):
+        return SimpleNamespace(last_hidden_state=self.embedding(input_ids).cumsum(dim=1))
+
+
+class TinyHiddenPeft(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.config=SimpleNamespace(vocab_size=7,hidden_size=5)
+        self.decoder_base=nn.Module()
+        self.decoder_base.model=TinyDecoder()
+
+    def get_base_model(self):
+        return self.decoder_base
+
+    def forward(self,*args,**kwargs):
+        raise AssertionError('Hidden variant must bypass the full vocabulary LM head')
+
+    def save_pretrained(self,path):
+        path.mkdir()
+        (path/'adapter_model.safetensors').write_bytes(b'cpu-contract-placeholder')
+
+
 class PRMCoreTests(unittest.TestCase):
     def setUp(self):
         torch.manual_seed(42)
@@ -84,6 +111,54 @@ class PRMCoreTests(unittest.TestCase):
             with self.assertRaises(ValueError):verify_prm(path,dict(self.identity,base_revision='错误版本'))
             (path/'head.pt').write_bytes('损坏'.encode('utf-8'))
             with self.assertRaises(ValueError):verify_prm(path,self.identity)
+
+    def test_hidden_representation_scoring_and_versioned_reload(self):
+        with self.assertRaises(ValueError):
+            NeuralPRM(TinyHiddenPeft(),'final_hidden_state')
+        hidden=NeuralPRM(TinyHiddenPeft(),'final_hidden_state',checkpoint_schema_version=2)
+        self.assertEqual(hidden.score_head.weight.shape,(1,5))
+        with torch.no_grad():
+            hidden.score_head.weight.fill_(.1)
+            hidden.score_head.bias.fill_(.2)
+        out=hidden(**self.batch)
+        h=hidden.backbone.get_base_model().model(
+            self.batch['input_ids'],self.batch['attention_mask']).last_hidden_state
+        expected=torch.stack([
+            hidden.score_head(h[0,2]).sum(),
+            hidden.score_head(h[1,[1,3]]).sum()])
+        torch.testing.assert_close(out['totals'],expected)
+        torch.testing.assert_close(out['loss'],(expected-self.batch['labels']).square().mean())
+        self.assertEqual(float(out['step_scores'][0,1].detach()),0.)
+        other=hidden(**dict(self.batch,labels=torch.tensor([0.,0.])))
+        torch.testing.assert_close(out['step_scores'],other['step_scores'])
+        with tempfile.TemporaryDirectory() as tmp:
+            path=Path(tmp)/'hidden-checkpoint'
+            save_prm(hidden,path,self.identity)
+            manifest=json.loads((path/'prm-manifest.json').read_text())
+            self.assertEqual(manifest['schema_version'],2)
+            self.assertEqual(manifest['architecture']['representation'],'final_hidden_state')
+            self.assertEqual(manifest['architecture']['input_dim'],5)
+            verify_prm(path,self.identity,'final_hidden_state',7,5)
+            with self.assertRaises(ValueError):
+                verify_prm(path,self.identity,'vocab_logits',7,5)
+            with self.assertRaises(ValueError):
+                verify_prm(path,self.identity,'final_hidden_state',7,6)
+            with torch.no_grad():
+                hidden.score_head.weight.fill_(4.)
+            restore_head(hidden,path,self.identity)
+            torch.testing.assert_close(hidden(**self.batch)['totals'],expected)
+
+    def test_paired_v2_logits_has_distinct_manifest_from_hidden(self):
+        logits=NeuralPRM(TinyHiddenPeft(),'vocab_logits',checkpoint_schema_version=2)
+        with tempfile.TemporaryDirectory() as tmp:
+            path=Path(tmp)/'logits-checkpoint'
+            save_prm(logits,path,self.identity)
+            manifest=json.loads((path/'prm-manifest.json').read_text())
+            self.assertEqual(manifest['schema_version'],2)
+            self.assertEqual(manifest['architecture']['representation'],'vocab_logits')
+            verify_prm(path,self.identity,'vocab_logits',7,5)
+            with self.assertRaises(ValueError):
+                verify_prm(path,self.identity,'final_hidden_state',7,5)
 
 
 if __name__ == '__main__':unittest.main()

@@ -43,3 +43,19 @@ class VariantContractTests(unittest.TestCase):
     def test_simultaneous_definition_changes_rejected(self):
         for kwargs in ({'head_type':'mlp'},{'reduction':'min'},{'score_position':'content_last_token'},{'dtype':'bfloat16'}):
             with self.assertRaises(ValueError):dataclasses.replace(self.hidden,**kwargs)
+
+    def test_runtime_v2_requires_explicit_representation_and_preserves_v1_shape(self):
+        root=Path(__file__).resolve().parents[1]/'configs/prm/proposals'
+        legacy=json.loads((root/'hidden-linear-v1.json').read_text())['runtime_config']
+        self.assertNotIn('representation',PRMConfig.from_dict(legacy).to_dict())
+        with self.assertRaises(ValueError):
+            PRMConfig.from_dict(dict(legacy,representation='final_hidden_state'))
+        with self.assertRaises(ValueError):
+            PRMConfig.from_dict(dict(legacy,schema_version='prm-qwen-config-v2'))
+        hidden=dict(legacy,schema_version='prm-qwen-config-v2',
+                    representation='final_hidden_state')
+        cfg=PRMConfig.from_dict(hidden)
+        self.assertEqual(cfg.to_dict()['representation'],'final_hidden_state')
+        self.assertEqual(PRMConfig.from_dict(cfg.to_dict()),cfg)
+        with self.assertRaises(ValueError):
+            PRMConfig.from_dict(dict(hidden,representation='pooled_actions'))

@@ -36,10 +36,15 @@ class PRMConfig:
     target_modules: tuple = ('q_proj', 'v_proj')
     schema_version: str = 'prm-qwen-config-v1'
     score_position: str = 'assistant_im_end'
+    representation: str = 'vocab_logits'
 
     def __post_init__(self):
-        if self.schema_version != 'prm-qwen-config-v1' or self.score_position != 'assistant_im_end':
+        if self.schema_version not in ('prm-qwen-config-v1', 'prm-qwen-config-v2') or self.score_position != 'assistant_im_end':
             raise ValueError('Unsupported PRM schema or score-position convention')
+        if self.representation not in ('vocab_logits', 'final_hidden_state'):
+            raise ValueError('Unsupported PRM feature representation')
+        if self.schema_version == 'prm-qwen-config-v1' and self.representation != 'vocab_logits':
+            raise ValueError('Legacy v1 config cannot select a hidden-state score head')
         for name in ('model', 'tokenizer', 'output_dir'):
             if not isinstance(getattr(self, name), str) or not getattr(self, name).strip():
                 raise ValueError(f'{name} must be a nonempty string')
@@ -89,6 +94,8 @@ class PRMConfig:
     def from_dict(cls, data):
         if not isinstance(data, dict):
             raise ValueError('PRM configuration must be an object')
+        if data.get('schema_version') == 'prm-qwen-config-v2' and 'representation' not in data:
+            raise ValueError('v2 config must explicitly identify its representation')
         unknown = set(data) - {f.name for f in fields(cls)}
         if unknown:
             raise ValueError(f'Unknown PRM configuration fields: {sorted(unknown)}')
@@ -100,6 +107,8 @@ class PRMConfig:
     def to_dict(self):
         result = asdict(self)
         result['target_modules'] = list(self.target_modules)
+        if self.schema_version == 'prm-qwen-config-v1':
+            result.pop('representation')
         return result
 
     def fingerprint(self):

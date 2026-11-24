@@ -97,6 +97,52 @@ class RuntimeTests(unittest.TestCase):
             self.assertEqual(third.returncode,0,third.stderr)
             self.assertEqual(json.loads((root/'continued/summary.json').read_text())['optimizer_steps'],4)
 
+    def test_hidden_v2_real_qwen_train_and_new_process_reload(self):
+        # Only runs when real pinned Qwen tokenizer + CPU Torch/Transformers/PEFT exist.
+        # This checks small random Qwen integration, NOT the 1.5B model or GPU.
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp)
+            original=self.make_fixture(root)
+            config_data=original.to_dict()
+            config_data.update(schema_version='prm-qwen-config-v2',
+                               representation='final_hidden_state')
+            config=root/'hidden-config.json'
+            config.write_text(json.dumps(config_data))
+            messages=[{'role':'system','content':'Shop carefully.'},
+                      {'role':'user','content':'Find blue shoes.'},
+                      {'role':'assistant','content':'Action: search[blue shoes]'}]
+            sample=root/'hidden-samples.jsonl'
+            sample.write_text(json.dumps({'task_id':111,'messages':messages,
+                'terminal_reward':1.,'done':True,'termination':'purchase',
+                'policy_adapter_sha256':original.sft_adapter_files_sha256['adapter_model.safetensors'],
+                'source_sha256':'a'*64})+'\n')
+            ids=root/'hidden-train-ids.json';ids.write_text('[111]')
+            env={**os.environ,'HF_HUB_OFFLINE':'1','TRANSFORMERS_OFFLINE':'1',
+                 'OMP_NUM_THREADS':'1','MKL_NUM_THREADS':'1'}
+            train=[sys.executable,'-m','webshop_lab.prm.train','--config',str(config),
+                   '--samples',str(sample),'--train-ids',str(ids),'--steps','2','--device','cpu']
+            trained=subprocess.run(train,capture_output=True,text=True,env=env,timeout=120)
+            self.assertEqual(trained.returncode,0,trained.stderr)
+            checkpoint=Path(config_data['output_dir'])
+            manifest=json.loads((checkpoint/'prm-manifest.json').read_text())
+            self.assertEqual(manifest['schema_version'],2)
+            self.assertEqual(manifest['architecture']['representation'],'final_hidden_state')
+            self.assertEqual(manifest['architecture']['input_dim'],8)
+            infer=[sys.executable,'-m','webshop_lab.prm.infer','--config',str(config),
+                   '--checkpoint',str(checkpoint),'--samples',str(sample),
+                   '--output',str(root/'hidden-reloaded.json'),
+                   '--reference',str(checkpoint/'reference-predictions.json'),'--device','cpu']
+            reloaded=subprocess.run(infer,capture_output=True,text=True,env=env,timeout=120)
+            self.assertEqual(reloaded.returncode,0,reloaded.stderr)
+            self.assertTrue(json.loads((root/'hidden-reloaded.json').read_text())['reference_match'])
+            wrong=dict(config_data,representation='vocab_logits',output_dir=str(root/'wrong-arm'))
+            wrong_config=root/'wrong-config.json';wrong_config.write_text(json.dumps(wrong))
+            wrong_cmd=infer.copy();wrong_cmd[wrong_cmd.index(str(config))]=str(wrong_config)
+            wrong_cmd[wrong_cmd.index(str(root/'hidden-reloaded.json'))]=str(root/'wrong-output.json')
+            rejected=subprocess.run(wrong_cmd,capture_output=True,text=True,env=env,timeout=120)
+            self.assertNotEqual(rejected.returncode,0)
+            self.assertFalse((root/'wrong-output.json').exists())
+
     def test_bridge_maps_only_valid_keys_and_masks(self):
         messages=[{'role':'system','content':'Shop.'},{'role':'user','content':'Page'},
                   {'role':'assistant','content':'Action: search[shoe]'}]

@@ -9,6 +9,7 @@ try:
     from peft import LoraConfig,get_peft_model
 except ImportError:
     raise unittest.SkipTest('表示探针需要Torch/Transformers/PEFT，不把缺依赖当通过')
+from webshop_lab.prm.model_core import NeuralPRM
 
 
 class VariantStructureTests(unittest.TestCase):
@@ -49,3 +50,26 @@ class VariantStructureTests(unittest.TestCase):
             restored=nn.Linear(8,1);restored.load_state_dict(torch.load(p,weights_only=True),strict=True)
             torch.testing.assert_close(restored(h.detach()),head(h.detach()))
             with self.assertRaises(RuntimeError):nn.Linear(64,1).load_state_dict(torch.load(p,weights_only=True),strict=True)
+
+    def test_hidden_neural_prm_has_real_decoder_gradient_path(self):
+        backbone=self.model()
+        prm=NeuralPRM(backbone,'final_hidden_state',checkpoint_schema_version=2)
+        self.assertEqual(prm.score_head.weight.shape,(1,8))
+        batch=dict(input_ids=torch.tensor([[1,2,3,4]]),
+            attention_mask=torch.ones(1,4,dtype=torch.long),
+            turn_end_indices=torch.tensor([[1,3]]),
+            turn_mask=torch.tensor([[True,True]]),
+            labels=torch.tensor([.75]))
+        opt=torch.optim.SGD([p for p in prm.parameters() if p.requires_grad],lr=.01)
+        gradients=[]
+        for _ in range(2):
+            opt.zero_grad(set_to_none=True)
+            result=prm(**batch)
+            self.assertTrue(torch.isfinite(result['loss']))
+            self.assertEqual(result['step_scores'].shape,(1,2))
+            result['loss'].backward()
+            gradients.append(sum(float(p.grad.abs().sum()) for n,p in prm.named_parameters()
+                                 if 'lora_' in n and p.grad is not None))
+            opt.step()
+        self.assertEqual(gradients[0],0.)
+        self.assertGreater(gradients[1],0.)
