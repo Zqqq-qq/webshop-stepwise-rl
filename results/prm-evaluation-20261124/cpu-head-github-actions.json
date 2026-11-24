@@ -1,0 +1,705 @@
+{
+  "schema_version": "prm-cpu-fixed-feature-head-v1",
+  "scope": "fixed B1 feature / head-only CPU; no model forward, LoRA, GPU, dev/test",
+  "source_provenance": "F.npy is re-extracted, not saved from historical training run",
+  "archive_sha256": "2d1c2763783759adb47bf8eeb056cc36b7134cd030a2f6b274ea32df68a86aa4",
+  "verified_member_sha256": {
+    "README.md": "a6a6af174a65f555fb0a16f85ad82ce390bf3b9d664a747279f49ba7f9a6a5c1",
+    "representation-diagnostic/COMMAND.txt": "90840b2b76acdfe3cd6d7a4a06debd76b42c01ed304bd2ada55b025dbe6c5cbd",
+    "representation-diagnostic/F.meta.json": "a7399fe26204597e7accf190a1ffc08e22cc4b412c90449d853dc5091a31fe86",
+    "representation-diagnostic/F.npy": "8efb5c98d3ce2ef43a948593715ff8c34ecd94d3ca1ea9288444d3d10b5592b6",
+    "representation-diagnostic/extraction.config.json": "9049d0764ccc1f30e368a7de735b467cead218dc6836588ca5f349e83af0d36f",
+    "representation-diagnostic/representation-diagnostic.json": "530d508d779b1e5d61ae575a8df5e8d94ce74945484ead24a80a2a1ecb3cc935",
+    "representation-diagnostic/svd_diagnostic.py": "933c9aa215222b26b0f4dac097f80eddcb415d1822edafcf93c426df871556c7",
+    "step-512/checkpoint-SHA256SUMS.txt": "c538b77b065fbc251cc34cb4ae82d9fb7cf78129dc2400167698c566469b01a6",
+    "step-512/prm-manifest.json": "cd57b427d24a1c2c28e5c1223b17af31a5be1d7ca68a5ca1c2e8c2bb2ceed0f7",
+    "step-512/training-state.pt": "c19461e3b22b822e5162cc3fb93e0825c5e398fddd26c55aa6a1326b87895c3c"
+  },
+  "task_order": [
+    351,
+    95,
+    5478,
+    3542,
+    359,
+    5031,
+    0,
+    6225
+  ],
+  "labels_float32": [
+    0.6666666865348816,
+    0.0,
+    0.0,
+    0.0,
+    0.6666666865348816,
+    0.0,
+    1.0,
+    1.0
+  ],
+  "train_features_shape": [
+    8,
+    151937
+  ],
+  "svd": {
+    "stored_F_shape": [
+      8,
+      151936
+    ],
+    "audited_A_shape": [
+      8,
+      151937
+    ],
+    "bias_column_turn_counts": [
+      3,
+      3,
+      10,
+      10,
+      3,
+      3,
+      3,
+      3
+    ],
+    "rcond": 1e-10,
+    "rank": 8,
+    "nonzero_spectrum_condition": 205.1749698264181,
+    "solution_l2": 0.007014064451067183,
+    "max_abs_residual": 1.0475905074173292e-14,
+    "max_abs_fp32_prediction_error": 7.564012776128948e-07,
+    "source": "re-extracted fixed B1 representation, NOT contemporaneous F",
+    "meaning": "eight-row linear representability only; no training/generalization acceptance"
+  },
+  "historical_step512_optimizer_audit": {
+    "sha256": "c19461e3b22b822e5162cc3fb93e0825c5e398fddd26c55aa6a1326b87895c3c",
+    "state_entry_count": 114,
+    "completed_steps": 512,
+    "moment_dtype": "float32",
+    "moment_values_finite": true,
+    "second_moments_nonnegative": true,
+    "learning_rate": 1e-07,
+    "weight_decay": 0.01,
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "eps": 1e-08,
+    "identity_limitation": "no independently persisted optimizer-ID to model-name mapping; no full-model restore"
+  },
+  "optimizer": {
+    "name": "torch.optim.AdamW",
+    "initialization": "zeros",
+    "dtype": "float32",
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "eps": 1e-08,
+    "weight_decay": 0.01,
+    "clip_norm": 1.0,
+    "sample_order": "8 historical examples in listed order"
+  },
+  "memory_gate": {
+    "mse_strictly_less_than": 0.001,
+    "max_abs_error_strictly_less_than": 0.1
+  },
+  "selection": {
+    "criterion": "minimum final train MSE, no dev/test",
+    "learning_rate": 1e-07
+  },
+  "runs": [
+    {
+      "learning_rate": 1e-07,
+      "batch_size": 1,
+      "sample_exposures": 512,
+      "optimizer_steps": 512,
+      "clip_events": 512,
+      "stop_reason": "exposure_cap",
+      "history": [
+        {
+          "sample_exposures": 64,
+          "optimizer_steps": 64,
+          "clip_events": 64,
+          "mse": 0.24922371934705467,
+          "max_abs_error": 0.695639967918396,
+          "predictions": [
+            0.32155001163482666,
+            0.3200289011001587,
+            0.5241587162017822,
+            0.5870851874351501,
+            0.3356951177120209,
+            0.31625646352767944,
+            0.3222249150276184,
+            0.304360032081604
+          ]
+        },
+        {
+          "sample_exposures": 128,
+          "optimizer_steps": 128,
+          "clip_events": 128,
+          "mse": 0.17424514706498617,
+          "max_abs_error": 0.6538065671920776,
+          "predictions": [
+            0.3777969479560852,
+            0.37220996618270874,
+            0.21417012810707092,
+            0.3299214541912079,
+            0.40237700939178467,
+            0.36396509408950806,
+            0.3775246739387512,
+            0.34619343280792236
+          ]
+        },
+        {
+          "sample_exposures": 192,
+          "optimizer_steps": 192,
+          "clip_events": 192,
+          "mse": 0.14429012837886773,
+          "max_abs_error": 0.612511157989502,
+          "predictions": [
+            0.43356168270111084,
+            0.42385584115982056,
+            -0.09793047606945038,
+            0.07072265446186066,
+            0.4685479700565338,
+            0.41113516688346863,
+            0.4322992265224457,
+            0.38748884201049805
+          ]
+        },
+        {
+          "sample_exposures": 256,
+          "optimizer_steps": 256,
+          "clip_events": 256,
+          "mse": 0.1331820961217598,
+          "max_abs_error": 0.5297912359237671,
+          "predictions": [
+            0.5275436639785767,
+            0.512464702129364,
+            -0.14316168427467346,
+            0.031972676515579224,
+            0.5683314800262451,
+            0.4960061311721802,
+            0.5250333547592163,
+            0.4702087640762329
+          ]
+        },
+        {
+          "sample_exposures": 320,
+          "optimizer_steps": 320,
+          "clip_events": 320,
+          "mse": 0.1334159280700347,
+          "max_abs_error": 0.6150804758071899,
+          "predictions": [
+            0.636284351348877,
+            0.6150804758071899,
+            -0.06853015720844269,
+            0.08969307690858841,
+            0.6804277300834656,
+            0.5953574776649475,
+            0.6322888135910034,
+            0.5693171620368958
+          ]
+        },
+        {
+          "sample_exposures": 384,
+          "optimizer_steps": 384,
+          "clip_events": 384,
+          "mse": 0.1439665978379272,
+          "max_abs_error": 0.66301429271698,
+          "predictions": [
+            0.6934406757354736,
+            0.66301429271698,
+            0.11438167840242386,
+            0.20810002088546753,
+            0.7309587001800537,
+            0.6431891322135925,
+            0.687739372253418,
+            0.6262263059616089
+          ]
+        },
+        {
+          "sample_exposures": 448,
+          "optimizer_steps": 448,
+          "clip_events": 448,
+          "mse": 0.12598345589162058,
+          "max_abs_error": 0.5687645673751831,
+          "predictions": [
+            0.6108152866363525,
+            0.5687645673751831,
+            -0.11170095205307007,
+            -0.03571663424372673,
+            0.63737553358078,
+            0.5514333248138428,
+            0.6024324297904968,
+            0.5477769374847412
+          ]
+        },
+        {
+          "sample_exposures": 512,
+          "optimizer_steps": 512,
+          "clip_events": 512,
+          "mse": 0.1399930029538009,
+          "max_abs_error": 0.6487289667129517,
+          "predictions": [
+            0.6972792148590088,
+            0.6487289667129517,
+            0.15720656514167786,
+            0.2108675241470337,
+            0.7203280925750732,
+            0.6306018233299255,
+            0.6901699304580688,
+            0.6360690593719482
+          ]
+        }
+      ]
+    },
+    {
+      "learning_rate": 3e-07,
+      "batch_size": 1,
+      "sample_exposures": 512,
+      "optimizer_steps": 512,
+      "clip_events": 512,
+      "stop_reason": "exposure_cap",
+      "history": [
+        {
+          "sample_exposures": 64,
+          "optimizer_steps": 64,
+          "clip_events": 64,
+          "mse": 0.16119139518507308,
+          "max_abs_error": 0.6746907234191895,
+          "predictions": [
+            0.36192411184310913,
+            0.3477930426597595,
+            -0.10521084070205688,
+            -0.006569092161953449,
+            0.3878134787082672,
+            0.34778928756713867,
+            0.35916727781295776,
+            0.32530927658081055
+          ]
+        },
+        {
+          "sample_exposures": 128,
+          "optimizer_steps": 128,
+          "clip_events": 128,
+          "mse": 0.18358236411801265,
+          "max_abs_error": 0.660013735294342,
+          "predictions": [
+            0.6850483417510986,
+            0.660013735294342,
+            0.3013966977596283,
+            0.5361658930778503,
+            0.7234299778938293,
+            0.6510242223739624,
+            0.6895738840103149,
+            0.638102114200592
+          ]
+        },
+        {
+          "sample_exposures": 192,
+          "optimizer_steps": 192,
+          "clip_events": 192,
+          "mse": 0.12330513499453154,
+          "max_abs_error": 0.5203893184661865,
+          "predictions": [
+            0.5519788861274719,
+            0.5203893184661865,
+            -0.17740952968597412,
+            0.01680726744234562,
+            0.596687912940979,
+            0.512812614440918,
+            0.576213002204895,
+            0.5274993181228638
+          ]
+        },
+        {
+          "sample_exposures": 256,
+          "optimizer_steps": 256,
+          "clip_events": 256,
+          "mse": 0.2479304760385781,
+          "max_abs_error": 0.7529608607292175,
+          "predictions": [
+            0.42112481594085693,
+            0.3831840753555298,
+            -0.7529608607292175,
+            -0.6326049566268921,
+            0.4752851724624634,
+            0.3760864734649658,
+            0.46378499269485474,
+            0.41383498907089233
+          ]
+        },
+        {
+          "sample_exposures": 320,
+          "optimizer_steps": 320,
+          "clip_events": 320,
+          "mse": 0.6167048058561746,
+          "max_abs_error": 1.2448633909225464,
+          "predictions": [
+            0.9903565645217896,
+            0.9470869302749634,
+            1.1678886413574219,
+            1.2448633909225464,
+            1.0481504201889038,
+            0.9327422976493835,
+            1.0519160032272339,
+            0.9972411394119263
+          ]
+        },
+        {
+          "sample_exposures": 384,
+          "optimizer_steps": 384,
+          "clip_events": 384,
+          "mse": 0.11494688612894394,
+          "max_abs_error": 0.6106136441230774,
+          "predictions": [
+            0.6612388491630554,
+            0.6106136441230774,
+            0.09608250856399536,
+            0.12085989862680435,
+            0.7237721681594849,
+            0.6007192730903625,
+            0.7430340051651001,
+            0.695530891418457
+          ]
+        },
+        {
+          "sample_exposures": 448,
+          "optimizer_steps": 448,
+          "clip_events": 448,
+          "mse": 0.099335091404118,
+          "max_abs_error": 0.4980281889438629,
+          "predictions": [
+            0.5660988688468933,
+            0.4980281889438629,
+            -0.11523839831352234,
+            -0.1349456012248993,
+            0.6178247332572937,
+            0.4913880527019501,
+            0.6574222445487976,
+            0.6207411289215088
+          ]
+        },
+        {
+          "sample_exposures": 512,
+          "optimizer_steps": 512,
+          "clip_events": 512,
+          "mse": 0.18143181744430115,
+          "max_abs_error": 0.6099205017089844,
+          "predictions": [
+            0.44386643171310425,
+            0.3654074966907501,
+            -0.551321268081665,
+            -0.6099205017089844,
+            0.4968827962875366,
+            0.3605000972747803,
+            0.5508648157119751,
+            0.5185184478759766
+          ]
+        }
+      ]
+    },
+    {
+      "learning_rate": 1e-06,
+      "batch_size": 1,
+      "sample_exposures": 512,
+      "optimizer_steps": 512,
+      "clip_events": 512,
+      "stop_reason": "exposure_cap",
+      "history": [
+        {
+          "sample_exposures": 64,
+          "optimizer_steps": 64,
+          "clip_events": 64,
+          "mse": 3.8898900945788033,
+          "max_abs_error": 3.3454105854034424,
+          "predictions": [
+            -0.6489903926849365,
+            -0.6739603281021118,
+            -3.3454105854034424,
+            -3.2051448822021484,
+            -0.6264376044273376,
+            -0.671892523765564,
+            -0.6190568208694458,
+            -0.650550127029419
+          ]
+        },
+        {
+          "sample_exposures": 128,
+          "optimizer_steps": 128,
+          "clip_events": 128,
+          "mse": 3.787353075024137,
+          "max_abs_error": 3.289079427719116,
+          "predictions": [
+            -0.6485235691070557,
+            -0.6511645913124084,
+            -3.289079427719116,
+            -3.13840389251709,
+            -0.6040636897087097,
+            -0.7607195377349854,
+            -0.5660885572433472,
+            -0.6826699376106262
+          ]
+        },
+        {
+          "sample_exposures": 192,
+          "optimizer_steps": 192,
+          "clip_events": 192,
+          "mse": 3.722122602793623,
+          "max_abs_error": 3.24723744392395,
+          "predictions": [
+            -0.6527670621871948,
+            -0.6330732107162476,
+            -3.24723744392395,
+            -3.0866525173187256,
+            -0.5864161252975464,
+            -0.8546650409698486,
+            -0.517954409122467,
+            -0.720018744468689
+          ]
+        },
+        {
+          "sample_exposures": 256,
+          "optimizer_steps": 256,
+          "clip_events": 256,
+          "mse": 3.6609114633885014,
+          "max_abs_error": 3.2051546573638916,
+          "predictions": [
+            -0.6570193767547607,
+            -0.6149848103523254,
+            -3.2051546573638916,
+            -3.0346927642822266,
+            -0.5687656402587891,
+            -0.948576807975769,
+            -0.4697955250740051,
+            -0.7573201656341553
+          ]
+        },
+        {
+          "sample_exposures": 320,
+          "optimizer_steps": 320,
+          "clip_events": 320,
+          "mse": 0.46199726487981874,
+          "max_abs_error": 0.984697163105011,
+          "predictions": [
+            0.11348272860050201,
+            0.18838012218475342,
+            -0.984697163105011,
+            -0.8895599842071533,
+            0.24709540605545044,
+            -0.21494179964065552,
+            0.362993061542511,
+            0.01739366352558136
+          ]
+        },
+        {
+          "sample_exposures": 384,
+          "optimizer_steps": 384,
+          "clip_events": 384,
+          "mse": 0.757634264909636,
+          "max_abs_error": 1.4932738542556763,
+          "predictions": [
+            0.09590986371040344,
+            0.14247889816761017,
+            -1.4288668632507324,
+            -1.4932738542556763,
+            0.24761588871479034,
+            -0.20532488822937012,
+            0.3859451413154602,
+            0.07877366244792938
+          ]
+        },
+        {
+          "sample_exposures": 448,
+          "optimizer_steps": 448,
+          "clip_events": 448,
+          "mse": 0.6271519072638772,
+          "max_abs_error": 1.3376203775405884,
+          "predictions": [
+            0.03649990260601044,
+            0.09725334495306015,
+            -1.2514961957931519,
+            -1.3376203775405884,
+            0.24167995154857635,
+            -0.19588077068328857,
+            0.42183035612106323,
+            0.16219767928123474
+          ]
+        },
+        {
+          "sample_exposures": 512,
+          "optimizer_steps": 512,
+          "clip_events": 512,
+          "mse": 0.36904875790773684,
+          "max_abs_error": 0.9192448258399963,
+          "predictions": [
+            0.8388434052467346,
+            0.8502897024154663,
+            0.896587610244751,
+            0.9192448258399963,
+            1.0410022735595703,
+            0.5976682901382446,
+            1.231210708618164,
+            1.0089085102081299
+          ]
+        }
+      ]
+    },
+    {
+      "learning_rate": 1e-07,
+      "batch_size": 8,
+      "sample_exposures": 512,
+      "optimizer_steps": 64,
+      "clip_events": 64,
+      "stop_reason": "exposure_cap",
+      "history": [
+        {
+          "sample_exposures": 64,
+          "optimizer_steps": 8,
+          "clip_events": 8,
+          "mse": 0.25881910858595425,
+          "max_abs_error": 0.7846973538398743,
+          "predictions": [
+            0.22009950876235962,
+            0.22729435563087463,
+            0.4106593728065491,
+            0.4441457986831665,
+            0.23314937949180603,
+            0.22427433729171753,
+            0.22567763924598694,
+            0.21530264616012573
+          ]
+        },
+        {
+          "sample_exposures": 128,
+          "optimizer_steps": 16,
+          "clip_events": 16,
+          "mse": 0.20473782645905317,
+          "max_abs_error": 0.7418611943721771,
+          "predictions": [
+            0.267281711101532,
+            0.27907124161720276,
+            0.20081208646297455,
+            0.26549363136291504,
+            0.2920883297920227,
+            0.27551567554473877,
+            0.27672600746154785,
+            0.2581388056278229
+          ]
+        },
+        {
+          "sample_exposures": 192,
+          "optimizer_steps": 24,
+          "clip_events": 24,
+          "mse": 0.16407141303960884,
+          "max_abs_error": 0.6403899192810059,
+          "predictions": [
+            0.37355974316596985,
+            0.39060041308403015,
+            0.1438310444355011,
+            0.23584656417369843,
+            0.41219615936279297,
+            0.38575315475463867,
+            0.38834652304649353,
+            0.35961008071899414
+          ]
+        },
+        {
+          "sample_exposures": 256,
+          "optimizer_steps": 32,
+          "clip_events": 32,
+          "mse": 0.14071072435090212,
+          "max_abs_error": 0.5509894490242004,
+          "predictions": [
+            0.4666394591331482,
+            0.4869387149810791,
+            0.05802956968545914,
+            0.15910525619983673,
+            0.5182146430015564,
+            0.4810410737991333,
+            0.4873053729534149,
+            0.44901055097579956
+          ]
+        },
+        {
+          "sample_exposures": 320,
+          "optimizer_steps": 40,
+          "clip_events": 40,
+          "mse": 0.1328617563681584,
+          "max_abs_error": 0.5479174256324768,
+          "predictions": [
+            0.5283539295196533,
+            0.5479174256324768,
+            -0.01001780666410923,
+            0.07384441047906876,
+            0.5882164239883423,
+            0.5413482785224915,
+            0.5544780492782593,
+            0.5098015069961548
+          ]
+        },
+        {
+          "sample_exposures": 384,
+          "optimizer_steps": 48,
+          "clip_events": 48,
+          "mse": 0.130291019963389,
+          "max_abs_error": 0.5745579600334167,
+          "predictions": [
+            0.5604314804077148,
+            0.5745579600334167,
+            -0.011966700665652752,
+            0.037144023925065994,
+            0.6222148537635803,
+            0.5676316022872925,
+            0.590918779373169,
+            0.5440685749053955
+          ]
+        },
+        {
+          "sample_exposures": 448,
+          "optimizer_steps": 56,
+          "clip_events": 56,
+          "mse": 0.12691198168925374,
+          "max_abs_error": 0.5669195652008057,
+          "predictions": [
+            0.5616592764854431,
+            0.5669195652008057,
+            -0.001278625801205635,
+            0.015257906168699265,
+            0.6203319430351257,
+            0.5599119067192078,
+            0.5950888395309448,
+            0.5494050979614258
+          ]
+        },
+        {
+          "sample_exposures": 512,
+          "optimizer_steps": 64,
+          "clip_events": 64,
+          "mse": 0.12317963103656589,
+          "max_abs_error": 0.5477426052093506,
+          "predictions": [
+            0.5531044602394104,
+            0.5477426052093506,
+            0.020617466419935226,
+            0.019351914525032043,
+            0.6061861515045166,
+            0.5407012104988098,
+            0.5886640548706055,
+            0.5455704927444458
+          ]
+        }
+      ]
+    }
+  ],
+  "software": {
+    "python": "3.11.18",
+    "numpy": "2.1.3",
+    "torch": "2.8.0+cpu"
+  },
+  "limitations": [
+    "Fixed features are re-extracted from B1, not an original same-run F snapshot.",
+    "A full-rank eight-row linear fit is not proof of successful gradient memorization.",
+    "Batch comparisons match sample exposures but not optimizer step counts.",
+    "No GPU neural training, generalization or step attribution was performed.",
+    "Independent reviewer must sign off before any GPU execution order."
+  ]
+}
