@@ -1,0 +1,15 @@
+{
+  "model": "/root/.cache/huggingface/hub/models--Qwen--Qwen2.5-1.5B-Instruct/snapshots/989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+  "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+  "adapter": "/root/webshop-main/artifacts/ppo-compare-seed43-run/candidate/round-4/adapter",
+  "load_in_4bit": false,
+  "seed": 42,
+  "temperature": 0.0,
+  "top_p": 0.9,
+  "context_length": 2048,
+  "max_new_tokens": 128,
+  "max_steps": 10,
+  "environment_url": "http://127.0.0.1:8766",
+  "goal_fingerprint": "e69c9ae2a0aad88977c44a7baf49f1f5ef7918ba8317923c4ae24dcc1f5638d8",
+  "policy_dtype": "float32"
+}
