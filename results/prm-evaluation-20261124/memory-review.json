@@ -1,0 +1,169 @@
+{
+  "scope": "CPU saved-record arithmetic and actual pinned-tokenizer audit; no GPU inference",
+  "archive_sha256": "b711fc49d9934adc321236a8837932406b6d1f3c8b81f8952d1f2c4a382453c8",
+  "zip_file_count": 94,
+  "top_checksum_payloads_verified": 85,
+  "samples_sha256": "9c88beffaef277f519712ab4a07c45766212579770d6292572c7f189bca4d8fe",
+  "sample_ids": [
+    351,
+    95,
+    5478,
+    3542,
+    359,
+    5031,
+    0,
+    6225
+  ],
+  "same_as_original64_fit": true,
+  "in_frozen_train": true,
+  "labels": [
+    0.6666666666666666,
+    0.0,
+    0.0,
+    0.0,
+    0.6666666666666666,
+    0.0,
+    1.0,
+    1.0
+  ],
+  "token_counts": [
+    1007,
+    902,
+    903,
+    914,
+    944,
+    952,
+    1037,
+    1052
+  ],
+  "turn_counts": [
+    3,
+    3,
+    10,
+    10,
+    3,
+    3,
+    3,
+    3
+  ],
+  "all_checkpoint_scoring_positions_retokenized": true,
+  "all_512_update_records_present": true,
+  "core_source_matches_previous_archived_a67db6a": true,
+  "adapter_saved_dtypes_by_step": {
+    "64": [
+      "F32"
+    ],
+    "128": [
+      "F32"
+    ],
+    "192": [
+      "F32"
+    ],
+    "256": [
+      "F32"
+    ],
+    "320": [
+      "F32"
+    ],
+    "384": [
+      "F32"
+    ],
+    "448": [
+      "F32"
+    ],
+    "512": [
+      "F32"
+    ]
+  },
+  "head_pickle_storage_globals_inspected_without_loading": [
+    "collections OrderedDict",
+    "torch._utils _rebuild_tensor_v2",
+    "torch FloatStorage"
+  ],
+  "checkpoints": [
+    {
+      "updates": 64,
+      "mse": 0.24903468387956293,
+      "max_absolute_error": 0.6956672370433807,
+      "passed": false
+    },
+    {
+      "updates": 128,
+      "mse": 0.17385151258518788,
+      "max_absolute_error": 0.6536123156547546,
+      "passed": false
+    },
+    {
+      "updates": 192,
+      "mse": 0.14414266219479036,
+      "max_absolute_error": 0.6118342280387878,
+      "passed": false
+    },
+    {
+      "updates": 256,
+      "mse": 0.13330072632644147,
+      "max_absolute_error": 0.5286039710044861,
+      "passed": false
+    },
+    {
+      "updates": 320,
+      "mse": 0.13354089847410125,
+      "max_absolute_error": 0.6172815561294556,
+      "passed": false
+    },
+    {
+      "updates": 384,
+      "mse": 0.13736719973204015,
+      "max_absolute_error": 0.6426343321800232,
+      "passed": false
+    },
+    {
+      "updates": 448,
+      "mse": 0.17602735020238086,
+      "max_absolute_error": 0.5591766834259033,
+      "passed": false
+    },
+    {
+      "updates": 512,
+      "mse": 0.13853124837964506,
+      "max_absolute_error": 0.6487203240394592,
+      "passed": false
+    }
+  ],
+  "memory_gate_passed": false,
+  "saved_reload_step_max_difference": 0.0,
+  "independent_model_reload_performed_here": false,
+  "missing_checkpoint_payloads": [
+    "memory-8/step-64/training-state.pt",
+    "memory-8/step-128/training-state.pt",
+    "memory-8/step-192/training-state.pt",
+    "memory-8/step-256/training-state.pt",
+    "memory-8/step-320/training-state.pt",
+    "memory-8/step-384/training-state.pt",
+    "memory-8/step-448/training-state.pt",
+    "memory-8/step-512/training-state.pt"
+  ],
+  "representation": {
+    "status": "reported_result_only_missing_F",
+    "samples_labels_tokens_turns_match": true,
+    "singular_values_independently_recomputed": false,
+    "reported_spectrum_ratio_arithmetic_checked": true,
+    "reported_residual_rms_arithmetic_checked": true,
+    "aggregation_in_script": "torch float32 sum, then cast to float64",
+    "script_uses_base_plus_merged_B1_without_new_PRM_LoRA": true,
+    "missing": [
+      "F or step logits",
+      "actual extraction config file",
+      "extraction core source hash binding"
+    ],
+    "budget_claim_validated": false
+  },
+  "gate_status": {
+    "BF16_risk": "separate mechanism; saved LoRA here is F32",
+    "memory_training": "failed at 512 updates",
+    "fixed_representation": "pending feature artifact",
+    "generalization": "not evaluated by this fit-only run",
+    "step_attribution": "not evaluated",
+    "test": "not authorized"
+  }
+}

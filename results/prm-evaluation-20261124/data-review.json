@@ -1,0 +1,78 @@
+{
+  "scope": "Independent PR45 CPU data/tokenizer/retained-export review; no model/GPU run",
+  "source_pr": 45,
+  "source_head": "0e1a15e46d2419e4451e6863934a6eafdd1ad3f7",
+  "archive_sha256": "e1578d582bdc1deaa5954e0b33e869d137eba0cb8d3efd7c57ecd7fcdadf2ec7",
+  "raw_source_sha256": "7f19714f0bbdc3be38d8497b34b20295d88b448d9a3c3379edca8c2b89b9b3cf",
+  "goal_map_sha256": "6b5d9dfceee913828871b8dff62fd59720a40306738a92a496d1b0fb6838fa88",
+  "split_sha256": {
+    "train_ids": "8c85e56b3ac2e1f0a09b54560ad0f9bf77eedddb241d73617c7ff32416522e20",
+    "val_ids": "45440d724b33e69e13916d0adbe243cc63ce3bd67677b8220feff9f30b866c36",
+    "test_ids": "823eb6f68270b3b83695415c8ee008a1c86fc86977ac6d316e44590f2f0f97c7"
+  },
+  "tokenizer_files_sha256": {
+    "config.json": "98d2ff8cc47488d08a2b0b3acf4eb99ef210779b42bd48605f6b8e36acdbf670",
+    "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+    "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+    "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+    "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+  },
+  "environment": {
+    "python": "3.12.10",
+    "transformers": "4.56.2",
+    "tokenizers": "0.22.2"
+  },
+  "coverage": {
+    "planned": 1451,
+    "actual": 911,
+    "kept": 628,
+    "rejected": 283
+  },
+  "train_pool_gate": {
+    "train_tasks": 1451,
+    "forbidden_tasks": 360,
+    "goal_map_entries": 12087,
+    "forbidden_instructions": 359,
+    "instruction_overlap_with_eval": 0
+  },
+  "splits": {
+    "fit": {
+      "input_episodes": 729,
+      "kept": 501,
+      "rejections": {
+        "too_long": 228
+      },
+      "label_buckets": {
+        "full": 154,
+        "partial": 292,
+        "zero": 55
+      },
+      "training_export_sha256": "6f1b6b2359477bd0863c3af00c00ce28db3ae1ae58e5ac05f7c3ce4108ff8d0b",
+      "encoded_export_keys_equal": true,
+      "labels_turn_counts_sources_equal": true
+    },
+    "dev": {
+      "input_episodes": 182,
+      "kept": 127,
+      "rejections": {
+        "too_long": 55
+      },
+      "label_buckets": {
+        "partial": 77,
+        "zero": 14,
+        "full": 36
+      },
+      "training_export_sha256": "cc095af6d83df9affcd62dad243e93141dc68ee003b3785074d848a0a6b01ef4",
+      "encoded_export_keys_equal": true,
+      "labels_turn_counts_sources_equal": true
+    }
+  },
+  "task_overlap": 0,
+  "instruction_overlap": 0,
+  "limitations": [
+    "31 existing CPU data/CLI tests separately passed; CLI tokenization uses a stub there",
+    "This 911-row re-encoding used the actual pinned tokenizer",
+    "No full model cross-PR checkpoint reload or GPU capacity validation",
+    "Behavior-policy identity is recorded, not proved from the sample text"
+  ]
+}

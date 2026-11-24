@@ -1,0 +1,667 @@
+{
+  "scope": "FP32 CPU AdamW trains only a zero-initialized linear head on fixed B1 logit sums",
+  "python": "3.13.16",
+  "numpy": "2.5.4",
+  "torch": "2.14.1",
+  "task_ids_in_order": [
+    351,
+    95,
+    5478,
+    3542,
+    359,
+    5031,
+    0,
+    6225
+  ],
+  "labels_in_order": [
+    0.6666666666666666,
+    0.0,
+    0.0,
+    0.0,
+    0.6666666666666666,
+    0.0,
+    1.0,
+    1.0
+  ],
+  "samples_sha256": "9c88beffaef277f519712ab4a07c45766212579770d6292572c7f189bca4d8fe",
+  "F_sha256": "8efb5c98d3ce2ef43a948593715ff8c34ecd94d3ca1ea9288444d3d10b5592b6",
+  "weight_decay": 0.01,
+  "betas": [
+    0.9,
+    0.999
+  ],
+  "eps": 1e-08,
+  "grad_clip_norm": 1.0,
+  "max_sample_presentations_per_arm": 512,
+  "evaluate_every_sample_presentations": 64,
+  "gate": {
+    "mse_strictly_below": 0.001,
+    "max_absolute_error_strictly_below": 0.1
+  },
+  "learning_rate_arms": [
+    {
+      "learning_rate": 1e-07,
+      "batch_size": 1,
+      "optimizer_updates": 512,
+      "samples_presented": 512,
+      "clipped_updates": 512,
+      "stop_reason": "budget_reached",
+      "checkpoints": [
+        {
+          "optimizer_updates": 64,
+          "samples_presented": 64,
+          "clipped_updates": 64,
+          "predictions_in_task_order": [
+            0.3215376138687134,
+            0.3200216591358185,
+            0.5241381525993347,
+            0.5870720148086548,
+            0.33569177985191345,
+            0.31625548005104065,
+            0.3222115635871887,
+            0.30435216426849365
+          ],
+          "mse": 0.24922340740502455,
+          "max_absolute_error": 0.6956478357315063,
+          "passed": false
+        },
+        {
+          "optimizer_updates": 128,
+          "samples_presented": 128,
+          "clipped_updates": 128,
+          "predictions_in_task_order": [
+            0.3777889609336853,
+            0.37219351530075073,
+            0.21413196623325348,
+            0.3298799693584442,
+            0.40236401557922363,
+            0.3639482855796814,
+            0.3775045871734619,
+            0.34617653489112854
+          ],
+          "mse": 0.17424394291420275,
+          "max_absolute_error": 0.6538234651088715,
+          "passed": false
+        },
+        {
+          "optimizer_updates": 192,
+          "samples_presented": 192,
+          "clipped_updates": 192,
+          "predictions_in_task_order": [
+            0.4335555136203766,
+            0.42386186122894287,
+            -0.09793277829885483,
+            0.0707201138138771,
+            0.4685404598712921,
+            0.4111355245113373,
+            0.43229129910469055,
+            0.3874947726726532
+          ],
+          "mse": 0.14429176081901443,
+          "max_absolute_error": 0.6125052273273468,
+          "passed": false
+        },
+        {
+          "optimizer_updates": 256,
+          "samples_presented": 256,
+          "clipped_updates": 256,
+          "predictions_in_task_order": [
+            0.5275430083274841,
+            0.5124635696411133,
+            -0.14317291975021362,
+            0.03196139261126518,
+            0.568317174911499,
+            0.4960046708583832,
+            0.5250219702720642,
+            0.4702077805995941
+          ],
+          "mse": 0.13318393732371434,
+          "max_absolute_error": 0.5297922194004059,
+          "passed": false
+        },
+        {
+          "optimizer_updates": 320,
+          "samples_presented": 320,
+          "clipped_updates": 320,
+          "predictions_in_task_order": [
+            0.6362873315811157,
+            0.6150878071784973,
+            -0.06853915750980377,
+            0.08968386799097061,
+            0.6804218888282776,
+            0.5953426957130432,
+            0.6323001980781555,
+            0.5693097114562988
+          ],
+          "mse": 0.1334145159105846,
+          "max_absolute_error": 0.6150878071784973,
+          "passed": false
+        },
+        {
+          "optimizer_updates": 384,
+          "samples_presented": 384,
+          "clipped_updates": 384,
+          "predictions_in_task_order": [
+            0.6934450268745422,
+            0.6629998087882996,
+            0.11437640339136124,
+            0.20809482038021088,
+            0.7309598922729492,
+            0.6432004570960999,
+            0.6877273917198181,
+            0.6262211203575134
+          ],
+          "mse": 0.1439670653208691,
+          "max_absolute_error": 0.6629998087882996,
+          "passed": false
+        },
+        {
+          "optimizer_updates": 448,
+          "samples_presented": 448,
+          "clipped_updates": 448,
+          "predictions_in_task_order": [
+            0.6108096241950989,
+            0.5687487125396729,
+            -0.11173082143068314,
+            -0.03574720770120621,
+            0.637369692325592,
+            0.5514296889305115,
+            0.6024118065834045,
+            0.5477644801139832
+          ],
+          "mse": 0.12598538725695058,
+          "max_absolute_error": 0.5687487125396729,
+          "passed": false
+        },
+        {
+          "optimizer_updates": 512,
+          "samples_presented": 512,
+          "clipped_updates": 512,
+          "predictions_in_task_order": [
+            0.6972576379776001,
+            0.6487118005752563,
+            0.157159686088562,
+            0.2108236402273178,
+            0.7203168869018555,
+            0.6305879950523376,
+            0.6901621222496033,
+            0.6360422968864441
+          ],
+          "mse": 0.13998660846518335,
+          "max_absolute_error": 0.6487118005752563,
+          "passed": false
+        }
+      ],
+      "passed": false
+    },
+    {
+      "learning_rate": 3e-07,
+      "batch_size": 1,
+      "optimizer_updates": 512,
+      "samples_presented": 512,
+      "clipped_updates": 512,
+      "stop_reason": "budget_reached",
+      "checkpoints": [
+        {
+          "optimizer_updates": 64,
+          "samples_presented": 64,
+          "clipped_updates": 64,
+          "predictions_in_task_order": [
+            0.361931711435318,
+            0.3478100895881653,
+            -0.10516850650310516,
+            -0.006526521407067776,
+            0.3878331184387207,
+            0.3478032648563385,
+            0.3591788411140442,
+            0.32532554864883423
+          ],
+          "mse": 0.1611863616556251,
+          "max_absolute_error": 0.6746744513511658,
+          "passed": false
+        },
+        {
+          "optimizer_updates": 128,
+          "samples_presented": 128,
+          "clipped_updates": 128,
+          "predictions_in_task_order": [
+            0.6850316524505615,
+            0.6600035429000854,
+            0.30137020349502563,
+            0.5361412763595581,
+            0.7234184741973877,
+            0.6510259509086609,
+            0.6895568370819092,
+            0.638100802898407
+          ],
+          "mse": 0.1835768699743116,
+          "max_absolute_error": 0.6600035429000854,
+          "passed": false
+        },
+        {
+          "optimizer_updates": 192,
+          "samples_presented": 192,
+          "clipped_updates": 192,
+          "predictions_in_task_order": [
+            0.5519417524337769,
+            0.5203661918640137,
+            -0.1774974763393402,
+            0.016718968749046326,
+            0.596642255783081,
+            0.512779712677002,
+            0.5761736631393433,
+            0.5274758338928223
+          ],
+          "mse": 0.12331024510354677,
+          "max_absolute_error": 0.5203661918640137,
+          "passed": false
+        },
+        {
+          "optimizer_updates": 256,
+          "samples_presented": 256,
+          "clipped_updates": 256,
+          "predictions_in_task_order": [
+            0.421085923910141,
+            0.3831402063369751,
+            -0.753072202205658,
+            -0.6327124238014221,
+            0.475247323513031,
+            0.3760497272014618,
+            0.4637433886528015,
+            0.4137927293777466
+          ],
+          "mse": 0.24797674393724645,
+          "max_absolute_error": 0.753072202205658,
+          "passed": false
+        },
+        {
+          "optimizer_updates": 320,
+          "samples_presented": 320,
+          "clipped_updates": 320,
+          "predictions_in_task_order": [
+            0.9903201460838318,
+            0.9470534324645996,
+            1.1677507162094116,
+            1.2447314262390137,
+            1.0481187105178833,
+            0.9326883554458618,
+            1.0518821477890015,
+            0.9971923828125
+          ],
+          "mse": 0.6165965884340585,
+          "max_absolute_error": 1.2447314262390137,
+          "passed": false
+        },
+        {
+          "optimizer_updates": 384,
+          "samples_presented": 384,
+          "clipped_updates": 384,
+          "predictions_in_task_order": [
+            0.6611763834953308,
+            0.6105318665504456,
+            0.09586218744516373,
+            0.12063640356063843,
+            0.7237029671669006,
+            0.6006562113761902,
+            0.742956817150116,
+            0.6954635381698608
+          ],
+          "mse": 0.11492208530023246,
+          "max_absolute_error": 0.6105318665504456,
+          "passed": false
+        },
+        {
+          "optimizer_updates": 448,
+          "samples_presented": 448,
+          "clipped_updates": 448,
+          "predictions_in_task_order": [
+            0.5659922957420349,
+            0.49793127179145813,
+            -0.11553622037172318,
+            -0.1352473348379135,
+            0.6177233457565308,
+            0.49129408597946167,
+            0.6573337912559509,
+            0.6206433773040771
+          ],
+          "mse": 0.09935103069573195,
+          "max_absolute_error": 0.49793127179145813,
+          "passed": false
+        },
+        {
+          "optimizer_updates": 512,
+          "samples_presented": 512,
+          "clipped_updates": 512,
+          "predictions_in_task_order": [
+            0.4437391459941864,
+            0.3652738332748413,
+            -0.55171138048172,
+            -0.6103295087814331,
+            0.49675390124320984,
+            0.36037856340408325,
+            0.5507287979125977,
+            0.5183888673782349
+          ],
+          "mse": 0.18156827028702785,
+          "max_absolute_error": 0.6103295087814331,
+          "passed": false
+        }
+      ],
+      "passed": false
+    },
+    {
+      "learning_rate": 1e-06,
+      "batch_size": 1,
+      "optimizer_updates": 512,
+      "samples_presented": 512,
+      "clipped_updates": 512,
+      "stop_reason": "budget_reached",
+      "checkpoints": [
+        {
+          "optimizer_updates": 64,
+          "samples_presented": 64,
+          "clipped_updates": 64,
+          "predictions_in_task_order": [
+            -0.6490173935890198,
+            -0.6740109324455261,
+            -3.345557451248169,
+            -3.205270767211914,
+            -0.6264824867248535,
+            -0.6719226241111755,
+            -0.6191041469573975,
+            -0.6505764126777649
+          ],
+          "mse": 3.8901807640881083,
+          "max_absolute_error": 3.345557451248169,
+          "passed": false
+        },
+        {
+          "optimizer_updates": 128,
+          "samples_presented": 128,
+          "clipped_updates": 128,
+          "predictions_in_task_order": [
+            -0.6485084295272827,
+            -0.651168704032898,
+            -3.289059638977051,
+            -3.1384353637695312,
+            -0.6040654182434082,
+            -0.7607201933860779,
+            -0.5660882592201233,
+            -0.6826717853546143
+          ],
+          "mse": 3.7873585091510678,
+          "max_absolute_error": 3.289059638977051,
+          "passed": false
+        },
+        {
+          "optimizer_updates": 192,
+          "samples_presented": 192,
+          "clipped_updates": 192,
+          "predictions_in_task_order": [
+            -0.6528117656707764,
+            -0.6331286430358887,
+            -3.2473011016845703,
+            -3.0867185592651367,
+            -0.5864664912223816,
+            -0.8546976447105408,
+            -0.5179951786994934,
+            -0.7200445532798767
+          ],
+          "mse": 3.722298065530901,
+          "max_absolute_error": 3.2473011016845703,
+          "passed": false
+        },
+        {
+          "optimizer_updates": 256,
+          "samples_presented": 256,
+          "clipped_updates": 256,
+          "predictions_in_task_order": [
+            -0.6570628881454468,
+            -0.6150367259979248,
+            -3.205352306365967,
+            -3.0348236560821533,
+            -0.5688197016716003,
+            -0.9486404061317444,
+            -0.46985119581222534,
+            -0.7573739290237427
+          ],
+          "mse": 3.661267373848656,
+          "max_absolute_error": 3.205352306365967,
+          "passed": false
+        },
+        {
+          "optimizer_updates": 320,
+          "samples_presented": 320,
+          "clipped_updates": 320,
+          "predictions_in_task_order": [
+            0.11339069902896881,
+            0.18828706443309784,
+            -0.984981119632721,
+            -0.8898548483848572,
+            0.24700136482715607,
+            -0.21503710746765137,
+            0.36290445923805237,
+            0.017301639541983604
+          ],
+          "mse": 0.46219281138587043,
+          "max_absolute_error": 0.984981119632721,
+          "passed": false
+        },
+        {
+          "optimizer_updates": 384,
+          "samples_presented": 384,
+          "clipped_updates": 384,
+          "predictions_in_task_order": [
+            0.09581661224365234,
+            0.14238391816616058,
+            -1.4291629791259766,
+            -1.49358069896698,
+            0.24751973152160645,
+            -0.20542147755622864,
+            0.38584867119789124,
+            0.07867886126041412
+          ],
+          "mse": 0.75791621525734,
+          "max_absolute_error": 1.49358069896698,
+          "passed": false
+        },
+        {
+          "optimizer_updates": 448,
+          "samples_presented": 448,
+          "clipped_updates": 448,
+          "predictions_in_task_order": [
+            0.03632981330156326,
+            0.09708016365766525,
+            -1.252035140991211,
+            -1.3381580114364624,
+            0.24150586128234863,
+            -0.19605322182178497,
+            0.4216625988483429,
+            0.16202843189239502
+          ],
+          "mse": 0.6276096299354753,
+          "max_absolute_error": 1.3381580114364624,
+          "passed": false
+        },
+        {
+          "optimizer_updates": 512,
+          "samples_presented": 512,
+          "clipped_updates": 512,
+          "predictions_in_task_order": [
+            0.8386170864105225,
+            0.850059449672699,
+            0.8959008455276489,
+            0.9185591340065002,
+            1.0407887697219849,
+            0.5974517464637756,
+            1.2309834957122803,
+            1.0086983442306519
+          ],
+          "mse": 0.3686127745428547,
+          "max_absolute_error": 0.9185591340065002,
+          "passed": false
+        }
+      ],
+      "passed": false
+    }
+  ],
+  "batch_comparison_if_learning_rate_gate_unmet": {
+    "learning_rate": 1e-07,
+    "batch_1_control_index": 0,
+    "batch_8": {
+      "learning_rate": 1e-07,
+      "batch_size": 8,
+      "optimizer_updates": 64,
+      "samples_presented": 512,
+      "clipped_updates": 64,
+      "stop_reason": "budget_reached",
+      "checkpoints": [
+        {
+          "optimizer_updates": 8,
+          "samples_presented": 64,
+          "clipped_updates": 8,
+          "predictions_in_task_order": [
+            0.22009731829166412,
+            0.22729608416557312,
+            0.4106576442718506,
+            0.44413769245147705,
+            0.23314912617206573,
+            0.2242770791053772,
+            0.22567877173423767,
+            0.21530382335186005
+          ],
+          "mse": 0.2588181004697302,
+          "max_absolute_error": 0.78469617664814,
+          "passed": false
+        },
+        {
+          "optimizer_updates": 16,
+          "samples_presented": 128,
+          "clipped_updates": 16,
+          "predictions_in_task_order": [
+            0.26728159189224243,
+            0.2790681719779968,
+            0.20081672072410583,
+            0.2654982805252075,
+            0.2920898199081421,
+            0.2755125164985657,
+            0.27672505378723145,
+            0.25813528895378113
+          ],
+          "mse": 0.2047386291297054,
+          "max_absolute_error": 0.7418647110462189,
+          "passed": false
+        },
+        {
+          "optimizer_updates": 24,
+          "samples_presented": 192,
+          "clipped_updates": 24,
+          "predictions_in_task_order": [
+            0.3735620677471161,
+            0.39059290289878845,
+            0.1438305377960205,
+            0.23584558069705963,
+            0.41219672560691833,
+            0.385751873254776,
+            0.38834184408187866,
+            0.35961592197418213
+          ],
+          "mse": 0.1640700511190466,
+          "max_absolute_error": 0.6403840780258179,
+          "passed": false
+        },
+        {
+          "optimizer_updates": 32,
+          "samples_presented": 256,
+          "clipped_updates": 32,
+          "predictions_in_task_order": [
+            0.4666387736797333,
+            0.48694321513175964,
+            0.05803731456398964,
+            0.15911154448986053,
+            0.5182116031646729,
+            0.48104941844940186,
+            0.48731136322021484,
+            0.44901177287101746
+          ],
+          "mse": 0.14071184747439225,
+          "max_absolute_error": 0.5509882271289825,
+          "passed": false
+        },
+        {
+          "optimizer_updates": 40,
+          "samples_presented": 320,
+          "clipped_updates": 40,
+          "predictions_in_task_order": [
+            0.5283599495887756,
+            0.5479163527488708,
+            -0.010026389732956886,
+            0.07383450865745544,
+            0.5882152915000916,
+            0.5413495898246765,
+            0.5544905066490173,
+            0.5098045468330383
+          ],
+          "mse": 0.13285967854981728,
+          "max_absolute_error": 0.5479163527488708,
+          "passed": false
+        },
+        {
+          "optimizer_updates": 48,
+          "samples_presented": 384,
+          "clipped_updates": 48,
+          "predictions_in_task_order": [
+            0.5604470372200012,
+            0.5745774507522583,
+            -0.011962848715484142,
+            0.03714486211538315,
+            0.6222222447395325,
+            0.567628800868988,
+            0.5909150242805481,
+            0.544079601764679
+          ],
+          "mse": 0.13029204952831897,
+          "max_absolute_error": 0.5745774507522583,
+          "passed": false
+        },
+        {
+          "optimizer_updates": 56,
+          "samples_presented": 448,
+          "clipped_updates": 56,
+          "predictions_in_task_order": [
+            0.5616600513458252,
+            0.5669330954551697,
+            -0.0012858359841629863,
+            0.015247912146151066,
+            0.6203316450119019,
+            0.5599263310432434,
+            0.5950784087181091,
+            0.5493963956832886
+          ],
+          "mse": 0.12691790123991,
+          "max_absolute_error": 0.5669330954551697,
+          "passed": false
+        },
+        {
+          "optimizer_updates": 64,
+          "samples_presented": 512,
+          "clipped_updates": 64,
+          "predictions_in_task_order": [
+            0.5531008243560791,
+            0.5477321743965149,
+            0.020621025934815407,
+            0.019352983683347702,
+            0.6061863899230957,
+            0.5407080054283142,
+            0.5886538028717041,
+            0.5455838441848755
+          ],
+          "mse": 0.12317878095798135,
+          "max_absolute_error": 0.5477321743965149,
+          "passed": false
+        }
+      ],
+      "passed": false
+    }
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "memory_archive_sha256": "b711fc49d9934adc321236a8837932406b6d1f3c8b81f8952d1f2c4a382453c8",
+  "supplement_archive_sha256": "2d1c2763783759adb47bf8eeb056cc36b7134cd030a2f6b274ea32df68a86aa4",
+  "memory_payloads_verified": 85,
+  "supplement_payloads_verified": 10,
+  "samples_sha256": "9c88beffaef277f519712ab4a07c45766212579770d6292572c7f189bca4d8fe",
+  "task_ids_in_order": [
+    351,
+    95,
+    5478,
+    3542,
+    359,
+    5031,
+    0,
+    6225
+  ],
+  "labels_in_order": [
+    0.6666666666666666,
+    0.0,
+    0.0,
+    0.0,
+    0.6666666666666666,
+    0.0,
+    1.0,
+    1.0
+  ],
+  "turn_counts_in_order": [
+    3,
+    3,
+    10,
+    10,
+    3,
+    3,
+    3,
+    3
+  ],
+  "historical_memory_run_at_512": {
+    "mse": 0.13853124837964506,
+    "max_absolute_error": 0.6487203240394592,
+    "passed": false
+  },
+  "representation": {
+    "origin": "re-extracted fixed B1 features; first extraction array was not saved",
+    "stored_shape": [
+      8,
+      151936
+    ],
+    "stored_F_sha256": "8efb5c98d3ce2ef43a948593715ff8c34ecd94d3ca1ea9288444d3d10b5592b6",
+    "solve_shape": [
+      8,
+      151937
+    ],
+    "bias_column_source": "archived scoring position counts",
+    "config_sha256": "9049d0764ccc1f30e368a7de735b467cead218dc6836588ca5f349e83af0d36f",
+    "extractor_sha256": "933c9aa215222b26b0f4dac097f80eddcb415d1822edafcf93c426df871556c7",
+    "base_revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+    "b1_adapter_sha256": "c39e2a78e7c5973328e9d2c23fb6320e566352e63cc089562488f3dd46ae5f9c",
+    "matches_reported_rank_spectrum_and_solution_norm": true,
+    "source_binding_of_extraction_independently_verified": false,
+    "raw_step_logits_available": false,
+    "model_forward_repeated": false,
+    "rcond": 1e-10,
+    "rank": 8,
+    "singular_values": [
+      23102.896868062988,
+      1473.3561603940173,
+      1176.4829393956943,
+      290.29228793089385,
+      231.774430370951,
+      167.31953659789573,
+      153.81865410192728,
+      112.60095170287609
+    ],
+    "rank_cutoff": 2.310289686806299e-06,
+    "nonzero_spectrum_condition": 205.174969826413,
+    "full_row_rank": true,
+    "solution_l2": 0.007014064451067159,
+    "solution_max_abs": 8.616438631435553e-05,
+    "residual_max_abs": 5.129230373768223e-14,
+    "residual_rms": 2.0837621153898137e-14,
+    "fp32_aggregated_max_abs_label_error": 7.748603820800781e-07
+  },
+  "optimizer": {
+    "checkpoint_manifest_match": true,
+    "training_state_sha256": "c19461e3b22b822e5162cc3fb93e0825c5e398fddd26c55aa6a1326b87895c3c",
+    "historical_source_commit": "a67db6abefc73c6f6c7f1efb78645086782b1ade",
+    "completed_steps": 512,
+    "seed": 42,
+    "parameter_states": 114,
+    "moment_dtype": "float32",
+    "parameter_shape_multiset_matches": true,
+    "cpu_rng_bytes": 5056,
+    "cuda_rng_states": 1,
+    "lr": 1e-07,
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "eps": 1e-08,
+    "weight_decay": 0.01
+  }
+}
