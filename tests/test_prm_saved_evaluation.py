@@ -122,5 +122,83 @@ class HoldoutIsolationTests(unittest.TestCase):
         b=self.m.isolate_candidates(reversed(range(200)),[],[],goals,None)
         self.assertEqual(a,b);self.assertEqual(len(a[-1]),160)
 
+    def test_replacement_preserves_retained_order_and_excludes_external_instruction_twins(self):
+        goals={t:'task '+str(t) for t in range(10)}
+        goals[99]='Instruction: TASK 1'
+        goals[100]='task 2'
+        eligible=list(range(10))
+        orig=sorted(eligible,key=lambda t:(self.m.sha(('42:'+str(t)).encode('ascii')),t))[:5]
+        exposed_elig=[orig[1]]
+        r_id=self.m.select_replacement_candidates(eligible,orig,exposed_elig,goals,count=5)
+        self.assertEqual(r_id['retained_count'],4)
+        self.assertEqual(r_id['removed_from_original_160'],[orig[1]])
+        self.assertNotIn(orig[1],r_id['selected_task_ids'])
+        self.assertEqual(r_id['selected_ids_sha256'],
+                         self.m.sha(self.m.canonical_ids_bytes(r_id['selected_task_ids'])))
+        if 1 in r_id['cross_goal_instruction_twins_in_remaining'] or str(1) in r_id['cross_goal_instruction_twins_in_remaining']:
+            self.assertEqual(r_id['cross_goal_instruction_twins_in_remaining']['1'],[99])
+        r_twin=self.m.select_replacement_candidates(
+            eligible,orig,exposed_elig,goals,all_exposed_ids=set(exposed_elig)|{99,100},count=5)
+        self.assertNotIn(1,r_twin['selected_task_ids'])
+        self.assertNotIn(2,r_twin['selected_task_ids'])
+        for t in (1,2):
+            if t not in exposed_elig:
+                self.assertIn(t,r_twin['excluded_by_instruction_twin'])
+
+    def test_replacement_rejects_duplicate_or_unknown_exposed_ids(self):
+        goals={t:str(t) for t in range(10)}
+        with self.assertRaisesRegex(ValueError,'duplicates'):
+            self.m.select_replacement_candidates(range(10),[0,1],[2,2],goals,count=2)
+        with self.assertRaisesRegex(ValueError,'outside eligible'):
+            self.m.select_replacement_candidates(range(10),[0,1],[99],goals,count=2)
+
+    def test_device_handoff_verifier_checks_shas_skipped_and_twin_isolation(self):
+        import json, tempfile
+        goals={t:'goal '+str(t) for t in range(8)}
+        eligible=list(range(8))
+        orig=sorted(eligible,key=lambda t:(self.m.sha(('42:'+str(t)).encode('ascii')),t))[:4]
+        target_in_orig=orig[2]
+        exposed_orig=orig[0]
+        goals[77]='  Instruction: GOAL '+str(target_in_orig)+'  '
+        clean=self.m.select_replacement_candidates(
+            eligible,orig,[exposed_orig],goals,all_exposed_ids={exposed_orig,77},count=4)
+        self.assertEqual(clean['excluded_by_instruction_twin'],[target_in_orig])
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp)
+            files={
+                'preflight-summary.json':json.dumps({'skipped':0}).encode(),
+                'full-history-audit.json':json.dumps({'skipped':0,'records':[{'task_id':exposed_orig},{'task_id':77}]}).encode(),
+                'eligible-history-audit.json':json.dumps({'skipped':0,'records':[{'task_id':exposed_orig}]}).encode(),
+                'holdout-replacement-candidate.json':self.m.canonical_ids_bytes(clean['selected_task_ids']),
+            }
+            shas={}
+            for name,raw in files.items():
+                (root/name).write_bytes(raw);shas[name]=self.m.sha(raw)
+            verified=self.m.verify_device_handoff(root,shas,eligible,orig,goals,count=4)
+            self.assertTrue(verified['device_handoff_received'])
+            self.assertEqual(verified['excluded_by_instruction_twin'],[target_in_orig])
+            # Reject SHA tampering
+            with self.assertRaisesRegex(ValueError,'SHA mismatch'):
+                self.m.verify_device_handoff(root,dict(shas,**{'preflight-summary.json':'0'*64}),eligible,orig,goals,count=4)
+            # Reject non-zero skipped count
+            bad_pre=json.dumps({'skipped':1}).encode()
+            (root/'preflight-summary.json').write_bytes(bad_pre)
+            bad_shas=dict(shas,**{'preflight-summary.json':self.m.sha(bad_pre)})
+            with self.assertRaisesRegex(ValueError,'skipped'):
+                self.m.verify_device_handoff(root,bad_shas,eligible,orig,goals,count=4)
+            # Restore preflight, unconditionally reject stale candidate that forgot external twin 77 -> target_in_orig
+            (root/'preflight-summary.json').write_bytes(files['preflight-summary.json'])
+            stale=self.m.select_replacement_candidates(eligible,orig,[exposed_orig],goals,count=4)
+            self.assertIn(target_in_orig,stale['selected_task_ids'])
+            stale_raw=self.m.canonical_ids_bytes(stale['selected_task_ids'])
+            (root/'holdout-replacement-candidate.json').write_bytes(stale_raw)
+            stale_shas=dict(shas,**{'holdout-replacement-candidate.json':self.m.sha(stale_raw)})
+            with self.assertRaisesRegex(ValueError,'disagree'):
+                self.m.verify_device_handoff(root,stale_shas,eligible,orig,goals,count=4)
+
+    def test_extract_actual_task_ids_ignores_plan_only_selected_ids(self):
+        payload={'selected_ids':[1,2,3],'records':[{'task_id':4},{'sample_keys':[[5,0]]}]}
+        self.assertEqual(self.m.extract_actual_task_ids(payload),{4,5})
+
 
 if __name__=='__main__': unittest.main()
