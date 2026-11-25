@@ -15,6 +15,7 @@ SOURCE_REF = '5ae6d83553ced1a74db32d750ada6f9d9b6786b1'
 CONTINUATION_SHA = {
     48: '4e115935e87cd3b6577e4a5a56a0fc2a1f4fb22b5eefa9a1064fe7fa0b000666',
     80: '4a2daf64b4256d76942b8044d5cade3166c9d4ffa9d40b152cf327931284e46c',
+    120: '90b1b1f769f21cfe8b44627ebf628f0c3d2f32b506d19fe7d922cc63585aa49f',
 }
 
 
@@ -34,7 +35,7 @@ def load_json(blob):
     return json.loads(blob, parse_constant=invalid)
 
 
-def verified_archive(path, expected_sha):
+def verified_archive(path, expected_sha, checksum_manifest=None):
     payload = Path(path).read_bytes()
     if sha(payload) != expected_sha:
         raise ValueError('Archive SHA mismatch')
@@ -45,6 +46,8 @@ def verified_archive(path, expected_sha):
                 or '\\' in n for n in names):
             raise ValueError('Unsafe or duplicate archive names')
         manifests = [n for n in names if PurePosixPath(n).name == 'SHA256SUMS']
+        if checksum_manifest is not None:
+            manifests = [n for n in manifests if n == checksum_manifest]
         if len(manifests) != 1:
             raise ValueError('Expected one archive checksum manifest')
         prefix = manifests[0][:-len('SHA256SUMS')]
@@ -197,6 +200,8 @@ def main(argv=None):
     args = parser.parse_args(argv)
     if args.step80_archive and not args.step48_archive:
         parser.error('Step80 audit requires the Step48 predecessor archive')
+    if args.step120_archive and not args.step80_archive:
+        parser.error('Step120 audit requires the Step80 predecessor archive')
     if Path(args.output).exists():
         parser.error('Output must be new')
     probe, probe_hashes = verified_archive(args.probe_archive, PROBE_SHA)

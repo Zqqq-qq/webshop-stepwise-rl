@@ -1,0 +1,120 @@
+{
+  "reviewed_commit": "559a7791b49332375c640bc132af05e079676a83",
+  "bundle_sha256": "6ffeaba47f6586e54efd3ab13fef9890d2d3bd1bad6386bbe597aa8b349bb6f5",
+  "verified_bundle_payloads": 39,
+  "initial_parameter_digests_match": true,
+  "runs": {
+    "hidden-lr-low-acc8": {
+      "mse": 0.3035302431013636,
+      "max_absolute_error": 0.8736273497343063,
+      "updates": 120,
+      "presentations": 960,
+      "clipped_updates": 120,
+      "max_training_loss_replay_difference": 2.492051076607993e-08,
+      "memory_gate_passed": false,
+      "full_reward_mean": 0.12657440453767776,
+      "zero_reward_mean": 0.12679512053728104,
+      "full_minus_zero_mean": -0.00022071599960327148,
+      "focus": [
+        {
+          "task_id": 0,
+          "label": 1.0,
+          "total": 0.12677615880966187
+        },
+        {
+          "task_id": 6225,
+          "label": 1.0,
+          "total": 0.12637265026569366
+        },
+        {
+          "task_id": 95,
+          "label": 0.0,
+          "total": 0.12691831588745117
+        },
+        {
+          "task_id": 5031,
+          "label": 0.0,
+          "total": 0.1266719251871109
+        }
+      ],
+      "saved_reload_max_difference": 0.0,
+      "verified_checkpoint_payloads": 8
+    },
+    "hidden-split-cos-acc8": {
+      "mse": 7.153360654299718e-07,
+      "max_absolute_error": 0.0014405995607376099,
+      "updates": 120,
+      "presentations": 960,
+      "clipped_updates": 114,
+      "max_training_loss_replay_difference": 1.876166072500851e-08,
+      "memory_gate_passed": true,
+      "full_reward_mean": 0.9989210069179535,
+      "zero_reward_mean": -0.00012683146633207798,
+      "full_minus_zero_mean": 0.9990478383842856,
+      "focus": [
+        {
+          "task_id": 0,
+          "label": 1.0,
+          "total": 0.9989136457443237
+        },
+        {
+          "task_id": 6225,
+          "label": 1.0,
+          "total": 0.9989283680915833
+        },
+        {
+          "task_id": 95,
+          "label": 0.0,
+          "total": 0.00022797053679823875
+        },
+        {
+          "task_id": 5031,
+          "label": 0.0,
+          "total": -0.0004816334694623947
+        }
+      ],
+      "saved_reload_max_difference": 0.0,
+      "verified_checkpoint_payloads": 8
+    },
+    "hidden-split-cos-acc1": {
+      "mse": 1.7329243921574564e-07,
+      "max_absolute_error": 0.0007626377046108246,
+      "updates": 960,
+      "presentations": 960,
+      "clipped_updates": 818,
+      "max_training_loss_replay_difference": 6.4873410643429e-08,
+      "memory_gate_passed": true,
+      "full_reward_mean": 0.9995166957378387,
+      "zero_reward_mean": 0.0002361675724387169,
+      "full_minus_zero_mean": 0.9992805281654,
+      "focus": [
+        {
+          "task_id": 0,
+          "label": 1.0,
+          "total": 0.9993603825569153
+        },
+        {
+          "task_id": 6225,
+          "label": 1.0,
+          "total": 0.9996730089187622
+        },
+        {
+          "task_id": 95,
+          "label": 0.0,
+          "total": 0.00011906586587429047
+        },
+        {
+          "task_id": 5031,
+          "label": 0.0,
+          "total": 0.0003532692790031433
+        }
+      ],
+      "saved_reload_max_difference": 0.0,
+      "verified_checkpoint_payloads": 8
+    }
+  },
+  "scope": "Saved-output arithmetic and payload SHA only; no model execution or optimizer deserialization",
+  "tokenizer_crosscheck": "Separate pinned-author verifier executed with original samples and real tokenizer",
+  "five_step_probe": "Rounded text log only; no exact post-update predictions or independent reload",
+  "test_authorized": false
+}
