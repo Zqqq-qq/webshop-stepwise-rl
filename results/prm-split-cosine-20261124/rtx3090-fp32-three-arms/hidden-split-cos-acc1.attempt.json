@@ -1,0 +1,9 @@
+{
+  "status": "complete",
+  "device": "cuda",
+  "started_utc": "2026-11-24T15:24:14.075024+00:00",
+  "test_authorization": false,
+  "ended_utc": "2026-11-24T15:33:19.837756+00:00",
+  "peak_allocated_gib": 6.255441665649414,
+  "peak_reserved_gib": 6.857421875
+}

@@ -1,0 +1,196 @@
+{
+  "predictions": [
+    {
+      "task_id": 351,
+      "turn_end_indices": [
+        173,
+        799,
+        1005
+      ],
+      "step_scores": [
+        0.08287462592124939,
+        0.12261731922626495,
+        0.4608904719352722
+      ],
+      "total": 0.666382372379303
+    },
+    {
+      "task_id": 95,
+      "turn_end_indices": [
+        167,
+        772,
+        900
+      ],
+      "step_scores": [
+        0.06970639526844025,
+        -0.024871034547686577,
+        -0.04471629485487938
+      ],
+      "total": 0.00011906586587429047
+    },
+    {
+      "task_id": 5478,
+      "turn_end_indices": [
+        161,
+        235,
+        309,
+        381,
+        467,
+        543,
+        621,
+        713,
+        793,
+        901
+      ],
+      "step_scores": [
+        0.09124337881803513,
+        0.016078349202871323,
+        -0.023579832166433334,
+        -0.014583662152290344,
+        -0.010927299037575722,
+        -0.012035173363983631,
+        -0.011649763211607933,
+        -0.010484489612281322,
+        -0.010270507074892521,
+        -0.013028363697230816
+      ],
+      "total": 0.0007626377046108246
+    },
+    {
+      "task_id": 3542,
+      "turn_end_indices": [
+        186,
+        262,
+        338,
+        418,
+        499,
+        621,
+        691,
+        768,
+        839,
+        912
+      ],
+      "step_scores": [
+        0.08620117604732513,
+        -0.005653660744428635,
+        -0.0178841482847929,
+        -0.011082133278250694,
+        -0.007825545966625214,
+        -0.00931762345135212,
+        -0.0075798844918608665,
+        -0.010620984248816967,
+        -0.008891653269529343,
+        -0.00708309281617403
+      ],
+      "total": 0.00026244670152664185
+    },
+    {
+      "task_id": 359,
+      "turn_end_indices": [
+        170,
+        764,
+        942
+      ],
+      "step_scores": [
+        0.07993683218955994,
+        0.13846395909786224,
+        0.4482623338699341
+      ],
+      "total": 0.6666631698608398
+    },
+    {
+      "task_id": 5031,
+      "turn_end_indices": [
+        164,
+        808,
+        950
+      ],
+      "step_scores": [
+        0.07343517988920212,
+        -0.03190893679857254,
+        -0.041172973811626434
+      ],
+      "total": 0.0003532692790031433
+    },
+    {
+      "task_id": 0,
+      "turn_end_indices": [
+        172,
+        896,
+        1035
+      ],
+      "step_scores": [
+        0.08891654759645462,
+        0.4540717601776123,
+        0.45637208223342896
+      ],
+      "total": 0.9993603825569153
+    },
+    {
+      "task_id": 6225,
+      "turn_end_indices": [
+        165,
+        901,
+        1050
+      ],
+      "step_scores": [
+        0.08942965418100357,
+        0.45568418502807617,
+        0.4545591473579407
+      ],
+      "total": 0.9996730089187622
+    }
+  ],
+  "identity": {
+    "base_revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+    "base_sha256": "dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee",
+    "tokenizer_sha256": {
+      "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+      "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+      "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+      "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3"
+    },
+    "tokenizer_revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+    "auxiliary_input_sha256": {
+      "/root/autodl-tmp/qwen25-15b/config.json": "98d2ff8cc47488d08a2b0b3acf4eb99ef210779b42bd48605f6b8e36acdbf670",
+      "/root/autodl-tmp/qwen25-15b/generation_config.json": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6"
+    },
+    "template_sha256": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+    "initialization": {
+      "kind": "sft_b1",
+      "sft_adapter_files_sha256": {
+        "adapter_model.safetensors": "c39e2a78e7c5973328e9d2c23fb6320e566352e63cc089562488f3dd46ae5f9c",
+        "adapter_config.json": "18993c388788ec14de72fd4f6f9ff86ce761ffc3aad5d0923b33f4365be03d97"
+      }
+    },
+    "source_commit": "d25e6164894c87fdea796bb73e3ee546807483d8",
+    "source_tracked_clean": true,
+    "source_sha256": {
+      "runtime.py": "49ab952c1b2e4f9c73dad6fe1b9930122d907178d5182105a51e2f903cc3b3c3",
+      "model_core.py": "acf4a15bd47826677c756574facf078c7721d7b766541032766489694442825d",
+      "train_core.py": "a07496bded55fb4ac2be98010812352c10485eae9cf5df8b110b4e54667de3e2",
+      "tokenize.py": "7515488a18e829274e291e63177732c33fad1927c0912e79c33345bb106f370d",
+      "config.py": "3ebd9dd7e6045fa14e2403cfd30ecd8ebb74495b46f5ae34db03231643e2ccad"
+    },
+    "prm_lora": {
+      "rank": 8,
+      "alpha": 16,
+      "target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "dropout": 0.05
+    },
+    "score_position": "assistant_im_end",
+    "max_length": 2048,
+    "policy_dtype": "float32"
+  },
+  "device": "cuda",
+  "total_samples": 8,
+  "rejected": [],
+  "input_schema": "samples",
+  "reference_match": true,
+  "atol": 1e-05,
+  "rtol": 1e-05,
+  "test_authorization": false
+}
