@@ -50,6 +50,26 @@ class EvaluationStatisticsTests(unittest.TestCase):
         self.assertEqual(result[0],4.)
         self.assertNotEqual(result[0],draw_mean)
 
+    def test_historical_models_align_by_task_instead_of_dictionary_order(self):
+        rows=[dict(task_id=1,terminal_reward=0.,termination='purchase'),
+              dict(task_id=2,terminal_reward=1.,termination='max_steps')]
+        old={2:dict(total=0.,turn_end_indices=[5]),1:dict(total=1.,turn_end_indices=[3])}
+        csv={('dev',r['task_id']):dict(label=str(r['terminal_reward']),termination=r['termination']) for r in rows}
+        result=self.m.compare_historical_models(np.array([0.,1.]),old,rows,{1:[3],2:[5]},csv)
+        self.assertEqual(result['observed_delta_and_ci95'],[-1.,-1.,-1.])
+        csv['dev',1]['termination']='max_steps'
+        with self.assertRaises(ValueError):
+            self.m.compare_historical_models(np.array([0.,1.]),old,rows,{1:[3],2:[5]},csv)
+
+    def test_historical_model_comparison_rejects_missing_tasks(self):
+        with self.assertRaises(ValueError):
+            self.m.compare_historical_models(np.array([0.]),{},
+                [dict(task_id=1,terminal_reward=0.,termination='purchase')],{1:[3]}, {})
+
+    def test_source_bundle_checksum_is_checked_before_clone(self):
+        with self.assertRaisesRegex(ValueError,'bundle SHA'):
+            self.m.verify_source_bundle(b'not-the-original-bundle','unused-checkout',{})
+
 
 class SplitRecordTests(unittest.TestCase):
     def setUp(self):

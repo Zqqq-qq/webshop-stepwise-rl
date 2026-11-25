@@ -1,5 +1,7 @@
 # #54 历史dev复评：源码身份补齐交接
 
+**已解决**：作者回传原bundle，已独立恢复d25提交及原tree；5060Ti复评也已回传，见[后续独立复核](PR54_5060TI_REVIEW.md)。以下保留当时缺项和交接步骤。
+
 2026-11-25，针对 [How的暂停回报](https://github.com/Zqqq-qq/webshop-stepwise-rl/pull/54#issuecomment-7158627109) 做只读核查。此文提供交接办法，不修改身份门禁或批准新训练。
 
 ## 已核实
