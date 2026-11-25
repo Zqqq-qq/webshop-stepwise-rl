@@ -1,6 +1,6 @@
 # 神经进度模型扩大训练与独立 dev 协议
 
-2026-11-25 冻结。本轮由 HowseaonLink 使用 RTX 5060 Ti 执行，QiuQiu-xuan 复核数据隔离、样本覆盖和配对指标。训练沿用 #54 的 hidden-state 评分及分组学习率配置。按现行展示日程，在 11/26 pre 结束后安排设备执行。PPO 与预留 test 另行验收，`test_authorization=false`。[#54 执行草案](https://github.com/Zqqq-qq/webshop-stepwise-rl/pull/54#issuecomment-7161569916) · [评估复核](https://github.com/Zqqq-qq/webshop-stepwise-rl/pull/54#issuecomment-7161673743) · [展示日程](DAILY_PLAN.md)
+2026-11-25 冻结。本轮由 HowseaonLink 使用 RTX 5060 Ti 执行，QiuQiu-xuan 复核数据隔离、样本覆盖和配对指标。训练沿用 #54 的 hidden-state 评分及分组学习率配置。第 32 组的课程展示为 11/27，GPU 采集与训练安排在本组展示结束且新 dev 清单重冻结、设备预检通过后。PPO 与预留 test 另行验收，`test_authorization=false`。[#54 执行草案](https://github.com/Zqqq-qq/webshop-stepwise-rl/pull/54#issuecomment-7161569916) · [评估复核](https://github.com/Zqqq-qq/webshop-stepwise-rl/pull/54#issuecomment-7161673743) · [第 32 组展示日期更新](https://github.com/Zqqq-qq/webshop-stepwise-rl/pull/55#issuecomment-7163790426)
 
 ## 冻结数据与采集
 
