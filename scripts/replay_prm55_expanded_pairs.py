@@ -11,7 +11,9 @@ from pathlib import Path
 from urllib.parse import urlsplit
 from zipfile import ZipFile
 
-from replay_prm55_option_pair import ARCHIVE_SHA, request, require, verify_checkpoint, write_json
+from replay_prm55_option_pair import (
+    ARCHIVE_SHA, read_system_prompts, request, require, scoring_sample, verify_checkpoint, write_json,
+)
 
 
 OPTION_CASES = {
@@ -34,14 +36,12 @@ def archive_inputs(path):
     require(hashlib.sha256(path.read_bytes()).hexdigest() == ARCHIVE_SHA, 'Wrong #55 evidence archive')
     task_ids = set(OPTION_CASES) | {PRODUCT_TASK}
     with ZipFile(path) as archive:
-        records = {}
-        for member in ('rollout/dev160.jsonl', 'data/dev160/dev160.training.jsonl'):
-            rows = [json.loads(line) for line in archive.read(member).splitlines()]
-            selected = [row for row in rows if row['task_id'] in task_ids]
-            require(len(selected) == len({r['task_id'] for r in selected}) == len(task_ids),
-                    f'Wrong task coverage in {member}')
-            records[member] = {row['task_id']: row for row in selected}
-        return (records['rollout/dev160.jsonl'], records['data/dev160/dev160.training.jsonl'],
+        rows = [json.loads(line) for line in archive.read('rollout/dev160.jsonl').splitlines()]
+        selected = [row for row in rows if row['task_id'] in task_ids]
+        require(len(selected) == len({r['task_id'] for r in selected}) == len(task_ids),
+                'Wrong task coverage in raw archive')
+        return ({row['task_id']: row for row in selected},
+                read_system_prompts(archive, task_ids),
                 json.loads(archive.read('training/stage126/prm-manifest.json')))
 
 
@@ -104,7 +104,7 @@ def check_pair(target, alternative, branch):
     require(target['done'] is True and alternative['done'] is True, 'Missing terminal state')
 
 
-def collect(args, episodes, training_rows):
+def collect(args, episodes, prompts):
     server = args.server.rstrip('/')
     address = urlsplit(server)
     require(address.scheme == 'http' and address.hostname == '127.0.0.1' and address.port
@@ -153,13 +153,9 @@ def collect(args, episodes, training_rows):
         with (args.run_dir / f'{name}.samples.jsonl').open('x', encoding='utf-8') as stream:
             for task_id in cases:
                 row = json.loads((args.run_dir / f'{task_id}.{name}.rollout.jsonl').read_text())
-                messages = [training_rows[task_id]['messages'][0]]
-                for step in row['steps']:
-                    messages.extend([{'role': 'user', 'content': step['observation']},
-                                     {'role': 'assistant', 'content': step['response']}])
-                # The environment label remains in its own artifact and never enters inference.
-                stream.write(json.dumps({'task_id': task_id, 'messages': messages},
-                                        ensure_ascii=False, allow_nan=False) + '\n')
+                # Environment labels stay in their own artifact.
+                sample = scoring_sample(row, prompts[task_id])
+                stream.write(json.dumps(sample, ensure_ascii=False, allow_nan=False) + '\n')
     write_json(args.run_dir / 'environment.json', {
         'health': health, 'source_archive_sha256': ARCHIVE_SHA,
         'pairs': pairs, 'test_authorization': False,
@@ -228,9 +224,9 @@ def main():
     parser.add_argument('--checkpoint', type=Path)
     parser.add_argument('--device', choices=('cuda', 'cpu'), default='cuda')
     args = parser.parse_args()
-    episodes, training_rows, manifest = archive_inputs(args.archive)
+    episodes, prompts, manifest = archive_inputs(args.archive)
     if args.mode == 'replay':
-        collect(args, episodes, training_rows)
+        collect(args, episodes, prompts)
         return
     if args.mode == 'score':
         require(args.config is not None and args.checkpoint is not None,

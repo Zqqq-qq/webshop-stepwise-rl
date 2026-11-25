@@ -11,10 +11,10 @@ python /path/to/scripts/replay_prm55_option_pair.py replay \
   --archive "$evidence_zip" --run-dir "$pair_dir"
 ```
 
-分别评分时使用真实运行的干净 `559a7791b49332375c640bc132af05e079676a83` checkout、原第 126 步配置和检查点。脚本核对该检查点的 manifest、adapter 和评分头，分别调用原推理入口。
+分别评分时使用真实运行的干净 `559a7791b49332375c640bc132af05e079676a83` checkout、原第 126 步配置和检查点。脚本核对该检查点的 manifest、adapter 和评分头，分别用原推理入口的 `--samples`。系统提示取自已归档的标准转换结果，网页和回复取自实时重放。这个入口不需要旧版本缺失的 `prm/data.py`。
 
 ```bash
-python /path/to/scripts/replay_prm55_option_pair.py score \
+PYTHONPATH=src python /path/to/scripts/replay_prm55_option_pair.py score \
   --archive "$evidence_zip" --run-dir "$pair_dir" \
   --config "$stage126_config" --checkpoint "$stage126_dir"
 ```

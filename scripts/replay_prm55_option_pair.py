@@ -29,7 +29,29 @@ def read_archive(path):
         require(episode['success'] and len(episode['steps']) == 4, 'Unexpected archived task')
         require([s['action'] for s in episode['steps'][2:]] == ['click[b]', 'click[buy now]'],
                 'Unexpected archived suffix')
-        return episode, json.loads(archive.read('training/stage126/prm-manifest.json'))
+        system = read_system_prompts(archive, {TASK_ID})[TASK_ID]
+        return episode, system, json.loads(archive.read('training/stage126/prm-manifest.json'))
+
+
+def read_system_prompts(archive, task_ids):
+    prompts = {}
+    for line in archive.read('data/dev160/dev160.training.jsonl').splitlines():
+        row = json.loads(line)
+        if row['task_id'] in task_ids:
+            prompt = row['messages'][0]
+            require(row['task_id'] not in prompts and prompt['role'] == 'system',
+                    'Invalid archived system prompt')
+            prompts[row['task_id']] = prompt
+    require(prompts.keys() == task_ids, 'Missing archived system prompt')
+    return prompts
+
+
+def scoring_sample(rollout, system):
+    messages = [system]
+    for step in rollout['steps']:
+        messages.extend([{'role': 'user', 'content': step['observation']},
+                         {'role': 'assistant', 'content': step['response']}])
+    return {'task_id': rollout['task_id'], 'messages': messages}
 
 
 def request(server, endpoint, body=None):
@@ -117,7 +139,7 @@ def compare(args, manifest):
     summary = {}
     for option in OPTIONS:
         result = json.loads((args.run_dir / f'{option}.predictions.json').read_text())
-        require(result['identity'] == manifest['identity'] and result['input_schema'] == 'rollout'
+        require(result['identity'] == manifest['identity'] and result['input_schema'] in ('rollout', 'samples')
                 and result['total_samples'] == 1 and not result['rejected']
                 and result['test_authorization'] is False, 'Scorer identity or coverage mismatch')
         (row,) = result['predictions']
@@ -150,17 +172,20 @@ def verify_checkpoint(checkpoint, manifest):
         require(digest == manifest['files_sha256'][name], 'Stage126 payload mismatch: ' + name)
 
 
-def score(args, manifest):
+def score(args, manifest, system):
     require(args.config is not None and args.checkpoint is not None,
             'Scoring requires the stage126 config and checkpoint')
     checkpoint = args.checkpoint.resolve()
     verify_checkpoint(checkpoint, manifest)
     for option in OPTIONS:
+        rollout = json.loads((args.run_dir / f'{option}.rollout.jsonl').read_text())
+        sample = args.run_dir.resolve() / f'{option}.samples.jsonl'
+        write_json(sample, scoring_sample(rollout, system))
         subprocess.run([
             sys.executable, '-m', 'webshop_lab.prm.infer', '--device', 'cuda',
             '--source-commit', manifest['identity']['source_commit'],
             '--config', str(args.config.resolve()), '--checkpoint', str(checkpoint),
-            '--rollout', str(args.run_dir.resolve() / f'{option}.rollout.jsonl'),
+            '--samples', str(sample),
             '--output', str(args.run_dir.resolve() / f'{option}.predictions.json'),
         ], check=True)
     compare(args, manifest)
@@ -175,11 +200,11 @@ def main():
     parser.add_argument('--config', type=Path)
     parser.add_argument('--checkpoint', type=Path)
     args = parser.parse_args()
-    episode, manifest = read_archive(args.archive)
+    episode, system, manifest = read_archive(args.archive)
     if args.mode == 'replay':
         collect(args, episode)
     else:
-        score(args, manifest)
+        score(args, manifest, system)
 
 
 if __name__ == '__main__':
