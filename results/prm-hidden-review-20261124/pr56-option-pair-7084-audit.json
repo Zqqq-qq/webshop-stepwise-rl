@@ -1,0 +1,71 @@
+{
+  "mode": "pair",
+  "task_id": 7084,
+  "prefix_verified_against_archive": true,
+  "controlled_post_fork_wording_verified": true,
+  "shared_turn_end_indices_0_1": [
+    179,
+    914
+  ],
+  "shared_prefix_b_minus_a": [
+    0.0,
+    0.0
+  ],
+  "shared_prefix_within_1e_5": true,
+  "b_prefix_minus_archived": [
+    -2.9802322387695312e-08,
+    -5.364418029785156e-07
+  ],
+  "a_prefix_minus_archived": [
+    -2.9802322387695312e-08,
+    -5.364418029785156e-07
+  ],
+  "arms": {
+    "b": {
+      "environment_terminal_score": 1.0,
+      "scores": [
+        0.28488418459892273,
+        0.26600387692451477,
+        0.13011933863162994,
+        0.04961058124899864
+      ],
+      "turn_end_indices": [
+        179,
+        914,
+        1057,
+        1202
+      ],
+      "prm_total": 0.7306180000305176
+    },
+    "a": {
+      "environment_terminal_score": 0.75,
+      "scores": [
+        0.28488418459892273,
+        0.26600387692451477,
+        0.12002833187580109,
+        0.0474061593413353
+      ],
+      "turn_end_indices": [
+        179,
+        914,
+        1057,
+        1202
+      ],
+      "prm_total": 0.7183225154876709
+    }
+  },
+  "environment_b_minus_a": 0.25,
+  "valid_environment_contrast": true,
+  "option_step_b_minus_a": 0.010091006755828857,
+  "buy_step_b_minus_a": 0.0022044219076633453,
+  "prm_b_minus_a_by_step": [
+    0.0,
+    0.0,
+    0.010091006755828857,
+    0.0022044219076633453
+  ],
+  "prm_b_minus_a_total": 0.01229548454284668,
+  "pair_comparison_json_verified": true,
+  "live_pair_replay_verified": true,
+  "test_authorization": false
+}

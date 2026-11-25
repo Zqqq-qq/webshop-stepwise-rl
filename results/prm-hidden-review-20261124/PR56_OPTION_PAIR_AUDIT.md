@@ -23,13 +23,16 @@
 2. **分叉后受控措辞检查**：强制校验选色步 `response == "Action: click[b|a]"` 与购买步 `response == "Action: click[buy now]"`，防止额外 Thought 文本混入两臂。
 3. **归档评分位点与 `environment.json` 交叉核验**：强制核对两臂 `turn_end_indices[:2]` 与归档 `[179, 914]` 一致、记录两臂共享前缀相对归档 7084 的数值漂移，并复核 `environment.json` 健康状态、终局分与 `pair-comparison.json` 全部差值字段。
 
-## 3. 当前状态与待回传核验命令
+## 3. 设备原件实测核验（`prm55-option-pair-7084-20261126.zip`）
 
-目前 How 尚未上传任务 7084 的设备重放与第 126 步评分原件，因此实测前缀一致性与 B−A 分数配对结果为 **待设备原件回传**（`live_pair_replay_verified=false`、`test_authorization=false`）。回传后直接运行下述命令完成最终独立核验：
+How 回传 [`prm55-option-pair-7084-20261126.zip`](https://github.com/Zqqq-qq/webshop-stepwise-rl/releases/download/data-v1/prm55-option-pair-7084-20261126.zip)（12,943 字节，SHA-256 `b024112b64935ff9fc75bb7ec9528a38cd77f85c2ad5527e649397bb593d1f23`）后，已运行独立核验器完成实测前缀一致性与分数配对核验，机器记录：[pr56-option-pair-7084-audit.json](pr56-option-pair-7084-audit.json)：
+
+- **前缀与措辞一致性**：两臂前两步完整记录与分叉前第 3 步页面均与归档 `7084` 逐字段一致；分叉后严格为 `Action: click[b|a]` 与 `Action: click[buy now]`；两臂共享评分位均为 `[179, 914]`（与归档一致），共享前缀 B−A 差为 `[0.0, 0.0]`（相对归档 7084 漂移 `≤5.36e-7`）。
+- **分数配对核验**：环境终局 `B=1.0` vs `A=0.75`（`valid_environment_contrast=true`，差 `+0.25`）；PRM 选色步 `B−A = +0.0100910068`，购买步 `+0.0022044219`，总分差 `+0.0122954845`（`0.7306180000` vs `0.7183225155`），与 `pair-comparison.json` 逐项一致。本项为单个已查看 dev 诊断，不外推为逐步归因或泛化通过，`test_authorization=false`。
 
 ```bash
 python scripts/audit_prm55_option_pair.py --mode pair \
   --archive /evidence/prm55-expanded-fit-20261125.zip \
-  --run-dir /evidence/prm55-option-pair-7084 \
+  --run-dir /evidence/prm55-option-pair-7084/run7084 \
   --output /new/pr56-option-pair-7084-audit.json
 ```
