@@ -1,0 +1,362 @@
+{
+  "schema_version": "prm55-product-pairs-v1",
+  "archive_sha256": "0834998fe986f450f40721f0864b51351c68743d5b2e5979334cffde28ca44b4",
+  "goal_fingerprint": "e69c9ae2a0aad88977c44a7baf49f1f5ef7918ba8317923c4ae24dcc1f5638d8",
+  "source_split": "fit501",
+  "eligible_tasks": 93,
+  "tasks": [
+    {
+      "task_id": 1649,
+      "instruction_sha256": "5a8c5668ab9ae89d8a8663a00af96b163dd2c47fabcf56d2c1ded86ac2bc8054",
+      "search": "search[plant-based sulfate-free shampoo that recycles hair loss and promotes hair growth price < 60.00]",
+      "reference_product": "b07yngtfk3",
+      "alternative_products": [
+        "b09fd45272",
+        "b07krp21ch"
+      ],
+      "result_page_sha256": "943e87abf6aff6700749847d88cc171cced0d9c731c2eae77a9db4df5ededdf2"
+    },
+    {
+      "task_id": 5101,
+      "instruction_sha256": "1abab22e7058651a6b29d5d08a6d93fd40624e002e4c8a393eb4cdc51823e106",
+      "search": "search[wall mounted mirror living room price < 240.00]",
+      "reference_product": "b08d3bgr5r",
+      "alternative_products": [
+        "b08dhyjwjw",
+        "b09gmg88pv"
+      ],
+      "result_page_sha256": "0e7948aaf3801fda149e83f1bbe60cde459148687ad20d60c1066915ec8320db"
+    },
+    {
+      "task_id": 1719,
+      "instruction_sha256": "2076930b167b58b9dac363ca187a2169070f67c15755cb8cdd280a25fd9c27a8",
+      "search": "search[fresh breath toothpaste price < 70.00]",
+      "reference_product": "b09r6rlk4d",
+      "alternative_products": [
+        "b087hk651t",
+        "b07kyfkjqd"
+      ],
+      "result_page_sha256": "0ad4e8ce1b3909e2e2e3e20985cf25fb28f61e1577e7b2b994450cc4c74a5dac"
+    },
+    {
+      "task_id": 2123,
+      "instruction_sha256": "3bdca9739c9a5d1e5a7773971ab012b07dc4b0771f500e0d82040525ac9c9348",
+      "search": "search[travel accessories bottles for travel size price < 30.00]",
+      "reference_product": "b09ph142z1",
+      "alternative_products": [
+        "b09kxkhxkn",
+        "b00yb1acj8"
+      ],
+      "result_page_sha256": "b8ba3e60317abad86999c9b8f7f0ce8682d17a0e7c761c4dbfe4547406e3af62"
+    },
+    {
+      "task_id": 397,
+      "instruction_sha256": "9185bc1b8f5d13560d0bf556ea55fc41631a2aedafaa8830b6017a7604ff8b6d",
+      "search": "search[high quality ingredients bagels under \\$130.00]",
+      "reference_product": "b09nxnq7sg",
+      "alternative_products": [
+        "b097qcxqb7",
+        "b09nxckfhs"
+      ],
+      "result_page_sha256": "66f241b183d988dc6e06ecb649e7ba979c40eae769e8e18b24c0893dfe9a9de6"
+    },
+    {
+      "task_id": 5912,
+      "instruction_sha256": "08de05899eefadbe63718ca696d416ff9fa0a56acb3fecf853a0e657668e0e90",
+      "search": "search[canon power shot s200]",
+      "reference_product": "b0000645c9",
+      "alternative_products": [
+        "b000063yar",
+        "b00cag6z6k"
+      ],
+      "result_page_sha256": "d546561aae3e3457de1fae4e97b54474b110cba2285e80b57ba23a7273118230"
+    },
+    {
+      "task_id": 394,
+      "instruction_sha256": "9cffd2b3913760ca3543e116c14975edee598b90b32727ea48988fd7be5fc813",
+      "search": "search[cat cupcakes for baby shower with ear cups under 40.00]",
+      "reference_product": "b09f8r76mz",
+      "alternative_products": [
+        "b07wnpbt71",
+        "b07wstzmqr"
+      ],
+      "result_page_sha256": "6a21ad053f7b656e2f4ece624d9378029c9e73e3ad5832e6ce679635d9df64e8"
+    },
+    {
+      "task_id": 889,
+      "instruction_sha256": "0092ce308116eed5394e9772f8e2be15cb3342bb9a5a7585437edeef414d87c4",
+      "search": "search[hair remover for face and body]",
+      "reference_product": "b081tmp78v",
+      "alternative_products": [
+        "b096fmht9d",
+        "b09mjd7g1f"
+      ],
+      "result_page_sha256": "aa047d5029e142800ec1848fe36bcae2fedc1dd41fa1833829132d88fd38fa1e"
+    },
+    {
+      "task_id": 5090,
+      "instruction_sha256": "402bb0e8878a83b937db5b8011ff111f54661455594442ad40e2cdb84636c7ea",
+      "search": "search[laundry bag]",
+      "reference_product": "b093ys77q5",
+      "alternative_products": [
+        "b08ps9nhfy",
+        "b09lcwy5xz"
+      ],
+      "result_page_sha256": "d91200459b34b6142190e08d209f699707e10dcc148cfb75b41804500200b873"
+    },
+    {
+      "task_id": 6385,
+      "instruction_sha256": "56d9603ff47154f1131154fb5db68398ad7770b289bb3450becd192756d6b3cc",
+      "search": "search[bluetooth hands-free music stereo car price < 90.00]",
+      "reference_product": "b092cbrj2n",
+      "alternative_products": [
+        "b09rphbnfl",
+        "b09rpflqnl"
+      ],
+      "result_page_sha256": "e66372a0bba6146b3a13119780f6e68e5ecbd35bd0d322b33da5c8194201be97"
+    },
+    {
+      "task_id": 1817,
+      "instruction_sha256": "1f10521ffb71d1638769653e40866a8dd066a1caae4c823c4d69186b5432a3e4",
+      "search": "search[high quality dual band streaming media player with warranty >4gb>64gb under $130]",
+      "reference_product": "b09p8ddfnx",
+      "alternative_products": [
+        "b09rzzj3pj",
+        "b09j4z5xjl"
+      ],
+      "result_page_sha256": "6eb6ffccc3be5f6f9868950da343d7f99a9cae74dac7ef7a675a481ffef37ae2"
+    },
+    {
+      "task_id": 3381,
+      "instruction_sha256": "6dc5afee13bda531f42c4400decf862dcba86ec0df71f1a44bd3d03c2f6a6a5d",
+      "search": "search[nail clippers - high quality stainless steel pedicure tool office aid]",
+      "reference_product": "b07l1rkdnf",
+      "alternative_products": [
+        "b07nvpvyzj",
+        "b08fy9bt7k"
+      ],
+      "result_page_sha256": "6c15c9fa828ab8563b2a17ad7db8e4b9d65616f4d20bf5a91e6da6f2164d51f2"
+    },
+    {
+      "task_id": 3155,
+      "instruction_sha256": "57e2029c6a55401eda400fe5e735382589b8e4e0375b7dee90a07371d0c9426e",
+      "search": "search[travel laundry bag price < 40.00]",
+      "reference_product": "b093ys77q5",
+      "alternative_products": [
+        "b093ysl51t",
+        "b093yrxdvw"
+      ],
+      "result_page_sha256": "be3866a089fbd3b0b80917c4e66c3d0574872c93c31f9e19fc08edf3c6983712"
+    },
+    {
+      "task_id": 5377,
+      "instruction_sha256": "15a3f9aed3651d46c0426674649f1e1d886338cbd0e6b21b02c0f41a11f3543d",
+      "search": "search[digital camera optical zoom < 700 price < 690.00]",
+      "reference_product": "b003musenk",
+      "alternative_products": [
+        "b006q9j438",
+        "b00lr2xlk6"
+      ],
+      "result_page_sha256": "b9aceb8fd7b0196622754f128d9d95f34afdc17d20ec6ec049a20731db3fdb89"
+    },
+    {
+      "task_id": 913,
+      "instruction_sha256": "7fa817cda730ccd006652a00243f5ee66d61ac6e430002f8ca8eee44b9010f97",
+      "search": "search[mid-size medium mesh laundry bags under $50.00]",
+      "reference_product": "b093ys77q5",
+      "alternative_products": [
+        "b093jqjhbm",
+        "b07rjtqx1p"
+      ],
+      "result_page_sha256": "20fbabba055af4eec2189b332a5db7c968d11f668f8f8dd567019e98450a08ce"
+    },
+    {
+      "task_id": 6083,
+      "instruction_sha256": "67795671ac14da7e8185cb4ed10175f90410d7d30315ceffb1cb808818d83f7b",
+      "search": "search[67.5 ounce cheez-it snack pack under \\$130.00 ]",
+      "reference_product": "b008qzz88k",
+      "alternative_products": [
+        "b09n9xjsks",
+        "b07qsls3qn"
+      ],
+      "result_page_sha256": "fdcddc069320d9e885f2aee707917a597b1d8bc5067f747e9fb16b009e084e5f"
+    },
+    {
+      "task_id": 3489,
+      "instruction_sha256": "0757160f89596058b65c9eebf32ca5934df116284ebf56e674ff4d13b6b0d90c",
+      "search": "search[gluten free norwegian crispbread price < 100.00]",
+      "reference_product": "b09mfpb82f",
+      "alternative_products": [
+        "b07hyh327v",
+        "b078cxvgr9"
+      ],
+      "result_page_sha256": "3ae7360cefd4ca4700d4a5e2d121f2fc408b0219d5bf840e44f8b0af4e68b4e5"
+    },
+    {
+      "task_id": 1679,
+      "instruction_sha256": "fa2449f455c298ac39da8b79344a92b55349e9b2e80d45b39f617e6ac66e2ac2",
+      "search": "search[lantern pendant light 4 lights black and gold]",
+      "reference_product": "b09cpfxjlb",
+      "alternative_products": [
+        "b08xxrky1j",
+        "b09jwgxk8w"
+      ],
+      "result_page_sha256": "e1fd2fa39d2ca3de90f691eb4e3eecbd2aaafc5780252f7e688a5310104749f2"
+    },
+    {
+      "task_id": 3128,
+      "instruction_sha256": "fbeca0c3bdb5b89b9288f6ea8ef518924428152fedfa69b434a3280fb5f0575b",
+      "search": "search[laundry bag]",
+      "reference_product": "b093ys77q5",
+      "alternative_products": [
+        "b08ps9nhfy",
+        "b09lcwy5xz"
+      ],
+      "result_page_sha256": "832d88d88075dc49630eeaef47bd7e1d6a9858358f99070db3ccb1e25408f6f0"
+    },
+    {
+      "task_id": 48,
+      "instruction_sha256": "6929fcb1e5d3eeb4c18b22c131148ff883acfbfe492bce9b9165595465220d4d",
+      "search": "search[high definition outdoor camera - 1080p price < 180.00]",
+      "reference_product": "b07q56cl88",
+      "alternative_products": [
+        "b01n9jk5jy",
+        "b09nsql7qq"
+      ],
+      "result_page_sha256": "5656fab543a05aaaf9d6c92accb61d34821a953c5beea3bf6516372410006561"
+    },
+    {
+      "task_id": 897,
+      "instruction_sha256": "a93cdd67a536883787050e12da2facb1b2e0591326210350cd0644a628e81a01",
+      "search": "search[usb 4g lte modem]",
+      "reference_product": "b077pnpm5t",
+      "alternative_products": [
+        "b08w57wlws",
+        "b08dh2mdq3"
+      ],
+      "result_page_sha256": "d3260ba711b08db55ed720985fcf078ed0e43efd470251d9433f3109f7604fa2"
+    },
+    {
+      "task_id": 4212,
+      "instruction_sha256": "ff6d117e89022cc226a595b34bcf8ae7c80fa977ce97fe7124690c2c1e438e2c",
+      "search": "search[mid century furniture]",
+      "reference_product": "b01hqls65g",
+      "alternative_products": [
+        "b01mdrta95",
+        "b0771k7wcg"
+      ],
+      "result_page_sha256": "e5ae3b32023d56f5fce12981cd14a8c4155f1ea90c40f010d231ffff376e6287"
+    },
+    {
+      "task_id": 1313,
+      "instruction_sha256": "ab8473ed4904087a90dd94405e27310d74c6518f0a02bd193c30aef90be5ef5b",
+      "search": "search[facial wax strips hair removal under $40]",
+      "reference_product": "b08p3s5l3m",
+      "alternative_products": [
+        "b003jfjf4a",
+        "b08t6ysdwd"
+      ],
+      "result_page_sha256": "6871ae4e1e85e00d7067ea5099d2cf3e689eb5ed563110618ab6f63cc9d3ea8d"
+    },
+    {
+      "task_id": 4521,
+      "instruction_sha256": "4d1d7e3461dc2e241549e23b718b2682db9c6a9391f11ea31d6b0306449823db",
+      "search": "search[wallets for blouse hosiery laundry bag price < 50.00]",
+      "reference_product": "b093ys77q5",
+      "alternative_products": [
+        "b093kh6b7p",
+        "b093kbk7pv"
+      ],
+      "result_page_sha256": "56bccbab35594e91e75fcc16cb1985a7070b761e8d151daac5ae75d1c0b3abb7"
+    },
+    {
+      "task_id": 1889,
+      "instruction_sha256": "9eee944dd4fc13b032f8d638f2fe4d398cf84d4f4582fe1a6695b0e816c1b4ad",
+      "search": "search[optical zoom dome camera price<310.00]",
+      "reference_product": "b08v1wwqv2",
+      "alternative_products": [
+        "b08qclvczv",
+        "b0028wiola"
+      ],
+      "result_page_sha256": "06d805530da1db915b9e632317798c6d17cffcf0f4ecbf2e9fa678d6162857e2"
+    },
+    {
+      "task_id": 3167,
+      "instruction_sha256": "8b89e4d44d4b9ceed582d0d29c318837d1852f85615b3b01159529ff5913a4cc",
+      "search": "search[valentine's chocolate gift box price < 30.00]",
+      "reference_product": "b08t6bydpl",
+      "alternative_products": [
+        "b07yxh2ccr",
+        "b08s76ld7n"
+      ],
+      "result_page_sha256": "5eb2631013d43de4d0aade9fac5db8334dcaa4710d5c728cc2449e5762648f4e"
+    },
+    {
+      "task_id": 5000,
+      "instruction_sha256": "a1726f3126dc7fd2037f4def338ac199ae80b1b162c31dffdf2584d003f67b0e",
+      "search": "search[fast charging usb cables price < 20.00]",
+      "reference_product": "b083y6gzbs",
+      "alternative_products": [
+        "b07rp5vbbs",
+        "b09nnyj9vy"
+      ],
+      "result_page_sha256": "41b38e6507c196d3883773c25a323a18cb732c7db6776aa7f04d2a7ad94ea665"
+    },
+    {
+      "task_id": 5123,
+      "instruction_sha256": "84371596e063695d9530c67df85dfd8f18bd01e62b56dc1d76c18c8e286f5be0",
+      "search": "search[16 color palette eyeshadows highly pigmented high quality long lasting matte eye shadow palette]",
+      "reference_product": "b09qpdk7dd",
+      "alternative_products": [
+        "b08rx6h7q7",
+        "b09plldkrv"
+      ],
+      "result_page_sha256": "859c71b48cc1e6f74937a9a9b74eb10590a119b75240752c437db2a7e7231a45"
+    },
+    {
+      "task_id": 45,
+      "instruction_sha256": "b39ba08c634e397c0a5f42f6cc300dc8be51d81cc9574a9321f3e0b17ca99cfb",
+      "search": "search[banana plugs for speaker wire price < 40.00]",
+      "reference_product": "b08zkn6232",
+      "alternative_products": [
+        "b09swxt79p",
+        "b09swsdm8s"
+      ],
+      "result_page_sha256": "ef980880ad1c5abec2dab1911fccbb2a6dfcb7eb74312593e42aed6bade33b3a"
+    },
+    {
+      "task_id": 1970,
+      "instruction_sha256": "969a75da405c9a5961803fab1da06c555a28b94e13e513f0a82946a17b365753",
+      "search": "search[2 mesh laundry bags]",
+      "reference_product": "b093ys77q5",
+      "alternative_products": [
+        "b093yszz7x",
+        "b093kxp9sq"
+      ],
+      "result_page_sha256": "92d52cd4e420e4fb440eed651579b97c5c34d5d1be46b9ba9e8c4a13e1aacf43"
+    },
+    {
+      "task_id": 1595,
+      "instruction_sha256": "bf7212f4e99042e26477fe9c08b8b27c76ae4acfc79d31f9c95a3fbf5b4a94b0",
+      "search": "search[argan oil hair treatment damaged hair price < 50.00]",
+      "reference_product": "b09rpm58k1",
+      "alternative_products": [
+        "b01giptth0",
+        "b01h2iv41g"
+      ],
+      "result_page_sha256": "0c7c758899e2c87075fb74b7f046681107bb28605917d34a416885f12e6de3f7"
+    },
+    {
+      "task_id": 1816,
+      "instruction_sha256": "81ca902afa96758d67d80e2256849203cfb1c36fcb998d14633cc0793168a585",
+      "search": "search[professional birdwatching binoculars under $80.00]",
+      "reference_product": "b07nlgnz5s",
+      "alternative_products": [
+        "b09qhrw3yv",
+        "b09nx8f974"
+      ],
+      "result_page_sha256": "08bf235ea62e87cada4aeace53abe757c1b1f5dea8058c928ba24e71754c76da"
+    }
+  ],
+  "test_authorization": false
+}

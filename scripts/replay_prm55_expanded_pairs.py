@@ -46,6 +46,7 @@ def archive_inputs(path):
 
 
 def replay_arm(server, old, branch, choice, continuation):
+    require(continuation in ('buy', 'size8', 'product'), 'Unknown replay continuation')
     state = request(server, '/reset', {'task_id': old['task_id']})
     require(state['instruction'] == old['instruction']
             and state['goal_fingerprint'] == old['goal_fingerprint'], 'Reset identity mismatch')
@@ -70,7 +71,8 @@ def replay_arm(server, old, branch, choice, continuation):
     for index in range(branch + 1):
         archived = old['steps'][index]
         require(state['observation'] == archived['observation']
-                and state['available']['clickables'] == archived['available']['clickables'],
+                and ('available' not in archived
+                     or state['available']['clickables'] == archived['available']['clickables']),
                 f"Task {old['task_id']} differs from archived page at turn {index + 1}")
         if index < branch:
             advance(archived['action'], archived['response'])
@@ -83,7 +85,7 @@ def replay_arm(server, old, branch, choice, continuation):
             advance(f'click[{size}]', f'Action: click[{size}]')
             selection = state['available'].get('selected_options')
             require(selection is None or size in selection.values(), f'Size click did not select {size}')
-    else:
+    elif continuation == 'buy':
         selection = state['available'].get('selected_options')
         require(selection is None or choice in selection.values(), f'Option click did not select {choice}')
     advance('click[buy now]', 'Action: click[buy now]', terminal=True)

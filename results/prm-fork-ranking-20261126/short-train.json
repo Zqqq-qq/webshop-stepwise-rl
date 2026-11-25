@@ -1,0 +1,12 @@
+{
+  "seed": 42,
+  "updates": 12,
+  "pairs_per_update": 4,
+  "lora_learning_rate": 0.00002,
+  "head_learning_rate": 0.00001,
+  "weight_decay": 0.01,
+  "rank_weight": {
+    "terminal": 0.0,
+    "ranking": 0.1
+  }
+}
