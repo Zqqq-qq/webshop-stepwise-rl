@@ -101,4 +101,26 @@ class SplitRecordTests(unittest.TestCase):
         with self.assertRaises(ValueError): self.m.check_records(self.summary,self.labels)
 
 
+class HoldoutIsolationTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls): cls.m=module('audit_prm_holdout_protocol')
+
+    def test_instruction_prefix_case_and_whitespace_are_same_identity(self):
+        self.assertEqual(self.m.instruction_hash('  Instruction:  RED   Mug '),
+                         self.m.instruction_hash('red mug'))
+
+    def test_reserved_and_seen_instructions_and_duplicate_candidates_are_excluded(self):
+        goals={1:'old',2:'Instruction: OLD',3:'reserved',4:'new',5:'NEW',6:'unfinished',7:'reserved'}
+        candidate,overlap,duplicate,eligible,selected=self.m.isolate_candidates(
+            [6,5,4,3,2,1],[1],[7],goals,6)
+        self.assertEqual(candidate,[2,3,4,5,6]);self.assertEqual(overlap,[2,3])
+        self.assertEqual(duplicate,[5]);self.assertEqual(eligible,[4]);self.assertEqual(selected,[4])
+
+    def test_candidate_ranking_is_independent_of_input_iteration_order(self):
+        goals={t:str(t) for t in range(200)}
+        a=self.m.isolate_candidates(range(200),[],[],goals,None)
+        b=self.m.isolate_candidates(reversed(range(200)),[],[],goals,None)
+        self.assertEqual(a,b);self.assertEqual(len(a[-1]),160)
+
+
 if __name__=='__main__': unittest.main()
