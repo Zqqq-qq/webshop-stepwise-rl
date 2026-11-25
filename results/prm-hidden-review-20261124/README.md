@@ -4,7 +4,7 @@
 
 **最新交接已闭合**：原d25源码bundle已恢复并独立核验，#54的5060Ti重载与历史dev复评原件已签收；[新复核结果](PR54_5060TI_REVIEW.md)。此前的[源码交接办法](SOURCE_HANDOFF.md)保留为来源记录。
 
-**下一轮执行前复核**：[#55冻结协议的独立隔离/输入核验](PR55_PROTOCOL_REVIEW.md)已完成，160个待采集ID与fit501原字节SHA吻合；设备预检阻塞及[`prm55-preflight-evidence-20261125.zip`独立核验](PR55_REPLACEMENT_REVIEW.md)已补入（[机器记录](pr55-preflight-handoff-audit.json)），85项排除复算与SHA吻合，另查实`9067`仅来自SFT长度审计、`7900`（PR #46）与剩余池`6755`同指令，正式重冻结仍待设备侧补核候选外同指令ID（尤其替代160内`8547↔8000`、`8778↔2525`）；新采集覆盖和配对结果待设备执行回传，不预填结果。
+**下一轮执行前复核**：[#55冻结协议的独立隔离/输入核验](PR55_PROTOCOL_REVIEW.md)与[设备预检、候选外无过滤补查及444/160正式重冻结独立核验](PR55_REPLACEMENT_REVIEW.md)均已完成（初版预检记录[pr55-preflight-handoff-audit.json](pr55-preflight-handoff-audit.json)，正式重冻结记录[pr55-refreeze-audit-1c19b2b.json](pr55-refreeze-audit-1c19b2b.json)）。`prm55-unfiltered-history-audit-20261125.zip` 确认 `2525/8000/9381/11798/6045` 均0命中、`7900` 有4条实际使用记录并排除对应候选 `6755`，#55 `a601999`/`1c19b2b` 重冻结清单（SHA `15b96f01…`）与 444 洁净池逐字节吻合，且保留 `test_authorization=false`；新采集覆盖、训练与配对结果待设备执行回传，不预填结果。
 
 2026-11-24。按 [#52 最新分工](https://github.com/Zqqq-qq/webshop-stepwise-rl/pull/52#issuecomment-7132933687)，本次核对已保存GPU预测、裁剪记录、覆盖和重载输出，不执行新的模型前向、GPU训练或设备续训。#49补包/CPU后续由Yuxiao承接，原Qiu/Tutor成果保留。
 

@@ -36,6 +36,22 @@
   - 若 `8000` 与 `2525` 均 0 命中，则替代 160 名单（`15b96f01…`）即可正式签收重冻结（洁净候选池记 444 扣除 `6755` 及任何其余同指令命中项）；
   - 若 `8000` 或 `2525` 有实际记录，须同步排除对应 `8547` / `8778` 后按原 SHA-256 规则递补再冻结。
 
+## 5. 补充核验：候选外无过滤补查与 #55 正式重冻结（`a601999` / `1c19b2b`）
+
+2026-11-25 晚间，针对 How 补传的两份候选外历史审计产物及 [#55](https://github.com/Zqqq-qq/webshop-stepwise-rl/pull/55) 后续提交（`9ace4ba` → `a601999` → `1c19b2b`）完成独立只读复核。新机器记录：[pr55-refreeze-audit-1c19b2b.json](pr55-refreeze-audit-1c19b2b.json)（原 [pr55-preflight-handoff-audit.json](pr55-preflight-handoff-audit.json) 完整保留不覆盖）。
+
+- **设备侧补查产物逐字节核验**：
+  - 过渡单文件 [`prm55-outside-candidate-history-audit-20261125.json`](https://github.com/Zqqq-qq/webshop-stepwise-rl/releases/download/data-v1/prm55-outside-candidate-history-audit-20261125.json)（539 字节，SHA-256 `edfe3ca0a4c9cc7943810dad3c255d8cfc56b91db06df2ea6c9a58d8988d5d13`）：同一 7 目录 3,583 份 JSON/JSONL、`skipped=0`，仅按 `task_id` 查 `[2525, 8000]` 均 0 命中。
+  - 正式无过滤包 [`prm55-unfiltered-history-audit-20261125.zip`](https://github.com/Zqqq-qq/webshop-stepwise-rl/releases/download/data-v1/prm55-unfiltered-history-audit-20261125.zip)（4,513 字节，SHA-256 `0df7049d0f4788cae5f6277b9ca900feea5bed6f71b435718ca3fd27d2f86a15`）：包内 `UNFILTERED_SHA256SUMS` 2 项全部匹配（`unfiltered-history-audit.json` `a0c21df6…`、`unfiltered_history_audit.py` `ebc1736b…`）。同一 7 目录 3,583 份文件、`skipped=0`、`candidate_filter_applied=false`，覆盖 `task_id`（20,714）、`task_ids`（460）、`sample_keys`（0）、`sample_key`（0）且排除 `selected_ids`：
+    - `2525`（↔`8778`）、`8000`（↔`8547`）、`9381`（↔`9085`）、`11798`（↔`11501`）、`6045`（↔`7610`）全部 **0 命中**；
+    - `7900`（↔`6755`）实证 **4 条实际使用命中**（`rl-full-coverage` round-22 `audit.json` 与 `episodes.json`，`prm-data-20261123` `b1-train-200-full.jsonl` 与 `dev200.training.jsonl`）及 `dataset-200/manifest.json` 中的 `dropped` 记录。据此再移出对应候选 `6755`（原排 226/445），洁净候选池收敛为 **444 题**，前 160 替代清单不受影响。
+- **#55 正式重冻结与排期提交核验（`a601999` / `1c19b2b`）**：
+  - `a601999` 冻结的 `results/prm-expanded-fit-20261125/holdout_ids.json`（1,317 字节，SHA-256 `15b96f015ed8a2b804633523144011eb2fdf092903ccded17395020b925eb5c1`）与 `holdout-audit.json`（22,152 字节，SHA-256 `17abdcc658310d620902d53f3fb403c8464457b2967f1fef5cfa561ca588334a`）经独立复算逐字节吻合：444 洁净池、133 保留 / 27 移除 / 27 新增、全部 160 条归一化指令哈希与锁定 `goal-instructions.json`（`6b5d9dfc…`）一致；`dev-rollout.json`（`4e9f7ccd…`）与 fit501（`b1f1eeda…`）未变，旧版 `3fa1b9d8` 链接保留。
+  - `9ace4ba` 将第 32 组课程展示日期更正为 11/27；`1c19b2b` 将 GPU 采集与训练排期提前至“新 dev 清单重冻结且设备预检一致后即可开展（早于 11/27 下午展示）”，同时保留 `test_authorization=false` 与 PPO/预留 test 另行验收的边界。
+- **签收结论与范围边界**：
+  - **执行前重冻结与数据隔离已签收**（覆盖 #55 `1c19b2b`）。
+  - **不预签收**：新 160 采集覆盖、126 步 GPU 训练、泛化结论、逐步归因、PPO 对比及预留 test（`test_authorization=false`）；B1 SFT 既有暴露与 `9067` 仅见于 SFT 长度审计的保守排除说明继续单列保留。
+
 ## 可复核入口
 
 ```bash
@@ -46,4 +62,16 @@ python scripts/audit_prm_holdout_protocol.py --mode replacement-handoff \
   --archive /evidence/webshop-nov21-b1-ppo-six-update-evidence.zip \
   --archive /evidence/webshop-project-fp32-full160-training-evidence-20261123.zip \
   --output /new/pr55-handoff-audit.json
+
+python scripts/audit_prm_holdout_protocol.py --mode refreeze-audit \
+  --repo /local/repository --goal-map /evidence/goal-instructions.json \
+  --handoff-zip /evidence/prm55-preflight-evidence-20261125.zip \
+  --outside-audit /evidence/prm55-outside-candidate-history-audit-20261125.json \
+  --unfiltered-zip /evidence/prm55-unfiltered-history-audit-20261125.zip \
+  --git-ref origin/results/prm-device-20261124 \
+  --archive /evidence/webshop-nov21-b1-ppo-six-update-evidence.zip \
+  --archive /evidence/webshop-nov22-seed42-43-ppo-four-update-evidence.zip \
+  --archive /evidence/webshop-project-fp32-full160-training-evidence-20261123.zip \
+  --archive /evidence/prm-dev-eval-evidence-20261124.zip \
+  --output /new/pr55-refreeze-audit-1c19b2b.json
 ```

@@ -10,7 +10,13 @@ import zipfile
 from audit_prm_hidden_results import sha, load_json, verified_archive, PROBE_SHA
 
 REF='3fa1b9d8d546316cf237ab931df670798bd0388d'
+REF_TIMING_1127='9ace4ba8309dfbb762cdb081064e4cd7e66a80de'
+REF_REFREEZE='a601999aa42f67d68fdc041f4b84a8bf5d682593'
+REF_HEAD='1c19b2bb0c3f3e34856bad134f8699247d2b9cde'
 ROOT='results/prm-expanded-fit-20261125/'
+PR55_OUTSIDE_AUDIT_SHA='edfe3ca0a4c9cc7943810dad3c255d8cfc56b91db06df2ea6c9a58d8988d5d13'
+PR55_UNFILTERED_ZIP_SHA='0df7049d0f4788cae5f6277b9ca900feea5bed6f71b435718ca3fd27d2f86a15'
+PR55_REFREEZE_HOLDOUT_AUDIT_SHA='17abdcc658310d620902d53f3fb403c8464457b2967f1fef5cfa561ca588334a'
 PR55_ANNOUNCED_ORIG160_27=(
     6472,7033,7275,7284,7290,7553,7719,8015,8081,8305,8372,8586,8672,8757,
     8946,9014,9142,9228,9249,9336,9672,9807,9818,10050,10589,10644,11053)
@@ -35,6 +41,12 @@ PLAN_ONLY_KEYS={'selected_ids','train_ids','val_ids','test_ids','eligible_task_i
 
 def instruction_hash(text):
     normalized=re.sub(r'^instruction\s*:\s*','',' '.join(text.lower().split())).strip()
+    return sha(normalized.encode())
+
+
+def common_instruction_hash(text):
+    normalized=' '.join(text.lower().split()).rstrip('.')
+    normalized=re.sub(r',?\s*and price lower than [\d.]+ dollars\.?$','',normalized).strip().rstrip('.')
     return sha(normalized.encode())
 
 
@@ -485,9 +497,320 @@ def _run_replacement_handoff(args):
                       if k not in ('selected_task_ids','selected_instruction_sha256')},indent=2))
 
 
+def verify_outside_candidate_audit(path, expected_sha=None, expected_targets=(2525,8000)):
+    p=Path(path);raw=p.read_bytes();digest=sha(raw)
+    if expected_sha and digest!=expected_sha:
+        raise ValueError('Outside-candidate audit SHA mismatch: '+digest)
+    doc=load_json(raw)
+    if doc.get('skipped_json_files'):
+        raise ValueError('Outside-candidate audit has non-empty skipped_json_files')
+    if not isinstance(doc.get('scanned_json_files'),int) or doc['scanned_json_files']<=0:
+        raise ValueError('Outside-candidate audit has invalid scanned_json_files')
+    if sorted(doc.get('target_task_ids',[]))!=sorted(expected_targets):
+        raise ValueError('Outside-candidate audit target_task_ids mismatch')
+    if doc.get('hit_task_ids') or doc.get('hit_file_count',0)!=0 or doc.get('files'):
+        raise ValueError('Outside-candidate audit reported unexpected hits: '+str(doc.get('hit_task_ids')))
+    return dict(
+        name=p.name,size_bytes=len(raw),sha256=digest,
+        target_task_ids=doc['target_task_ids'],
+        scope=doc.get('scope',''),
+        roots=doc.get('roots',[]),
+        scanned_json_files=doc['scanned_json_files'],
+        skipped_json_files_count=len(doc.get('skipped_json_files',[])),
+        hit_task_ids=doc['hit_task_ids'],
+        hit_file_count=doc['hit_file_count'],
+        task_id_only_scan=True,
+    )
+
+
+def verify_unfiltered_history_zip(zip_path, goals, expected_twins_map, expected_zip_sha=None):
+    zpath=Path(zip_path);zbytes=zpath.read_bytes();zsha=sha(zbytes)
+    if expected_zip_sha and zsha!=expected_zip_sha:
+        raise ValueError('Unfiltered history ZIP SHA mismatch: '+zsha)
+    members={}
+    with zipfile.ZipFile(zpath) as zf:
+        for name in zf.namelist():
+            if not name.endswith('/'): members[name]=zf.read(name)
+    if 'UNFILTERED_SHA256SUMS' not in members:
+        raise ValueError('Missing UNFILTERED_SHA256SUMS in unfiltered audit ZIP')
+    verified_sums={}
+    for line in members['UNFILTERED_SHA256SUMS'].decode('utf-8').strip().splitlines():
+        expected,fname=line.split()
+        if fname not in members: raise ValueError('Missing member listed in UNFILTERED_SHA256SUMS: '+fname)
+        actual=sha(members[fname])
+        if actual!=expected: raise ValueError('UNFILTERED_SHA256SUMS mismatch: '+fname)
+        verified_sums[fname]=actual
+    doc=load_json(members['unfiltered-history-audit.json'])
+    if doc.get('skipped_json_files'):
+        raise ValueError('Unfiltered audit has non-empty skipped_json_files')
+    if not isinstance(doc.get('scanned_json_files'),int) or doc['scanned_json_files']<=0:
+        raise ValueError('Unfiltered audit has invalid scanned_json_files')
+    scope=doc['scope']
+    if scope.get('candidate_filter_applied') is not False:
+        raise ValueError('Unfiltered audit candidate_filter_applied must be false')
+    required_fields={'task_id','task_ids','sample_keys','sample_key'}
+    if not required_fields.issubset(set(scope.get('actual_use_fields',[]))):
+        raise ValueError('Unfiltered audit missing required actual_use_fields')
+    if 'selected_ids' not in scope.get('excluded_plan_fields',[]):
+        raise ValueError('Unfiltered audit must exclude selected_ids plan field')
+    exp_pairs={str(k):v for k,v in sorted(expected_twins_map.items())}
+    if doc.get('candidate_pairs')!=exp_pairs or sorted(doc.get('target_task_ids',[]))!=sorted(expected_twins_map.keys()):
+        raise ValueError('Unfiltered audit targets/candidate_pairs disagree with goal-map twins')
+    inst_checks=doc.get('instruction_checks',{})
+    for tid,cid in sorted(expected_twins_map.items()):
+        rec=inst_checks.get(str(tid))
+        if not rec: raise ValueError('Missing instruction_check for '+str(tid))
+        th=common_instruction_hash(goals[tid]);ch=common_instruction_hash(goals[cid])
+        if (rec.get('candidate_id')!=cid or rec.get('target_instruction_sha256')!=th or
+                rec.get('candidate_instruction_sha256')!=ch or th!=ch or
+                instruction_hash(goals[tid])!=instruction_hash(goals[cid]) or
+                rec.get('same_normalized_instruction') is not True):
+            raise ValueError('Instruction hash verification failed for twin '+str(tid)+'->'+str(cid))
+    actual_matches=doc.get('actual_matches',[])
+    re_hits=sorted({m['task_id'] for m in actual_matches})
+    if re_hits!=doc.get('actual_hit_ids') or len(re_hits)!=doc.get('actual_hit_count'):
+        raise ValueError('Unfiltered audit actual_hit_ids mismatch with actual_matches')
+    nonuse_matches=doc.get('nonuse_matches',[])
+    nonuse_files=sorted({m['file'] for m in nonuse_matches})
+    zero_hit=sorted(set(expected_twins_map.keys())-set(re_hits))
+    return dict(
+        name=zpath.name,size_bytes=len(zbytes),sha256=zsha,
+        verified_members=len(verified_sums),sha256sums=verified_sums,
+        scanned_json_files=doc['scanned_json_files'],
+        skipped_json_files_count=len(doc.get('skipped_json_files',[])),
+        roots=scope.get('roots',[]),
+        actual_use_fields=scope['actual_use_fields'],
+        excluded_plan_fields=scope['excluded_plan_fields'],
+        candidate_filter_applied=scope['candidate_filter_applied'],
+        field_occurrence_counts=doc.get('field_occurrence_counts',{}),
+        target_task_ids=doc['target_task_ids'],
+        candidate_pairs=doc['candidate_pairs'],
+        actual_hit_ids=re_hits,
+        zero_hit_target_ids=zero_hit,
+        actual_match_count=len(actual_matches),
+        actual_matches=[dict(task_id=m['task_id'],field=m['field'],json_path=m['json_path'],
+                             file=m['file'],size_bytes=m['size_bytes'],sha256=m['sha256'])
+                        for m in actual_matches],
+        nonuse_match_count=len(nonuse_matches),
+        nonuse_unique_files=nonuse_files,
+        replacement_impact=doc.get('replacement_impact',{}),
+        instruction_checks_verified=True,
+        goal_map_sha256=doc.get('goal_map_sha256'),
+    )
+
+
+def _run_refreeze_audit(args):
+    def blob(ref, path):
+        return subprocess.check_output(['git','show',ref+':'+path],cwd=args.repo)
+    head_ref=args.refreeze_ref
+    for anc,desc in ((REF,REF_TIMING_1127),(REF_TIMING_1127,REF_REFREEZE),(REF_REFREEZE,head_ref)):
+        subprocess.check_call(['git','merge-base','--is-ancestor',anc,desc],cwd=args.repo)
+    orig_audit=load_json(blob(REF,ROOT+'holdout-audit.json'))
+    orig_ids_blob=blob(REF,ROOT+'holdout_ids.json');orig_selected=load_json(orig_ids_blob)
+    orig_cfg_blob=blob(REF,ROOT+'dev-rollout.json');orig_cfg=load_json(orig_cfg_blob)
+    refreeze_audit_blob=blob(REF_REFREEZE,ROOT+'holdout-audit.json')
+    head_audit_blob=blob(head_ref,ROOT+'holdout-audit.json')
+    if refreeze_audit_blob!=head_audit_blob:
+        raise ValueError('holdout-audit.json changed between refreeze commit and head_ref')
+    if sha(head_audit_blob)!=PR55_REFREEZE_HOLDOUT_AUDIT_SHA:
+        raise ValueError('Refreeze holdout-audit.json SHA mismatch: '+sha(head_audit_blob))
+    refreeze_ids_blob=blob(REF_REFREEZE,ROOT+'holdout_ids.json')
+    head_ids_blob=blob(head_ref,ROOT+'holdout_ids.json')
+    if refreeze_ids_blob!=head_ids_blob:
+        raise ValueError('holdout_ids.json changed between refreeze commit and head_ref')
+    if blob(head_ref,ROOT+'dev-rollout.json')!=orig_cfg_blob:
+        raise ValueError('dev-rollout.json unexpectedly changed after original commit')
+    new_audit=load_json(head_audit_blob);new_selected=load_json(head_ids_blob)
+    goals_raw=Path(args.goal_map).read_bytes();goals_sha=sha(goals_raw)
+    if goals_sha!=orig_audit['goal_map_sha256'] or goals_sha!=new_audit['goal_map_sha256']:
+        raise ValueError('Goal map SHA mismatch')
+    goals={r['task_id']:r['instruction'] for r in load_json(goals_raw)}
+    # Verify unchanged frozen inputs/splits/fit501 identity
+    for field in ('split_sha','raw_input_sha256','history_source_sha256',
+                  'fit501_training_jsonl_sha256','fit_order_first_six_ids',
+                  'possible_interrupted_first_unfinished','excluded_instruction_overlap',
+                  'excluded_duplicate_candidate_instruction_ids'):
+        if orig_audit[field]!=new_audit[field]:
+            raise ValueError('Frozen field changed across refreeze: '+field)
+    # Verify preflight ZIP (85 exposed, 9067 SFT-only breakdown)
+    zpath=Path(args.handoff_zip);zbytes=zpath.read_bytes();zsha=sha(zbytes)
+    if zsha!=PR55_HANDOFF_ZIP_SHA: raise ValueError('Preflight ZIP SHA mismatch: '+zsha)
+    members={}
+    with zipfile.ZipFile(zpath) as zf:
+        for name in zf.namelist():
+            if not name.endswith('/'): members[name]=zf.read(name)
+    preflight_sums={}
+    for line in members['SHA256SUMS'].decode('utf-8').strip().splitlines():
+        expected,fname=line.split()
+        actual=sha(members[fname])
+        if actual!=expected: raise ValueError('Preflight SHA256SUMS mismatch: '+fname)
+        preflight_sums[fname]=actual
+    for name,expected in PR55_DECLARED_HANDOFF_SHAS.items():
+        if preflight_sums.get(name)!=expected: raise ValueError('Declared preflight SHA mismatch: '+name)
+    elig_audit=load_json(members['eligible-history-audit.json'])
+    full_audit=load_json(members['full-history-audit.json'])
+    _,elig_all=_audit_history_doc(elig_audit,'eligible-history-audit')
+    _,full_all=_audit_history_doc(full_audit,'full-history-audit')
+    if set(full_all)!=(set(elig_all)&set(orig_selected)):
+        raise ValueError('full-history-audit mismatch with orig_160 restriction')
+    id_files={}
+    for cls,files in elig_audit['files_by_class'].items():
+        for fpath,ids in files.items():
+            for tid in ids: id_files.setdefault(tid,[]).append((cls,fpath))
+    sft_audit_only=sorted(t for t,es in id_files.items()
+                          if all('sft-label-length-audit.json' in p for _,p in es))
+    real_exposed=sorted(set(elig_all)-set(sft_audit_only))
+    orig_eligible=orig_audit['eligible_task_ids']
+    repl_pre=select_replacement_candidates(orig_eligible,orig_selected,elig_all,goals,count=160)
+    expected_twins_map={}
+    for cand_str,ext_list in repl_pre['cross_goal_instruction_twins_in_remaining'].items():
+        for ext_id in ext_list: expected_twins_map[ext_id]=int(cand_str)
+    # Verify both new device audit artifacts
+    outside_res=verify_outside_candidate_audit(
+        args.outside_audit,expected_sha=PR55_OUTSIDE_AUDIT_SHA,expected_targets=(2525,8000))
+    unfiltered_res=verify_unfiltered_history_zip(
+        args.unfiltered_zip,goals,expected_twins_map,expected_zip_sha=PR55_UNFILTERED_ZIP_SHA)
+    if unfiltered_res['goal_map_sha256']!=goals_sha:
+        raise ValueError('Unfiltered audit goal_map_sha256 mismatch')
+    # Recompute clean 444 pool and top-160 replacement list with confirmed external hits
+    all_exposed=set(elig_all)|set(unfiltered_res['actual_hit_ids'])
+    repl_final=select_replacement_candidates(
+        orig_eligible,orig_selected,elig_all,goals,all_exposed_ids=all_exposed,count=160)
+    expected_clean_444=sorted(set(orig_eligible)-set(elig_all)-set(repl_final['excluded_by_instruction_twin']))
+    if new_audit['eligible']!=len(expected_clean_444) or new_audit['eligible_task_ids']!=expected_clean_444:
+        raise ValueError('Refrozen eligible_task_ids disagrees with recomputed 444 clean pool')
+    if new_selected!=repl_final['selected_task_ids'] or head_ids_blob!=canonical_ids_bytes(repl_final['selected_task_ids']):
+        raise ValueError('Refrozen holdout_ids.json disagrees with recomputed replacement 160')
+    if sha(head_ids_blob)!=PR55_REPLACEMENT_CANDIDATE_SHA or new_audit['candidate_ids_sha256']!=PR55_REPLACEMENT_CANDIDATE_SHA:
+        raise ValueError('Refrozen holdout_ids.json SHA mismatch')
+    if head_ids_blob!=members['holdout-replacement-candidate.json']:
+        raise ValueError('Refrozen holdout_ids.json differs from preflight candidate bytes')
+    if new_audit['selected_instruction_sha256']!=repl_final['selected_instruction_sha256']:
+        raise ValueError('Refrozen selected_instruction_sha256 mismatch')
+    # Verify refreeze metadata block inside holdout-audit.json
+    rf=new_audit['refreeze']
+    expected_rf=dict(
+        original_protocol_commit=REF,
+        original_candidate_pool_size=len(orig_eligible),
+        original_holdout_sha256=orig_audit['candidate_ids_sha256'],
+        device_preflight_evidence_sha256=PR55_HANDOFF_ZIP_SHA,
+        unfiltered_history_evidence_sha256=PR55_UNFILTERED_ZIP_SHA,
+        device_history_excluded_ids=elig_all,
+        sft_audit_only_conservative_exclusion=sft_audit_only[0] if len(sft_audit_only)==1 else sft_audit_only,
+        documented_non_sft_usage_excluded_count=len(real_exposed),
+        eligible_after_device_exclusions=len(orig_eligible)-len(elig_all),
+        outside_candidate_alias_to_candidate={str(k):v for k,v in expected_twins_map.items()},
+        outside_candidate_historical_usage_hits=unfiltered_res['actual_hit_ids'],
+        additional_same_instruction_exclusions=repl_final['excluded_by_instruction_twin'],
+        scanned_device_json_files=unfiltered_res['scanned_json_files'],
+        skipped_device_json_files=[],
+        kept_original_tasks=repl_final['retained_count'],
+        replaced_original_tasks=len(repl_final['added_replacement_ids']),
+    )
+    for k,v in expected_rf.items():
+        if rf.get(k)!=v: raise ValueError('Refreeze metadata mismatch for '+k+': '+str(rf.get(k)))
+    # Verify protocol doc invariants across a601999 and 1c19b2b
+    doc_refreeze_raw=blob(REF_REFREEZE,'docs/PRM_EXPANDED_FIT_PROTOCOL_20261125.md')
+    doc_head_raw=blob(head_ref,'docs/PRM_EXPANDED_FIT_PROTOCOL_20261125.md')
+    doc_head_text=doc_head_raw.decode('utf-8')
+    doc_checks=dict(
+        refreeze_doc_sha256=sha(doc_refreeze_raw),
+        head_doc_sha256=sha(doc_head_raw),
+        test_authorization_false_present=('`test_authorization=false`' in doc_head_text),
+        replacement_sha_present=(PR55_REPLACEMENT_CANDIDATE_SHA in doc_head_text),
+        fit501_sha_present=(new_audit['fit501_training_jsonl_sha256'] in doc_head_text),
+        historical_3fa1b9d8_link_retained=(REF in doc_head_text),
+        team32_1127_mentioned=('11/27' in doc_head_text),
+        advances_run_before_presentation=('可立即开展 GPU 采集与训练' in doc_head_text),
+        preserves_ppo_and_reserved_test_separate_gate=('PPO 与预留 test 另行验收' in doc_head_text),
+    )
+    for k in ('test_authorization_false_present','replacement_sha_present','fit501_sha_present',
+              'historical_3fa1b9d8_link_retained','team32_1127_mentioned',
+              'preserves_ppo_and_reserved_test_separate_gate'):
+        if not doc_checks[k]: raise ValueError('Protocol doc invariant failed: '+k)
+    # Optional published-artifact cross-check
+    pub_section=None
+    if args.git_ref or args.archive:
+        sources,hits=scan_published_sources(
+            args.repo,args.git_ref,args.archive,set(expected_clean_444)|set(expected_twins_map.keys()))
+        pub_in_444=sorted(int(k) for k in hits if int(k) in set(expected_clean_444))
+        pub_twins=sorted(int(k) for k in hits if int(k) in set(expected_twins_map.keys()))
+        if pub_in_444: raise ValueError('Published artifacts hit clean 444 pool: '+str(pub_in_444))
+        pub_section=dict(sources=sources,confirmed_in_clean_444=pub_in_444,
+                         confirmed_external_twins=pub_twins,hits_by_task_id=hits)
+    output=dict(
+        reviewed_commits=dict(
+            original_protocol=REF,
+            timing_gate_1127=REF_TIMING_1127,
+            formal_refreeze=REF_REFREEZE,
+            pr55_head=head_ref,
+        ),
+        mode='refreeze-audit',
+        scope='Independent pre-execution verification of PR #55 re-freeze (a601999) + schedule update (1c19b2b) and all 3 device history audit artifacts.',
+        frozen_artifacts=dict(
+            holdout_ids_sha256=sha(head_ids_blob),
+            holdout_ids_size_bytes=len(head_ids_blob),
+            holdout_audit_sha256=sha(head_audit_blob),
+            holdout_audit_size_bytes=len(head_audit_blob),
+            dev_rollout_sha256=sha(orig_cfg_blob),
+            goal_map_sha256=goals_sha,
+            fit501_training_jsonl_sha256=new_audit['fit501_training_jsonl_sha256'],
+            fit_order_first_six_ids=new_audit['fit_order_first_six_ids'],
+            split_sha256=new_audit['split_sha'],
+        ),
+        device_artifacts=dict(
+            preflight_zip=dict(name=zpath.name,size_bytes=len(zbytes),sha256=zsha,
+                               verified_members=len(preflight_sums),
+                               exposed_85_count=len(elig_all),
+                               sft_audit_only_ids=sft_audit_only,
+                               real_non_sft_exposed_count=len(real_exposed)),
+            outside_candidate_audit=outside_res,
+            unfiltered_history_zip=unfiltered_res,
+        ),
+        refreeze_recomputation=dict(
+            original_eligible_count=len(orig_eligible),
+            device_exposed_count=len(elig_all),
+            remaining_after_id_exclusion_count=repl_final['remaining_after_id_exclusion_count'],
+            excluded_by_instruction_twin=repl_final['excluded_by_instruction_twin'],
+            clean_eligible_count=len(expected_clean_444),
+            selected_count=repl_final['selected_count'],
+            retained_count=repl_final['retained_count'],
+            removed_from_original_160=repl_final['removed_from_original_160'],
+            added_replacement_ids=repl_final['added_replacement_ids'],
+            selected_ids_sha256=repl_final['selected_ids_sha256'],
+            matches_refrozen_holdout_ids_bytes=True,
+            matches_refrozen_holdout_audit_metadata=True,
+            matches_all_160_instruction_hashes=True,
+        ),
+        protocol_doc_checks=doc_checks,
+        published_artifact_crosscheck=pub_section,
+        caveats=[
+            'B1 SFT inherited exposure is outside PRM holdout isolation and remains disclosed separately.',
+            'Task 9067 appears only in copied sft-label-length-audit.json files (not PRM/RL/progress runs) and is conservatively excluded (84 non-SFT + 1 conservative = 85); excluding or keeping 9067 does not affect the top-160 selection.',
+            'Intermediate outside-candidate JSON (edfe3ca0...) was a task_id-only scan of [2525, 8000] and is superseded by the broader unfiltered ZIP (0df7049d...) covering all 6 exhaustive goal-map twins across task_id, task_ids, sample_keys, and sample_key.',
+            'Commit 1c19b2b advances GPU rollout/training to start immediately after re-freeze and device preflight agreement (before Team 32 presentation on 11/27 afternoon) while preserving test_authorization=false and separate PPO/reserved-test acceptance.',
+        ],
+        re_freeze_verified=True,
+        new_rollout_or_training_performed=False,
+        test_authorized=False,
+    )
+    with Path(args.output).open('x',encoding='utf-8',newline='\n') as handle:
+        json.dump(output,handle,indent=2,allow_nan=False);handle.write('\n')
+    print(json.dumps({
+        'mode':output['mode'],'pr55_head':head_ref,
+        'holdout_ids_sha256':output['frozen_artifacts']['holdout_ids_sha256'],
+        'holdout_audit_sha256':output['frozen_artifacts']['holdout_audit_sha256'],
+        'clean_eligible_count':len(expected_clean_444),
+        'outside_audit_sha256':outside_res['sha256'],
+        'unfiltered_zip_sha256':unfiltered_res['sha256'],
+        'unfiltered_hits':unfiltered_res['actual_hit_ids'],
+        'excluded_by_twin':repl_final['excluded_by_instruction_twin'],
+        're_freeze_verified':True,'test_authorized':False},indent=2))
+
+
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--mode',choices=('original','replacement-preflight','replacement-handoff'),
+    parser.add_argument('--mode',choices=('original','replacement-preflight','replacement-handoff','refreeze-audit'),
                         default='original')
     parser.add_argument('--repo',required=True)
     parser.add_argument('--goal-map',required=True)
@@ -497,6 +820,9 @@ def main():
     parser.add_argument('--tokenizer')
     parser.add_argument('--handoff-dir')
     parser.add_argument('--handoff-zip')
+    parser.add_argument('--outside-audit')
+    parser.add_argument('--unfiltered-zip')
+    parser.add_argument('--refreeze-ref',default=REF_HEAD)
     parser.add_argument('--archive',action='append',default=[])
     parser.add_argument('--git-ref',action='append',default=[])
     args=parser.parse_args()
@@ -507,6 +833,10 @@ def main():
         if not (args.handoff_dir or args.handoff_zip):
             parser.error('--handoff-dir or --handoff-zip is required for replacement-handoff')
         _run_replacement_handoff(args);return
+    if args.mode=='refreeze-audit':
+        for name in ('handoff_zip','outside_audit','unfiltered_zip'):
+            if not getattr(args,name): parser.error('--'+name.replace('_','-')+' is required for refreeze-audit')
+        _run_refreeze_audit(args);return
     for name in ('data_archive','probe_archive','tokenizer'):
         if not getattr(args,name): parser.error('--'+name.replace('_','-')+' is required')
     def blob(path): return subprocess.check_output(['git','show',REF+':'+path],cwd=args.repo)

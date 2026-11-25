@@ -200,5 +200,93 @@ class HoldoutIsolationTests(unittest.TestCase):
         payload={'selected_ids':[1,2,3],'records':[{'task_id':4},{'sample_keys':[[5,0]]}]}
         self.assertEqual(self.m.extract_actual_task_ids(payload),{4,5})
 
+    def test_outside_candidate_audit_verifier_checks_sha_skipped_and_zero_hits(self):
+        import json, tempfile
+        payload={
+            'target_task_ids':[2525,8000],'scope':'task_id only','roots':['/r'],
+            'scanned_json_files':3583,'skipped_json_files':[],
+            'hit_task_ids':[],'hit_file_count':0,'files':{},
+        }
+        with tempfile.TemporaryDirectory() as tmp:
+            p=Path(tmp)/'outside.json'
+            raw=json.dumps(payload).encode()
+            p.write_bytes(raw);digest=self.m.sha(raw)
+            res=self.m.verify_outside_candidate_audit(p,expected_sha=digest)
+            self.assertEqual(res['scanned_json_files'],3583)
+            self.assertEqual(res['hit_task_ids'],[])
+            with self.assertRaisesRegex(ValueError,'SHA mismatch'):
+                self.m.verify_outside_candidate_audit(p,expected_sha='0'*64)
+            bad=dict(payload,hit_task_ids=[2525],hit_file_count=1,files={'a.json':[2525]})
+            p.write_bytes(json.dumps(bad).encode())
+            with self.assertRaisesRegex(ValueError,'unexpected hits'):
+                self.m.verify_outside_candidate_audit(p)
+            bad_skip=dict(payload,skipped_json_files=['broken.json'])
+            p.write_bytes(json.dumps(bad_skip).encode())
+            with self.assertRaisesRegex(ValueError,'skipped'):
+                self.m.verify_outside_candidate_audit(p)
+
+    def test_unfiltered_history_zip_verifier_checks_sums_fields_twins_and_hits(self):
+        import json, tempfile, zipfile
+        goals={10:'blue mug, and price lower than 50.00 dollars',99:'blue mug, and price lower than 50.00 dollars',
+               20:'red cup',88:'RED CUP'}
+        expected_twins={99:10,88:20}
+        report={
+            'target_task_ids':[88,99],
+            'candidate_pairs':{'88':20,'99':10},
+            'scope':{
+                'roots':['/r'],'file_types':['.json','.jsonl'],
+                'actual_use_fields':['task_id','task_ids','sample_keys','sample_key'],
+                'excluded_plan_fields':['selected_ids'],'candidate_filter_applied':False,
+            },
+            'scanned_json_files':10,'skipped_json_files':[],
+            'field_occurrence_counts':{'task_id':5,'task_ids':1,'sample_keys':0,'sample_key':0},
+            'actual_hit_ids':[99],'actual_hit_count':1,
+            'actual_matches':[{'task_id':99,'field':'task_id','json_path':'$.task_id',
+                               'file':'/r/a.json','size_bytes':12,'sha256':'a'*64}],
+            'nonuse_matches':[],
+            'replacement_impact':{'additional_candidate_exclusions':[10]},
+            'instruction_checks':{
+                '88':{'candidate_id':20,'target_instruction_sha256':self.m.common_instruction_hash(goals[88]),
+                      'candidate_instruction_sha256':self.m.common_instruction_hash(goals[20]),
+                      'same_normalized_instruction':True},
+                '99':{'candidate_id':10,'target_instruction_sha256':self.m.common_instruction_hash(goals[99]),
+                      'candidate_instruction_sha256':self.m.common_instruction_hash(goals[10]),
+                      'same_normalized_instruction':True},
+            },
+            'goal_map_sha256':'b'*64,
+        }
+        def write_zip(path, doc, tamper_sum=False):
+            raw_json=json.dumps(doc).encode()
+            raw_py=b'# script\n'
+            sums=(f"{('0'*64 if tamper_sum else self.m.sha(raw_json))}  unfiltered-history-audit.json\n"
+                  f"{self.m.sha(raw_py)}  unfiltered_history_audit.py\n").encode()
+            with zipfile.ZipFile(path,'w') as zf:
+                zf.writestr('unfiltered-history-audit.json',raw_json)
+                zf.writestr('unfiltered_history_audit.py',raw_py)
+                zf.writestr('UNFILTERED_SHA256SUMS',sums)
+        with tempfile.TemporaryDirectory() as tmp:
+            zp=Path(tmp)/'unfiltered.zip'
+            write_zip(zp,report)
+            res=self.m.verify_unfiltered_history_zip(zp,goals,expected_twins,expected_zip_sha=self.m.sha(zp.read_bytes()))
+            self.assertEqual(res['actual_hit_ids'],[99])
+            self.assertEqual(res['zero_hit_target_ids'],[88])
+            self.assertTrue(res['instruction_checks_verified'])
+            # Reject tampered inner SHA256SUMS
+            write_zip(zp,report,tamper_sum=True)
+            with self.assertRaisesRegex(ValueError,'UNFILTERED_SHA256SUMS mismatch'):
+                self.m.verify_unfiltered_history_zip(zp,goals,expected_twins)
+            # Reject candidate-filtered scan
+            bad_scope=json.loads(json.dumps(report))
+            bad_scope['scope']['candidate_filter_applied']=True
+            write_zip(zp,bad_scope)
+            with self.assertRaisesRegex(ValueError,'candidate_filter_applied'):
+                self.m.verify_unfiltered_history_zip(zp,goals,expected_twins)
+            # Reject mismatched actual_hit_ids vs actual_matches
+            bad_hits=json.loads(json.dumps(report))
+            bad_hits['actual_hit_ids']=[]
+            write_zip(zp,bad_hits)
+            with self.assertRaisesRegex(ValueError,'actual_hit_ids mismatch'):
+                self.m.verify_unfiltered_history_zip(zp,goals,expected_twins)
+
 
 if __name__=='__main__': unittest.main()
