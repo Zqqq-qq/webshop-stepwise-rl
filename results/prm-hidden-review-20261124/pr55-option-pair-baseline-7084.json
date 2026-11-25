@@ -1,0 +1,137 @@
+{
+  "mode": "baseline",
+  "archive": {
+    "name": "prm55-expanded-fit-20261125.zip",
+    "size_bytes": 25530124,
+    "sha256": "0834998fe986f450f40721f0864b51351c68743d5b2e5979334cffde28ca44b4",
+    "verified_sha256sums_count": 61
+  },
+  "stage126_identity": {
+    "source_commit": "559a7791b49332375c640bc132af05e079676a83",
+    "base_revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+    "template_sha256": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+    "head_sha256": "c216878476323ce3cfff5211bfb7c821afcfadc53b117370988a27b7fefaf25b",
+    "adapter_model_sha256": "abcdd508a543ca381ced76c2a9c49db1c8de2c5a0a5fe8ab45ac9b0910246c74",
+    "adapter_config_sha256": "22740a3a7decb9b646067c910984db850667bff8e812970a0381b7d19782b383",
+    "manifest_sha256": "20b62297526b6a93d8d03560f4e48d3273298b2dc552537b3165f1c1fedd354c"
+  },
+  "task_7084_reference": {
+    "task_id": 7084,
+    "instruction": "Instruction: find me some highly pigmented eye shadow in color b, and price lower than 30.00 dollars",
+    "goal_fingerprint": "e69c9ae2a0aad88977c44a7baf49f1f5ef7918ba8317923c4ae24dcc1f5638d8",
+    "final_reward": 1.0,
+    "prefix_steps_0_1_sha256": "8875d03839c34d830a7e4ce184d90124a5ac6795458d35b56c8f8e82d349116b",
+    "step_2_observation_sha256": "c6e647024b1aad9891623c2dc8421e53e8d51eab0d29cd8a686f839b4642732e",
+    "step_2_available_sha256": "772b435682051121fda8d3be70481d6ebb5bb15810aa6e70e87e623825700cb4",
+    "step_2_clickables": [
+      "back to search",
+      "< prev",
+      "description",
+      "features",
+      "reviews",
+      "buy now",
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "actions": [
+      "search[highly pigmented eye shadow in color b under \\$30.00]",
+      "click[b09g6n33k9]",
+      "click[b]",
+      "click[buy now]"
+    ],
+    "archived_turn_end_indices": [
+      179,
+      914,
+      1081,
+      1246
+    ],
+    "archived_step_scores": [
+      0.2848842144012451,
+      0.26600441336631775,
+      0.08091839402914047,
+      0.05375150591135025
+    ],
+    "archived_prm_total": 0.685558557510376
+  },
+  "zero_reward_purchase_crosscheck": {
+    "cases": {
+      "7544": {
+        "final_reward": 0.0,
+        "actions": [
+          "search[ethylene vinyl women's running shoes size 8 under $70]",
+          "click[b092f97bw4]",
+          "click[8 wide women | 8 wide men]",
+          "click[buy now]"
+        ],
+        "open_product_step_score": 0.2656775414943695,
+        "step_scores": [
+          0.2812252342700958,
+          0.2656775414943695,
+          0.08481650054454803,
+          0.06841541081666946
+        ],
+        "prm_total": 0.7001346945762634
+      },
+      "8669": {
+        "final_reward": 0.0,
+        "actions": [
+          "search[black automobile charge wirelessly priced <60.00]",
+          "click[b09snsndh5]",
+          "click[buy now]"
+        ],
+        "open_product_step_score": 0.26371893286705017,
+        "step_scores": [
+          0.2816069722175598,
+          0.26371893286705017,
+          0.12877696752548218
+        ],
+        "prm_total": 0.6741029024124146
+      },
+      "9984": {
+        "final_reward": 0.0,
+        "actions": [
+          "search[king-size bedroom set wood finish price < 630.00]",
+          "click[b07f3nq5p9]",
+          "click[buy now]"
+        ],
+        "open_product_step_score": 0.264477401971817,
+        "step_scores": [
+          0.2862362265586853,
+          0.264477401971817,
+          0.16410736739635468
+        ],
+        "prm_total": 0.7148209810256958
+      }
+    },
+    "three_step_full_reward_count": 23,
+    "three_step_full_reward_open_product_mean": 0.26414180125879205
+  },
+  "fallback_task_7402": {
+    "task_id": 7402,
+    "instruction": "Instruction: i am looking for solid wood chairs in a dusty pink color, and price lower than 230.00 dollars",
+    "final_reward": 1.0,
+    "actions": [
+      "search[solid wood chairs dusty pink price < 230.00]",
+      "click[b08ndpzblk]",
+      "click[dusty pink]",
+      "click[buy now]"
+    ],
+    "archived_turn_end_indices": [
+      188,
+      848,
+      1059,
+      1298
+    ],
+    "archived_step_scores": [
+      0.2804504930973053,
+      0.2601732015609741,
+      0.09849093854427338,
+      0.048963382840156555
+    ],
+    "archived_prm_total": 0.688077986240387
+  },
+  "live_pair_replay_verified": false,
+  "test_authorization": false
+}
