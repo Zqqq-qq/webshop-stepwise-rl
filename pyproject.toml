@@ -15,3 +15,6 @@ webshop-lab = "webshop_lab.cli:main"
 [tool.setuptools.packages.find]
 where = ["src"]
 
+[tool.setuptools.package-data]
+"webshop_lab.prm" = ["prefix_value_contract.json"]
+

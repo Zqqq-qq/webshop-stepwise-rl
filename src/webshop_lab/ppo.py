@@ -393,6 +393,11 @@ def run(args):
     critic_before = tensor_digest(critic.state_dict())
     if parent and (actor_before != parent["actor_after"] or critic_before != parent["critic_after"]):
         raise ValueError("Resume weights do not match the previous run")
+    reward_contract = None
+    if cfg.get("reward_mode") == "neural_progress":
+        from .prm.prefix_reward import prefix_value_checkpoint
+
+        reward_contract = prefix_value_checkpoint(Path(cfg["prm_checkpoint"]), True)
     write_json(out / "run.meta.json", {"schema_version": "rl-smoke-v0.1", "run_id": run_id,
         "scope": "one engineering update", "split": "train", "source_commit": git_head(),
         "config": cfg, "config_sha256": config_sha, "ids": ids,
@@ -400,6 +405,7 @@ def run(args):
         "parent_run_id": parent["run_id"] if parent else None, "update_index": cumulative_updates,
         "health": health, "sampling": generation.to_dict(), "torch_version": torch.__version__,
         "reward_mode": cfg.get("reward_mode", "terminal"),
+        "reward_contract": reward_contract,
         "algorithm": {"unit": "assistant_turn", "ratio": "joint_response", "gamma": 1.0, "lambda": 1.0,
                       "clip": CLIP, "beta": 0.0, "kl_coefficient": 0.0, "optimizer_updates": 1,
                       "learning_rate": 1e-5, "value_coefficient": 0.5, "max_gradient_norm": 1.0,

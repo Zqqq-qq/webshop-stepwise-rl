@@ -136,6 +136,12 @@ class PrefixValuePRMAblationTests(unittest.TestCase):
             cfg_path = root / "cfg.json"
             cfg_path.write_text(json.dumps(cfg.to_dict()))
             finalize_manifest(ckpt)
+            from webshop_lab.prm.prefix_reward import CONTRACT_PATH, checkpoint_manifest_sha
+
+            contract = json.loads(CONTRACT_PATH.read_text())
+            contract["checkpoints"] = {checkpoint_manifest_sha(ckpt): "preclick_asin"}
+            contract_path = root / "fixture-contract.json"
+            contract_path.write_text(json.dumps(contract))
 
             samples = root / "samples.jsonl"
             samples.write_text(json.dumps({
@@ -156,6 +162,7 @@ class PrefixValuePRMAblationTests(unittest.TestCase):
             cmd1 = [
                 sys.executable, str(REPO_ROOT / "scripts/score_prefix_value_prm.py"),
                 "--config", str(cfg_path), "--checkpoint", str(ckpt),
+                "--contract", str(contract_path),
                 "--samples", str(samples), "--output", str(out1), "--device", "cpu",
             ]
             res1 = subprocess.run(cmd1, capture_output=True, text=True, timeout=90)

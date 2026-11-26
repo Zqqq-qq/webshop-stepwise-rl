@@ -1,4 +1,5 @@
 import unittest
+from pathlib import Path
 from unittest.mock import Mock, patch
 
 from webshop_lab.prm import prefix_reward
@@ -6,6 +7,16 @@ from webshop_lab.prm.tokenize import TrajectoryTooLong
 
 
 class OnlinePrefixTests(unittest.TestCase):
+    def test_registered_arm4_rejects_incompatible_scoring_views(self):
+        results = Path(__file__).resolve().parents[1] / "results/prm-prefix-value-20261126/rtx3090-five-arms"
+        checkpoint = results / "arm4_pv_asin_context_fit501"
+        contract = prefix_reward.prefix_value_checkpoint(checkpoint, True)
+        self.assertEqual(contract["checkpoint_view"], "preclick_asin")
+        with self.assertRaisesRegex(ValueError, "not registered"):
+            prefix_reward.prefix_value_checkpoint(checkpoint, False)
+        with self.assertRaisesRegex(ValueError, "use scripts/score_prefix"):
+            prefix_reward.reject_prefix_value_checkpoint(checkpoint)
+
     def test_overlong_raw_prefix_drops_only_complete_old_exchanges(self):
         messages = [
             {"role": "system", "content": "Shop"},

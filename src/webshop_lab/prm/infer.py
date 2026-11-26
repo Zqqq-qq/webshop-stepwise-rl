@@ -6,6 +6,7 @@ from .config import load_config
 from .runtime import build_prm, write_json, verify_runtime_inputs
 from .train import load_samples, predict
 from .predictions import compare_predictions, validate_predictions
+from .prefix_reward import reject_prefix_value_checkpoint
 
 
 def load_rollout_samples(path,tokenizer,max_length,task_id=None,repeat=None):
@@ -51,6 +52,7 @@ def main(argv=None):
         raise ValueError('--task-id/--repeat仅用于原始rollout输入')
     if args.output.exists() or args.checkpoint.resolve() in args.output.resolve().parents:
         raise ValueError('新输出须位于检查点之外，不能覆盖旧证据')
+    reject_prefix_value_checkpoint(args.checkpoint)
     cfg=load_config(args.config)
     model,tok,identity,inputs=build_prm(cfg,args.checkpoint,args.device,False)
     if args.source_commit is not None and args.source_commit!=identity['source_commit']:

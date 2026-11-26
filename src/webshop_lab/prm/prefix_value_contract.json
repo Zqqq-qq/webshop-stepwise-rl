@@ -1,0 +1,15 @@
+{
+  "schema": "webshop-prm-prefix-value-v1",
+  "training_loss": "per_turn_mse_to_environment_terminal_reward",
+  "step_score": "current_prefix_value_minus_previous",
+  "trajectory_score": "last_prefix_value",
+  "online_view": "actor_visible_history_current_prefix",
+  "historical_view": "full_trajectory_augmentation",
+  "checkpoints": {
+    "6dd7110532a808856a7612213ee085e1f12248c12ae0650495dac44aaaf96750": "raw",
+    "b3906493cd162924cc556d653dad8f903b3219a23bbf7d23aec3afe527e684c9": "raw",
+    "95feaf82b667cf22ec2cce39ded51f403832b671fdc3dab233f2b692043f9006": "raw",
+    "826f9cce3a51365ec6bf02fb10574ca4990010a8927e9082b5a0383fd028b01c": "preclick_asin",
+    "8ef74fd81ee62d3eaeee708852133d0ff2703153151449054df82022ab58d6d4": "preclick_asin"
+  }
+}

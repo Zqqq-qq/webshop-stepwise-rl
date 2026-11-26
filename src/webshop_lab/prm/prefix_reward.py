@@ -1,4 +1,5 @@
 """Arm 4 ASIN context and current-prefix value scoring."""
+import hashlib
 import json
 import math
 import os
@@ -11,6 +12,39 @@ from webshop_lab.prm.tokenize import TrajectoryTooLong, tokenize_trajectory
 
 
 ASIN_CLICK_RE = re.compile(r"click\[(b[0-9a-z]{9})\]", flags=re.IGNORECASE)
+CONTRACT_PATH = Path(__file__).with_name("prefix_value_contract.json")
+
+
+def prefix_value_checkpoint(checkpoint, attach_asin_context, contract=CONTRACT_PATH):
+    """Bind the unchanged weight manifest to an explicit prefix-value scoring view."""
+    data = contract.read_bytes()
+    spec = json.loads(data)
+    expected = {
+        "schema": "webshop-prm-prefix-value-v1",
+        "training_loss": "per_turn_mse_to_environment_terminal_reward",
+        "step_score": "current_prefix_value_minus_previous",
+        "trajectory_score": "last_prefix_value",
+        "online_view": "actor_visible_history_current_prefix",
+        "historical_view": "full_trajectory_augmentation",
+    }
+    if any(spec.get(key) != value for key, value in expected.items()):
+        raise ValueError("Unsupported prefix-value scoring contract")
+    digest = checkpoint_manifest_sha(checkpoint)
+    view = "preclick_asin" if attach_asin_context else "raw"
+    if spec["checkpoints"].get(digest) != view:
+        raise ValueError("Checkpoint manifest is not registered for this prefix-value scoring view")
+    return {"schema": expected["schema"], "sha256": hashlib.sha256(data).hexdigest(),
+            "manifest_sha256": digest, "checkpoint_view": view}
+
+
+def checkpoint_manifest_sha(checkpoint):
+    return hashlib.sha256((checkpoint / "prm-manifest.json").read_bytes()).hexdigest()
+
+
+def reject_prefix_value_checkpoint(checkpoint):
+    known = json.loads(CONTRACT_PATH.read_text(encoding="utf-8"))["checkpoints"]
+    if checkpoint_manifest_sha(checkpoint) in known:
+        raise ValueError("This is a prefix-value checkpoint; use scripts/score_prefix_value_prm.py")
 
 
 def extract_preclick_asin_snippet(messages: list[dict], msg_idx: int) -> dict | None:
@@ -98,7 +132,12 @@ def encode_trajectory_for_pv(tokenizer, messages: list[dict], max_length: int, a
 
 
 
-def encode_current_prefix(tokenizer, messages, max_length):
+def encode_current_prefix(tokenizer, messages, max_length, attach_asin_context=True):
+    encoded, provenance = encode_current_prefix_details(tokenizer, messages, max_length, attach_asin_context)
+    return encoded, any(record["fallback_to_raw_due_to_max_length"] for record in provenance)
+
+
+def encode_current_prefix_details(tokenizer, messages, max_length, attach_asin_context=True):
     """Encode the actor's visible history, dropping old exchanges if PRM needs more room."""
     # Earlier EOS-only actions still have an environment error response. Preserve
     # that exchange without passing an empty assistant message to the PRM tokenizer.
@@ -109,14 +148,26 @@ def encode_current_prefix(tokenizer, messages, max_length):
     ] + messages[-1:]
     while True:
         try:
-            encoded, provenance = encode_trajectory_for_pv(tokenizer, history, max_length, True)
+            encoded, provenance = encode_trajectory_for_pv(tokenizer, history, max_length, attach_asin_context)
         except TrajectoryTooLong:
             # Keep the system instruction and the current observation/action pair.
             if len(history) <= 3:
-                return None, False
+                return None, []
             del history[1:3]
         else:
-            return encoded, any(record["fallback_to_raw_due_to_max_length"] for record in provenance)
+            return encoded, provenance
+
+
+def score_last_prefix(model, tokenizer, encoded):
+    import torch
+    from webshop_lab.prm.runtime import tensor_batch
+
+    batch = tensor_batch([encoded], tokenizer.pad_token_id, next(model.parameters()).device, False)
+    with torch.no_grad():
+        value = float(model(**batch)["step_scores"][0, -1])
+    if not math.isfinite(value):
+        raise ValueError("Arm 4 returned a non-finite prefix value")
+    return value
 
 
 class OnlinePrefixReward:
@@ -160,13 +211,12 @@ class OnlinePrefixReward:
 
 
 def serve(config, checkpoint):
-    import torch
     from webshop_lab.prm.config import load_config
-    from webshop_lab.prm.runtime import build_prm, tensor_batch
+    from webshop_lab.prm.runtime import build_prm
 
+    prefix_value_checkpoint(checkpoint, True)
     cfg = load_config(config)
     model, tokenizer, _, _ = build_prm(cfg, checkpoint, "cuda", False)
-    device = next(model.parameters()).device
     print(json.dumps({"ready": True}), flush=True)
     for line in sys.stdin:
         prefix = json.loads(line)
@@ -174,11 +224,7 @@ def serve(config, checkpoint):
         if encoded is None:
             print(json.dumps({"value": None, "asin_length_fallback": False}), flush=True)
             continue
-        batch = tensor_batch([encoded], tokenizer.pad_token_id, device, False)
-        with torch.no_grad():
-            value = float(model(**batch)["step_scores"][0, -1])
-        if not math.isfinite(value):
-            raise ValueError("Arm 4 returned a non-finite prefix value")
+        value = score_last_prefix(model, tokenizer, encoded)
         print(json.dumps({"value": value, "asin_length_fallback": fallback}), flush=True)
 
 
