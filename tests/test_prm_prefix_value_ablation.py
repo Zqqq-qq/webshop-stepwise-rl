@@ -6,6 +6,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from unittest.mock import Mock, patch
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(REPO_ROOT / "scripts") not in sys.path:
@@ -20,6 +21,28 @@ def _load_module(name: str, path: Path):
 
 
 class PrefixValuePRMAblationTests(unittest.TestCase):
+    def test_rollout_replay_uses_fitted_prompt_and_invalid_action_feedback(self):
+        if self.scorer is None:
+            self.skipTest("Requires torch environment")
+        episode = {"task_id": 1, "instruction": "Instruction: shop",
+                   "steps": [{"observation": "Home", "response": "", "grounding": 0},
+                             {"observation": "Home", "response": "Action: search[shoes]", "grounding": 1}]}
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder) / "rollout.jsonl"
+            path.write_text(json.dumps(episode) + "\n")
+            def trim(_tokenizer, history, budget, *, generation):
+                self.assertEqual(budget, 100)
+                self.assertTrue(generation)
+                return [history[0], history[-1]], [1]
+
+            encoder = Mock(return_value=(None, {}))
+            with patch.object(self.scorer, "fit_history", side_effect=trim), \
+                    patch.object(self.scorer, "encode_current_prefix", encoder):
+                self.scorer.load_pv_rollouts(path, None, 128, prompt_budget=100)
+            second_prefix = encoder.call_args.args[1]
+            self.assertEqual([m["role"] for m in second_prefix], ["system", "user", "assistant"])
+            self.assertTrue(second_prefix[1]["content"].startswith("Observation: Invalid action"))
+
     @classmethod
     def setUpClass(cls):
         cls.recompute = _load_module(
