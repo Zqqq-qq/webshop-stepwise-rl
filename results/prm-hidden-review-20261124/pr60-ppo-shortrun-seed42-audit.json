@@ -1,0 +1,40 @@
+{
+    "schema_version":  "pr60-ppo-shortrun-freeze-v1",
+    "frozen_at_utc":  "2026-11-26T14:48:00Z",
+    "author":  "QiuQiu-xuan",
+    "seed":  42,
+    "updates_per_arm":  1,
+    "rollouts_per_task":  1,
+    "selection_rule":  "Deterministic SHA256(ASCII(\u0027pr60-ppo-shortrun-seed42:\u0027 + ID)) ascending over mapped_train (1451), excluding fit501 (501), PR #55 dev160 (160), PR #57 dev64 (64), PR #59 reverify dev64 (64), prior smoke/regression tasks {2581, 6285, 7544}, val160 (160), and test200 (200).",
+    "eligible_pool_count":  661,
+    "selected_train_ids_ordered":  [
+                                       5034,
+                                       8742,
+                                       89,
+                                       5211
+                                   ],
+    "selected_train_ids_sha256":  "07459cd86227b3624298126b8d27f2ddd60f005e7943ecbca2c4289034f4cad6",
+    "split_hashes":  {
+                         "train_ids.json":  "8c85e56b3ac2e1f0a09b54560ad0f9bf77eedddb241d73617c7ff32416522e20",
+                         "val_ids.json":  "45440d724b33e69e13916d0adbe243cc63ce3bd67677b8220feff9f30b866c36",
+                         "test_ids.json":  "823eb6f68270b3b83695415c8ee008a1c86fc86977ac6d316e44590f2f0f97c7"
+                     },
+    "isolation_checks":  {
+                             "all_in_mapped_train":  true,
+                             "overlap_with_fit501":  0,
+                             "overlap_with_pr55_dev160":  0,
+                             "overlap_with_pr57_dev64":  0,
+                             "overlap_with_pr59_reverify_dev64":  0,
+                             "overlap_with_smoke_2581_6285_7544":  0,
+                             "overlap_with_val160":  0,
+                             "overlap_with_test200":  0
+                         },
+    "eval_set":  {
+                     "name":  "frozen_val160",
+                     "path":  "results/env-2026-11-17/val_ids.json",
+                     "count":  160,
+                     "sha256":  "45440d724b33e69e13916d0adbe243cc63ce3bd67677b8220feff9f30b866c36",
+                     "decoding":  "FP32 greedy decoding (do_sample=False), shared max_steps and max_new_tokens identical across B1, TG, and Arm 4 arms"
+                 },
+    "test_authorization":  false
+}
