@@ -19,7 +19,7 @@ from webshop_lab.prm.runtime import build_prm, tensor_batch, sha
 from webshop_lab.prm.model_core import restore_head, save_prm
 from webshop_lab.prm.tokenize import tokenize_trajectory
 from webshop_lab.prm.infer import compare_predictions
-from webshop_lab.prm.train import load_samples
+from webshop_lab.prm.train import cosine_lr_multiplier, load_samples
 
 REV='989aa7980e4cf806f80c7fef2b1adb7bc71aa306'
 
@@ -178,6 +178,209 @@ class RuntimeTests(unittest.TestCase):
             rejected=subprocess.run(rejected_train,capture_output=True,text=True,env=env,timeout=120)
             self.assertNotEqual(rejected.returncode,0)
             self.assertIn('续训梯度累积、样本计数或 AdamW 超参数不一致',rejected.stderr)
+
+    def test_split_head_lora_lr_and_cosine_schedule_with_resume(self):
+        self.assertAlmostEqual(cosine_lr_multiplier(0, 3), 1.0, places=12)
+        self.assertAlmostEqual(cosine_lr_multiplier(1, 3), 0.75, places=12)
+        self.assertAlmostEqual(cosine_lr_multiplier(2, 3), 0.25, places=12)
+        with self.assertRaises(ValueError):
+            cosine_lr_multiplier(3, 3)
+        with self.assertRaises(ValueError):
+            cosine_lr_multiplier(-1, 3)
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp)
+            original=self.make_fixture(root)
+            config_data=original.to_dict()
+            config_data.update(schema_version='prm-qwen-config-v2',
+                               representation='final_hidden_state',
+                               output_dir=str(root/'split-cos-part1'))
+            config=root/'split-cos.json'
+            config.write_text(json.dumps(config_data))
+            messages=[{'role':'system','content':'Shop carefully.'},
+                      {'role':'user','content':'Find blue shoes.'},
+                      {'role':'assistant','content':'Action: search[blue shoes]'}]
+            sample=root/'samples.jsonl'
+            template={'messages':messages,
+                'terminal_reward':1.,'done':True,'termination':'purchase',
+                'policy_adapter_sha256':original.sft_adapter_files_sha256['adapter_model.safetensors'],
+                'source_sha256':'a'*64}
+            sample.write_text(''.join(json.dumps(dict(template, task_id=i, terminal_reward=reward))+'\n'
+                for i, reward in ((111, 1.), (112, .5), (113, 0.))))
+            ids=root/'train-ids.json';ids.write_text('[111,112,113]')
+            env={**os.environ,'HF_HUB_OFFLINE':'1','TRANSFORMERS_OFFLINE':'1',
+                 'OMP_NUM_THREADS':'1','MKL_NUM_THREADS':'1'}
+            cmd=[sys.executable,'-m','webshop_lab.prm.train','--config',str(config),
+                 '--samples',str(sample),'--train-ids',str(ids),'--steps','2','--device','cpu',
+                 '--gradient-accumulation-steps','3','--learning-rate','2e-4',
+                 '--head-learning-rate','1e-5','--lr-scheduler','cosine',
+                 '--cosine-total-steps','3','--weight-decay','0.01']
+            part1=subprocess.run(cmd,capture_output=True,text=True,env=env,timeout=120)
+            self.assertEqual(part1.returncode,0,part1.stderr)
+            ckpt1=Path(config_data['output_dir'])
+            summary1=json.loads((ckpt1/'summary.json').read_text())
+            opt1=summary1['optimization']
+            self.assertTrue(opt1['separate_head_learning_rate'])
+            self.assertEqual(opt1['learning_rate'],2e-4)
+            self.assertEqual(opt1['head_learning_rate'],1e-5)
+            self.assertEqual(opt1['lr_scheduler'],'cosine')
+            self.assertEqual(opt1['cosine_total_steps'],3)
+            self.assertAlmostEqual(summary1['records'][0]['learning_rate'],2e-4,places=12)
+            self.assertAlmostEqual(summary1['records'][0]['head_learning_rate'],1e-5,places=12)
+            self.assertAlmostEqual(summary1['records'][1]['learning_rate'],1.5e-4,places=12)
+            self.assertAlmostEqual(summary1['records'][1]['head_learning_rate'],7.5e-6,places=12)
+            state1=torch.load(ckpt1/'training-state.pt',weights_only=True,map_location='cpu')
+            self.assertEqual(len(state1['optimizer']['param_groups']),2)
+
+            infer=[sys.executable,'-m','webshop_lab.prm.infer','--config',str(config),
+                   '--checkpoint',str(ckpt1),'--samples',str(sample),
+                   '--output',str(root/'reloaded.json'),
+                   '--reference',str(ckpt1/'reference-predictions.json'),'--device','cpu']
+            reloaded=subprocess.run(infer,capture_output=True,text=True,env=env,timeout=120)
+            self.assertEqual(reloaded.returncode,0,reloaded.stderr)
+            self.assertTrue(json.loads((root/'reloaded.json').read_text())['reference_match'])
+
+            cfg2=root/'split-cos-part2.json'
+            cfg2.write_text(json.dumps(dict(config_data,output_dir=str(root/'split-cos-part2'))))
+            cmd2=cmd.copy()
+            cmd2[cmd2.index(str(config))]=str(cfg2)
+            cmd2[cmd2.index('--steps')+1]='1'
+            cmd2+=['--resume',str(ckpt1)]
+            part2=subprocess.run(cmd2,capture_output=True,text=True,env=env,timeout=120)
+            self.assertEqual(part2.returncode,0,part2.stderr)
+            summary2=json.loads((root/'split-cos-part2/summary.json').read_text())
+            self.assertEqual(summary2['optimizer_steps'],3)
+            self.assertAlmostEqual(summary2['records'][0]['learning_rate'],5e-5,places=12)
+            self.assertAlmostEqual(summary2['records'][0]['head_learning_rate'],2.5e-6,places=12)
+
+            for bad_name, flag, bad_val in (
+                ('bad-head', '--head-learning-rate', '2e-5'),
+                ('bad-sched', '--lr-scheduler', 'constant'),
+                ('bad-horizon', '--cosine-total-steps', '4'),
+                ('over-budget', '--steps', '2'),
+            ):
+                bad_cfg=root/f'{bad_name}.json'
+                bad_cfg.write_text(json.dumps(dict(config_data,output_dir=str(root/bad_name))))
+                bad_cmd=cmd2.copy()
+                bad_cmd[bad_cmd.index(str(cfg2))]=str(bad_cfg)
+                if bad_name == 'bad-sched':
+                    idx=bad_cmd.index('--cosine-total-steps')
+                    del bad_cmd[idx:idx+2]
+                bad_cmd[bad_cmd.index(flag)+1]=bad_val
+                failed=subprocess.run(bad_cmd,capture_output=True,text=True,env=env,timeout=120)
+                self.assertNotEqual(failed.returncode,0,bad_name)
+
+    def test_continuous_vs_resumed_exact_equivalence_and_tampered_saved_lr_rejection(self):
+        from safetensors.torch import load_file
+        from webshop_lab.prm.runtime import finalize_manifest
+        import shutil
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp)
+            original=self.make_fixture(root)
+            base_cfg=original.to_dict()
+            base_cfg.update(schema_version='prm-qwen-config-v2',
+                            representation='final_hidden_state')
+            messages=[{'role':'system','content':'Shop carefully.'},
+                      {'role':'user','content':'Find blue shoes.'},
+                      {'role':'assistant','content':'Action: search[blue shoes]'}]
+            sample=root/'samples.jsonl'
+            template={'messages':messages,
+                'terminal_reward':1.,'done':True,'termination':'purchase',
+                'policy_adapter_sha256':original.sft_adapter_files_sha256['adapter_model.safetensors'],
+                'source_sha256':'a'*64}
+            sample.write_text(''.join(json.dumps(dict(template, task_id=i, terminal_reward=reward))+'\n'
+                for i, reward in ((111, 1.), (112, .5), (113, 0.))))
+            ids=root/'train-ids.json';ids.write_text('[111,112,113]')
+            env={**os.environ,'HF_HUB_OFFLINE':'1','TRANSFORMERS_OFFLINE':'1',
+                 'OMP_NUM_THREADS':'1','MKL_NUM_THREADS':'1'}
+
+            def run_train(name, steps, head_lr, scheduler, cosine_total, resume=None):
+                out_dir=root/name
+                cfg_path=root/f'{name}.json'
+                cfg_path.write_text(json.dumps(dict(base_cfg, output_dir=str(out_dir))))
+                cmd=[sys.executable,'-m','webshop_lab.prm.train','--config',str(cfg_path),
+                     '--samples',str(sample),'--train-ids',str(ids),'--steps',str(steps),
+                     '--device','cpu','--seed','42','--gradient-accumulation-steps','3',
+                     '--learning-rate','2e-4','--lr-scheduler',scheduler,'--weight-decay','0.01']
+                if head_lr is not None:
+                    cmd+=['--head-learning-rate',head_lr]
+                if cosine_total is not None:
+                    cmd+=['--cosine-total-steps',cosine_total]
+                if resume is not None:
+                    cmd+=['--resume',str(resume)]
+                proc=subprocess.run(cmd,capture_output=True,text=True,env=env,timeout=120)
+                self.assertEqual(proc.returncode,0,f'{name}: {proc.stderr}')
+                return out_dir
+
+            split_cos_part1=None
+            for tag, head_lr, scheduler, cosine_total in (
+                ('single-const', None, 'constant', None),
+                ('split-const', '1e-5', 'constant', None),
+                ('single-cos', None, 'cosine', '4'),
+                ('split-cos', '1e-5', 'cosine', '4'),
+            ):
+                cont=run_train(f'{tag}-cont4', 4, head_lr, scheduler, cosine_total)
+                part1=run_train(f'{tag}-part1', 2, head_lr, scheduler, cosine_total)
+                part2=run_train(f'{tag}-part2', 2, head_lr, scheduler, cosine_total, resume=part1)
+                if tag == 'split-cos':
+                    split_cos_part1=part1
+
+                head_cont=torch.load(cont/'head.pt',weights_only=True,map_location='cpu')
+                head_res=torch.load(part2/'head.pt',weights_only=True,map_location='cpu')
+                for k in ('weight','bias'):
+                    self.assertTrue(torch.equal(head_cont[k],head_res[k]),f'{tag} head.{k}')
+
+                lora_cont=load_file(str(cont/'adapter/adapter_model.safetensors'))
+                lora_res=load_file(str(part2/'adapter/adapter_model.safetensors'))
+                self.assertEqual(set(lora_cont),set(lora_res))
+                for k in lora_cont:
+                    self.assertTrue(torch.equal(lora_cont[k],lora_res[k]),f'{tag} {k}')
+
+                ref_cont=json.loads((cont/'reference-predictions.json').read_text())
+                ref_res=json.loads((part2/'reference-predictions.json').read_text())
+                self.assertEqual(ref_cont,ref_res,f'{tag} reference-predictions')
+
+                sum_cont=json.loads((cont/'summary.json').read_text())
+                sum_res=json.loads((part2/'summary.json').read_text())
+                self.assertEqual(sum_cont['optimizer_steps'],4)
+                self.assertEqual(sum_res['optimizer_steps'],4)
+                self.assertEqual(sum_cont['samples_consumed'],12)
+                self.assertEqual(sum_res['samples_consumed'],12)
+                self.assertEqual(sum_cont['parameters_after'],sum_res['parameters_after'],f'{tag} digest')
+                for rec_c, rec_r in zip(sum_cont['records'][2:], sum_res['records']):
+                    for field in ('optimizer_step','samples_consumed','task_ids','terminal_rewards',
+                                  'loss','gradient_norm','totals_before_update','learning_rate',
+                                  'head_learning_rate','head_gradient_l1','lora_gradient_l1'):
+                        self.assertEqual(rec_c[field],rec_r[field],f'{tag} {field}')
+
+                st_cont=torch.load(cont/'training-state.pt',weights_only=True,map_location='cpu')
+                st_res=torch.load(part2/'training-state.pt',weights_only=True,map_location='cpu')
+                self.assertTrue(torch.equal(st_cont['cpu_rng'],st_res['cpu_rng']),f'{tag} cpu_rng')
+                self.assertEqual(st_cont['optimizer']['param_groups'],st_res['optimizer']['param_groups'])
+                self.assertEqual(set(st_cont['optimizer']['state']),set(st_res['optimizer']['state']))
+                for pid in st_cont['optimizer']['state']:
+                    for sk in ('step','exp_avg','exp_avg_sq'):
+                        self.assertTrue(torch.equal(st_cont['optimizer']['state'][pid][sk],
+                                                    st_res['optimizer']['state'][pid][sk]),
+                                        f'{tag} state[{pid}][{sk}]')
+
+            for idx, bad_lr in ((0, 9.9e-6), (1, 1.9e-4)):
+                tampered=root/f'tampered-group-{idx}'
+                shutil.copytree(split_cos_part1, tampered)
+                st=torch.load(tampered/'training-state.pt',weights_only=True,map_location='cpu')
+                st['optimizer']['param_groups'][idx]['lr']=bad_lr
+                torch.save(st, tampered/'training-state.pt')
+                finalize_manifest(tampered)
+                bad_cfg=root/f'tampered-resume-{idx}.json'
+                bad_cfg.write_text(json.dumps(dict(base_cfg, output_dir=str(root/f'tampered-out-{idx}'))))
+                bad_cmd=[sys.executable,'-m','webshop_lab.prm.train','--config',str(bad_cfg),
+                         '--samples',str(sample),'--train-ids',str(ids),'--steps','2',
+                         '--device','cpu','--seed','42','--gradient-accumulation-steps','3',
+                         '--learning-rate','2e-4','--head-learning-rate','1e-5',
+                         '--lr-scheduler','cosine','--cosine-total-steps','4',
+                         '--weight-decay','0.01','--resume',str(tampered)]
+                rejected=subprocess.run(bad_cmd,capture_output=True,text=True,env=env,timeout=120)
+                self.assertNotEqual(rejected.returncode,0)
+                self.assertIn('续训梯度累积、样本计数或 AdamW 超参数不一致',rejected.stderr)
 
     def test_logits_rejects_cross_schema_before_loading_backbone(self):
         with tempfile.TemporaryDirectory() as tmp:

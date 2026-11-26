@@ -1,0 +1,72 @@
+{
+  "schema_version": 2,
+  "identity": {
+    "base_revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+    "base_sha256": "dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee",
+    "tokenizer_sha256": {
+      "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+      "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+      "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+      "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3"
+    },
+    "tokenizer_revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+    "auxiliary_input_sha256": {
+      "/root/autodl-tmp/qwen25-15b/config.json": "98d2ff8cc47488d08a2b0b3acf4eb99ef210779b42bd48605f6b8e36acdbf670",
+      "/root/autodl-tmp/qwen25-15b/generation_config.json": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6"
+    },
+    "template_sha256": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+    "initialization": {
+      "kind": "sft_b1",
+      "sft_adapter_files_sha256": {
+        "adapter_model.safetensors": "c39e2a78e7c5973328e9d2c23fb6320e566352e63cc089562488f3dd46ae5f9c",
+        "adapter_config.json": "18993c388788ec14de72fd4f6f9ff86ce761ffc3aad5d0923b33f4365be03d97"
+      }
+    },
+    "source_commit": "d25e6164894c87fdea796bb73e3ee546807483d8",
+    "source_tracked_clean": true,
+    "source_sha256": {
+      "runtime.py": "49ab952c1b2e4f9c73dad6fe1b9930122d907178d5182105a51e2f903cc3b3c3",
+      "model_core.py": "acf4a15bd47826677c756574facf078c7721d7b766541032766489694442825d",
+      "train_core.py": "a07496bded55fb4ac2be98010812352c10485eae9cf5df8b110b4e54667de3e2",
+      "tokenize.py": "7515488a18e829274e291e63177732c33fad1927c0912e79c33345bb106f370d",
+      "config.py": "3ebd9dd7e6045fa14e2403cfd30ecd8ebb74495b46f5ae34db03231643e2ccad"
+    },
+    "prm_lora": {
+      "rank": 8,
+      "alpha": 16,
+      "target_modules": [
+        "q_proj",
+        "k_proj",
+        "v_proj",
+        "o_proj",
+        "gate_proj",
+        "up_proj",
+        "down_proj"
+      ],
+      "dropout": 0.05
+    },
+    "score_position": "assistant_im_end",
+    "max_length": 2048,
+    "policy_dtype": "float32"
+  },
+  "architecture": {
+    "representation": "final_hidden_state",
+    "input_dim": 1536,
+    "head_type": "linear",
+    "score_position": "assistant_im_end",
+    "reduction": "sum",
+    "loss": "trajectory_mse",
+    "dtype": "float32",
+    "initialization": "zeros"
+  },
+  "vocab_size": 151936,
+  "hidden_size": 1536,
+  "score_definition": "assistant_im_end_final_norm_hidden_linear_sum_mse",
+  "files_sha256": {
+    "adapter/README.md": "4532e7c3696f9b295fee1d451a1db5caad7bbcb8539a64bfac521d24c091a132",
+    "adapter/adapter_config.json": "f0605ffdf903dd4a09e37da5c728cac0e1005fed74d2852772f9490d5954fbb0",
+    "adapter/adapter_model.safetensors": "4080dd9a7c1503161711870a8546fcaae317f27e2fd36b9e73b90ae0506047e6",
+    "config.json": "bdd9c560bb011477bd4c12647c71b77c60205cadd913779ded7388bfbae73704",
+    "head.pt": "54fc69d5667d3222b5bbb938a78f536abb0a1d36011ac1999e559d0ddd799a17"
+  }
+}

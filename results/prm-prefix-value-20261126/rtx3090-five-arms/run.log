@@ -1,0 +1,38 @@
+`torch_dtype` is deprecated! Use `dtype` instead!
+[arm1_pv_qv_fit501] step 1/126 | pv_loss=0.42799 | last_mse=0.42799 | gnorm=171.45 | elapsed=22.0s
+[arm1_pv_qv_fit501] step 21/126 | pv_loss=0.07784 | last_mse=0.07730 | gnorm=9.63 | elapsed=140.2s
+[arm1_pv_qv_fit501] step 42/126 | pv_loss=0.13010 | last_mse=0.12665 | gnorm=2.95 | elapsed=270.2s
+[arm1_pv_qv_fit501] step 63/126 | pv_loss=0.14180 | last_mse=0.15213 | gnorm=48.11 | elapsed=394.6s
+[arm1_pv_qv_fit501] step 84/126 | pv_loss=0.09365 | last_mse=0.09348 | gnorm=5.93 | elapsed=520.1s
+[arm1_pv_qv_fit501] step 105/126 | pv_loss=0.11498 | last_mse=0.11601 | gnorm=15.28 | elapsed=650.1s
+[arm1_pv_qv_fit501] step 126/126 | pv_loss=0.04938 | last_mse=0.05203 | gnorm=15.15 | elapsed=774.6s
+==> [arm1_pv_qv_fit501 DONE in 820.2s] dev32_acc=22/32 (68.8%) by_vis={'V+': '18/21', 'U': '4/8', 'V-': '0/3'} mean_gap=0.00474 | 7544_click_gap=-0.0223 | dev160_mse=0.09475 (const=0.10840)
+[arm2_pv_alllinear_fit501] step 1/126 | pv_loss=0.42799 | last_mse=0.42799 | gnorm=171.45 | elapsed=21.4s
+[arm2_pv_alllinear_fit501] step 21/126 | pv_loss=0.07775 | last_mse=0.07869 | gnorm=4.58 | elapsed=166.6s
+[arm2_pv_alllinear_fit501] step 42/126 | pv_loss=0.13158 | last_mse=0.13266 | gnorm=10.34 | elapsed=324.4s
+[arm2_pv_alllinear_fit501] step 63/126 | pv_loss=0.11695 | last_mse=0.11254 | gnorm=23.46 | elapsed=475.6s
+[arm2_pv_alllinear_fit501] step 84/126 | pv_loss=0.10165 | last_mse=0.10459 | gnorm=18.85 | elapsed=628.0s
+[arm2_pv_alllinear_fit501] step 105/126 | pv_loss=0.11085 | last_mse=0.10290 | gnorm=13.10 | elapsed=785.9s
+[arm2_pv_alllinear_fit501] step 126/126 | pv_loss=0.05134 | last_mse=0.05108 | gnorm=7.52 | elapsed=936.8s
+==> [arm2_pv_alllinear_fit501 DONE in 987.0s] dev32_acc=22/32 (68.8%) by_vis={'V+': '19/21', 'U': '3/8', 'V-': '0/3'} mean_gap=0.01306 | 7544_click_gap=+0.0218 | dev160_mse=0.08788 (const=0.10840)
+[arm3_pv_alllinear_pairs20] step 1/24 | pair_loss=0.41599 | train_gap=+0.0220 | gnorm=10.92
+[arm3_pv_alllinear_pairs20] step 6/24 | pair_loss=0.15968 | train_gap=+0.5428 | gnorm=50.66
+[arm3_pv_alllinear_pairs20] step 12/24 | pair_loss=0.06737 | train_gap=+0.5981 | gnorm=26.64
+[arm3_pv_alllinear_pairs20] step 18/24 | pair_loss=0.11276 | train_gap=+0.8160 | gnorm=41.32
+[arm3_pv_alllinear_pairs20] step 24/24 | pair_loss=0.35199 | train_gap=+0.5284 | gnorm=36.19
+==> [arm3_pv_alllinear_pairs20 DONE in 203.1s] dev32_acc=23/32 (71.9%) by_vis={'V+': '19/21', 'U': '4/8', 'V-': '0/3'} mean_gap=0.30791 | 7544_click_gap=+0.0086 | dev160_mse=0.10356
+[arm4_pv_asin_context_fit501] step 1/126 | pv_loss=0.42799 | last_mse=0.42799 | gnorm=171.62 | elapsed=24.5s
+[arm4_pv_asin_context_fit501] step 21/126 | pv_loss=0.08450 | last_mse=0.08278 | gnorm=20.69 | elapsed=176.2s
+[arm4_pv_asin_context_fit501] step 42/126 | pv_loss=0.12751 | last_mse=0.12594 | gnorm=4.07 | elapsed=341.4s
+[arm4_pv_asin_context_fit501] step 63/126 | pv_loss=0.15411 | last_mse=0.15454 | gnorm=48.84 | elapsed=499.7s
+[arm4_pv_asin_context_fit501] step 84/126 | pv_loss=0.08653 | last_mse=0.08706 | gnorm=4.16 | elapsed=658.2s
+[arm4_pv_asin_context_fit501] step 105/126 | pv_loss=0.08348 | last_mse=0.07929 | gnorm=5.90 | elapsed=823.3s
+[arm4_pv_asin_context_fit501] step 126/126 | pv_loss=0.05196 | last_mse=0.04776 | gnorm=9.31 | elapsed=981.4s
+==> [arm4_pv_asin_context_fit501 DONE in 1034.6s] dev32_acc=26/32 (81.2%) by_vis={'V+': '20/21', 'U': '6/8', 'V-': '0/3'} mean_gap=0.07486 | 7544_click_gap=+0.1152 | dev160_mse=0.08124 (const=0.10840)
+[arm5_pv_asin_context_pairs20] step 1/24 | pair_loss=0.29520 | train_gap=+0.1512 | gnorm=23.96
+[arm5_pv_asin_context_pairs20] step 6/24 | pair_loss=0.24134 | train_gap=+0.8654 | gnorm=110.50
+[arm5_pv_asin_context_pairs20] step 12/24 | pair_loss=0.15719 | train_gap=+0.4918 | gnorm=26.32
+[arm5_pv_asin_context_pairs20] step 18/24 | pair_loss=0.04670 | train_gap=+0.6759 | gnorm=5.68
+[arm5_pv_asin_context_pairs20] step 24/24 | pair_loss=0.18117 | train_gap=+0.6553 | gnorm=34.30
+==> [arm5_pv_asin_context_pairs20 DONE in 215.5s] dev32_acc=26/32 (81.2%) by_vis={'V+': '20/21', 'U': '6/8', 'V-': '0/3'} mean_gap=0.30417 | 7544_click_gap=+0.0054 | dev160_mse=0.14905
+=== ALL ARMS COMPLETE ===

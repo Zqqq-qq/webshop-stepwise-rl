@@ -1,0 +1,32 @@
+{
+  "model": "/root/autodl-tmp/qwen25-15b",
+  "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+  "base_weights_sha256": "dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee",
+  "tokenizer": "/root/autodl-tmp/qwen25-15b",
+  "tokenizer_revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+  "tokenizer_files_sha256": {
+    "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+    "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+    "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+    "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3"
+  },
+  "output_dir": "/root/autodl-tmp/runs/issue48-verify-v1/hidden-split-cos-acc8",
+  "initialization": "sft_b1",
+  "sft_adapter": "/root/autodl-tmp/inputs/b1-adapter",
+  "sft_adapter_files_sha256": {
+    "adapter_model.safetensors": "c39e2a78e7c5973328e9d2c23fb6320e566352e63cc089562488f3dd46ae5f9c",
+    "adapter_config.json": "18993c388788ec14de72fd4f6f9ff86ce761ffc3aad5d0923b33f4365be03d97"
+  },
+  "policy_dtype": "float32",
+  "load_in_4bit": false,
+  "max_length": 2048,
+  "lora_r": 8,
+  "lora_alpha": 16,
+  "target_modules": [
+    "q_proj",
+    "v_proj"
+  ],
+  "schema_version": "prm-qwen-config-v2",
+  "score_position": "assistant_im_end",
+  "representation": "final_hidden_state"
+}
