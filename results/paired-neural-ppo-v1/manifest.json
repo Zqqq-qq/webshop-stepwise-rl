@@ -1,0 +1,249 @@
+{
+  "schema": "pr61-paired-neural-ppo-freeze-v1",
+  "execution_commit": "01def67412aecd0cc6571a84b4b1d974aece0b40",
+  "test_authorization": false,
+  "seeds": [
+    42,
+    43
+  ],
+  "arms": [
+    "terminal",
+    "neural_progress"
+  ],
+  "training": {
+    "updates_per_seed_arm": 4,
+    "episodes_per_update": 4,
+    "repeats": 1,
+    "max_steps": 3,
+    "max_new_tokens": 96,
+    "context_length": 2048,
+    "policy_dtype": "float32",
+    "load_in_4bit": false,
+    "temperature": 1.0,
+    "top_p": 1.0,
+    "top_k": 0,
+    "beta": 0.0
+  },
+  "evaluation": {
+    "ids_path": "results/env-2026-11-17/val_ids.json",
+    "ids_sha256": "45440d724b33e69e13916d0adbe243cc63ce3bd67677b8220feff9f30b866c36",
+    "expected_tasks": 160,
+    "repeats": 1,
+    "policy_dtype": "float32",
+    "load_in_4bit": false,
+    "context_length": 2048,
+    "max_new_tokens": 128,
+    "max_steps": 10,
+    "temperature": 0.0,
+    "bootstrap_resamples": 2000,
+    "bootstrap_seed": 42,
+    "high_neural_reward_threshold": 0.3
+  },
+  "goal_map_sha256": "6b5d9dfceee913828871b8dff62fd59720a40306738a92a496d1b0fb6838fa88",
+  "selection": {
+    "mapped_train_count": 1451,
+    "after_exact_id_exclusions": 657,
+    "eligible_after_instruction_filters": 620,
+    "order": "sha256 ASCII pr61-formal-ppo-v1:<seed>:<id> ascending, then ID",
+    "deduplication": "Exclude normalized cross-goal twins and exclusion-set instruction matches; choose seed 42 then 43, skipping previously selected IDs and budget-stripped instructions."
+  },
+  "sources": {
+    "train": {
+      "sha256": "8c85e56b3ac2e1f0a09b54560ad0f9bf77eedddb241d73617c7ff32416522e20",
+      "count": 1451,
+      "path": "results/env-2026-11-17/train_ids.json"
+    },
+    "val": {
+      "sha256": "45440d724b33e69e13916d0adbe243cc63ce3bd67677b8220feff9f30b866c36",
+      "count": 160,
+      "path": "results/env-2026-11-17/val_ids.json"
+    },
+    "test": {
+      "sha256": "823eb6f68270b3b83695415c8ee008a1c86fc86977ac6d316e44590f2f0f97c7",
+      "count": 200,
+      "path": "results/env-2026-11-17/test_ids.json"
+    },
+    "fit501": {
+      "archive": "#55 evidence archive",
+      "path": "data/fit501.training.jsonl",
+      "sha256": "b1f1eeda3a762337d0ce99b9f98451a9fb0d444e6ed0a3cc5d302bd383e7cd71",
+      "count": 501
+    },
+    "pr55_dev160": {
+      "commit": "1c19b2bb0c3f3e34856bad134f8699247d2b9cde",
+      "path": "results/prm-expanded-fit-20261125/holdout_ids.json",
+      "sha256": "15b96f015ed8a2b804633523144011eb2fdf092903ccded17395020b925eb5c1",
+      "count": 160
+    },
+    "pr57_train32": {
+      "commit": "f34c880bb8f2e7dabd3e845103849090579f36e2",
+      "path": "results/prm-fork-ranking-20261126/train-candidates.json",
+      "sha256": "e1abc08137e9f2abda6467ddde70caa7578b51d0c07f8aa1f65f1c3c829e6dc1",
+      "count": 32
+    },
+    "pr57_dev64": {
+      "commit": "c39b371633f8e46fba9eac50116a0a1b01e5d22b",
+      "path": "results/prm-hidden-review-20261124/prm57-independent-dev-ids.json",
+      "sha256": "4e0e86abd884cd01b80388e271f7a0c96d183b11d4690fefd8bd89b9a002177b",
+      "count": 64
+    },
+    "pr59_dev64": {
+      "commit": "c39b371633f8e46fba9eac50116a0a1b01e5d22b",
+      "path": "results/prm-hidden-review-20261124/prm59-reverify-dev-ids.json",
+      "sha256": "a033b312440952d6325734b4b9bebc9f99ecc1db9b865939a31cc3e54e57f2e8",
+      "count": 64
+    },
+    "pr60_short4": {
+      "commit": "c39b371633f8e46fba9eac50116a0a1b01e5d22b",
+      "path": "results/prm-hidden-review-20261124/pr60-ppo-shortrun-seed42-ids.json",
+      "sha256": "07459cd86227b3624298126b8d27f2ddd60f005e7943ecbca2c4289034f4cad6",
+      "count": 4
+    }
+  },
+  "isolation_overlaps": {
+    "fit501": {
+      "id": 0,
+      "normalized_instruction": 0,
+      "budget_stripped_instruction": 0
+    },
+    "val160": {
+      "id": 0,
+      "normalized_instruction": 0,
+      "budget_stripped_instruction": 0
+    },
+    "test200": {
+      "id": 0,
+      "normalized_instruction": 0,
+      "budget_stripped_instruction": 0
+    },
+    "smoke_and_regression": {
+      "id": 0,
+      "normalized_instruction": 0,
+      "budget_stripped_instruction": 0
+    },
+    "pr55_dev160": {
+      "id": 0,
+      "normalized_instruction": 0,
+      "budget_stripped_instruction": 0
+    },
+    "pr57_train32": {
+      "id": 0,
+      "normalized_instruction": 0,
+      "budget_stripped_instruction": 0
+    },
+    "pr57_dev64": {
+      "id": 0,
+      "normalized_instruction": 0,
+      "budget_stripped_instruction": 0
+    },
+    "pr59_dev64": {
+      "id": 0,
+      "normalized_instruction": 0,
+      "budget_stripped_instruction": 0
+    },
+    "pr60_short4": {
+      "id": 0,
+      "normalized_instruction": 0,
+      "budget_stripped_instruction": 0
+    }
+  },
+  "seed_overlap": {
+    "id": 0,
+    "normalized_instruction": 0,
+    "budget_stripped_instruction": 0
+  },
+  "schedules": {
+    "42": [
+      {
+        "update": 1,
+        "path": "seed-42/update-1-ids.json",
+        "sha256": "3c462da3a8a1897b726c5348a8ad81a0309c5e23ee7a48186cbabfb943896947",
+        "ids": [
+          158,
+          2441,
+          9807,
+          7616
+        ]
+      },
+      {
+        "update": 2,
+        "path": "seed-42/update-2-ids.json",
+        "sha256": "0063cab8dcdec7f875b1c14fe79b687d411279a208efa8ed51853b2c8405d7c5",
+        "ids": [
+          1328,
+          1635,
+          11034,
+          7887
+        ]
+      },
+      {
+        "update": 3,
+        "path": "seed-42/update-3-ids.json",
+        "sha256": "ad3b2714dc0c00f2d733ed208944cf7a10eebd9d7b878421e54ce64406db7b20",
+        "ids": [
+          103,
+          7750,
+          6066,
+          6349
+        ]
+      },
+      {
+        "update": 4,
+        "path": "seed-42/update-4-ids.json",
+        "sha256": "2855c8586b63a79319f1f55536f63794d46528e2a909177fab03c870326845a3",
+        "ids": [
+          3304,
+          5080,
+          6091,
+          10050
+        ]
+      }
+    ],
+    "43": [
+      {
+        "update": 1,
+        "path": "seed-43/update-1-ids.json",
+        "sha256": "fcf7a2b14ef0d2bcddc514b78ce318fb45ddef9e74d6208b64d4f0176f34e3f7",
+        "ids": [
+          5874,
+          1710,
+          9284,
+          8028
+        ]
+      },
+      {
+        "update": 2,
+        "path": "seed-43/update-2-ids.json",
+        "sha256": "b7373dfb3bbc4ad4a876ff10f3ef499f4baad1c764762c4e7bcfea18487d1111",
+        "ids": [
+          5439,
+          1017,
+          1854,
+          1457
+        ]
+      },
+      {
+        "update": 3,
+        "path": "seed-43/update-3-ids.json",
+        "sha256": "b0bec1251784a70bb6eed163a7154e68541351e817465a9c924b4de0c703d396",
+        "ids": [
+          183,
+          1717,
+          1748,
+          6954
+        ]
+      },
+      {
+        "update": 4,
+        "path": "seed-43/update-4-ids.json",
+        "sha256": "4c7db83f328160f66c2fd993fa24b9edefcdf615bbc9963aa737fc82e7547318",
+        "ids": [
+          7849,
+          6589,
+          7128,
+          323
+        ]
+      }
+    ]
+  }
+}
