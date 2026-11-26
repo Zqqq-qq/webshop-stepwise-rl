@@ -1,5 +1,7 @@
 # TG 与 Arm 4 配对 PPO 训练和验证
 
+这份 32 题清单保留作历史准备记录。后续执行使用[全训练池冻结方案](../full-pool-neural-ppo-v1/README.md)。
+
 ## 冻结批次
 
 [manifest.json](manifest.json) 记录每批任务顺序、文件 SHA-256、抽样规则、排除集来源以及隔离结果。训练代码在 `01def67412aecd0cc6571a84b4b1d974aece0b40`；本目录是独立的数据交付，执行代码与批次文件应分别按提交固定。两臂均从同一个冻结 B1 初始化策略和 PPO 价值头。Arm 4 的检查点、语义契约与运行时沿用 [组合协议](../../docs/NEURAL_PPO_COMPARISON.md)。
