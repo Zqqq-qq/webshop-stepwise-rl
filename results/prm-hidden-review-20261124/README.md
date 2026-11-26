@@ -8,6 +8,8 @@
 
 **#56 同页选色诊断与 #57 独立 dev 冻结**：已完成 `prm55-expanded-fit-20261125.zip`（61/61 `SHA256SUMS`）、任务 `7084` 实测分叉包 `prm55-option-pair-7084-20261126.zip` 独立前缀/配对核验（[说明](PR56_OPTION_PAIR_AUDIT.md) · [基线记录](pr55-option-pair-baseline-7084.json) · [实测核验](pr56-option-pair-7084-audit.json)，共享前缀差 `0`、选色步 B−A `+0.010091`），并按 #57 分工冻结 64 题未查看独立 dev 清单（[说明](PR57_INDEPENDENT_DEV_FREEZE.md) · [冻结 ID](prm57-independent-dev-ids.json) SHA `4e0e86ab…` · [隔离审计](prm57-independent-dev-audit.json)，与训练候选/fit501/已查看 dev160/val/test 及全库 12,087 题孪生重叠均为 0，`7544` 单列回归，`test_authorization=false`）。
 
+**#59 复验新 dev 冻结与验收表**：已从剩余 214 题严格未查看洁净池冻结全新 64 题（主评 32 + 备选 32）及验收协议（[协议与验收表](PR59_REVERIFY_DEV_PROTOCOL.md) · [64 题清单](prm59-reverify-dev-ids.json) SHA `a033b312…` · [主评 32](prm59-reverify-dev-primary_32-ids.json) SHA `a04c3385…` · [备选 32](prm59-reverify-dev-reserve_32-ids.json) SHA `3ad6b162…` · [隔离审计](prm59-reverify-dev-audit.json)），排除全部训练、#55 `dev160`、#57 `dev64`、全库 12,087 题孪生及去价格同指令冲突，`test200` 继续冻结（`test_authorization=false`）。
+
 2026-11-24。按 [#52 最新分工](https://github.com/Zqqq-qq/webshop-stepwise-rl/pull/52#issuecomment-7132933687)，本次核对已保存GPU预测、裁剪记录、覆盖和重载输出，不执行新的模型前向、GPU训练或设备续训。#49补包/CPU后续由Yuxiao承接，原Qiu/Tutor成果保留。
 
 ## 已发布三档16步原件
