@@ -1,0 +1,22 @@
+{
+  "schema_version": "prm-prefix-value-scoring-v1",
+  "head_output": "terminal_reward_prefix_value",
+  "training_loss": "mean_turn_terminal_reward_mse",
+  "step_reward": "value_minus_previous_value_initial_zero",
+  "total": "last_prefix_value",
+  "position": "assistant_im_end_per_current_prefix",
+  "asin_context": "immediately_preceding_public_search_page",
+  "length_policy": "current_prefix_raw_then_augmented_fallback_drop_old_pairs",
+  "empty_reply": "zero_reward_keep_previous_value",
+  "unscorable_prefix": "zero_reward_keep_previous_value",
+  "checkpoint_manifest_sha256": "826f9cce3a51365ec6bf02fb10574ca4990010a8927e9082b5a0383fd028b01c",
+  "helper_sha256": "48337c3c230bb0ea89ac27e21599dc41321af02ac24f7f95bd28b05548b21db8",
+  "max_length": 2048,
+  "payload_sha256": {
+    "adapter/README.md": "4532e7c3696f9b295fee1d451a1db5caad7bbcb8539a64bfac521d24c091a132",
+    "adapter/adapter_config.json": "f0605ffdf903dd4a09e37da5c728cac0e1005fed74d2852772f9490d5954fbb0",
+    "adapter/adapter_model.safetensors": "fc78e9c77c6d0722bc2926b337ce06f155d1f9a94d954e7778541f5d0027bf92",
+    "config.json": "e2d52dcb504300d62ed7dab24e2e0268faa1d144b4dbe399881147e6b96c1a8e",
+    "head.pt": "a234fd6d1a4d89a2214064f2e17ac7f85896126f7fa018df18eec8b5afe2a23e"
+  }
+}

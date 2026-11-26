@@ -15,10 +15,10 @@ class OnlinePrefixTests(unittest.TestCase):
             {"role": "assistant", "content": "Action: click[buy now]"},
         ]
         original = [dict(message) for message in messages]
-        with patch.object(prefix_reward, "encode_trajectory_for_pv",
-                          side_effect=[TrajectoryTooLong(), ({"input_ids": [1]}, [])]) as encode:
+        with patch.object(prefix_reward.SUPPORT, "tokenize_trajectory",
+                          side_effect=[TrajectoryTooLong(), {"input_ids": [1], "turn_end_indices": [0]}]) as encode:
             self.assertEqual(prefix_reward.encode_current_prefix(None, messages, 10),
-                             ({"input_ids": [1]}, False))
+                             ({"input_ids": [1], "turn_end_indices": [0]}, False))
         self.assertEqual(encode.call_args.args[1], [messages[0], *messages[-2:]])
         self.assertEqual(messages, original)
 
@@ -28,10 +28,10 @@ class OnlinePrefixTests(unittest.TestCase):
             {"role": "user", "content": "Huge current page"},
             {"role": "assistant", "content": "Action: click[buy now]"},
         ]
-        with patch.object(prefix_reward, "encode_trajectory_for_pv",
+        with patch.object(prefix_reward.SUPPORT, "tokenize_trajectory",
                           side_effect=TrajectoryTooLong()) as encode:
             self.assertEqual(prefix_reward.encode_current_prefix(None, messages, 10), (None, False))
-        encode.assert_called_once_with(None, messages, 10, True)
+        encode.assert_called_once_with(None, messages, 10)
 
     def test_blank_past_reply_retains_the_following_observation(self):
         messages = [
@@ -41,7 +41,7 @@ class OnlinePrefixTests(unittest.TestCase):
             {"role": "user", "content": "Observation: Invalid action"},
             {"role": "assistant", "content": "Action: search[shoe]"},
         ]
-        with patch.object(prefix_reward, "encode_trajectory_for_pv", return_value=({}, [])) as encode:
+        with patch.object(prefix_reward.SUPPORT, "tokenize_trajectory", return_value={"input_ids": [1], "turn_end_indices": [0]}) as encode:
             prefix_reward.encode_current_prefix(None, messages, 100)
         history = encode.call_args.args[1]
         self.assertTrue(history[2]["content"])
@@ -67,7 +67,7 @@ class OnlinePrefixTests(unittest.TestCase):
             {"role": "assistant", "content": "Action: click[Buy Now]"},
         ]
         tokenizer = Mock()
-        with patch.object(prefix_reward, "tokenize_trajectory", encode):
+        with patch.object(prefix_reward.SUPPORT, "tokenize_trajectory", encode):
             early, early_fallback = prefix_reward.encode_current_prefix(tokenizer, initial, 149)
             late, late_fallback = prefix_reward.encode_current_prefix(tokenizer, later, 149)
             repeated, repeated_fallback = prefix_reward.encode_current_prefix(tokenizer, later[:3], 149)

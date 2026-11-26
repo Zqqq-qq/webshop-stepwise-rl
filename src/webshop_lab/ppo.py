@@ -89,7 +89,8 @@ def load_progress_model(cfg, split_dir):
         if (file_hash(config) != cfg["prm_config_sha256"]
                 or file_hash(checkpoint / "prm-manifest.json") != cfg["prm_manifest_sha256"]):
             raise ValueError("Arm 4 config or checkpoint manifest hash mismatch")
-        return OnlinePrefixReward(config, checkpoint, cfg["prm_runtime"])
+        return OnlinePrefixReward(config, checkpoint, cfg["prm_runtime"],
+                                  Path(cfg["prm_scoring_contract"]), cfg["prm_scoring_contract_sha256"])
     if mode != "progress":
         raise ValueError("Unknown PPO reward mode")
     path = Path(cfg["progress_model"])
@@ -227,6 +228,9 @@ def collect(model, tokenizer, critic, generation, base, task, cfg, expected_inst
                     skip_reason = "prefix_too_long"
                 else:
                     value = prediction
+                trace = getattr(progress_model, "last_trace", None)
+                if isinstance(trace, dict):
+                    turn["prm_scoring_trace"] = trace
             else:
                 skip_reason = "empty_response"
             prefix_rewards.append(value - previous_value)
