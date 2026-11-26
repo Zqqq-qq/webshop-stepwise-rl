@@ -89,7 +89,8 @@ def load_progress_model(cfg, split_dir):
         if (file_hash(config) != cfg["prm_config_sha256"]
                 or file_hash(checkpoint / "prm-manifest.json") != cfg["prm_manifest_sha256"]):
             raise ValueError("Arm 4 config or checkpoint manifest hash mismatch")
-        return OnlinePrefixReward(config, checkpoint, cfg["prm_runtime"])
+        return OnlinePrefixReward(config, checkpoint, cfg["prm_runtime"],
+                                  Path(cfg["prm_scoring_contract"]), cfg["prm_scoring_contract_sha256"])
     if mode != "progress":
         raise ValueError("Unknown PPO reward mode")
     path = Path(cfg["progress_model"])
@@ -191,8 +192,9 @@ def collect(model, tokenizer, critic, generation, base, task, cfg, expected_inst
     eos = generation.eos_token_id
     eos = {eos} if isinstance(eos, int) else set(eos or [])
     for step in range(cfg["max_steps"]):
-        _, prompt = fit_history(tokenizer, messages, cfg["context_length"] - generation.max_new_tokens,
-                               generation=True)
+        prompt_messages, prompt = fit_history(
+            tokenizer, messages, cfg["context_length"] - generation.max_new_tokens, generation=True,
+        )
         ids = torch.tensor([prompt], device=model.device)
         with torch.no_grad():
             result = model.generate(input_ids=ids, attention_mask=torch.ones_like(ids),
@@ -218,11 +220,23 @@ def collect(model, tokenizer, critic, generation, base, task, cfg, expected_inst
         if shaping:
             turn["potential_before"] = option_potential(instruction, state["available"].get("selected_options"))
         if online:
-            prefix = messages + [{"role": "assistant", "content": text}]
-            value, fallback = progress_model(prefix)
+            value, fallback, skip_reason = previous_value, False, None
+            if text:
+                prefix = prompt_messages + [{"role": "assistant", "content": text}]
+                prediction, fallback = progress_model(prefix)
+                if prediction is None:
+                    skip_reason = "prefix_too_long"
+                else:
+                    value = prediction
+                trace = getattr(progress_model, "last_trace", None)
+                if isinstance(trace, dict):
+                    turn["prm_scoring_trace"] = trace
+            else:
+                skip_reason = "empty_response"
             prefix_rewards.append(value - previous_value)
             previous_value = value
-            turn.update(prm_prefix_value=value, prm_asin_length_fallback=fallback)
+            turn.update(prm_prefix_value=value, prm_asin_length_fallback=fallback,
+                        prm_skip_reason=skip_reason)
         action, error = None, None
         try:
             action = parse_action(text)
