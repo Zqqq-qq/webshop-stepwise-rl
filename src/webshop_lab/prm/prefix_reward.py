@@ -99,9 +99,24 @@ def encode_trajectory_for_pv(tokenizer, messages: list[dict], max_length: int, a
 
 
 def encode_current_prefix(tokenizer, messages, max_length):
-    """Choose ASIN augmentation using only the history ending at this action."""
-    encoded, provenance = encode_trajectory_for_pv(tokenizer, messages, max_length, True)
-    return encoded, any(record["fallback_to_raw_due_to_max_length"] for record in provenance)
+    """Encode the actor's visible history, dropping old exchanges if PRM needs more room."""
+    # Earlier EOS-only actions still have an environment error response. Preserve
+    # that exchange without passing an empty assistant message to the PRM tokenizer.
+    history = [
+        {"role": "assistant", "content": "(Empty assistant reply)"}
+        if m["role"] == "assistant" and not m["content"].strip() else m
+        for m in messages[:-1]
+    ] + messages[-1:]
+    while True:
+        try:
+            encoded, provenance = encode_trajectory_for_pv(tokenizer, history, max_length, True)
+        except TrajectoryTooLong:
+            # Keep the system instruction and the current observation/action pair.
+            if len(history) <= 3:
+                return None, False
+            del history[1:3]
+        else:
+            return encoded, any(record["fallback_to_raw_due_to_max_length"] for record in provenance)
 
 
 class OnlinePrefixReward:
@@ -156,6 +171,9 @@ def serve(config, checkpoint):
     for line in sys.stdin:
         prefix = json.loads(line)
         encoded, fallback = encode_current_prefix(tokenizer, prefix, cfg.max_length)
+        if encoded is None:
+            print(json.dumps({"value": None, "asin_length_fallback": False}), flush=True)
+            continue
         batch = tensor_batch([encoded], tokenizer.pad_token_id, device, False)
         with torch.no_grad():
             value = float(model(**batch)["step_scores"][0, -1])
