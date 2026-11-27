@@ -76,6 +76,7 @@ class ContractTests(unittest.TestCase):
             p.write_text(json.dumps({"score_definition": "assistant_turn_end_vocab_logits_linear_sum_mse"}))
             reject_registered_pv_checkpoint(p.parent)
 
+    @unittest.skipUnless(importlib.util.find_spec("torch"), "Requires PyTorch for the frozen PRM runtime")
     def test_cli_imports_without_new_runtime_modules(self):
         with tempfile.TemporaryDirectory() as tmp:
             runtime = Path(tmp)
@@ -97,6 +98,7 @@ class ContractTests(unittest.TestCase):
             support.compare_pv_predictions([row], [other], 1e-5, 1e-5)
 
 
+@unittest.skipUnless(importlib.util.find_spec("transformers"), "Requires Transformers for the fixed Qwen tokenizer")
 class CausalTokenizerTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
