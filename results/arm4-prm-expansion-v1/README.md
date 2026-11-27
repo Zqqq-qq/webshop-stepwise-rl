@@ -59,3 +59,14 @@ PYTHONPATH="$EXEC_REPO/src" python "$EXP_REPO/scripts/train_arm4_expansion.py" \
 ```
 
 同时用固定 B1 采集新 dev 的真实终局分和同页选品分叉。自然轨迹采用 FP32 贪心、2048 context、每回合最多生成 128 token、每题最多 10 步，每题一次。固定原始轨迹后，对原 Arm 4 和两个阶段检查点使用同一 #61 因果评分入口独立重载。对共同覆盖的完整轨迹报告总分 MSE 和配对区间，另报常数、回合数均值和 OLS 三条仅用新 fit 拟合的基线。选品步报告有环境分差对的方向、分差和点击前证据子集。对零分购买和未购买分别报告累计评分达到 0.30 的比例及分母，同时披露跳过和回退覆盖。任务 89、6285、7544 单列作已看回归。冻结的末轮检查点和旧 Arm 4 是主对照；不以这个新 dev 调参或挑最佳轮次。扩训、独立 dev 和 GPU 结果另行交付后复算。
+
+## 已拟合的独立验证基线
+
+[基线参数](fit-baselines.json)仅由冻结的 693 条训练轨迹拟合，目标与扩训一致，完成购买时使用环境终局分，未完成时用 0。回合数取原始日志中的 agent 动作回合数，含无效动作，使用同一口径计算训练和验证特征。按回合均值基线遇到训练中未出现的回合数时用全局均值。OLS 使用带截距的一元线性回归，保留原预测值。收到验证原件后，在与模型对照共同覆盖的轨迹上计算验证误差。
+
+```sh
+python scripts/fit_arm4_expansion_baselines.py \
+  --raw-rollouts "$RAW_ROOT/partial911-source/b1-train-1451.jsonl" \
+  --inventory results/arm4-prm-expansion-v1/inventory.json \
+  --output /path/to/new-fit-baselines.json
+```

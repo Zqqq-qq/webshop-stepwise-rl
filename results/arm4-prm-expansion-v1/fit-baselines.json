@@ -1,0 +1,52 @@
+{
+  "schema": "arm4-expansion-fit-baselines-v1",
+  "fit_trajectories": 693,
+  "feature": "number of logged agent turns, including invalid actions",
+  "target": "final_reward if done, zero otherwise",
+  "sources_sha256": {
+    "inventory": "95b63cae7bad3a9bfadcc99a92789c3025f4cacdc6b970a825a9fa8533f7993f",
+    "train_order": "59c465529f7f3a7ad56f2a293e667f14f11db5021170c96b7e3d9c3405679464",
+    "raw_rollouts": "7f19714f0bbdc3be38d8497b34b20295d88b448d9a3c3379edca8c2b89b9b3cf"
+  },
+  "constant": 0.5114598364598365,
+  "turn_count_mean": {
+    "3": {
+      "n": 267,
+      "prediction": 0.6578901373283396
+    },
+    "4": {
+      "n": 138,
+      "prediction": 0.6492667356797791
+    },
+    "5": {
+      "n": 64,
+      "prediction": 0.6431436011904762
+    },
+    "6": {
+      "n": 40,
+      "prediction": 0.5789583333333334
+    },
+    "7": {
+      "n": 22,
+      "prediction": 0.6015151515151516
+    },
+    "8": {
+      "n": 13,
+      "prediction": 0.5294871794871795
+    },
+    "9": {
+      "n": 5,
+      "prediction": 0.6166666666666667
+    },
+    "10": {
+      "n": 144,
+      "prediction": 0.011574074074074073
+    }
+  },
+  "turn_count_mean_fallback": 0.5114598364598365,
+  "turn_count_ols": {
+    "intercept": 0.9765072859009298,
+    "slope": -0.0881504054876033,
+    "clip": false
+  }
+}
