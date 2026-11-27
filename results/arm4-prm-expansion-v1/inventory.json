@@ -1,0 +1,5020 @@
+{
+  "schema": "arm4-prm-expansion-v1",
+  "test_authorization": false,
+  "original_rollout_metadata": {
+    "sha256": "2a2dbbf2fd398db46ed010a89abf71e4154fbc9c2c2649f6d4e423960068cbdb",
+    "policy_context_length": 2048,
+    "policy_max_new_tokens": 128,
+    "policy_max_steps": 10,
+    "rollout_was_4bit": true
+  },
+  "historical": {
+    "mapped_train": 1451,
+    "collected_raw": 911,
+    "no_raw_in_archive": 540,
+    "fit": 729,
+    "old_dev": 182,
+    "fit501": 501,
+    "old_fit_rejected_over_2048": 228,
+    "categories": {
+      "fit_original": {
+        "full_purchase": 175,
+        "no_purchase": 149,
+        "partial_purchase": 371,
+        "zero_purchase": 34
+      },
+      "history_dev_excluded": {
+        "partial_purchase": 92,
+        "no_purchase": 38,
+        "zero_purchase": 12,
+        "full_purchase": 40
+      },
+      "fit501": {
+        "full_purchase": 154,
+        "partial_purchase": 292,
+        "zero_purchase": 26,
+        "no_purchase": 29
+      },
+      "rejected_2048": {
+        "no_purchase": 120,
+        "partial_purchase": 79,
+        "full_purchase": 21,
+        "zero_purchase": 8
+      }
+    }
+  },
+  "sources": {
+    "raw_sha256": "7f19714f0bbdc3be38d8497b34b20295d88b448d9a3c3379edca8c2b89b9b3cf",
+    "fit_sha256": "03a6370bc2048ea0119331aa06969ae6bde18e4e7ba5db3decde108153792500",
+    "old_dev_sha256": "df1f71a7843a04a654172c853656ece8f0793f1954557d735a8cd5b200c93d76",
+    "fit501_sha256": "b1f1eeda3a762337d0ce99b9f98451a9fb0d444e6ed0a3cc5d302bd383e7cd71",
+    "goal_map_sha256": "6b5d9dfceee913828871b8dff62fd59720a40306738a92a496d1b0fb6838fa88",
+    "splits_sha256": {
+      "train": "8c85e56b3ac2e1f0a09b54560ad0f9bf77eedddb241d73617c7ff32416522e20",
+      "val": "45440d724b33e69e13916d0adbe243cc63ce3bd67677b8220feff9f30b866c36",
+      "test": "823eb6f68270b3b83695415c8ee008a1c86fc86977ac6d316e44590f2f0f97c7"
+    },
+    "additional": {
+      "dev55": {
+        "commit": "1c19b2bb0c3f3e34856bad134f8699247d2b9cde",
+        "path": "results/prm-expanded-fit-20261125/holdout_ids.json",
+        "sha256": "15b96f015ed8a2b804633523144011eb2fdf092903ccded17395020b925eb5c1"
+      },
+      "dev57": {
+        "commit": "c39b371633f8e46fba9eac50116a0a1b01e5d22b",
+        "path": "results/prm-hidden-review-20261124/prm57-independent-dev-ids.json",
+        "sha256": "4e0e86abd884cd01b80388e271f7a0c96d183b11d4690fefd8bd89b9a002177b"
+      },
+      "dev59": {
+        "commit": "c39b371633f8e46fba9eac50116a0a1b01e5d22b",
+        "path": "results/prm-hidden-review-20261124/prm59-reverify-dev-ids.json",
+        "sha256": "a033b312440952d6325734b4b9bebc9f99ecc1db9b865939a31cc3e54e57f2e8"
+      },
+      "ppo_short4": {
+        "commit": "c39b371633f8e46fba9eac50116a0a1b01e5d22b",
+        "path": "results/prm-hidden-review-20261124/pr60-ppo-shortrun-seed42-ids.json",
+        "sha256": "07459cd86227b3624298126b8d27f2ddd60f005e7943ecbca2c4289034f4cad6"
+      },
+      "ppo_full618": {
+        "commit": "b09d1823191fa1c406fae6f9e6d69944797bf566",
+        "path": "results/full-pool-neural-ppo-v1/seed-42-ordered-ids.json",
+        "sha256": "df5a6fda55310c942d1ebdeef4ae7163ae7a95afa59d6cc50cfac563885774d4"
+      }
+    }
+  },
+  "existing_after_isolation": 693,
+  "excluded_counts": {
+    "instruction_overlap": 32,
+    "historical_holdout_or_diagnostic": 3,
+    "duplicate_fit_family": 1
+  },
+  "verified_train_trajectories": 693,
+  "verified_already_in_fit501": 480,
+  "verified_recovered_long": 213,
+  "new_scoreable_turns": 3656,
+  "eligible_categories": {
+    "eligible": {
+      "partial_purchase": 353,
+      "no_purchase": 141,
+      "full_purchase": 167,
+      "zero_purchase": 32
+    },
+    "old_fit501": {
+      "partial_purchase": 281,
+      "full_purchase": 147,
+      "zero_purchase": 24,
+      "no_purchase": 28
+    },
+    "recovered_long": {
+      "no_purchase": 113,
+      "partial_purchase": 72,
+      "full_purchase": 20,
+      "zero_purchase": 8
+    }
+  },
+  "unusable_counts": {},
+  "skipped_turns": {},
+  "missing_after_exclusions_primary_reserve_and_collection": 309,
+  "fresh_dev_count": 96,
+  "new_training_collection_candidates": 135,
+  "fresh_dev_overlap_with_old_unsigned_ppo_pool": 96,
+  "files_sha256": {
+    "train-verified-ids.json": "59c465529f7f3a7ad56f2a293e667f14f11db5021170c96b7e3d9c3405679464",
+    "fresh-dev-primary-64-ids.json": "308de9190ed8271a9f73991fcc149f8bb27875c6b4ede747233d3536ff1c2b0e",
+    "fresh-dev-reserve-32-ids.json": "0c8a122206ffea5a79d3e02432528758ebdff94770d4649604331e861cfb09fe",
+    "train-recollection-candidates-ids.json": "01b77e76cc969d617472080a1bc3f2f8ffa57161af031a8e598852857dbdf655"
+  },
+  "selection": "SHA256 arm4-prm-expand-v1:<purpose>:<task_id> ascending. Exclude known viewed tasks, normalized twins and budget-stripped instruction families. Fresh 64 primary, 32 reserve.",
+  "training_order": "train-verified-ids.json frozen order; seed 42 model initialization; no shuffle between passes",
+  "task_status": {
+    "5818": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "2594": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "5000": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1812": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "693": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "3040": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "5214": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 8,
+      "turns": 8
+    },
+    "2634": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "5642": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "3046": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "224": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "4590": {
+      "status": "eligible",
+      "category": "zero_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1557": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 6,
+      "turns": 6
+    },
+    "4617": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "555": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "650": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "395": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "1583": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "32": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "6083": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1589": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "908": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "842": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "2303": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "4456": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "4758": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1869": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "3603": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "4438": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "26": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "4488": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "5495": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1599": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "1883": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "146": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "1100": {
+      "status": "eligible",
+      "category": "zero_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "1320": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "2624": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "47": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 6,
+      "turns": 6
+    },
+    "3054": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "261": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "896": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "3571": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 6,
+      "turns": 6
+    },
+    "2277": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "216": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "3542": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "1719": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "639": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1704": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "3620": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 7,
+      "turns": 7
+    },
+    "4924": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "2499": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 8,
+      "turns": 8
+    },
+    "5606": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1648": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "479": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "2753": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "5998": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "159": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "1548": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "3225": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "12": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "3489": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "5080": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "1534": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 6,
+      "turns": 6
+    },
+    "2329": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "399": {
+      "status": "eligible",
+      "category": "zero_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "5644": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "2449": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "3568": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "6293": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1864": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "2612": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "3359": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "498": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "374": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1924": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 6,
+      "turns": 6
+    },
+    "1002": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "6066": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 9,
+      "turns": 9
+    },
+    "2656": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "491": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "4407": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "5478": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "3094": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "2154": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "4521": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "501": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "41": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1360": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "294": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "3251": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "810": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "4717": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "165": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "6188": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1692": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "3462": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 8,
+      "turns": 8
+    },
+    "2039": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "1979": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "2826": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 7,
+      "turns": 7
+    },
+    "103": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "3107": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "6189": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "1582": {
+      "status": "eligible",
+      "category": "zero_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 6,
+      "turns": 6
+    },
+    "6363": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1808": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 7,
+      "turns": 7
+    },
+    "1887": {
+      "status": "eligible",
+      "category": "zero_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "256": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "19": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "4252": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "622": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "462": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 8,
+      "turns": 8
+    },
+    "5931": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "1342": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "5394": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 7,
+      "turns": 7
+    },
+    "97": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "6308": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "1250": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "6169": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "1777": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 8,
+      "turns": 8
+    },
+    "6207": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "6123": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "575": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "295": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 6,
+      "turns": 6
+    },
+    "1670": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "359": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "2654": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "114": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "4900": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1971": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "2755": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "4297": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 7,
+      "turns": 7
+    },
+    "6046": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "1877": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "913": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1751": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "208": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "290": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "1536": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "4734": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "1610": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "4878": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "5356": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "5514": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "6373": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "388": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "5183": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "6297": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "5397": {
+      "status": "eligible",
+      "category": "zero_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 6,
+      "turns": 6
+    },
+    "375": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "164": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "3352": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 6,
+      "turns": 6
+    },
+    "484": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "1931": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "1697": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "3406": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "87": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 7,
+      "turns": 7
+    },
+    "5835": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "3687": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "73": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "1668": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "5440": {
+      "status": "eligible",
+      "category": "zero_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 8,
+      "turns": 8
+    },
+    "2907": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "5129": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "5458": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "474": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 6,
+      "turns": 6
+    },
+    "2123": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "5598": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "3128": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "4558": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1643": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "390": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "4583": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "1757": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "6273": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "790": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "1531": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "4451": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1629": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "1605": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 7,
+      "turns": 7
+    },
+    "2441": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "6385": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "376": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "3306": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "1870": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1980": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "2271": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "1252": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "2904": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "4391": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "5033": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 9,
+      "turns": 9
+    },
+    "3477": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "197": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "3712": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "5223": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "889": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "151": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "56": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "2869": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "6225": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "327": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "401": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1518": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "4157": {
+      "status": "eligible",
+      "category": "zero_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "3061": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 7,
+      "turns": 7
+    },
+    "2188": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "6157": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1363": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "2946": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "2713": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1595": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "3709": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "365": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "1875": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 8,
+      "turns": 8
+    },
+    "2692": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "5295": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "720": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "2957": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "2715": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1832": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1373": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1834": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 6,
+      "turns": 6
+    },
+    "3941": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "3097": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "381": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "964": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "1094": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1005": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 6,
+      "turns": 6
+    },
+    "2881": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1655": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "4649": {
+      "status": "eligible",
+      "category": "zero_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 6,
+      "turns": 6
+    },
+    "3003": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1310": {
+      "status": "eligible",
+      "category": "zero_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "1950": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1783": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "162": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 7,
+      "turns": 7
+    },
+    "2232": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1884": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "323": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "3295": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "2636": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "6395": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "5624": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "3365": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 7,
+      "turns": 7
+    },
+    "209": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "587": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 6,
+      "turns": 6
+    },
+    "6161": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "3719": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "1947": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "745": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "1942": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "249": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "2014": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "5925": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 6,
+      "turns": 6
+    },
+    "270": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "427": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "1718": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 6,
+      "turns": 6
+    },
+    "3213": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 7,
+      "turns": 7
+    },
+    "128": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "461": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "1846": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "43": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 6,
+      "turns": 6
+    },
+    "5123": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "4091": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1357": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 8,
+      "turns": 8
+    },
+    "449": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "454": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1232": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "3259": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1590": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "269": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 6,
+      "turns": 6
+    },
+    "708": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "6182": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1173": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "2354": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "5201": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 7,
+      "turns": 7
+    },
+    "2392": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "2598": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "805": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 6,
+      "turns": 6
+    },
+    "4724": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "5194": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "3593": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 7,
+      "turns": 7
+    },
+    "242": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 6,
+      "turns": 6
+    },
+    "1792": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "348": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "48": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "5665": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "370": {
+      "status": "eligible",
+      "category": "zero_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 6,
+      "turns": 6
+    },
+    "1671": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "1755": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "4509": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "330": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "594": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1621": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1245": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 6,
+      "turns": 6
+    },
+    "2750": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "1862": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "647": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "154": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "3830": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "150": {
+      "status": "eligible",
+      "category": "zero_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1522": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "3648": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "1833": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "5510": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "2147": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "2368": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "363": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 9,
+      "turns": 9
+    },
+    "4662": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "3267": {
+      "status": "eligible",
+      "category": "zero_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "3087": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "3155": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "5710": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1495": {
+      "status": "eligible",
+      "category": "zero_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1580": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 6,
+      "turns": 6
+    },
+    "1906": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "1944": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "317": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "4": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "1568": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "2719": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "5182": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "5100": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "351": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1741": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 6,
+      "turns": 6
+    },
+    "5355": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "5858": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "5238": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "2479": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "5325": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1988": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "4058": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "1684": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "1715": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1649": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "4102": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "1852": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "418": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "4997": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "147": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "2533": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "5932": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "178": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "2920": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "5569": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "248": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "2358": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "40": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "5386": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "3144": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1914": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "1838": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "5157": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "1905": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "448": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "1764": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 7,
+      "turns": 7
+    },
+    "5656": {
+      "status": "eligible",
+      "category": "zero_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1199": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "731": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "5667": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "4169": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "45": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "4517": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "3163": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "5258": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 8,
+      "turns": 8
+    },
+    "1525": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "3034": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "1772": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "4484": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "883": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "1909": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "4632": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1430": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "3943": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "5851": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "387": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 8,
+      "turns": 8
+    },
+    "1858": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "121": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "4576": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 8,
+      "turns": 8
+    },
+    "6366": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "3839": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "557": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "3381": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "5101": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "2498": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "4812": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "2343": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1976": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1680": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "1146": {
+      "status": "eligible",
+      "category": "zero_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1519": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "46": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "1816": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1598": {
+      "status": "eligible",
+      "category": "zero_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "157": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1509": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "6051": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1835": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "134": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "1788": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "1183": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1508": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "1644": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "2748": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1958": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "897": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "2183": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "5228": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "100": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "1945": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "11": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "4792": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "3072": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "3088": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "2523": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "5622": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "1622": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 6,
+      "turns": 6
+    },
+    "4574": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1502": {
+      "status": "eligible",
+      "category": "zero_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "441": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "5664": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "3411": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "5766": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "170": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "1904": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "1712": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "2406": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 9,
+      "turns": 9
+    },
+    "95": {
+      "status": "eligible",
+      "category": "zero_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "4145": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "3882": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 8,
+      "turns": 8
+    },
+    "1733": {
+      "status": "eligible",
+      "category": "zero_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "4769": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "470": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1163": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "394": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1544": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "5439": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 6,
+      "turns": 6
+    },
+    "833": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "5912": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "8": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "1795": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "1060": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1997": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "1817": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1948": {
+      "status": "eligible",
+      "category": "zero_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "2341": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "1625": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "1111": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "5547": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "3965": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "2347": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "2467": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "2372": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "109": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "329": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "5830": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "1901": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "1929": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1720": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1669": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "325": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 6,
+      "turns": 6
+    },
+    "882": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "2846": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "28": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1641": {
+      "status": "eligible",
+      "category": "zero_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "96": {
+      "status": "eligible",
+      "category": "zero_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "5488": {
+      "status": "eligible",
+      "category": "zero_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "4127": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "79": {
+      "status": "eligible",
+      "category": "zero_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "1663": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "1882": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "5243": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "6252": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "3625": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "681": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1362": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 6,
+      "turns": 6
+    },
+    "201": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "5402": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "1902": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "943": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "1596": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 7,
+      "turns": 7
+    },
+    "1031": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1395": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "1608": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "5727": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "1528": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "2699": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "2489": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "1895": {
+      "status": "eligible",
+      "category": "zero_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "2912": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "2181": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "3440": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "2768": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "3645": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "5077": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "1748": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "1481": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "6349": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "2894": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "5821": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "1632": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "2646": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1315": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "3551": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "1529": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "433": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "2272": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "3216": {
+      "status": "eligible",
+      "category": "zero_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "316": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "167": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "2481": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1969": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "5915": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 6,
+      "turns": 6
+    },
+    "1405": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "2549": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "123": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "4585": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "5370": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "13": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "880": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "189": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 7,
+      "turns": 7
+    },
+    "4942": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "166": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 6,
+      "turns": 6
+    },
+    "1620": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "3514": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "2253": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "770": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "305": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "1787": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "1889": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "4362": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "5678": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "1289": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "3089": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1953": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1624": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "6172": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "4199": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "1274": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "3": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "1890": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "2229": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1075": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "6034": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "4642": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "397": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "3797": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "1717": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "915": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "3190": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "5232": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "1657": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 6,
+      "turns": 6
+    },
+    "1771": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "3594": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "1675": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "2000": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "1404": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "2445": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 7,
+      "turns": 7
+    },
+    "1602": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1679": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1879": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "3258": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "2997": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "5761": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "3517": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "4788": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "5619": {
+      "status": "eligible",
+      "category": "zero_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "2541": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "3325": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "4529": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "752": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "31": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1809": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "472": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1597": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 7,
+      "turns": 7
+    },
+    "3248": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "196": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "4636": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "1725": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "1933": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1674": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "2348": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1934": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "4775": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "377": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "29": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "346": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "1700": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "3524": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "2100": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "1533": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "1033": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "149": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 6,
+      "turns": 6
+    },
+    "456": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1806": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "3292": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "3475": {
+      "status": "eligible",
+      "category": "zero_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 6,
+      "turns": 6
+    },
+    "5544": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "1114": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 6,
+      "turns": 6
+    },
+    "124": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "4912": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "382": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "544": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "3829": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "5345": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "6200": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "3628": {
+      "status": "eligible",
+      "category": "zero_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 8,
+      "turns": 8
+    },
+    "306": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "2773": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 6,
+      "turns": 6
+    },
+    "1758": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "2889": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "1682": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "2955": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "2840": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "6134": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "238": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "835": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "3414": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "3167": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "3980": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 9,
+      "turns": 9
+    },
+    "1907": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 6,
+      "turns": 6
+    },
+    "857": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "5273": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "5663": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "5906": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "6266": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 6,
+      "turns": 6
+    },
+    "5960": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "1740": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "2420": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "4212": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "621": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 7,
+      "turns": 7
+    },
+    "3646": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "576": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "2534": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "3711": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "1821": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "206": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "1723": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "1453": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "3550": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 6,
+      "turns": 6
+    },
+    "661": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "207": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "841": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "2300": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1198": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "6264": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "2702": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1651": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "1796": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "115": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 6,
+      "turns": 6
+    },
+    "1587": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1572": {
+      "status": "eligible",
+      "category": "zero_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "4197": {
+      "status": "eligible",
+      "category": "zero_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 7,
+      "turns": 7
+    },
+    "1878": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "2258": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "3304": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "4130": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "486": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "1780": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 7,
+      "turns": 7
+    },
+    "1876": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "1278": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "1513": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "691": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "4086": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "4556": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "4478": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "2763": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "5169": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "5520": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "3863": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "84": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "5377": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "2706": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "4243": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "1872": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "9": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "3491": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 6,
+      "turns": 6
+    },
+    "3218": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 7,
+      "turns": 7
+    },
+    "2418": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "5086": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "2456": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "3157": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1694": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "4541": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "1713": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "6235": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "1822": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 5,
+      "turns": 5
+    },
+    "2412": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "667": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "156": {
+      "status": "eligible",
+      "category": "no_purchase",
+      "source_group": "recovered_long",
+      "scoreable_turns": 10,
+      "turns": 10
+    },
+    "1896": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "3158": {
+      "status": "eligible",
+      "category": "partial_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    },
+    "1984": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 4,
+      "turns": 4
+    },
+    "0": {
+      "status": "eligible",
+      "category": "full_purchase",
+      "source_group": "old_fit501",
+      "scoreable_turns": 3,
+      "turns": 3
+    }
+  },
+  "disallowed_existing_ids": {
+    "6202": "instruction_overlap",
+    "3305": "instruction_overlap",
+    "5211": "historical_holdout_or_diagnostic",
+    "1967": "instruction_overlap",
+    "235": "instruction_overlap",
+    "756": "instruction_overlap",
+    "241": "instruction_overlap",
+    "6285": "historical_holdout_or_diagnostic",
+    "298": "instruction_overlap",
+    "4713": "instruction_overlap",
+    "2362": "instruction_overlap",
+    "4463": "instruction_overlap",
+    "5031": "instruction_overlap",
+    "1970": "instruction_overlap",
+    "495": "instruction_overlap",
+    "4040": "instruction_overlap",
+    "5936": "instruction_overlap",
+    "5731": "instruction_overlap",
+    "2438": "instruction_overlap",
+    "5062": "instruction_overlap",
+    "1136": "instruction_overlap",
+    "1313": "instruction_overlap",
+    "2581": "historical_holdout_or_diagnostic",
+    "1691": "instruction_overlap",
+    "5090": "instruction_overlap",
+    "458": "instruction_overlap",
+    "3971": "instruction_overlap",
+    "848": "instruction_overlap",
+    "4329": "instruction_overlap",
+    "369": "instruction_overlap",
+    "3136": "instruction_overlap",
+    "6146": "duplicate_fit_family",
+    "1793": "instruction_overlap",
+    "1193": "instruction_overlap",
+    "2836": "instruction_overlap",
+    "5104": "instruction_overlap"
+  }
+}
