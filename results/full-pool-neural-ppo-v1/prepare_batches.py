@@ -10,8 +10,8 @@ def sha(data):
     return hashlib.sha256(data).hexdigest()
 
 
-def prepare(output):
-    frozen = Path(__file__).resolve().parent
+def prepare(output, frozen=None):
+    frozen = Path(__file__).resolve().parent if frozen is None else frozen.resolve()
     repo = frozen.parents[1]
     manifest = json.loads((frozen / "manifest.json").read_text(encoding="utf-8"))
     if manifest["test_authorization"]:
@@ -26,6 +26,16 @@ def prepare(output):
         if len(values) != entry["count"] or len(set(values)) != len(values):
             raise ValueError(f"Frozen {split} split has invalid coverage")
         splits[split] = set(values)
+
+    holdout = set()
+    for entry in manifest.get("additional_holdouts", []):
+        contents = (frozen / entry["path"]).read_bytes()
+        ids = json.loads(contents)
+        if sha(contents) != entry["sha256"] or len(ids) != entry["count"] or len(set(ids)) != len(ids):
+            raise ValueError(f"Frozen holdout changed: {entry['path']}")
+        if holdout.intersection(ids):
+            raise ValueError("Additional holdouts overlap")
+        holdout.update(ids)
 
     schedules = {}
     common_pool = None
@@ -42,6 +52,8 @@ def prepare(output):
             raise ValueError(f"Seed {seed} has incomplete or duplicate IDs")
         if not pool <= splits["train"] or pool & (splits["val"] | splits["test"]):
             raise ValueError(f"Seed {seed} contains out-of-split IDs")
+        if pool & holdout:
+            raise ValueError(f"Seed {seed} overlaps with an additional frozen holdout")
         if common_pool is not None and pool != common_pool:
             raise ValueError("Seeds must traverse the same task pool")
         common_pool = pool
@@ -68,4 +80,6 @@ def prepare(output):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, required=True)
-    prepare(parser.parse_args().output)
+    parser.add_argument("--frozen-dir", type=Path)
+    args = parser.parse_args()
+    prepare(args.output, args.frozen_dir)
