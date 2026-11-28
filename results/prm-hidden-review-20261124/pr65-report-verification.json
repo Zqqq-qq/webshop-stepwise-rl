@@ -1,0 +1,122 @@
+{
+  "reviewed_pr65_commit": "9ce42fc5701190cf262c61fc665bfc6fa75b4045",
+  "draft_sha256": "83aae678ea3415082834a7bb742457910718144c528036072bff96d7038753a9",
+  "original_archive_sha256": {
+    "full160": "4ea38266297bdc5d70e1da5818851532d092c75503412a75772615b302fe797b",
+    "pr61": "85b007b1d857f47137a1c3a1bf53179713a5f8191c189c540606c4cb07e0b61c"
+  },
+  "verified_payloads": {
+    "full160": 134,
+    "pr61": 12
+  },
+  "policies": {
+    "b0": {
+      "tasks": 160,
+      "successes": 15,
+      "purchases": 50,
+      "success_rate": 0.09375,
+      "mean_terminal_reward": 0.19197916666666665
+    },
+    "b1": {
+      "tasks": 160,
+      "successes": 54,
+      "purchases": 156,
+      "success_rate": 0.3375,
+      "mean_terminal_reward": 0.6890520833333333
+    },
+    "tg42": {
+      "tasks": 160,
+      "successes": 51,
+      "purchases": 155,
+      "success_rate": 0.31875,
+      "mean_terminal_reward": 0.68259375
+    },
+    "op42": {
+      "tasks": 160,
+      "successes": 52,
+      "purchases": 155,
+      "success_rate": 0.325,
+      "mean_terminal_reward": 0.6846770833333333
+    },
+    "tg43": {
+      "tasks": 160,
+      "successes": 53,
+      "purchases": 152,
+      "success_rate": 0.33125,
+      "mean_terminal_reward": 0.6729062499999999
+    },
+    "op43": {
+      "tasks": 160,
+      "successes": 53,
+      "purchases": 151,
+      "success_rate": 0.33125,
+      "mean_terminal_reward": 0.6687395833333334
+    }
+  },
+  "paired_success": {
+    "b1_minus_b0": {
+      "difference": 0.24375,
+      "ci95": [
+        0.175,
+        0.31875
+      ]
+    },
+    "op42_minus_tg42": {
+      "difference": 0.00625,
+      "ci95": [
+        0.0,
+        0.01875
+      ]
+    },
+    "op43_minus_tg43": {
+      "difference": 0.0,
+      "ci95": [
+        -0.01875,
+        0.01875
+      ]
+    }
+  },
+  "training_totals": {
+    "updates": 16,
+    "episodes": 64,
+    "policy_turns": 272,
+    "environment_calls": 220,
+    "generated_tokens": 16128
+  },
+  "regression_7544": {
+    "task_id": 7544,
+    "target_click_reward": -0.016547203063964844,
+    "alternative_click_reward": -0.13170576095581055,
+    "click_difference": 0.1151585578918457,
+    "target_total": 0.7146499752998352,
+    "alternative_total": 0.718246340751648,
+    "total_difference": -0.003596365451812744
+  },
+  "failed_trajectory_rewards": {
+    "6285": {
+      "environment_terminal": 0.0,
+      "cumulative_neural_reward": 0.35730260610580444,
+      "reward_turns": [
+        0.6494367122650146,
+        -0.015608608722686768,
+        -0.27652549743652344
+      ]
+    },
+    "89": {
+      "environment_terminal": 0.0,
+      "cumulative_neural_reward": 0.7653395533561707,
+      "reward_turns": [
+        0.7734827995300293,
+        -0.1658942699432373,
+        0.15775102376937866
+      ]
+    }
+  },
+  "engineer_record_scope": {
+    "updates": 1,
+    "turns": 6
+  },
+  "historical_pr59_crosscheck": "Prior independently accepted 31/24-pair and 48-pair records, not rerun here",
+  "model_or_training_executed": false,
+  "test_authorized": false
+}

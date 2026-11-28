@@ -1,0 +1,175 @@
+{
+  "scope": "Independent CPU arithmetic of saved GPU outputs; no model reload or new training",
+  "probe_archive_sha256": "aa33e5ca0b62e06a43801ea6416326256ae0d389f8ee8e6c3d46cbf571e75b08",
+  "features_archive_sha256": "aa35ec78c4149dc81414e0a44b49740abe5b55103b2fb7fdc57383bc67e5615d",
+  "verified_probe_payloads": 29,
+  "verified_feature_payloads": 16,
+  "verified_step16_checkpoint_payloads": 8,
+  "ordered_sample_ids": [
+    351,
+    95,
+    5478,
+    3542,
+    359,
+    5031,
+    0,
+    6225
+  ],
+  "samples_sha256": "9c88beffaef277f519712ab4a07c45766212579770d6292572c7f189bca4d8fe",
+  "real_tokenizer_scoring_positions_recomputed": true,
+  "source_file_sha256": {
+    "train.py": "02904950c11fb8ccf8bd4c7649cee9160bcdd4ad53073a0a4a79dd7d7f6783d7",
+    "infer.py": "9bcded1dd396fc99c721c9bc1631a0e2ae1e571d82dbe8cff0a2ed5341972160",
+    "runtime.py": "49ab952c1b2e4f9c73dad6fe1b9930122d907178d5182105a51e2f903cc3b3c3",
+    "model_core.py": "acf4a15bd47826677c756574facf078c7721d7b766541032766489694442825d",
+    "train_core.py": "a07496bded55fb4ac2be98010812352c10485eae9cf5df8b110b4e54667de3e2",
+    "config.py": "3ebd9dd7e6045fa14e2403cfd30ecd8ebb74495b46f5ae34db03231643e2ccad",
+    "tokenize.py": "7515488a18e829274e291e63177732c33fad1927c0912e79c33345bb106f370d"
+  },
+  "source_limit": "Seven supplied core files match pinned PR52; full executed Git tree not independently recovered",
+  "baselines": {
+    "scope": "in-sample references for these eight; not independent dev baselines",
+    "constant": {
+      "mse": 0.1875,
+      "max_absolute_error": 0.5833333333333334
+    },
+    "turn_count_group_mean": {
+      "mse": 0.12962962962962962,
+      "max_absolute_error": 0.5555555555555555
+    }
+  },
+  "runs": {
+    "hidden-lr-1e7-probe": {
+      "mse": 0.3461862439496016,
+      "max_absolute_error": 0.9805642422288656,
+      "memory_gate_passed": false,
+      "cumulative_optimizer_steps": 16,
+      "segment_optimizer_steps": 16,
+      "cumulative_presentations": 128,
+      "segment_clip_count": 16,
+      "segment_clip_ratio": 1.0,
+      "covered_tasks": 8,
+      "covered_scoring_positions": 38,
+      "saved_reload_max_step_difference": 0.0,
+      "saved_reload_max_total_difference": 0.0,
+      "training_loss_max_replay_difference": 2.3812532723432867e-08,
+      "focus": [
+        {
+          "task_id": 0,
+          "label": 1.0,
+          "total": 0.019435757771134377
+        },
+        {
+          "task_id": 6225,
+          "label": 1.0,
+          "total": 0.019443511962890625
+        },
+        {
+          "task_id": 95,
+          "label": 0.0,
+          "total": 0.019466836005449295
+        },
+        {
+          "task_id": 5031,
+          "label": 0.0,
+          "total": 0.01940089650452137
+        }
+      ],
+      "full_reward_group_mean": 0.0194396348670125,
+      "zero_reward_group_mean": 0.019433866254985332,
+      "full_minus_zero_group_mean": 5.768612027168274e-06,
+      "recorded_source_commit": "5a529686c2a5a26da8893b67ded98ac63a208d12",
+      "peak_allocated_gib": 6.259739398956299,
+      "peak_reserved_gib": 6.892578125
+    },
+    "hidden-lr-1e6-probe": {
+      "mse": 0.30617840320509204,
+      "max_absolute_error": 0.8496759980916977,
+      "memory_gate_passed": false,
+      "cumulative_optimizer_steps": 16,
+      "segment_optimizer_steps": 16,
+      "cumulative_presentations": 128,
+      "segment_clip_count": 16,
+      "segment_clip_ratio": 1.0,
+      "covered_tasks": 8,
+      "covered_scoring_positions": 38,
+      "saved_reload_max_step_difference": 0.0,
+      "saved_reload_max_total_difference": 0.0,
+      "training_loss_max_replay_difference": 1.9719874511103797e-08,
+      "focus": [
+        {
+          "task_id": 0,
+          "label": 1.0,
+          "total": 0.15065117180347443
+        },
+        {
+          "task_id": 6225,
+          "label": 1.0,
+          "total": 0.1503240019083023
+        },
+        {
+          "task_id": 95,
+          "label": 0.0,
+          "total": 0.15086586773395538
+        },
+        {
+          "task_id": 5031,
+          "label": 0.0,
+          "total": 0.15048232674598694
+        }
+      ],
+      "full_reward_group_mean": 0.15048758685588837,
+      "zero_reward_group_mean": 0.15067409723997116,
+      "full_minus_zero_group_mean": -0.0001865103840827942,
+      "recorded_source_commit": "5a529686c2a5a26da8893b67ded98ac63a208d12",
+      "peak_allocated_gib": 6.259739398956299,
+      "peak_reserved_gib": 6.892578125
+    },
+    "hidden-lr-1e5-probe": {
+      "mse": 0.2068152007447221,
+      "max_absolute_error": 0.7207927405834198,
+      "memory_gate_passed": false,
+      "cumulative_optimizer_steps": 16,
+      "segment_optimizer_steps": 16,
+      "cumulative_presentations": 128,
+      "segment_clip_count": 16,
+      "segment_clip_ratio": 1.0,
+      "covered_tasks": 8,
+      "covered_scoring_positions": 38,
+      "saved_reload_max_step_difference": 0.0,
+      "saved_reload_max_total_difference": 0.0,
+      "training_loss_max_replay_difference": 1.616842976170929e-08,
+      "focus": [
+        {
+          "task_id": 0,
+          "label": 1.0,
+          "total": 0.2876889705657959
+        },
+        {
+          "task_id": 6225,
+          "label": 1.0,
+          "total": 0.2792072594165802
+        },
+        {
+          "task_id": 95,
+          "label": 0.0,
+          "total": 0.287153422832489
+        },
+        {
+          "task_id": 5031,
+          "label": 0.0,
+          "total": 0.28686410188674927
+        }
+      ],
+      "full_reward_group_mean": 0.28344811499118805,
+      "zero_reward_group_mean": 0.28700876235961914,
+      "full_minus_zero_group_mean": -0.0035606473684310913,
+      "recorded_source_commit": "5a529686c2a5a26da8893b67ded98ac63a208d12",
+      "peak_allocated_gib": 6.259739398956299,
+      "peak_reserved_gib": 6.892578125
+    }
+  },
+  "independent_model_reload_performed_here": false,
+  "pending": "No cumulative48/80/120 result in these archives; separate checkpoint acceptance required",
+  "test_authorized": false
+}

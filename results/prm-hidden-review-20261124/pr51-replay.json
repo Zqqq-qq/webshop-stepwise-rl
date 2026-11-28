@@ -1,0 +1,76 @@
+{
+  "scope": "Independent replay of tracked PR51 predictions and immutable Actions artifact, no Torch training rerun",
+  "pr51_head": "cfb10c9e681ff21090b610504da7f0c6d1424dcf",
+  "actions_run": 45379955682,
+  "actions_artifact_id": 14912463941,
+  "artifact_sha256": "50a10570b28cd2e057328578fff717c81e32ef3eb6c320fb5a21ca66e38e8229",
+  "tracked_report_matches_artifact": true,
+  "supplement_payloads_rehashed": 10,
+  "checkpoints_independently_replayed": 32,
+  "svd_independent_numpy": {
+    "stored_shape": [
+      8,
+      151936
+    ],
+    "augmented_shape": [
+      8,
+      151937
+    ],
+    "rank": 8,
+    "condition": 205.17496982641316,
+    "solution_l2": 0.007014064451067164,
+    "max_abs_residual": 3.019806626980426e-14,
+    "fp32_max_abs_label_error": 7.564012776128948e-07,
+    "scope": "re-extracted fixed representation; no gradient-training acceptance"
+  },
+  "optimizer_state_bytes_sha_checked": "c19461e3b22b822e5162cc3fb93e0825c5e398fddd26c55aa6a1326b87895c3c",
+  "optimizer_deserialized_here": false,
+  "pytorch_training_rerun_here": false,
+  "final_runs": [
+    {
+      "lr": 1e-07,
+      "batch": 1,
+      "presentations": 512,
+      "updates": 512,
+      "clip_ratio": 1.0,
+      "mse": 0.1399930029538009,
+      "max_absolute_error": 0.6487289667129517,
+      "gate_passed": false
+    },
+    {
+      "lr": 3e-07,
+      "batch": 1,
+      "presentations": 512,
+      "updates": 512,
+      "clip_ratio": 1.0,
+      "mse": 0.18143181744430115,
+      "max_absolute_error": 0.6099205017089844,
+      "gate_passed": false
+    },
+    {
+      "lr": 1e-06,
+      "batch": 1,
+      "presentations": 512,
+      "updates": 512,
+      "clip_ratio": 1.0,
+      "mse": 0.36904875790773684,
+      "max_absolute_error": 0.9192448258399963,
+      "gate_passed": false
+    },
+    {
+      "lr": 1e-07,
+      "batch": 8,
+      "presentations": 512,
+      "updates": 64,
+      "clip_ratio": 1.0,
+      "mse": 0.12317963103656589,
+      "max_absolute_error": 0.5477426052093506,
+      "gate_passed": false
+    }
+  ],
+  "integration": "Additive files can preserve original Qiu/Tutor evidence; no actual PR merge performed",
+  "limitations": [
+    "NumPy/BLAS differs from runner; no bitwise cross-platform equality expected",
+    "Saved optimizer dtype claims reviewed against safe loader and successful pinned CI; not reloaded here"
+  ]
+}

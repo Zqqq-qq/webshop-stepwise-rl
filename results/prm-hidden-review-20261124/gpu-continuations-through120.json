@@ -1,0 +1,516 @@
+{
+  "scope": "Independent CPU arithmetic of saved GPU outputs; no model reload or new training",
+  "probe_archive_sha256": "aa33e5ca0b62e06a43801ea6416326256ae0d389f8ee8e6c3d46cbf571e75b08",
+  "features_archive_sha256": "aa35ec78c4149dc81414e0a44b49740abe5b55103b2fb7fdc57383bc67e5615d",
+  "verified_probe_payloads": 29,
+  "verified_feature_payloads": 16,
+  "verified_step16_checkpoint_payloads": 8,
+  "ordered_sample_ids": [
+    351,
+    95,
+    5478,
+    3542,
+    359,
+    5031,
+    0,
+    6225
+  ],
+  "samples_sha256": "9c88beffaef277f519712ab4a07c45766212579770d6292572c7f189bca4d8fe",
+  "real_tokenizer_scoring_positions_recomputed": true,
+  "source_file_sha256": {
+    "train.py": "02904950c11fb8ccf8bd4c7649cee9160bcdd4ad53073a0a4a79dd7d7f6783d7",
+    "infer.py": "9bcded1dd396fc99c721c9bc1631a0e2ae1e571d82dbe8cff0a2ed5341972160",
+    "runtime.py": "49ab952c1b2e4f9c73dad6fe1b9930122d907178d5182105a51e2f903cc3b3c3",
+    "model_core.py": "acf4a15bd47826677c756574facf078c7721d7b766541032766489694442825d",
+    "train_core.py": "a07496bded55fb4ac2be98010812352c10485eae9cf5df8b110b4e54667de3e2",
+    "config.py": "3ebd9dd7e6045fa14e2403cfd30ecd8ebb74495b46f5ae34db03231643e2ccad",
+    "tokenize.py": "7515488a18e829274e291e63177732c33fad1927c0912e79c33345bb106f370d"
+  },
+  "source_limit": "Seven supplied core files match pinned PR52; full executed Git tree not independently recovered",
+  "baselines": {
+    "scope": "in-sample references for these eight; not independent dev baselines",
+    "constant": {
+      "mse": 0.1875,
+      "max_absolute_error": 0.5833333333333334
+    },
+    "turn_count_group_mean": {
+      "mse": 0.12962962962962962,
+      "max_absolute_error": 0.5555555555555555
+    }
+  },
+  "runs": {
+    "hidden-lr-1e7-probe": {
+      "mse": 0.3461862439496016,
+      "max_absolute_error": 0.9805642422288656,
+      "memory_gate_passed": false,
+      "cumulative_optimizer_steps": 16,
+      "segment_optimizer_steps": 16,
+      "cumulative_presentations": 128,
+      "segment_clip_count": 16,
+      "segment_clip_ratio": 1.0,
+      "covered_tasks": 8,
+      "covered_scoring_positions": 38,
+      "saved_reload_max_step_difference": 0.0,
+      "saved_reload_max_total_difference": 0.0,
+      "training_loss_max_replay_difference": 2.3812532723432867e-08,
+      "focus": [
+        {
+          "task_id": 0,
+          "label": 1.0,
+          "total": 0.019435757771134377
+        },
+        {
+          "task_id": 6225,
+          "label": 1.0,
+          "total": 0.019443511962890625
+        },
+        {
+          "task_id": 95,
+          "label": 0.0,
+          "total": 0.019466836005449295
+        },
+        {
+          "task_id": 5031,
+          "label": 0.0,
+          "total": 0.01940089650452137
+        }
+      ],
+      "full_reward_group_mean": 0.0194396348670125,
+      "zero_reward_group_mean": 0.019433866254985332,
+      "full_minus_zero_group_mean": 5.768612027168274e-06,
+      "recorded_source_commit": "5a529686c2a5a26da8893b67ded98ac63a208d12",
+      "peak_allocated_gib": 6.259739398956299,
+      "peak_reserved_gib": 6.892578125
+    },
+    "hidden-lr-1e6-probe": {
+      "mse": 0.30617840320509204,
+      "max_absolute_error": 0.8496759980916977,
+      "memory_gate_passed": false,
+      "cumulative_optimizer_steps": 16,
+      "segment_optimizer_steps": 16,
+      "cumulative_presentations": 128,
+      "segment_clip_count": 16,
+      "segment_clip_ratio": 1.0,
+      "covered_tasks": 8,
+      "covered_scoring_positions": 38,
+      "saved_reload_max_step_difference": 0.0,
+      "saved_reload_max_total_difference": 0.0,
+      "training_loss_max_replay_difference": 1.9719874511103797e-08,
+      "focus": [
+        {
+          "task_id": 0,
+          "label": 1.0,
+          "total": 0.15065117180347443
+        },
+        {
+          "task_id": 6225,
+          "label": 1.0,
+          "total": 0.1503240019083023
+        },
+        {
+          "task_id": 95,
+          "label": 0.0,
+          "total": 0.15086586773395538
+        },
+        {
+          "task_id": 5031,
+          "label": 0.0,
+          "total": 0.15048232674598694
+        }
+      ],
+      "full_reward_group_mean": 0.15048758685588837,
+      "zero_reward_group_mean": 0.15067409723997116,
+      "full_minus_zero_group_mean": -0.0001865103840827942,
+      "recorded_source_commit": "5a529686c2a5a26da8893b67ded98ac63a208d12",
+      "peak_allocated_gib": 6.259739398956299,
+      "peak_reserved_gib": 6.892578125
+    },
+    "hidden-lr-1e5-probe": {
+      "mse": 0.2068152007447221,
+      "max_absolute_error": 0.7207927405834198,
+      "memory_gate_passed": false,
+      "cumulative_optimizer_steps": 16,
+      "segment_optimizer_steps": 16,
+      "cumulative_presentations": 128,
+      "segment_clip_count": 16,
+      "segment_clip_ratio": 1.0,
+      "covered_tasks": 8,
+      "covered_scoring_positions": 38,
+      "saved_reload_max_step_difference": 0.0,
+      "saved_reload_max_total_difference": 0.0,
+      "training_loss_max_replay_difference": 1.616842976170929e-08,
+      "focus": [
+        {
+          "task_id": 0,
+          "label": 1.0,
+          "total": 0.2876889705657959
+        },
+        {
+          "task_id": 6225,
+          "label": 1.0,
+          "total": 0.2792072594165802
+        },
+        {
+          "task_id": 95,
+          "label": 0.0,
+          "total": 0.287153422832489
+        },
+        {
+          "task_id": 5031,
+          "label": 0.0,
+          "total": 0.28686410188674927
+        }
+      ],
+      "full_reward_group_mean": 0.28344811499118805,
+      "zero_reward_group_mean": 0.28700876235961914,
+      "full_minus_zero_group_mean": -0.0035606473684310913,
+      "recorded_source_commit": "5a529686c2a5a26da8893b67ded98ac63a208d12",
+      "peak_allocated_gib": 6.259739398956299,
+      "peak_reserved_gib": 6.892578125
+    }
+  },
+  "independent_model_reload_performed_here": false,
+  "continuations": {
+    "48": {
+      "mse": 0.11423385718636178,
+      "max_absolute_error": 0.535895586013794,
+      "memory_gate_passed": false,
+      "cumulative_optimizer_steps": 48,
+      "segment_optimizer_steps": 32,
+      "cumulative_presentations": 384,
+      "segment_clip_count": 32,
+      "segment_clip_ratio": 1.0,
+      "covered_tasks": 8,
+      "covered_scoring_positions": 38,
+      "saved_reload_max_step_difference": 0.0,
+      "saved_reload_max_total_difference": 0.0,
+      "training_loss_max_replay_difference": 7.978105454053974e-09,
+      "focus": [
+        {
+          "task_id": 0,
+          "label": 1.0,
+          "total": 0.6082248091697693
+        },
+        {
+          "task_id": 6225,
+          "label": 1.0,
+          "total": 0.576199471950531
+        },
+        {
+          "task_id": 95,
+          "label": 0.0,
+          "total": 0.535895586013794
+        },
+        {
+          "task_id": 5031,
+          "label": 0.0,
+          "total": 0.5283744931221008
+        }
+      ],
+      "full_reward_group_mean": 0.5922121405601501,
+      "zero_reward_group_mean": 0.5321350395679474,
+      "full_minus_zero_group_mean": 0.06007710099220276,
+      "recorded_source_commit": "5a529686c2a5a26da8893b67ded98ac63a208d12",
+      "peak_allocated_gib": 6.259739398956299,
+      "peak_reserved_gib": 6.892578125,
+      "archive_sha256": "4e115935e87cd3b6577e4a5a56a0fc2a1f4fb22b5eefa9a1064fe7fa0b000666",
+      "verified_archive_payloads": 16,
+      "verified_checkpoint_payloads": 8,
+      "predecessor_optimizer_steps": 16,
+      "saved_parameter_digest_linkage_matches": true,
+      "optimizer_and_rng_state_deserialized_here": false,
+      "mse_components": {
+        "group_mean_error_mse": 0.00023116865404821323,
+        "within_group_centered_error_mse": 0.11400268853231357
+      },
+      "mse_decline_from_predecessor": 0.09258134355836031,
+      "group_mean_share_of_mse_decline": 0.8217584246804488,
+      "per_sample": [
+        {
+          "task_id": 351,
+          "label": 0.6666666666666666,
+          "total": 0.5682962536811829,
+          "error": -0.09837041298548377,
+          "previous_total": 0.2903178334236145
+        },
+        {
+          "task_id": 95,
+          "label": 0.0,
+          "total": 0.535895586013794,
+          "error": 0.535895586013794,
+          "previous_total": 0.287153422832489
+        },
+        {
+          "task_id": 5478,
+          "label": 0.0,
+          "total": 0.009108975529670715,
+          "error": 0.009108975529670715,
+          "previous_total": 0.25495845079421997
+        },
+        {
+          "task_id": 3542,
+          "label": 0.0,
+          "total": -0.037378743290901184,
+          "error": -0.037378743290901184,
+          "previous_total": 0.3527248501777649
+        },
+        {
+          "task_id": 359,
+          "label": 0.6666666666666666,
+          "total": 0.6096087694168091,
+          "error": -0.05705789724985755,
+          "previous_total": 0.30364152789115906
+        },
+        {
+          "task_id": 5031,
+          "label": 0.0,
+          "total": 0.5283744931221008,
+          "error": 0.5283744931221008,
+          "previous_total": 0.28686410188674927
+        },
+        {
+          "task_id": 0,
+          "label": 1.0,
+          "total": 0.6082248091697693,
+          "error": -0.3917751908302307,
+          "previous_total": 0.2876889705657959
+        },
+        {
+          "task_id": 6225,
+          "label": 1.0,
+          "total": 0.576199471950531,
+          "error": -0.423800528049469,
+          "previous_total": 0.2792072594165802
+        }
+      ]
+    },
+    "80": {
+      "mse": 0.06112119579570117,
+      "max_absolute_error": 0.4021008014678955,
+      "memory_gate_passed": false,
+      "cumulative_optimizer_steps": 80,
+      "segment_optimizer_steps": 32,
+      "cumulative_presentations": 640,
+      "segment_clip_count": 32,
+      "segment_clip_ratio": 1.0,
+      "covered_tasks": 8,
+      "covered_scoring_positions": 38,
+      "saved_reload_max_step_difference": 0.0,
+      "saved_reload_max_total_difference": 0.0,
+      "training_loss_max_replay_difference": 3.2490274498586658e-09,
+      "focus": [
+        {
+          "task_id": 0,
+          "label": 1.0,
+          "total": 0.7374675869941711
+        },
+        {
+          "task_id": 6225,
+          "label": 1.0,
+          "total": 0.6835916042327881
+        },
+        {
+          "task_id": 95,
+          "label": 0.0,
+          "total": 0.4021008014678955
+        },
+        {
+          "task_id": 5031,
+          "label": 0.0,
+          "total": 0.3743763267993927
+        }
+      ],
+      "full_reward_group_mean": 0.7105295956134796,
+      "zero_reward_group_mean": 0.3882385641336441,
+      "full_minus_zero_group_mean": 0.3222910314798355,
+      "recorded_source_commit": "5a529686c2a5a26da8893b67ded98ac63a208d12",
+      "peak_allocated_gib": 6.259739398956299,
+      "peak_reserved_gib": 6.892578125,
+      "archive_sha256": "4a2daf64b4256d76942b8044d5cade3166c9d4ffa9d40b152cf327931284e46c",
+      "verified_archive_payloads": 16,
+      "verified_checkpoint_payloads": 8,
+      "predecessor_optimizer_steps": 48,
+      "saved_parameter_digest_linkage_matches": true,
+      "optimizer_and_rng_state_deserialized_here": false,
+      "mse_components": {
+        "group_mean_error_mse": 1.911359967298437e-05,
+        "within_group_centered_error_mse": 0.06110208219602818
+      },
+      "mse_decline_from_predecessor": 0.053112661390660613,
+      "group_mean_share_of_mse_decline": 0.003992551847769332,
+      "per_sample": [
+        {
+          "task_id": 351,
+          "label": 0.6666666666666666,
+          "total": 0.5592691898345947,
+          "error": -0.1073974768320719,
+          "previous_total": 0.5682962536811829
+        },
+        {
+          "task_id": 95,
+          "label": 0.0,
+          "total": 0.4021008014678955,
+          "error": 0.4021008014678955,
+          "previous_total": 0.535895586013794
+        },
+        {
+          "task_id": 5478,
+          "label": 0.0,
+          "total": -0.000970691442489624,
+          "error": -0.000970691442489624,
+          "previous_total": 0.009108975529670715
+        },
+        {
+          "task_id": 3542,
+          "label": 0.0,
+          "total": -0.015398398041725159,
+          "error": -0.015398398041725159,
+          "previous_total": -0.037378743290901184
+        },
+        {
+          "task_id": 359,
+          "label": 0.6666666666666666,
+          "total": 0.5871866941452026,
+          "error": -0.07947997252146399,
+          "previous_total": 0.6096087694168091
+        },
+        {
+          "task_id": 5031,
+          "label": 0.0,
+          "total": 0.3743763267993927,
+          "error": 0.3743763267993927,
+          "previous_total": 0.5283744931221008
+        },
+        {
+          "task_id": 0,
+          "label": 1.0,
+          "total": 0.7374675869941711,
+          "error": -0.26253241300582886,
+          "previous_total": 0.6082248091697693
+        },
+        {
+          "task_id": 6225,
+          "label": 1.0,
+          "total": 0.6835916042327881,
+          "error": -0.3164083957672119,
+          "previous_total": 0.576199471950531
+        }
+      ]
+    },
+    "120": {
+      "mse": 0.0028597886270710447,
+      "max_absolute_error": 0.09443799654642737,
+      "memory_gate_passed": false,
+      "cumulative_optimizer_steps": 120,
+      "segment_optimizer_steps": 40,
+      "cumulative_presentations": 960,
+      "segment_clip_count": 40,
+      "segment_clip_ratio": 1.0,
+      "covered_tasks": 8,
+      "covered_scoring_positions": 38,
+      "saved_reload_max_step_difference": 0.0,
+      "saved_reload_max_total_difference": 0.0,
+      "training_loss_max_replay_difference": 1.896195533923617e-09,
+      "focus": [
+        {
+          "task_id": 0,
+          "label": 1.0,
+          "total": 1.007338523864746
+        },
+        {
+          "task_id": 6225,
+          "label": 1.0,
+          "total": 0.9459384083747864
+        },
+        {
+          "task_id": 95,
+          "label": 0.0,
+          "total": 0.04915608838200569
+        },
+        {
+          "task_id": 5031,
+          "label": 0.0,
+          "total": 0.048950448632240295
+        }
+      ],
+      "full_reward_group_mean": 0.9766384661197662,
+      "zero_reward_group_mean": 0.04905326850712299,
+      "full_minus_zero_group_mean": 0.9275851976126432,
+      "recorded_source_commit": "5a529686c2a5a26da8893b67ded98ac63a208d12",
+      "peak_allocated_gib": 6.259739398956299,
+      "peak_reserved_gib": 6.892578125,
+      "archive_sha256": "90b1b1f769f21cfe8b44627ebf628f0c3d2f32b506d19fe7d922cc63585aa49f",
+      "verified_archive_payloads": 16,
+      "verified_checkpoint_payloads": 8,
+      "predecessor_optimizer_steps": 80,
+      "saved_parameter_digest_linkage_matches": true,
+      "optimizer_and_rng_state_deserialized_here": false,
+      "mse_components": {
+        "group_mean_error_mse": 0.0006087361986641239,
+        "within_group_centered_error_mse": 0.00225105242840692
+      },
+      "mse_decline_from_predecessor": 0.058261407168630125,
+      "group_mean_share_of_mse_decline": -0.010120294507898735,
+      "per_sample": [
+        {
+          "task_id": 351,
+          "label": 0.6666666666666666,
+          "total": 0.6146078109741211,
+          "error": -0.052058855692545536,
+          "previous_total": 0.5592691898345947
+        },
+        {
+          "task_id": 95,
+          "label": 0.0,
+          "total": 0.04915608838200569,
+          "error": 0.04915608838200569,
+          "previous_total": 0.4021008014678955
+        },
+        {
+          "task_id": 5478,
+          "label": 0.0,
+          "total": -0.03398146480321884,
+          "error": -0.03398146480321884,
+          "previous_total": -0.000970691442489624
+        },
+        {
+          "task_id": 3542,
+          "label": 0.0,
+          "total": -0.048020124435424805,
+          "error": -0.048020124435424805,
+          "previous_total": -0.015398398041725159
+        },
+        {
+          "task_id": 359,
+          "label": 0.6666666666666666,
+          "total": 0.5722286701202393,
+          "error": -0.09443799654642737,
+          "previous_total": 0.5871866941452026
+        },
+        {
+          "task_id": 5031,
+          "label": 0.0,
+          "total": 0.048950448632240295,
+          "error": 0.048950448632240295,
+          "previous_total": 0.3743763267993927
+        },
+        {
+          "task_id": 0,
+          "label": 1.0,
+          "total": 1.007338523864746,
+          "error": 0.007338523864746094,
+          "previous_total": 0.7374675869941711
+        },
+        {
+          "task_id": 6225,
+          "label": 1.0,
+          "total": 0.9459384083747864,
+          "error": -0.05406159162521362,
+          "previous_total": 0.6835916042327881
+        }
+      ]
+    }
+  },
+  "pending": "Only supplied archived checkpoints audited; subsequent checkpoints require separate acceptance",
+  "test_authorized": false
+}

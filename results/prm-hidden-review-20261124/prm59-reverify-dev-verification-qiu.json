@@ -1,0 +1,163 @@
+{
+  "schema_version": "prm59-reverify-dev-acceptance-v1",
+  "verified_at_utc": "2026-11-26T13:46:00Z",
+  "verifier": "QiuQiu-xuan",
+  "test_authorization": false,
+  "provenance": {
+    "predictions_zip_sha256": "463106895935c66ccdf824f90400000b1033f139b7899e0d538de7d14f13f5f8",
+    "visibility_sha256": "0b578cfec4eb6837e0eaca126dba60741d2f164f1d7c127cdf10631d004e381d",
+    "fit501_archive_sha256": "0834998fe986f450f40721f0864b51351c68743d5b2e5979334cffde28ca44b4",
+    "common_raw_input_sha256": {
+      "target.samples.jsonl": "e5f1db5a17398cd491fa4c6203ecd0b92e7c69c5ea5c616420bf862d87845482",
+      "alternative.samples.jsonl": "89e67f5cb86135e0679ead885a64d68e85ed67ccc47fb85bbe921c742a6f857b"
+    },
+    "arm4_telescoping_max_abs_err": 0.0,
+    "arm4_fallback_count": 0,
+    "arm4_empty_provenance_count": 0,
+    "arm4_branch_prev_page_verified": "96/96",
+    "visibility_cross_check_match": "31/31"
+  },
+  "coverage": {
+    "attempted": 64,
+    "primary_32": {
+      "valid_contrast": 15,
+      "environment_tie": 9,
+      "no_replayable_fork": 8,
+      "too_long": 0,
+      "technical_error": 0
+    },
+    "reserve_32": {
+      "valid_contrast": 16,
+      "environment_tie": 8,
+      "no_replayable_fork": 8,
+      "too_long": 0,
+      "technical_error": 0
+    },
+    "total_64": {
+      "valid_contrast": 31,
+      "environment_tie": 17,
+      "no_replayable_fork": 16,
+      "too_long": 0,
+      "technical_error": 0
+    },
+    "visibility_split": {
+      "V+": 24,
+      "U": 3,
+      "V-": 4
+    },
+    "environment_ties_mean_abs_click_diff": {
+      "stage126": 0.003291,
+      "arm4": 0.080025
+    }
+  },
+  "metrics_48_scoreable": {
+    "stage126_mse": 0.111141,
+    "arm4_mse": 0.094373,
+    "baselines_mse": {
+      "constant": 0.1067,
+      "turn_mean": 0.110432,
+      "ols": 0.116491
+    },
+    "arm4_minus_stage126_mse": {
+      "mean": -0.016768,
+      "ci95": [
+        -0.028345,
+        -0.004913
+      ]
+    },
+    "arm4_minus_constant_mse": {
+      "mean": -0.012327,
+      "ci95": [
+        -0.02653,
+        0.002265
+      ]
+    },
+    "arm4_minus_turn_mean_mse": {
+      "mean": -0.016059,
+      "ci95": [
+        -0.028423,
+        -0.003629
+      ]
+    },
+    "arm4_minus_ols_mse": {
+      "mean": -0.022117,
+      "ci95": [
+        -0.03492,
+        -0.010108
+      ]
+    }
+  },
+  "metrics_31_valid_contrast": {
+    "stage126_correct": "17/31",
+    "arm4_correct": "22/31",
+    "arm4_minus_stage126_acc": {
+      "mean": 0.16129,
+      "ci95": [
+        -0.064516,
+        0.387097
+      ]
+    },
+    "stage126_mean_gap": 0.000966,
+    "arm4_mean_gap": 0.063281,
+    "arm4_minus_stage126_gap": {
+      "mean": 0.062316,
+      "ci95": [
+        0.030425,
+        0.094294
+      ]
+    },
+    "V+_24": {
+      "stage126_correct": "14/24",
+      "arm4_correct": "21/24",
+      "arm4_minus_stage126_acc": {
+        "mean": 0.291667,
+        "ci95": [
+          0.083333,
+          0.5
+        ]
+      },
+      "arm4_minus_stage126_gap": {
+        "mean": 0.092953,
+        "ci95": [
+          0.062926,
+          0.122068
+        ]
+      },
+      "arm4_minus_stage126_mse": {
+        "mean": -0.023244,
+        "ci95": [
+          -0.035879,
+          -0.012328
+        ]
+      }
+    },
+    "U_3": {
+      "stage126_correct": "2/3",
+      "arm4_correct": "1/3",
+      "stage126_mean_gap": 0.002231,
+      "arm4_mean_gap": -0.031832
+    },
+    "V-_4": {
+      "stage126_correct": "1/4",
+      "arm4_correct": "0/4",
+      "stage126_mean_gap": -0.001286,
+      "arm4_mean_gap": -0.05051
+    }
+  },
+  "regression_7544_separate": {
+    "stage126_click_gap": -0.003439,
+    "arm4_click_gap": 0.115157,
+    "stage126_total_gap": 0.057429,
+    "arm4_total_gap": -0.003596
+  },
+  "verdict": {
+    "independent_recomputation_passed": true,
+    "ppo_smoke_recommendation": "conditional_pass_small_scale_smoke_only",
+    "caveats": [
+      "All-31 accuracy delta CI crosses zero ([-6.5, +38.7] pp) due to 4 V- and 3 U pairs; V+ (24 pairs) is strictly positive ([+8.3, +50.0] pp).",
+      "48-pair MSE delta vs constant baseline slightly crosses zero ([-0.0265, +0.0023]), though strictly beats stage126, turn_mean, and OLS.",
+      "Online PPO deployment requires prefix-level length fallback rather than full-trajectory fallback.",
+      "11/27 pre keeps existing formal evidence only; test200 remains frozen (test_authorization=false)."
+    ]
+  }
+}

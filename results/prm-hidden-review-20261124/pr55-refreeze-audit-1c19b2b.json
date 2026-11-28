@@ -1,0 +1,322 @@
+{
+  "reviewed_commits": {
+    "original_protocol": "3fa1b9d8d546316cf237ab931df670798bd0388d",
+    "timing_gate_1127": "9ace4ba8309dfbb762cdb081064e4cd7e66a80de",
+    "formal_refreeze": "a601999aa42f67d68fdc041f4b84a8bf5d682593",
+    "pr55_head": "1c19b2bb0c3f3e34856bad134f8699247d2b9cde"
+  },
+  "mode": "refreeze-audit",
+  "scope": "Independent pre-execution verification of PR #55 re-freeze (a601999) + schedule update (1c19b2b) and all 3 device history audit artifacts.",
+  "frozen_artifacts": {
+    "holdout_ids_sha256": "15b96f015ed8a2b804633523144011eb2fdf092903ccded17395020b925eb5c1",
+    "holdout_ids_size_bytes": 1317,
+    "holdout_audit_sha256": "17abdcc658310d620902d53f3fb403c8464457b2967f1fef5cfa561ca588334a",
+    "holdout_audit_size_bytes": 22152,
+    "dev_rollout_sha256": "4e9f7ccd99f498b450ee5f485f77eb9d3556154d169564fc220b9c07f709f1c8",
+    "goal_map_sha256": "6b5d9dfceee913828871b8dff62fd59720a40306738a92a496d1b0fb6838fa88",
+    "fit501_training_jsonl_sha256": "b1f1eeda3a762337d0ce99b9f98451a9fb0d444e6ed0a3cc5d302bd383e7cd71",
+    "fit_order_first_six_ids": [
+      0,
+      9,
+      11,
+      13,
+      28,
+      31
+    ],
+    "split_sha256": {
+      "train": "8c85e56b3ac2e1f0a09b54560ad0f9bf77eedddb241d73617c7ff32416522e20",
+      "val": "45440d724b33e69e13916d0adbe243cc63ce3bd67677b8220feff9f30b866c36",
+      "test": "823eb6f68270b3b83695415c8ee008a1c86fc86977ac6d316e44590f2f0f97c7"
+    }
+  },
+  "device_artifacts": {
+    "preflight_zip": {
+      "name": "prm55-preflight-evidence-20261125.zip",
+      "size_bytes": 16573,
+      "sha256": "a6034a1b192e834d492d52c1d32d82973a5e561250771e2407941f6924657022",
+      "verified_members": 10,
+      "exposed_85_count": 85,
+      "sft_audit_only_ids": [
+        9067
+      ],
+      "real_non_sft_exposed_count": 84
+    },
+    "outside_candidate_audit": {
+      "name": "prm55-outside-candidate-history-audit-20261125.json",
+      "size_bytes": 539,
+      "sha256": "edfe3ca0a4c9cc7943810dad3c255d8cfc56b91db06df2ea6c9a58d8988d5d13",
+      "target_task_ids": [
+        2525,
+        8000
+      ],
+      "scope": "Actual task_id fields in JSON/JSONL records; metadata selected_ids plans are not treated as use.",
+      "roots": [
+        "/root/webshop-main/artifacts",
+        "/root/prm52/artifacts",
+        "/root/prm54/eval",
+        "/root/webshop-stepwise-rl/artifacts",
+        "/root/webshop-main/handoffs",
+        "/root/webshop-stepwise-rl/handoffs",
+        "/root/webshop-main/results"
+      ],
+      "scanned_json_files": 3583,
+      "skipped_json_files_count": 0,
+      "hit_task_ids": [],
+      "hit_file_count": 0,
+      "task_id_only_scan": true
+    },
+    "unfiltered_history_zip": {
+      "name": "prm55-unfiltered-history-audit-20261125.zip",
+      "size_bytes": 4513,
+      "sha256": "0df7049d0f4788cae5f6277b9ca900feea5bed6f71b435718ca3fd27d2f86a15",
+      "verified_members": 2,
+      "sha256sums": {
+        "unfiltered-history-audit.json": "a0c21df631bb5a3a113a5be524b2773aa6b349770aafbed0a7424d04a1ade4e4",
+        "unfiltered_history_audit.py": "ebc1736b883b959ec88e7c7c34bcade48036e69f4616a6dc9c6af5a7b425cb63"
+      },
+      "scanned_json_files": 3583,
+      "skipped_json_files_count": 0,
+      "roots": [
+        "/root/webshop-main/artifacts",
+        "/root/prm52/artifacts",
+        "/root/prm54/eval",
+        "/root/webshop-stepwise-rl/artifacts",
+        "/root/webshop-main/handoffs",
+        "/root/webshop-stepwise-rl/handoffs",
+        "/root/webshop-main/results"
+      ],
+      "actual_use_fields": [
+        "task_id",
+        "task_ids",
+        "sample_keys",
+        "sample_key"
+      ],
+      "excluded_plan_fields": [
+        "selected_ids"
+      ],
+      "candidate_filter_applied": false,
+      "field_occurrence_counts": {
+        "task_id": 20714,
+        "task_ids": 460,
+        "sample_keys": 0,
+        "sample_key": 0,
+        "dropped": 3
+      },
+      "target_task_ids": [
+        2525,
+        6045,
+        7900,
+        8000,
+        9381,
+        11798
+      ],
+      "candidate_pairs": {
+        "2525": 8778,
+        "8000": 8547,
+        "9381": 9085,
+        "11798": 11501,
+        "6045": 7610,
+        "7900": 6755
+      },
+      "actual_hit_ids": [
+        7900
+      ],
+      "zero_hit_target_ids": [
+        2525,
+        6045,
+        8000,
+        9381,
+        11798
+      ],
+      "actual_match_count": 4,
+      "actual_matches": [
+        {
+          "task_id": 7900,
+          "field": "task_ids",
+          "json_path": "$.task_ids",
+          "file": "/root/webshop-main/artifacts/rl-full-coverage-20261123-m82oz7jk/seed42/terminal/round-22.audit.json",
+          "size_bytes": 3939,
+          "sha256": "08ed0c4f7d0eacc95d95f37f8e8ed59675625c965a1000572a3338e086e0c2fa"
+        },
+        {
+          "task_id": 7900,
+          "field": "task_id",
+          "json_path": "$[2].task_id",
+          "file": "/root/webshop-main/artifacts/rl-full-coverage-20261123-m82oz7jk/seed42/terminal/round-22/episodes.json",
+          "size_bytes": 333593,
+          "sha256": "0915d21302f74f891383356d1e82ab7cc12718775c489345bbc9463678501e6f"
+        },
+        {
+          "task_id": 7900,
+          "field": "task_id",
+          "json_path": "line[152].task_id",
+          "file": "/root/webshop-main/artifacts/prm-data-20261123/b1-train-200-full.jsonl",
+          "size_bytes": 1676673,
+          "sha256": "348cff0ea9a7fcbefedfc80e3be12c73f7982997c62d9f125360156505038d00"
+        },
+        {
+          "task_id": 7900,
+          "field": "task_id",
+          "json_path": "line[29].task_id",
+          "file": "/root/webshop-main/artifacts/prm-data-20261123/dev200.training.jsonl",
+          "size_bytes": 312955,
+          "sha256": "84de9f05820b074de0b1925e844a3f4073b12503b7bfdc868c45c08b565d3d94"
+        }
+      ],
+      "nonuse_match_count": 2,
+      "nonuse_unique_files": [
+        "/root/webshop-main/artifacts/prm-data-20261123/dataset-200/manifest.json"
+      ],
+      "replacement_impact": {
+        "additional_candidate_exclusions": [
+          6755
+        ],
+        "clean_pool_before_additional_exclusions": 445,
+        "clean_pool_after_additional_exclusions": 444,
+        "rank_6755_before_exclusion": 226,
+        "replacement_top160_unchanged": true,
+        "replacement_sha256": "15b96f015ed8a2b804633523144011eb2fdf092903ccded17395020b925eb5c1"
+      },
+      "instruction_checks_verified": true,
+      "goal_map_sha256": "6b5d9dfceee913828871b8dff62fd59720a40306738a92a496d1b0fb6838fa88"
+    }
+  },
+  "refreeze_recomputation": {
+    "original_eligible_count": 530,
+    "device_exposed_count": 85,
+    "remaining_after_id_exclusion_count": 445,
+    "excluded_by_instruction_twin": [
+      6755
+    ],
+    "clean_eligible_count": 444,
+    "selected_count": 160,
+    "retained_count": 133,
+    "removed_from_original_160": [
+      6472,
+      7033,
+      7275,
+      7284,
+      7290,
+      7553,
+      7719,
+      8015,
+      8081,
+      8305,
+      8372,
+      8586,
+      8672,
+      8757,
+      8946,
+      9014,
+      9142,
+      9228,
+      9249,
+      9336,
+      9672,
+      9807,
+      9818,
+      10050,
+      10589,
+      10644,
+      11053
+    ],
+    "added_replacement_ids": [
+      8502,
+      7848,
+      10571,
+      7895,
+      9488,
+      7422,
+      7267,
+      7838,
+      11534,
+      6634,
+      8512,
+      11843,
+      8304,
+      7682,
+      9970,
+      9668,
+      11237,
+      6806,
+      9233,
+      7113,
+      11340,
+      7122,
+      8520,
+      9984,
+      8673,
+      11901,
+      7837
+    ],
+    "selected_ids_sha256": "15b96f015ed8a2b804633523144011eb2fdf092903ccded17395020b925eb5c1",
+    "matches_refrozen_holdout_ids_bytes": true,
+    "matches_refrozen_holdout_audit_metadata": true,
+    "matches_all_160_instruction_hashes": true
+  },
+  "protocol_doc_checks": {
+    "refreeze_doc_sha256": "0fb93c72734b492529dc62dbc43fc65014727686fedefca4f6f69c256cb308c0",
+    "head_doc_sha256": "f4299bf2a5d295887d467e06a0b343be8fe7d01d5df1b6a1edcf6e5a5bee3f84",
+    "test_authorization_false_present": true,
+    "replacement_sha_present": true,
+    "fit501_sha_present": true,
+    "historical_3fa1b9d8_link_retained": true,
+    "team32_1127_mentioned": true,
+    "advances_run_before_presentation": true,
+    "preserves_ppo_and_reserved_test_separate_gate": true
+  },
+  "published_artifact_crosscheck": {
+    "sources": [
+      {
+        "kind": "git_ref",
+        "ref": "origin/results/prm-device-20261124",
+        "commit": "304019f3682798dae2646a7914d9098130974ed5",
+        "matched_ids": [
+          7900
+        ]
+      },
+      {
+        "kind": "zip",
+        "name": "webshop-nov21-b1-ppo-six-update-evidence.zip",
+        "sha256": "32c1b8f9839716ee2c76439061337ddc23067c8f80396436c8533aaa9973fd8f",
+        "matched_ids": []
+      },
+      {
+        "kind": "zip",
+        "name": "webshop-nov22-seed42-43-ppo-four-update-evidence.zip",
+        "sha256": "37487c88034b34501d290e16454326adfd01ff04f8495cf8062269acd8404ef4",
+        "matched_ids": []
+      },
+      {
+        "kind": "zip",
+        "name": "webshop-project-fp32-full160-training-evidence-20261123.zip",
+        "sha256": "4ea38266297bdc5d70e1da5818851532d092c75503412a75772615b302fe797b",
+        "matched_ids": []
+      },
+      {
+        "kind": "zip",
+        "name": "prm-dev-eval-evidence-20261124.zip",
+        "sha256": "6e8ac493b72af56c9b689e5fdaac8b7d91cdc5586e8cfa48776b21f11a5f0518",
+        "matched_ids": []
+      }
+    ],
+    "confirmed_in_clean_444": [],
+    "confirmed_external_twins": [
+      7900
+    ],
+    "hits_by_task_id": {
+      "7900": [
+        "origin/results/prm-device-20261124:results/prm-device-20261124/dataset-200-manifest.json"
+      ]
+    }
+  },
+  "caveats": [
+    "B1 SFT inherited exposure is outside PRM holdout isolation and remains disclosed separately.",
+    "Task 9067 appears only in copied sft-label-length-audit.json files (not PRM/RL/progress runs) and is conservatively excluded (84 non-SFT + 1 conservative = 85); excluding or keeping 9067 does not affect the top-160 selection.",
+    "Intermediate outside-candidate JSON (edfe3ca0...) was a task_id-only scan of [2525, 8000] and is superseded by the broader unfiltered ZIP (0df7049d...) covering all 6 exhaustive goal-map twins across task_id, task_ids, sample_keys, and sample_key.",
+    "Commit 1c19b2b advances GPU rollout/training to start immediately after re-freeze and device preflight agreement (before Team 32 presentation on 11/27 afternoon) while preserving test_authorization=false and separate PPO/reserved-test acceptance."
+  ],
+  "re_freeze_verified": true,
+  "new_rollout_or_training_performed": false,
+  "test_authorized": false
+}
