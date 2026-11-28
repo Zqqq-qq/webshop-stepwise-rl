@@ -1,0 +1,128 @@
+{
+  "status": "completed_local_candidate",
+  "registration": "not a formal experiment or shopping evaluation",
+  "config": {
+    "parameters": {
+      "model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+      "load_in_4bit": true,
+      "seed": 42,
+      "max_length": 2048,
+      "epochs": 1,
+      "gradient_accumulation_steps": 8,
+      "learning_rate": 0.0002,
+      "lora_r": 8,
+      "lora_alpha": 16,
+      "target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "logging_steps": 5,
+      "configuration_status": "local_candidate"
+    },
+    "per_device_train_batch_size": 1,
+    "executed_file_sha256": "0fd1e8163202546ccb1ab3ccc040455345538a9d77c606c50e19a66c20d8a330"
+  },
+  "source": {
+    "head": "0fc56073740d7fbf8b9dc320451517fbb2cc7a40",
+    "blobs": {
+      "src/webshop_lab/sft.py": "139b77f052ce76d75945711169e0ab8e7f47f55d",
+      "src/webshop_lab/model.py": "45d0ee2cac34362ea4fc766b97d428fb7536ba76",
+      "src/webshop_lab/common.py": "3d1e296e9a67d08b94335dbcad8a6c1fdde69f03",
+      "configs/sft-qwen15b-formal-draft.json": "d0e3ad2b022b1951add4463768ad87e342d28d32"
+    }
+  },
+  "runtime": {
+    "python": "3.10.22",
+    "packages": {
+      "torch": "2.8.0+cu128",
+      "transformers": "4.56.2",
+      "peft": "0.17.1",
+      "accelerate": "1.10.1",
+      "bitsandbytes": "0.48.2",
+      "tokenizers": "0.22.2"
+    }
+  },
+  "inputs_sha256": {
+    "train.json": "00e9a068f90011ba85eb42e26dc3e048241f94a77820c4e64b8df999f54b045e",
+    "val.json": "2ac4dcb4388735c031be4ffc46eb3454301340238f15c9bef01f616b2216b8b3",
+    "split-manifest.json": "397c3c597444c0f2b650235bda1e9210d0a6f681c8401d26b8a6d8eee22cb663"
+  },
+  "health": {
+    "ready": true,
+    "n_goals": 12087,
+    "goal_fingerprint": "e69c9ae2a0aad88977c44a7baf49f1f5ef7918ba8317923c4ae24dcc1f5638d8",
+    "alignment_checked": 1624,
+    "alignment_mismatches": 0,
+    "split_status": {
+      "verified": true,
+      "instruction_overlaps": {
+        "0-1": 0,
+        "0-2": 0,
+        "1-2": 0
+      }
+    }
+  },
+  "model_source": {
+    "model": "Qwen/Qwen2.5-1.5B-Instruct",
+    "requested_revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+    "resolved_model_revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+    "resolved_tokenizer_revision": null,
+    "note": "Null resolved revisions require separate local-file hash evidence; a requested revision is not proof of local file identity."
+  },
+  "tokenizer_sha256": {
+    "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+    "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+    "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+    "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3"
+  },
+  "resume": {
+    "checkpoint_steps": [
+      100,
+      600
+    ],
+    "previous_attempt_final_optimizer_step": 655,
+    "local_patch": "Count skipped batches when checking final-batch gradient synchronization.",
+    "wrapper_sha256": "8fd4121d259a982fe2e01a9b96343e9e48121b6181683190857055e84891ddf4"
+  },
+  "training": {
+    "examples": 5241,
+    "validation_examples": 605,
+    "skipped_train_examples": 18,
+    "optimizer_steps": 656,
+    "epoch": 1,
+    "validation_loss": 0.400295227766037
+  },
+  "recorded_memory": {
+    "peak_allocated_gib": 5.776729106903076,
+    "peak_reserved_gib": 29.306640625,
+    "device_total_gib": 15.92828369140625,
+    "memory_unit": "GiB (2**30 bytes)",
+    "memory_scope": "Current process allocator peak from before model load through final evaluation; reserved is not device-wide usage or an OOM guarantee."
+  },
+  "memory_note": "The reported reserved allocator peak exceeds physical capacity, and is not used as a physical VRAM measurement. Cause unverified.",
+  "adapter": {
+    "safetensors_sha256": "c39e2a78e7c5973328e9d2c23fb6320e566352e63cc089562488f3dd46ae5f9c",
+    "trained_lora_sha256": "93760afbdf4b2a24d4d89bfa2e986ec2db7576ce516f9fc439e485558f304640",
+    "reloaded_lora_sha256": "93760afbdf4b2a24d4d89bfa2e986ec2db7576ce516f9fc439e485558f304640",
+    "reload_matches": true,
+    "synthetic_forward_loss": 6.286272048950195,
+    "synthetic_generation_token_ids": [
+      84169,
+      25,
+      358,
+      1744,
+      358,
+      1265,
+      990,
+      279
+    ]
+  },
+  "artifact_sha256": {
+    "output/run.json": "fede4f3446c0e40ae7d46b87862e6debc20c0b99c36b581f8192397ee3e41cf0",
+    "output/trainer_state.json": "7174a8808f0e099acfbf450f34d3b853954b6a3b5bcd92871ab330de8b2ab84d",
+    "trained-lora.json": "01dc6a8c3fff3879ae1375ca78c1dd6dd47eaf3a3cb7a315a524aaffc9f93ef5",
+    "reload.json": "114d0da52bdeb79df7a354d739b2063246f7ee10b55cc876934a507460644b2c"
+  },
+  "test_used_for_training_or_evaluation": false
+}
